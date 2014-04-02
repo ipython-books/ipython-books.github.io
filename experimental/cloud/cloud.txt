@@ -1,0 +1,88 @@
+word
+git
+reproducibility
+ipython
+python
+javascript
+css
+numerical computing
+interactive computing
+high-performance
+notebook
+mathematics
+probability
+statistics
+frequentist
+bayesian
+interactive widgets
+cython
+ctypes
+cuda
+opencl
+mpi
+parallel computing
+profiling
+optimization
+numpy
+scipy
+statsmodels
+sympy
+nose
+debugging
+IPython blocks
+pymc
+matplotlib
+pandas
+sage
+signal processing
+audio processing
+image processing
+scikit-image
+scikit-learn
+opencv
+pillow
+line profiler
+memory profiler
+HDF5
+PyTables
+memory mapping
+numba
+numexpr
+ctypes
+cython
+vispy
+seaborn
+vega
+opengl
+d3.js
+mpld3
+bokeh
+networkx
+MCMC
+Markov chains
+R
+classification
+regression
+clustering
+supervised learning
+unsupervised learning
+fourier transform
+bifurcation
+dynamical systems
+differential equations
+ODE
+PDE
+SDE
+reaction-diffusion
+chaotic systems
+cellular automata
+brownian motion
+poisson process
+geometry
+GIS
+maps
+shapely
+basemap
+fiona
+shapefiles
+voronoi

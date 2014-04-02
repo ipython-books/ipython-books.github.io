@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<body>
+<script src="d3.min.js"></script>
+<script src="d3.layout.cloud.js"></script>
+<link href='http://fonts.googleapis.com/css?family=Lato' 
+      rel='stylesheet' type='text/css'>
+<style>
+    text{
+        -webkit-font-smoothing: antialiased;
+        text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+    }
+</style>
+<script>
+  var fill = d3.scale.category20();
+  var w = 800;
+  var h = 450
+
+  
+var words = [];
+
+d3.csv("cloud.txt", function(data) {
+    data.forEach( function (d) {
+        words.push(d.word);
+    });
+  
+  d3.layout.cloud().size([w, h])
+      .words(words
+        .map(function(d) {
+        return {text: d, size: 10 + Math.random() * 20};
+      }))
+      .padding(2)
+      .rotate(0)
+      .font("Lato")
+      .spiral("rectangular")
+      .fontSize(function(d) { return d.size; })
+      .on("end", draw)
+      .start();
+});
+
+  function draw(words) {
+    d3.select("body").append("svg")
+        .attr("width", w)
+        .attr("height", h)
+      .append("g")
+        .attr("transform", "translate("+(w/2)+", "+(h/2)+")")
+      .selectAll("text")
+        .data(words)
+      .enter().append("text")
+        .style("font-size", function(d) { return d.size + "px"; })
+        .style("font-family", "Lato")
+        .style("fill", function(d, i) { return fill(i); })
+        .attr("text-anchor", "middle")
+        .attr("transform", function(d) {
+          return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+        })
+        .text(function(d) { return d.text; });
+  }
+</script>
