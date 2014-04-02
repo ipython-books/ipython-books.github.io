@@ -70,9 +70,9 @@ fourier transform
 bifurcation
 dynamical systems
 differential equations
-ODE
-PDE
-SDE
+ODEs
+PDEs
+stochastic equations
 reaction-diffusion
 chaotic systems
 cellular automata
@@ -86,3 +86,12 @@ basemap
 fiona
 shapefiles
 voronoi
+sports
+mathematics
+meteorology
+climatology
+health
+social
+physics
+geography
+finance
