@@ -1,0 +1,112 @@
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Helvetica', sans-serif;
+}
+
+body, p, a {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-size: 12pt;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 400;
+}
+
+.smallbox {
+/*
+    font-size: 20pt;
+    font-weight: 400;
+    text-align: center;
+    padding: 20px;
+    margin: 20px 20px;*/
+}
+
+.jumbo {
+    padding-top: 80px;
+    padding-bottom: 20px;
+}
+
+.jumbo .container {
+    margin-bottom: 20px;
+}
+
+.jumbo strong {
+    font-weight: 400;
+}
+
+.author {
+    font-size: 12pt;
+}
+
+.feature li {
+    font-size: 12pt;
+}
+
+.feature1 {
+	background-color: #f8f8f8;
+	padding: 50px 0;
+	border-top: 1px solid #e7e7e7;
+	border-bottom: 1px solid #e7e7e7;
+}
+
+
+.feature2 {
+	background-color: #fff;
+	padding: 50px 0;
+	border-top: 0px solid #e7e7e7;
+	border-bottom: 1px solid #e7e7e7;
+}
+
+
+.feature3 {
+	background-color: #f8f8f8;
+	padding: 50px 0;
+	border-top: 0px solid #e7e7e7;
+	border-bottom: 1px solid #e7e7e7;
+}
+
+
+.feature4 {
+	background-color: #fff;
+	padding: 50px 0;
+	border-top: 0px solid #e7e7e7;
+	border-bottom: 1px solid #e7e7e7;
+}
+
+.cover img {
+    width: 250px;
+    float: left;
+    margin: 10px 50px;
+}
+
+.jumbo .release {
+    font-size: 12pt;
+}
+
+.cloud {
+	background-color: #f8f8f8;
+	padding: 50px 0;
+	border-top: 0px solid #e7e7e7;
+	border-bottom: 1px solid #e7e7e7;
+}
+
+.cloud svg {
+    /* text-align: center; */
+    display: block;
+    margin: auto;
+}
+
+.cloud text {
+    -webkit-font-smoothing: antialiased;
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+footer {
+    padding: 30px 0 20px 0;
+	background-color: rgb(51, 51, 51);
+}
+
+footer .copyright {
+    text-align: right;
+    /*color: #e7e7e7;*/
+}
