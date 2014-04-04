@@ -90,8 +90,7 @@ sports
 mathematics
 meteorology
 climatology
-health
-social
+social data
 physics
 geography
-finance
+finance data
