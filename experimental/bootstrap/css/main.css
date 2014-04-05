@@ -58,6 +58,11 @@ strong {
     /* border-color: #FF7F16; */
 }
 
+.preorder i {
+    padding-right: 6px;
+    display: none;
+}
+
 .jumbo .release {
     font-size: 12pt;
 }
@@ -88,6 +93,9 @@ strong {
     font-weight: 400;
     color: #f7f5f6;
     text-transform: uppercase;
+}
+.coming i {
+    padding-right: 6px;
 }
 
 
