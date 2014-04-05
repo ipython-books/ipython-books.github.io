@@ -27,12 +27,28 @@ strong {
 .navbar {
     background-color: #221e1f;
 }
+.navbar-brand {
+    font-size: 16pt;
+}
 
-/* .twitter-icon i {
-    font-size: 18pt;
-} */
 .navbar-right {
     padding-left: 5px;
+}
+.navbar-right i {
+    padding: 0 2px;
+    font-size: 16pt;
+}
+i.fa-twitter {
+    color: #55acee;
+}
+i.fa-twitter:hover {
+    color: #8dc4ee;
+}
+i.fa-shopping-cart {
+    color: #f6931d;
+}
+i.fa-shopping-cart:hover {
+    color: #f5b569;
 }
 
 
@@ -160,45 +176,6 @@ strong {
 }
 
 
-/* 
-.description {
-	background-color: #547b4f;
-    color: #221e1f;
-}
-
-.description .part {
-    background-color: #f7f5f6;
-    margin: 40px 10px;
-    padding: 20px 40px;
-    border: 1px solid #221e1f;
-}
-
-.description .part1 {
-    margin-left: 20px;
-}
-.description .part2 {
-    margin-right: 20px;
-}
-
-@media (min-width: 992px) {
-    .description .part {
-        min-height: 300px;
-    }
-}
-
-.description .part  h4 {
-    font-size: 12pt;
-    font-weight: 300;
-    text-transform: uppercase;
-    padding: 10px 0 10px 0;
-    margin: 0;
-}
-.description .part  h3 {
-    font-size: 16pt;
-    font-weight: 400;
-    padding: 5px 0 10px 0;
-    margin: 0;
-} */
 
 
 .feature h2 {
@@ -244,7 +221,6 @@ strong {
 
 .chapters {
 	background-color: #547b4f;
-	/* padding: 30px 0px; */
 }
 .chapters div.panel {
 	background-color: #f5f7f6;
@@ -252,14 +228,6 @@ strong {
     margin-bottom: 40px;
     padding: 20px 25px;
 }
-/* .chapters div.panel1 {
-    margin-left: 40px;
-    margin-right: 20px;
-}
-.chapters div.panel2 {
-    margin-right: 40px;
-    margin-left: 20px;
-} */
 .chapters h3, .chapters h4 {
     text-align: center;
 }
@@ -269,8 +237,9 @@ strong {
 .chapters h4 {
     margin: 0;
     padding: 0;
-    font-weight: 400;
-    color: #777;
+    font-weight: 300;
+    text-transform: uppercase;
+    color: #221e1f;
 }
 .chapters h3 {
     margin: 20px 0px 20px 0;
@@ -278,26 +247,10 @@ strong {
     font-size: 16pt;
     font-weight: 400;
     color: #f7f5f6;
+    background-color: #221e1f;
 }
-
-.chapters .panel1 h3 {
-    background-color: #71136d;
-}
-.chapters .panel1 h4 {
-    color: #71136d;
-}
-.chapters .panel1 i.fa-circle {
-    color: #71136d;
-}
-
-.chapters .panel2 h3 {
-    background-color: #AB7242;
-}
-.chapters .panel2 h4 {
-    color: #AB7242;
-}
-.chapters .panel2 i.fa-circle {
-    color: #AB7242;
+.chapters hr {
+    width: 50%;
 }
 
 .chapters ul {
@@ -306,7 +259,6 @@ strong {
 }
 .chapters h5 {
     margin: 15px 0 10px 0;
-    /* text-transform: uppercase; */
     padding: 0;
     font-size: 12pt;
     font-weight: 400;
