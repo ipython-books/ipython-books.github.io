@@ -64,6 +64,7 @@ R
 classification
 regression
 clustering
+machine learning
 supervised learning
 unsupervised learning
 fourier transform
@@ -92,5 +93,9 @@ meteorology
 climatology
 social data
 physics
+mechanics
 geography
 finance data
+data science
+social graphs
+graphs
