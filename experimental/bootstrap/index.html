@@ -31,8 +31,11 @@
         <div class="navbar-header">
           <a class="navbar-brand" href="#">IPython Cookbook</a>
         </div>
-        <div class="navbar-text navbar-right twitter-icon">
-            <a href="https://twitter.com/cyrillerossant"><i class="fa fa-twitter"></i></a>
+        <div class="navbar-text navbar-right">
+            <a href="https://twitter.com/cyrillerossant"><i class="fa fa-lg fa-twitter"></i></a>
+        </div>
+        <div class="navbar-text navbar-right">
+            <a href="https://twitter.com/cyrillerossant"><i class="fa fa-lg fa-shopping-cart"></i></a>
         </div>
       </div>
     </div>
@@ -40,31 +43,30 @@
     
 <!-- ********************************************************** -->
 <!-- JUMBOTRON -->
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron jumbo">
-      <div class="container">
+<div class="jumbotron jumbo">
+  <div class="container">
+    
+    <div class="jumbo-div">
+        <div class="cover"><img src="images/cover.jpg"></div>
         
-        <div class="jumbo-div">
-            <div class="cover"><img src="images/cover.jpg"></div>
-            
-            <h1>IPython Cookbook</h1>
-            
-            <p>The definitive guide to <strong>high-performance scientific computing</strong> 
-            <br/>and <strong>data science</strong> in Python.</p>
-            
-            <p><a class="btn btn-success btn-lg preorder" role="button" href="http://www.packtpub.com/ipython-interactive-computing-and-visualization-cookbook/book"><i class="fa fa-shopping-cart"></i> Pre-order now &raquo;</a>
-            <!-- <br/><span class="release">(to be released Summer 2014)</span> -->
-            </p>
-            
-            <div style="clear: both;"></div>
-            
-        </div>
-        <div class="text-right author">by Cyrille Rossant. Packt Publishing, 2014.</div>
-      </div>
-      
+        <h1>IPython Cookbook</h1>
+        
+        <p>The definitive guide to <strong>high-performance scientific computing</strong> 
+        <br/>and <strong>data science</strong> in Python.</p>
+        
+        <p><a class="btn btn-success btn-lg preorder" role="button" href="http://www.packtpub.com/ipython-interactive-computing-and-visualization-cookbook/book"><i class="fa fa-shopping-cart"></i> Pre-order now &raquo;</a>
+        <!-- <br/><span class="release">(to be released Summer 2014)</span> -->
+        </p>
+        
+        <div style="clear: both;"></div>
+        
     </div>
+    <div class="text-right author">by Cyrille Rossant. Packt Publishing, 2014.</div>
+  </div>
+  
+</div>
 
-      <!-- <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p> -->
+  <!-- <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p> -->
       
       
 <!-- ********************************************************** -->
@@ -170,74 +172,86 @@
       
 
 
-
-<!-- ********************************************************** -->
-<!-- TEXT -->
-<div class="description">
+<div style="display: none;">
     <div class="container">
-    
-        <div class="public">
-            <h3>Public</h3>
+        <div class="row">
             
-            <p>This book is intended to anyone interested in numerical computing and data science: students, researchers, teachers, engineers, analysts, hobbyists...</p>
-            
-            <p>It targets <strong>advanced users</strong> already familiar with the Python scientific 
-            stack: IPython, NumPy, SciPy, Pandas, matplotlib.
-            <br/>Beginners will be interested in the 
-            <a href="http://ipython.rossant.net/"><strong>IPython Minibook</strong></a>, the prequel of this cookbook.</p>
+            <!-- <div class="col-md-8 col-md-pull-4 overview"> -->
+            <div class="col-md-12 overview">
+                <h3>Overview</h3>
+                <p><strong>Two parts</strong>:</p>
+                <ul>
+                    <li><strong>Advanced High-Performance Interactive Computing with IPython</strong> (chapters 1-6). Intended to <strong>advanced users</strong> familiar with Scientific Python, this part tackles advanced topics in interactive computing in the IPython notebook, interactive data visualization, and high-performance computing.</li>
+                    <li><strong>Introduction to Numerical Methods in Data Science and Applied Mathematics with Python</strong> (chapters 7-15). This part gives an <strong>overview</strong> of standard methods in Python for data science and applied mathematics. It offers a glimpse of the incredible range of applications of Scientific Python in science and engineering.</li>
+                </ul>
+            </div>
+        
         </div>
         
-        <div class="overview">
-            <h3>Overview</h3>
-            <p>The IPython Cookbook contains two parts of equal length:</p>
-            <ul>
-                <li><strong>Advanced High-Performance Interactive Computing with IPython</strong> (chapters 1-6). Intended to <strong>advanced users</strong> familiar with Scientific Python, this part tackles advanced topics in interactive computing in the IPython notebook, interactive data visualization, and high-performance computing.</li>
-                <li><strong>Introduction to Numerical Methods in Data Science and Applied Mathematics with Python</strong> (chapters 7-15). This part gives an <strong>overview</strong> of standard methods in Python for data science and applied mathematics. It offers a glimpse of the incredible range of applications of Scientific Python in science and engineering.</li>
-            </ul>
-        </div>
         
-        <div class="chapters">
-            <h3>Chapters</h3>
-            
-              <div class="row">
-                <div class="col-md-4">
-                    <ol>
-                        <li>A Tour of Interactive Computing with IPython</li>
-                        <li>Best practices in Interactive Computing</li>
-                        <li>Master the Notebook</li>
-                        <li>Profiling and Optimization</li>
-                        <li>High-Performance Computing</li>
-                    </ol>
-                </div>
-                <div class="col-md-4">
-                    <ol start="6">
-                        <li>Advanced Visualization</li>
-                        <li>Statistical Data Analysis</li>
-                        <li>Machine Learning</li>
-                        <li>Numerical Optimization</li>
-                        <li>Signal Processing</li>
-                    </ol>
-                </div>
-                <div class="col-md-4">
-                    <ol start="11">
-                        <li>Image and Audio Processing</li>
-                        <li>Deterministic Dynamical Systems</li>
-                        <li>Stochastic Dynamical Systems</li>
-                        <li>Graphs and Geometry</li>
-                        <li>Symbolic and Numerical Mathematics</li>
-                    </ol>
-                </div>
+        <div class="row">
+            <!-- <div class="col-md-4 col-md-push-8 public"> -->
+            <div class="col-md-12 public">
+                <h3>Public</h3>
+                
+                <ul>
+                <li><strong>Anyone interested in scientific computing and data science</strong>: students, researchers, teachers, engineers, analysts, hobbyists...</li>
+                
+                <li><strong>Advanced Python users</strong>, already familiar with IPython, NumPy, SciPy, Pandas, matplotlib...</li>
+                
+                <li>Beginners will be interested in the 
+                <a href="http://ipython.rossant.net/"><strong>IPython Minibook</strong></a>, the prequel of this cookbook.</li>
+                </ul>
             </div>
         </div>
         
-        <div class="recipes">
+        
+        <div class="row chapters">
+            <!-- <div class="chapters"> -->
+                <div class="col-md-12">
+                    <h3>Chapters</h3>
+                </div>
+                
+                  <!-- <div class="row"> -->
+                    <div class="col-md-4">
+                        <ol>
+                            <li>A Tour of Interactive Computing with IPython</li>
+                            <li>Best practices in Interactive Computing</li>
+                            <li>Master the Notebook</li>
+                            <li>Profiling and Optimization</li>
+                            <li>High-Performance Computing</li>
+                        </ol>
+                    </div>
+                    <div class="col-md-4">
+                        <ol start="6">
+                            <li>Advanced Visualization</li>
+                            <li>Statistical Data Analysis</li>
+                            <li>Machine Learning</li>
+                            <li>Numerical Optimization</li>
+                            <li>Signal Processing</li>
+                        </ol>
+                    </div>
+                    <div class="col-md-4">
+                        <ol start="11">
+                            <li>Image and Audio Processing</li>
+                            <li>Deterministic Dynamical Systems</li>
+                            <li>Stochastic Dynamical Systems</li>
+                            <li>Graphs and Geometry</li>
+                            <li>Symbolic and Numerical Mathematics</li>
+                        </ol>
+                    </div>
+                <!-- </div> -->
+            <!-- </div> -->
+        </div>
+        
+        <!-- <div class="recipes">
             <h3>Recipes</h3>
             <p>Each recipe is a self-contained tutorial or example illustrating a particular technique or application.</p>
             <p>The code of all recipes will be available as IPython notebooks (coming soon).</p>
             
             <p>Full list of recipes coming soon!</p>
             
-        </div>
+        </div> -->
 
     </div>
 
@@ -247,8 +261,8 @@
 
 <!-- ********************************************************** -->
 <!-- FEATURE 1 -->
-<div class="feature1">
-    <div class="container feature" >
+<div class="feature feature-dark feature1">
+    <div class="container" >
       <div class="row">
         <div class="col-md-4">
           <img src="images/code.JPG" alt="..." 
@@ -271,7 +285,7 @@
 
 
 <!-- FEATURE 2 -->
-<div class="feature2">
+<div class="feature feature-light feature2">
     <div class="container" >
       <div class="row">
         <div class="col-md-4 col-md-push-8">
@@ -295,7 +309,7 @@
       
 
 <!-- FEATURE 3 -->
-<div class="feature3">
+<div class="feature feature-dark feature3">
     <div class="container" >
       <div class="row">
         <div class="col-md-4">
@@ -319,7 +333,7 @@
 
 
 <!-- FEATURE 4 -->
-<div class="feature4">
+<div class="feature feature-light feature4">
     <div class="container" >
       <div class="row">
         <div class="col-md-4 col-md-push-8">
@@ -340,6 +354,10 @@
       </div>
     </div>
 </div>
+
+
+
+
 
 
 
@@ -368,36 +386,36 @@
       
 <!-- ********************************************************** -->
 <!-- FOOTER -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <!-- <ul class="list-inline">
-                        <li><a href="#home">Home</a>
-                        </li>
-                        <li class="footer-menu-divider">&sdot;</li>
-                        <li><a href="#about">About</a>
-                        </li>
-                        <li class="footer-menu-divider">&sdot;</li>
-                        <li><a href="#services">Services</a>
-                        </li>
-                        <li class="footer-menu-divider">&sdot;</li>
-                        <li><a href="#contact">Contact</a>
-                        </li>
-                    </ul> -->
-                    <p class="copyright text-muted small">&copy; Cyrille Rossant, Packt Publishing 2014.</p>
-                </div>
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- <ul class="list-inline">
+                    <li><a href="#home">Home</a>
+                    </li>
+                    <li class="footer-menu-divider">&sdot;</li>
+                    <li><a href="#about">About</a>
+                    </li>
+                    <li class="footer-menu-divider">&sdot;</li>
+                    <li><a href="#services">Services</a>
+                    </li>
+                    <li class="footer-menu-divider">&sdot;</li>
+                    <li><a href="#contact">Contact</a>
+                    </li>
+                </ul> -->
+                <p class="copyright text-muted small">&copy; Cyrille Rossant, Packt Publishing 2014.</p>
             </div>
         </div>
-    </footer>
+    </div>
+</footer>
       
       
       
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/d3.min.js"></script>
-    <script src="js/d3.layout.cloud.js"></script>
-    <!-- <script src="js/cloud.js"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/d3.min.js"></script>
+<script src="js/d3.layout.cloud.js"></script>
+<!-- <script src="js/cloud.js"></script> -->
       
   </body>
 </html>
