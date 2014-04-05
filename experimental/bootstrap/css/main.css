@@ -16,6 +16,10 @@ strong {
     font-weight: 400;
 }
 
+.navbar {
+    background-color: #221e1f;
+}
+
 .twitter-icon i {
     font-size: 18pt;
 }
@@ -24,6 +28,7 @@ strong {
 .jumbo {
     padding: 80px 20px 20px 20px;
     margin-bottom: 0;
+    background-image: url('../images/board.jpg');
 }
 
 .jumbo .jumbo-div {
@@ -43,22 +48,34 @@ strong {
     float: left;
     margin: 10px 50px;
     
-    box-shadow: 5px 5px 15px 2px rgb(151, 151, 151);
+    /* box-shadow: 5px 5px 15px 2px rgb(151, 151, 151); */
+}
+
+.preorder {
+    background-color: #6dbc51;
+    text-shadow: none;
+    color: #f7f5f6;
+    /* border-color: #FF7F16; */
 }
 
 .jumbo .release {
     font-size: 12pt;
 }
 
+.jumbo h1, .jumbo p {
+    color: #f7f5f6;
+    text-shadow: 1px 1px 10px #444;
+}
+
 .author {
+    color: #f7f5f6;
     font-size: 12pt;
 }
 
 
 .coming {
     margin: 0;
-	background-color: #aaa;
-    color: #fff;
+	background-color: #221e1f;
 	padding: 20px 50px;
 	border-top: 0px solid #e7e7e7;
 	border-bottom: 0px solid #e7e7e7;
@@ -67,6 +84,10 @@ strong {
 .coming p {
     display: block;
     margin: 0;
+    font-size: 12pt;
+    font-weight: 400;
+    color: #f7f5f6;
+    text-transform: uppercase;
 }
 
 
