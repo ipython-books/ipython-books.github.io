@@ -111,7 +111,7 @@ strong {
 
 .smallbox-container {
     background-color: #f7f5f6;
-    padding: 10px 0px 20px 0px;
+    padding: 10px 0px 10px 0px;
 }
 .smallbox {
     padding: 0px;
@@ -138,6 +138,13 @@ strong {
 }
 .smallbox-container .box2, .smallbox-container .box5 {
     border-right: 1px solid #ddd;
+}
+.smallbox-container i.fa-circle {
+    color: #221e1f;
+}
+
+.smallbox-container .box4, .smallbox-container .box5, .smallbox-container .box6 {
+    padding-top: 10px;
 }
 
 /* @media (min-width: 700px) { */
