@@ -160,7 +160,7 @@ strong {
 }
 
 
-
+/* 
 .description {
 	background-color: #547b4f;
     color: #221e1f;
@@ -196,12 +196,16 @@ strong {
 .description .part  h3 {
     font-size: 16pt;
     font-weight: 400;
-    /* text-transform: uppercase; */
     padding: 5px 0 10px 0;
     margin: 0;
+} */
+
+
+.feature h2 {
+    margin-top: 5px;
+    /* text-transform: uppercase; */
+    font-size: 18pt;
 }
-
-
 
 .feature li {
     font-size: 12pt;
@@ -233,30 +237,90 @@ strong {
     border-top-width: 1px;
 }
 
-/* 
-.feature2 {
-	border-top-width: 0px;
-	border-bottom-width: 1px;
-}
 
-.feature3 {
-	border-top-width: 0px;
-	border-bottom-width: 1px;
-}
 
-.feature4 {
-	border-top-width: 0px;
-	border-bottom-width: 1px;
+
+
+
+.chapters {
+	background-color: #547b4f;
+	/* padding: 30px 0px; */
+}
+.chapters div.panel {
+	background-color: #f5f7f6;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    padding: 20px 25px;
+}
+/* .chapters div.panel1 {
+    margin-left: 40px;
+    margin-right: 20px;
+}
+.chapters div.panel2 {
+    margin-right: 40px;
+    margin-left: 20px;
 } */
+.chapters h3, .chapters h4 {
+    text-align: center;
+}
+.chapters .icon {
+    text-align: center;
+}
+.chapters h4 {
+    margin: 0;
+    padding: 0;
+    font-weight: 400;
+    color: #777;
+}
+.chapters h3 {
+    margin: 20px 0px 20px 0;
+    padding: 10px 0;
+    font-size: 16pt;
+    font-weight: 400;
+    color: #f7f5f6;
+}
 
+.chapters .panel1 h3 {
+    background-color: #71136d;
+}
+.chapters .panel1 h4 {
+    color: #71136d;
+}
+.chapters .panel1 i.fa-circle {
+    color: #71136d;
+}
 
+.chapters .panel2 h3 {
+    background-color: #AB7242;
+}
+.chapters .panel2 h4 {
+    color: #AB7242;
+}
+.chapters .panel2 i.fa-circle {
+    color: #AB7242;
+}
 
-
+.chapters ul {
+    margin: 10px 30px;
+    padding: 0;
+}
+.chapters h5 {
+    margin: 15px 0 10px 0;
+    /* text-transform: uppercase; */
+    padding: 0;
+    font-size: 12pt;
+    font-weight: 400;
+}
+@media (min-width: 992px) {
+    .chapters .panel  {
+        min-height: 590px;
+    }
+}
 
 
 .cloud {
 	background-color: #f8f8f8;
-	padding: 50px 0;
+	padding: 30px 0 20px 0;
 	border-top: 0px solid #e7e7e7;
 	border-bottom: 1px solid #e7e7e7;
 }
