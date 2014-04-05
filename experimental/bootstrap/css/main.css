@@ -1,3 +1,11 @@
+body {
+    background-color: #5d8759;
+}
+
+html,body {
+    height:100%;
+}
+
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Helvetica', sans-serif;
 }
@@ -35,7 +43,7 @@ strong {
     display: block;
     margin: auto;
     margin-bottom: 0;
-    width: 950px;
+    /* width: 950px; */
 }
 
 .jumbo .container {
@@ -48,14 +56,13 @@ strong {
     float: left;
     margin: 10px 50px;
     
-    /* box-shadow: 5px 5px 15px 2px rgb(151, 151, 151); */
+    box-shadow: 1px 1px 10px #444;
 }
 
 .preorder {
     background-color: #6dbc51;
     text-shadow: none;
     color: #f7f5f6;
-    /* border-color: #FF7F16; */
 }
 
 .preorder i {
@@ -103,11 +110,49 @@ strong {
 
 
 .smallbox-container {
+    background-color: #f7f5f6;
     padding: 10px 0px 20px 0px;
 }
 .smallbox {
-    padding: 20px 0;
+    padding: 0px;
+    margin: 0px;
 }
+.smallbox > div.icon {
+    /* font-size: 24pt; */
+    padding: 15px 0 5px 0;
+    margin: 0;
+    text-align: center;
+}
+.smallbox h3 {
+    text-align: center;
+    padding: 0;
+    margin: 10px 0;
+}
+
+.smallbox-container .box1, .smallbox-container .box2, .smallbox-container .box3 {
+    border-bottom: 1px solid #ddd;
+}
+
+.smallbox-container .box1, .smallbox-container .box4 {
+    border-right: 1px solid #ddd;
+}
+.smallbox-container .box2, .smallbox-container .box5 {
+    border-right: 1px solid #ddd;
+}
+
+/* @media (min-width: 700px) { */
+.smallbox-container .col-md-4  {
+    min-height: 200px;
+}
+
+/* } */
+/*
+.smallbox1, .smallbox4 {
+    margin-left: 0px;
+}
+.smallbox3, .smallbox6 {
+    margin-right: 0px;
+}*/
 
 
 
