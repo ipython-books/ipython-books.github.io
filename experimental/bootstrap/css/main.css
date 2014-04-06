@@ -1,10 +1,12 @@
 body {
     background-color: #f7f5f6;
+     overflow-x: hidden;
+    /* padding-top: 50px;  */
 }
 
-html,body {
+/* html,body {
     height:100%;
-}
+} */
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Lato', sans-serif;
@@ -24,33 +26,35 @@ strong {
     font-weight: 400;
 }
 
+
 .navbar {
     background-color: #221e1f;
 }
-.navbar-brand {
-    /* font-size: 14pt; */
+/* .navbar-brand {
     padding-right: 30px;
 }
-
 .navbar-right {
     padding-left: 5px;
 }
 .navbar-right i {
     padding: 0 2px;
-    /* font-size: 14pt; */
+} */
+
+
+.navbar i {
+    margin-top: 18px;
+    margin-right: 20px;
 }
-i.fa-twitter {
+.navbar i.fa-twitter {
     color: #55acee;
 }
-i.fa-twitter:hover {
+.navbar i.fa-twitter:hover {
     color: #8dc4ee;
 }
-i.fa-shopping-cart {
-    /* color: #f6931d; */
+.navbar i.fa-shopping-cart {
     color: #55acee;
 }
-i.fa-shopping-cart:hover {
-    /* color: #f5b569; */
+.navbar i.fa-shopping-cart:hover {
     color: #8dc4ee;
 }
 
@@ -180,6 +184,16 @@ i.fa-shopping-cart:hover {
 }
 .smallbox-container i.fa-circle {
     color: #221e1f;
+}
+
+@media (max-width: 991px) {
+    .smallbox-container .col-md-4 {
+        border: 0;
+        border-bottom: 1px solid #e7e7e7;
+    }
+    .smallbox-container .box6 {
+        border-bottom: 0;
+    }
 }
 
 .smallbox-container .box4, .smallbox-container .box5, .smallbox-container .box6 {

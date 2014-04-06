@@ -1,5 +1,5 @@
-var w = 700;
-var h = 400;
+var w = Math.min(700, $(window).width());
+var h = Math.min(400, $(window).width());
 var words = [];
 
 var fill = d3.scale.category20();
