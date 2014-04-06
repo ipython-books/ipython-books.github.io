@@ -81,6 +81,7 @@ strong {
     width: 250px;
     float: left;
     margin: 10px 50px;
+    margin-left: 0;
     
     box-shadow: 1px 1px 10px #444;
 }
