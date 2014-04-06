@@ -216,16 +216,23 @@ strong {
     font-size: 18pt;
 }
 
+.feature ul {
+    margin-left: 30px;
+    padding-left: 10px;
+}
+
 .feature li {
     font-size: 12pt;
 }
 
 .feature img {
     box-shadow: 1px 1px 10px #444;
+    margin-left: 10px;
+    margin-bottom: 20px;
 }
 
 .feature {
-	padding: 30px 0;
+	padding: 30px 0 10px 0;
     border-color: #e7e7e7;
     border-style: solid;
     border-width: 0px;
