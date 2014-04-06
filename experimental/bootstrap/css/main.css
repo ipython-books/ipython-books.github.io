@@ -28,7 +28,8 @@ strong {
     background-color: #221e1f;
 }
 .navbar-brand {
-    font-size: 16pt;
+    font-size: 14pt;
+    padding-right: 30px;
 }
 
 .navbar-right {
@@ -36,7 +37,7 @@ strong {
 }
 .navbar-right i {
     padding: 0 2px;
-    font-size: 16pt;
+    font-size: 14pt;
 }
 i.fa-twitter {
     color: #55acee;
@@ -45,10 +46,12 @@ i.fa-twitter:hover {
     color: #8dc4ee;
 }
 i.fa-shopping-cart {
-    color: #f6931d;
+    /* color: #f6931d; */
+    color: #55acee;
 }
 i.fa-shopping-cart:hover {
-    color: #f5b569;
+    /* color: #f5b569; */
+    color: #8dc4ee;
 }
 
 
@@ -82,6 +85,11 @@ i.fa-shopping-cart:hover {
     background-color: #6dbc51;
     text-shadow: none;
     color: #f7f5f6;
+    border-color: #55923f;
+}
+.preorder:hover {
+    background-color: #62a949;
+    border-color: #55923f;
 }
 
 .preorder i {
@@ -99,8 +107,13 @@ i.fa-shopping-cart:hover {
 }
 
 .author {
+    margin-right: 10px;
     color: #f7f5f6;
     font-size: 12pt;
+}
+
+.author a {
+    color: #80dc5f;
 }
 
 
@@ -122,6 +135,10 @@ i.fa-shopping-cart:hover {
 }
 .coming i {
     padding-right: 6px;
+}
+.coming a {
+    font-weight: 400;
+    color: #80dc5f;
 }
 
 
@@ -171,7 +188,7 @@ i.fa-shopping-cart:hover {
 
 @media (min-width: 992px) {
     .smallbox-container .col-md-4  {
-        min-height: 200px;
+        min-height: 220px;
     }
 }
 
@@ -265,10 +282,15 @@ i.fa-shopping-cart:hover {
 }
 @media (min-width: 992px) {
     .chapters .panel  {
-        min-height: 590px;
+        min-height: 620px;
     }
 }
 
+@media (min-width: 992px) {
+    .chapters ol  {
+        min-height: 210px;
+    }
+}
 
 .cloud {
 	background-color: #f8f8f8;
@@ -294,7 +316,7 @@ i.fa-shopping-cart:hover {
 
 footer {
     padding: 30px 0 20px 0;
-	background-color: rgb(51, 51, 51);
+	background-color: #221e1f;
 }
 
 footer .copyright {
