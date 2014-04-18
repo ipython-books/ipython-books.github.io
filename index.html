@@ -1,1 +1,429 @@
-IPython books. Data coming soon...
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>IPython Cookbook by Cyrille Rossant: the definitive guide to high-performance scientific computing and data science in Python.</title>
+
+    <!-- Bootstrap -->
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    
+    <script type="text/javascript"> 
+    <!-- 
+    (function() { 
+        if ("-ms-user-select" in document.documentElement.style && navigator.userAgent.match(/IEMobile\/10\.0/)) { 
+            var msViewportStyle = document.createElement("style"); 
+            msViewportStyle.appendChild( 
+                document.createTextNode("@-ms-viewport{width:auto!important}") 
+            ); 
+            document.getElementsByTagName("head")[0].appendChild(msViewportStyle); 
+        } 
+    })(); 
+    //--> 
+    </script>
+    
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+  
+<!-- ********************************************************** -->
+<!-- HEADER -->
+  
+<nav class="navbar navbar-default navbar-inverse navbar-fixed-top">
+
+    <div class="navbar-header pull-left">
+      <a class="navbar-brand" href="#">IPython Cookbook</a>
+    </div>
+    <div class="navbar-header pull-right">
+      <a href="https://twitter.com/cyrillerossant"><i class="fa fa-lg fa-twitter"></i></a>
+        <a href="http://www.packtpub.com/ipython-interactive-computing-and-visualization-cookbook/book"><i class="fa fa-lg fa-shopping-cart"></i></a>
+    </div>
+</nav>
+
+    
+<!-- ********************************************************** -->
+<!-- JUMBOTRON -->
+<div class="jumbotron jumbo">
+  <div class="container">
+    
+    <div class="jumbo-div">
+        <div class="cover"><img src="images/cover.jpg" alt="IPython Cookbook"></div>
+        
+        <h1>IPython Cookbook</h1>
+        
+        <p>The definitive guide to <strong>high-performance scientific computing</strong> 
+        <br/>and <strong>data science</strong> in Python.</p>
+        
+        <p><a class="btn btn-success btn-lg preorder" role="button" href="http://www.packtpub.com/ipython-interactive-computing-and-visualization-cookbook/book"><i class="fa fa-shopping-cart"></i> Pre-order now &raquo;</a>
+        <!-- <br/><span class="release">(to be released Summer 2014)</span> -->
+        </p>
+        
+        <div style="clear: both;"></div>
+        
+    </div>
+    <div class="text-right author">by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>. Packt Publishing, Summer 2014.</div>
+  </div>
+  
+</div>
+
+  <!-- <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p> -->
+      
+      
+<!-- ********************************************************** -->
+<!-- COMING SOON -->
+<div class="container-fluid coming">
+    <div class="row">
+        <div class="center-block">
+            <p><i class="fa fa-book"></i> newbie? check out the <a href="http://ipython.rossant.net">IPython mini-book</a></p>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- ********************************************************** -->
+<!-- 6 BOXES -->
+<div class="smallbox-container">
+    <div class="container">
+    <!-- <div class="container"> -->
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-4 box1">
+            <div class="smallbox">
+                <div class="icon">
+                    <span class="fa-stack fa-2x">
+                        <i class="fa fa-stack-2x fa-circle"></i>
+                        <i class="fa fa-stack-1x fa-book fa-inverse"></i>
+                    </span>
+                </div>
+                <h3>400+ pages</h3>
+                <p>15 chapters on interactive computing, data science, and numerical methods in applied mathematics.<!-- , entirely written in the IPython notebook! --></p>
+            </div>
+       </div>
+        <div class="col-md-4 box2">
+            <div class="smallbox">
+                <div class="icon">
+                    <span class="fa-stack fa-2x">
+                        <i class="fa fa-stack-2x fa-circle"></i>
+                        <i class="fa fa-stack-1x fa-files-o fa-inverse"></i>
+                    </span>
+                </div>
+              <h3>100+ recipes</h3>
+                <p>Focused tutorials on a wide range of technical and scientific topics.</p>
+            </div>
+        </div>
+        <div class="col-md-4 box3">
+            <div class="smallbox">
+                <div class="icon">
+                    <span class="fa-stack fa-2x">
+                        <i class="fa fa-stack-2x fa-circle"></i>
+                        <i class="fa fa-stack-1x fa-github fa-inverse"></i>
+                    </span>
+                </div>
+                <h3>The code on GitHub</h3>
+            <p>The code will be available on GitHub as IPython notebooks.</p>
+        </div>
+        </div>
+      </div>
+    <!-- </div> -->
+    
+    
+    <!-- <div class="container"> -->
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-4 box4">
+            <div class="smallbox">
+                <div class="icon">
+                    <span class="fa-stack fa-2x">
+                        <i class="fa fa-stack-2x fa-circle"></i>
+                        <i class="fa fa-stack-1x fa-code fa-inverse"></i>
+                    </span>
+                </div>
+                <h3>Python 2 &amp; 3</h3>
+            <p>The code is compatible with Python 2 and Python 3.</p>
+        </div>
+        </div>
+        <div class="col-md-4 box5">
+            <div class="smallbox">
+                <div class="icon">
+                    <span class="fa-stack fa-2x">
+                        <i class="fa fa-stack-2x fa-circle"></i>
+                        <i class="fa fa-stack-1x fa-hand-o-up fa-inverse"></i>
+                    </span>
+                </div>
+                <h3>Interactive notebook widgets</h3>
+            <p>Create awesome interactive widgets in the IPython notebook! (IPython 2+ required)</p>
+        </div>
+       </div>
+        <div class="col-md-4 box6">
+            <div class="smallbox">
+                <div class="icon">
+                    <span class="fa-stack fa-2x">
+                        <i class="fa fa-stack-2x fa-circle"></i>
+                        <i class="fa fa-stack-1x fa-code-fork fa-inverse"></i>
+                    </span>
+                </div>
+                <h3>Contribute</h3>
+            <p>Open pull requests on GitHub to improve the book or propose your own recipes !</p>
+        </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<!-- ********************************************************** -->
+<!-- FEATURE 1 -->
+<div class="feature feature-dark feature1">
+    <div class="container" >
+      <div class="row">
+        <div class="col-md-4">
+          <img src="images/code.JPG" alt="Advanced Interactive Computing" 
+                class="img-responsive img-rounded">
+        </div>
+        <div class="col-md-8">
+          <h2>Advanced Interactive Computing</h2>
+            <ul>
+                <li>Learn best coding practices with Python</li>
+                <li>Design beautiful interactive figures in the notebook</li>
+                <li>Create interactive widgets in the notebook</li>
+                <li>Create rich Python/Javascript GUI applications in the notebook</li>
+                <li>Customize Javascript and CSS in the notebook</li>
+                <li>Customize IPython</li>
+            </ul>
+       </div>
+      </div>
+    </div>
+</div>
+
+
+<!-- FEATURE 2 -->
+<div class="feature feature-light feature2">
+    <div class="container" >
+      <div class="row">
+        <div class="col-md-4 col-md-push-8">
+          <img src="images/hpc.JPG" alt="High-Performance Computing" 
+                class="img-responsive img-rounded">
+        </div>
+        <div class="col-md-8 col-md-pull-4">
+          <h2>High-Performance Computing</h2>
+            <ul>
+                <li>Profile and optimize your code</li>
+                <li>Accelerate NumPy code with Numexpr and Numba</li>
+                <li>Learn how to manipulate efficiently huge arrays with NumPy and PyTables</li>
+                <li>Mix Python and C with Cython and ctypes</li>
+                <li>Distribute code in parallel with IPython</li>
+                <li>Write GPGPU implementations with CUDA and OpenCL</li>
+            </ul>
+       </div>
+      </div>
+    </div>
+</div>
+      
+
+<!-- FEATURE 3 -->
+<div class="feature feature-dark feature3">
+    <div class="container" >
+      <div class="row">
+        <div class="col-md-4">
+          <img src="images/data.jpg" alt="Data Science" 
+                class="img-responsive img-rounded">
+        </div>
+        <div class="col-md-8">
+          <h2>Introduction to Data Science</h2>
+            <ul>
+                <li>Analyze tabular data with Pandas</li>
+                <li>Analyze geographical data</li>
+                <li>Analyze social graphs with NetworkX</li>
+                <li>Train statistical models on your data with statsmodels, PyMC, and R</li>
+                <li>Learn from your data with machine learning in scikit-learn</li>
+                <li>Discover hidden structure in your data with clustering algorithms</li>
+            </ul>
+       </div>
+      </div>
+    </div>
+</div>
+
+
+<!-- FEATURE 4 -->
+<div class="feature feature-light feature4">
+    <div class="container" >
+      <div class="row">
+        <div class="col-md-4 col-md-push-8">
+          <img src="images/maths.JPG" alt="Applied mathematics" 
+                class="img-responsive img-rounded">
+        </div>
+        <div class="col-md-8 col-md-pull-4">
+          <h2>Standard Methods in Applied Mathematics</h2>
+            <ul>
+                <li>Optimize mathematical functions with SciPy</li>
+                <li>Simulate dynamical systems with SciPy</li>
+                <li>Learn basic signal processing methods</li>
+                <li>Process sounds with SciPy</li>
+                <li>Process images with scikit-image, Pillow, OpenCV</li>
+                <li>Do symbolic mathematics with SymPy and Sage</li>
+            </ul>
+       </div>
+      </div>
+    </div>
+</div>
+
+
+
+
+
+      
+<!-- ********************************************************** -->
+<!-- TOC -->
+<div class="container-fluid coming">
+    <div class="row">
+        <div class="center-block">
+            <p><i class="fa fa-list-ul"></i> Table of contents</p>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- ********************************************************** -->
+<!-- CHAPTERS -->
+<div class="container-fluid chapters">
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel1">
+                <div class="icon">
+                    <span class="fa-stack fa-2x">
+                        <i class="fa fa-stack-2x fa-circle"></i>
+                        <i class="fa fa-stack-1x fa-laptop fa-inverse"></i>
+                    </span>
+                </div>
+                <h4>Part 1</h4>
+                <h3>Advanced High-Performance <br/>Interactive Computing</h3>
+                
+                <!-- <h5>Chapters</h5> -->
+                <ol>
+                    <li>A Tour of Interactive Computing with IPython</li>
+                    <li>Best practices in Interactive Computing</li>
+                    <li>Master the Notebook</li>
+                    <li>Profiling and Optimization</li>
+                    <li>High-Performance Computing</li>
+                    <li>Advanced Visualization</li>
+                </ol>
+                <hr/>
+                <ul>
+                    <li><strong>Advanced programming topics</strong> with IPython.</li>
+                    <li>Intended to <strong>advanced users</strong> who want to sharpen their scientific Python programming skills.</li>
+                    <li>Beginners should start with the <a href="http://ipython.rossant.net">IPython minibook</a>.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel2">
+                <div class="icon">
+                    <span class="fa-stack fa-2x">
+                        <i class="fa fa-stack-2x fa-circle"></i>
+                        <i class="fa fa-stack-1x fa-flask fa-inverse"></i>
+                    </span>
+                </div>
+                <h4>Part 2</h4>
+                <h3>Standard Methods in Data Science <br/>and Applied Mathematics</h3>
+                
+                <!-- <h5>Chapters</h5> -->
+                <ol start="7">
+                    <li>Statistical Data Analysis</li>
+                    <li>Machine Learning</li>
+                    <li>Numerical Optimization</li>
+                    <li>Signal Processing</li>
+                    <li>Image and Audio Processing</li>
+                    <li>Deterministic Dynamical Systems</li>
+                    <li>Stochastic Dynamical Systems</li>
+                    <li>Graphs and Geometry</li>
+                    <li>Symbolic and Numerical Mathematics</li>
+                </ol>
+                <hr/>
+                <ul>
+                    <li><strong>Introductory scientific topics</strong> with Python.</li>
+                    <li>Intended to those who want an <strong>introduction</strong> to a wide range of methods in <strong>data science and applied mathematics</strong>.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+
+      
+<!-- ********************************************************** -->
+<!-- RECIPES -->
+<div class="container-fluid coming">
+    <div class="row">
+        <div class="center-block">
+            <p><i class="fa fa-clock-o"></i> list of recipes coming soon, <a href="https://twitter.com/cyrillerossant">stay tuned</a>!</p>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!-- ********************************************************** -->
+<!-- CLOUD -->
+<div class="cloud">
+    <div class="center-block" >
+        <svg></svg>
+      </div>
+</div>
+
+
+
+
+
+      
+<!-- ********************************************************** -->
+<!-- FOOTER -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <p class="copyright text-muted small">&copy; Cyrille Rossant, Packt Publishing 2014.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+      
+      
+      
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/d3.min.js"></script>
+<script src="js/d3.layout.cloud.js"></script>
+<script src="js/cloud.js"></script>
+<script type="text/javascript">
+<!--
+var words = ["word", "git", "reproducibility", "ipython", "python", "javascript", "css", "numerical computing", "interactive computing", "high-performance", "notebook", "mathematics", "probability", "statistics", "frequentist", "bayesian", "interactive widgets", "cython", "ctypes", "cuda", "opencl", "mpi", "parallel computing", "profiling", "optimization", "numpy", "scipy", "statsmodels", "sympy", "nose", "debugging", "IPython blocks", "pymc", "matplotlib", "pandas", "sage", "signal processing", "audio processing", "image processing", "scikit-image", "scikit-learn", "opencv", "pillow", "line profiler", "memory profiler", "HDF5", "PyTables", "memory mapping", "numba", "numexpr", "ctypes", "cython", "vispy", "seaborn", "vega", "opengl", "d3.js", "mpld3", "bokeh", "networkx", "MCMC", "Markov chains", "R", "classification", "regression", "clustering", "machine learning", "supervised learning", "unsupervised learning", "fourier transform", "bifurcation", "dynamical systems", "differential equations", "ODEs", "PDEs", "stochastic equations", "reaction-diffusion", "chaotic systems", "cellular automata", "brownian motion", "poisson process", "geometry", "GIS", "maps", "shapely", "basemap", "fiona", "shapefiles", "voronoi", "sports", "mathematics", "meteorology", "climatology", "social data", "physics", "mechanics", "geography", "finance data", "data science", "social graphs", "graphs"];
+
+$(document).ready(show_cloud);
+-->
+</script>
+      
+  </body>
+</html>

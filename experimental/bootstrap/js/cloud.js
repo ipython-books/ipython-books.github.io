@@ -1,6 +1,6 @@
 var w = Math.min(700, $(window).width());
 var h = Math.min(400, $(window).width());
-var words = [];
+//var words = [];
 
 var fill = d3.scale.category20();
 
@@ -23,16 +23,12 @@ d3.select("svg")
     .text(function(d) { return d.text; });
 }
 
-
-$(document).ready(function() { 
-
-
-
-    d3.csv("cloud.txt", function(data) {
+function show_cloud() {
+    /*d3.csv("cloud.txt", function(data) {
     
         data.forEach(function(d) {
             words.push(d.word);
-        });
+        });*/
   
         d3.layout.cloud().size([w, h])
             .words(words
@@ -46,6 +42,5 @@ $(document).ready(function() {
             .fontSize(function(d) { return d.size; })
             .on("end", draw)
             .start();
-    });
-    
-});
+    /*});*/
+}
