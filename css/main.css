@@ -1,6 +1,7 @@
 body {
-    background-color: #f7f5f6;
+    background-color: #ffffff;
      overflow-x: hidden;
+     padding: 0;
     /* padding-top: 50px;  */
 }
 
@@ -89,7 +90,7 @@ strong {
 .preorder {
     background-color: #6dbc51;
     text-shadow: none;
-    color: #f7f5f6;
+    color: #ffffff;
     border-color: #55923f;
 }
 .preorder:hover {
@@ -113,13 +114,13 @@ strong {
 }
 
 .jumbo h1, .jumbo p {
-    color: #f7f5f6;
+    color: #ffffff;
     text-shadow: 1px 1px 10px #444;
 }
 
 .author {
     margin-right: 10px;
-    color: #f7f5f6;
+    color: #ffffff;
     font-size: 12pt;
 }
 
@@ -141,7 +142,7 @@ strong {
     margin: 0;
     font-size: 12pt;
     font-weight: 400;
-    color: #f7f5f6;
+    color: #ffffff;
     text-transform: uppercase;
 }
 .coming i {
@@ -157,7 +158,7 @@ strong {
 
 
 .smallbox-container {
-    /* background-color: #f7f5f6; */
+    /* background-color: #ffffff; */
     padding: 10px 0px 10px 0px;
 }
 .smallbox {
@@ -246,13 +247,13 @@ strong {
 }
 
 .feature-light {
-	background-color: #f8f8f8;
+	background-color: #ffffff;
     color: #221e1f;
 }
 
 .feature-dark {
 	background-color: #547b4f;
-    color: #f7f5f6;
+    color: #ffffff;
     text-shadow: 1px 1px 8px #333;
 }
 .feature1 {
@@ -291,7 +292,7 @@ strong {
     padding: 10px 0;
     font-size: 16pt;
     font-weight: 400;
-    color: #f7f5f6;
+    color: #ffffff;
     background-color: #221e1f;
 }
 .chapters hr {
@@ -321,7 +322,7 @@ strong {
 }
 
 .cloud {
-	background-color: #f8f8f8;
+	background-color: #ffffff;
 	padding: 30px 0 20px 0;
 	border-top: 0px solid #e7e7e7;
 	border-bottom: 1px solid #e7e7e7;
@@ -344,6 +345,7 @@ strong {
 
 footer {
     padding: 30px 0 20px 0;
+    margin: 0;
 	background-color: #221e1f;
 }
 
@@ -351,3 +353,4 @@ footer .copyright {
     text-align: right;
     /*color: #e7e7e7;*/
 }
+
