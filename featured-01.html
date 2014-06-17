@@ -3138,7 +3138,10 @@ In&nbsp;[39]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>When transposing a matrix, this order is reversed, but the underlying data remains identical. Flattening this array (in column-major order now it has been transposed) requires a copy, as flattening assumes row-major order by default.</p>
+<p>More generally, NumPy uses the notion of <strong>strides</strong> to convert between a multidimensional index and the memory location of the underlying (1D) sequence of elements. The specific mapping between <code>array[i1, i2]</code> and the relevant byte address of the internal data is given by</p>
+<p><code>offset = array.strides[0] * i1 + array.strides[1] * i2</code></p>
+<p>When reshaping an array, NumPy avoids copies when possible by modifying the <code>strides</code> attribute. For example, when transposing a matrix, the order of <code>strides</code> is reversed, but the underlying data remains identical. However, flattening a transposed array cannot be accomplished simply by modifying <code>strides</code> (try it!), so a copy is needed (thanks to <a href="http://chrisbeaumont.org/">Chris Beaumont</a> from Harvard for clarifying an earlier version of this paragraph).</p>
+<p><a href="http://nbviewer.ipython.org/github/ipython-books/cookbook-code/blob/master/notebooks/chapter04_optimization/06_stride_tricks.ipynb">Recipe 4.6</a> (<em>Using stride tricks with NumPy</em>) contains a more extensive discussion on strides. Also, <a href="http://nbviewer.ipython.org/github/ipython-books/cookbook-code/blob/master/notebooks/chapter04_optimization/07_rolling_average.ipynb">recipe 4.7</a> (<em>Implementing an efficient rolling average algorithm with stride tricks</em>) shows how one can use strides to accelerate particular array computations.</p>
 </div>
 </div>
 </div>
