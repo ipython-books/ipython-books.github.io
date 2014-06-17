@@ -31,35 +31,21 @@ strong {
 .navbar {
     background-color: #221e1f;
 }
-/* .navbar-brand {
-    padding-right: 30px;
-}
-.navbar-right {
-    padding-left: 5px;
-}
-.navbar-right i {
-    padding: 0 2px;
-} */
-
-
 .navbar i {
-    margin-top: 18px;
-    margin-right: 20px;
 }
 .navbar i {
     color: #55acee;
 }
 .navbar i:hover {
     color: #8dc4ee;
-}/*
-.navbar i.fa-shopping-cart {
-    color: #55acee;
 }
-.navbar i.fa-shopping-cart:hover {
-    color: #8dc4ee;
-}*/
-.navbar .navbar-brand {
+.navbar .nav li a {
     color: #ddd;
+    font-size: 18px;
+}
+.navbar .navbar-header .navbar-brand {
+    color: #ddd;
+    font-size: 18px;
 }
 
 
