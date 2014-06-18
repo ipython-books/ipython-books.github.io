@@ -1,5 +1,4 @@
- HELLO WORLD 
- .clearfix {
+/*.clearfix {
     *zoom: 1;
 }
 
@@ -127,7 +126,7 @@ button, input {
 textarea {
     overflow: auto;
     vertical-align: top;
-}
+}*/
 
 @media print {
     * {
@@ -183,7 +182,7 @@ textarea {
         page-break-after: avoid;
     }
 }
-
+/*
 body {
     margin: 0;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -201,7 +200,7 @@ a {
     a:hover, a:focus {
         color: #005580;
         text-decoration: underline;
-    }
+    }*/
 
 .img-rounded {
     border-radius: 6px;
@@ -227,7 +226,7 @@ a {
     border-radius: 500px;
 }
  
- .row {
+/* .row {
     margin-left: -20px;
     *zoom: 1;
 }
@@ -240,18 +239,18 @@ a {
 
     .row:after {
         clear: both;
-    }
-
+    }*/
+/*
 [class*="span"] {
     float: left;
     min-height: 1px;
     margin-left: 20px;
-}
+}*/
 /* 
 .container {
     width: 940px;
 } */
-
+/*
 .span12 {
     width: 940px;
 }
@@ -347,6 +346,7 @@ a {
 .offset1 {
     margin-left: 100px;
 }
+ */
  
 .row-fluid {
     width: 100%;
@@ -570,7 +570,7 @@ a {
     [class*="span"].pull-right, .row-fluid [class*="span"].pull-right {
         float: right;
     }
-
+/* 
 .container {
     margin-right: auto;
     margin-left: auto;
@@ -586,7 +586,7 @@ a {
     .container:after {
         clear: both;
     }
-
+ */
 /*.container-fluid {
     padding-right: 20px;
     padding-left: 20px;
@@ -602,7 +602,7 @@ a {
     .container-fluid:after {
         clear: both;
     }*/
- 
+ /*
 p {
     margin: 0 0 10px;
 }
@@ -739,14 +739,14 @@ h3 small {
 
 h4 small {
     font-size: 13px;
-}
+}*/
 
 .page-header {
     padding-bottom: 9px;
     margin: 20px 0 30px;
     border-bottom: 1px solid #eee;
 }
-
+/*
 ul, ol {
     padding: 0;
     margin: 0 0 10px 25px;
@@ -1011,8 +1011,8 @@ input, textarea, .uneditable-input {
 
 textarea {
     height: auto;
-}
-
+}*/
+/*
 textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
     background-color: #fff;
     border: 1px solid #ccc;
@@ -1908,6 +1908,7 @@ table td[class*="span"], table th[class*="span"], .row-fluid table td[class*="sp
     background-image: url("../img/glyphicons-halflings-white.png");
 }
 */
+/*
 .icon-glass {
     background-position: 0 0;
 }
@@ -2470,7 +2471,8 @@ table td[class*="span"], table th[class*="span"], .row-fluid table td[class*="sp
 .icon-fullscreen {
     background-position: -456px -144px;
 }
-
+*/
+/*
 .dropup, .dropdown {
     position: relative;
 }
@@ -2689,7 +2691,7 @@ table td[class*="span"], table th[class*="span"], .row-fluid table td[class*="sp
     padding-left: 20px;
     padding-right: 20px;
 } */
-
+/*
 .typeahead {
     z-index: 1051;
     margin-top: 2px;
@@ -3392,7 +3394,7 @@ button.btn, input[type="submit"].btn {
         -moz-border-radius: 0 0 6px 6px;
         border-radius: 0 0 6px 6px;
     }
-
+*/
 .alert {
     padding: 8px 35px 8px 14px;
     margin-bottom: 20px;
@@ -4415,7 +4417,7 @@ button.btn, input[type="submit"].btn {
     
     
     
-    
+/*
 .breadcrumb {
     padding: 8px 15px;
     margin: 0 0 20px;
@@ -4968,7 +4970,7 @@ button.btn, input[type="submit"].btn {
         border-left-color: #fff;
         bottom: -10px;
     }
-
+*/
 .thumbnails {
     margin-left: -20px;
     list-style: none;
@@ -6064,10 +6066,10 @@ a.label:hover, a.label:focus, a.badge:hover, a.badge:focus {
 }
 
 @media (min-width:768px) and (max-width:979px) {
-    .row {
+/*    .row {
         margin-left: -20px;
         *zoom: 1;
-    }
+    }*/
 
         .row:before, .row:after {
             display: table;
@@ -6824,14 +6826,14 @@ a.label:hover, a.label:focus, a.badge:hover, a.badge:focus {
         overflow: visible !important;
     }
 }*/
-
+/*
 @font-face {
     font-family: 'FontAwesome';
     src: url('../components/font-awesome/font/fontawesome-webfont.eot?v=3.2.1');
     src: url('../components/font-awesome/font/fontawesome-webfont.eot?#iefix&v=3.2.1') format('embedded-opentype'),url('../components/font-awesome/font/fontawesome-webfont.woff?v=3.2.1') format('woff'),url('../components/font-awesome/font/fontawesome-webfont.ttf?v=3.2.1') format('truetype'),url('../components/font-awesome/font/fontawesome-webfont.svg#fontawesomeregular?v=3.2.1') format('svg');
     font-weight: normal;
     font-style: normal;
-}
+}*/
 
 [class^="icon-"], [class*=" icon-"] {
     font-family: FontAwesome;
@@ -10281,9 +10283,9 @@ pre, code, kbd, samp {
     font-family: monospace;
 }
 
-p {
+/*p {
     margin-bottom: 0;
-}
+}*/
 
 .end_space {
     height: 200px;
