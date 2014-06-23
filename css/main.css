@@ -399,3 +399,6 @@ footer .copyright {
     /*color: #e7e7e7;*/
 }
 
+.output_wrapper .output_png.output_subarea img {
+    width: 50%;
+}

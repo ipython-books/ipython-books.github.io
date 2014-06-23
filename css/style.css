@@ -10244,7 +10244,7 @@ div#notebook_panel {
 }
 
 div#notebook {
-    font-size: 14px;
+    /*font-size: 14px;*/
     line-height: 20px;
     overflow-y: scroll;
     overflow-x: auto;
