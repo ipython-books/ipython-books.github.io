@@ -86,11 +86,12 @@ strong {
     text-shadow: none;
     color: #ffffff;
     border-color: #55923f;
-    height: 70px;
+    /*height: 70px;*/
 }
+/*
 .preorder .small {
     font-size: 80%;
-}
+}*/
 .preorder:hover {
     background-color: #62a949;
     border-color: #55923f;
@@ -106,9 +107,10 @@ strong {
 .getthecode:hover {
     border-color: rgb(53, 126, 189);
 }
+/*
 .getthecode .small {
     font-size: 80%;
-}
+}*/
 
 .jumbo .release {
     font-size: 12pt;
