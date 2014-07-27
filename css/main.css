@@ -409,5 +409,9 @@ footer .copyright {
 }
 
 .output_wrapper .output_png.output_subarea img {
-    width: 75%;
+    width: 100%;
+}
+
+.rendered_html img {
+    width: 100%;
 }
