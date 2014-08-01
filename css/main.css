@@ -5,6 +5,10 @@ body {
     /* padding-top: 50px;  */
 }
 
+.container {
+    max-width: 750px;
+}
+
 /* html,body {
     height:100%;
 } */
