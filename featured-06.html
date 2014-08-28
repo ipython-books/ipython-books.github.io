@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>IPython Cookbook Featured Recipe #6: Getting started with Vispy</title>
+
+<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css' />
+<link href="css/bootstrap.min.css" rel="stylesheet" />
+<link href="css/font-awesome.min.css" rel="stylesheet" />
+
+
+<link href="css/highlight.css" rel="stylesheet" />
+<link href="css/style.css" rel="stylesheet" />
+<link href="css/main.css" rel="stylesheet" />
+<link href="css/featured.css" rel="stylesheet" />
+
+
+<style type="text/css">
+/* Overrides of notebook CSS for static HTML export */
+/*body {
+  overflow: visible;
+  padding: 8px;
+}*/
+
+div#notebook {
+  overflow: visible;
+  border-top: none;
+}
+
+@media print {
+  div.cell {
+    display: block;
+    page-break-inside: avoid;
+  } 
+  div.output_wrapper { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+  div.output { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+}
+</style>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+<!-- Loading mathjax macro -->
+<!-- Load mathjax -->
+    <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+    <!-- MathJax configuration -->
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        // Center justify equations in code and markdown cells. Elsewhere
+        // we use CSS to left justify single line equations in code cells.
+        displayAlign: 'center',
+        "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            linebreaks: { automatic: true }
+        }
+    });
+    </script>
+    <!-- End of mathjax configuration -->
+  <script type="text/javascript">
+    <!--
+    (function() {
+        if ("-ms-user-select" in document.documentElement.style && navigator.userAgent.match(/IEMobile\/10\.0/)) {
+            var msViewportStyle = document.createElement("style");
+            msViewportStyle.appendChild(
+                document.createTextNode("@-ms-viewport{width:auto!important}")
+            );
+            document.getElementsByTagName("head")[0].appendChild(msViewportStyle);
+        }
+    })();
+    //-->
+  </script>
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+
+<!-- BEGIN NAVBAR -->
+<nav class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="http://ipython-books.github.io">IPython Cookbook</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="http://www.packtpub.com/ipython-interactive-computing-and-visualization-cookbook/book">Pre-order</a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-code">Get the code</a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-data">Get the data</a></li>
+      </ul>
+      
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://github.com/ipython-books/cookbook-code" title="Get the code on GitHub"><i class="fa fa-lg fa-github fa-inverse"></i></a></li>
+        <li><a href="http://www.packtpub.com/ipython-interactive-computing-and-visualization-cookbook/book" title="Pre-order now!"><i class="fa fa-lg fa-shopping-cart"></i></a></li>
+        <li><a href="https://twitter.com/cyrillerossant" title="Follow on Twitter"><i class="fa fa-lg fa-twitter"></i></a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+  <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1>Featured Recipe #6: Getting started with Vispy</h1>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p>This is a featured recipe from the <a href="http://ipython-books.github.io/"><strong>IPython Cookbook</strong></a>, the definitive guide to <strong>high-performance scientific computing</strong> and <strong>data science</strong> in Python.</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Most existing plotting or visualization libraries in Python can display small or medium datasets (containing no more than a few tens of thousands of points). In the <em>Big Data</em> era, it is sometimes necessary to display larger datasets.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><a href="http://vispy.org">Vispy</a> is a young 2D/3D high-performance visualization library that can display very large datasets. Vispy leverages the computational power of modern Graphics Processing Units (GPUs) through the OpenGL library. </p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Vispy offers a Pythonic object-oriented interface to OpenGL, useful to those who know OpenGL or who are willing to learn it. Higher-level graphical interfaces are also being developed at the time of this writing, and experimental versions are already available. These interfaces do not require any knowledge of OpenGL.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In this recipe, we give a brief introduction to the fundamental concepts of OpenGL. There are two situations where you would need to know these concepts:</p>
+<ul>
+<li>If you want to use Vispy today, before the availability of stable high-level plotting interfaces.</li>
+<li>If you want to create custom, sophisticated, high-performance visualizations that are not yet implemented in Vispy.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Here, we display a digital signal using Vispy's object-oriented interface to OpenGL.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2>Getting ready</h2>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Vispy depends on NumPy. A backend library is necessary (PyQt4/PySide, wxPython, glfw, or other).</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This recipe has been tested with the <a href="https://github.com/vispy/vispy">development version of Vispy</a>. You should clone the GitHub repository and install Vispy with <code>python setup.py install</code>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The API used in this recipe might change in future versions.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2>How to do it...</h2>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ol start="1">
+<li>Let's import NumPy, <strong>vispy.app</strong> (to display a canvas) and <strong>vispy.gloo</strong> (object-oriented interface to OpenGL).</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">vispy</span> <span class="kn">import</span> <span class="n">app</span>
+<span class="kn">from</span> <span class="nn">vispy</span> <span class="kn">import</span> <span class="n">gloo</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ol start="2">
+<li>In order to display a window, we need to create a <strong>Canvas</strong>.</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython"><pre><span class="n">c</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">Canvas</span><span class="p">(</span><span class="n">close_keys</span><span class="o">=</span><span class="s">&#39;escape&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ol start="3">
+<li>When using <code>vispy.gloo</code>, we need to write <strong>shaders</strong>. These programs, written in a C-like language called GLSL, run on the GPU and give us full flexibility for our visualizations. Here, we create a trivial <strong>vertex shader</strong> that directly displays 2D data points (stored in the <code>a_position</code> variable) in the canvas. The function <code>main()</code> executes once per data point (also called <strong>vertex</strong>). The variable <code>a_position</code> contains the <code>(x, y)</code> coordinates of the current vertex. All this function does is to pass these coordinates to the next stage of processing in the rendering pipeline. We give more details in the <em>How it works</em> section below.</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython"><pre><span class="n">vertex</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">attribute vec2 a_position;</span>
+<span class="s">void main (void)</span>
+<span class="s">{</span>
+<span class="s">    gl_Position = vec4(a_position, 0.0, 1.0);</span>
+<span class="s">}</span>
+<span class="s">&quot;&quot;&quot;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ol start="4">
+<li>The other shader we need to create is the <strong>fragment shader</strong>. It lets us control the pixels' color. Here, we display all data points in black. This function runs once per generated pixel.</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython"><pre><span class="n">fragment</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">void main()</span>
+<span class="s">{</span>
+<span class="s">    gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0);</span>
+<span class="s">}</span>
+<span class="s">&quot;&quot;&quot;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ol start="5">
+<li>Next, we create an <strong>OpenGL Program</strong>. This object contains the shaders and allows us to link the shader variables to Python/NumPy data.</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython"><pre><span class="n">program</span> <span class="o">=</span> <span class="n">gloo</span><span class="o">.</span><span class="n">Program</span><span class="p">(</span><span class="n">vertex</span><span class="p">,</span> <span class="n">fragment</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ol start="6">
+<li>We link the variable <code>a_position</code> to a <code>(1000, 2)</code> NumPy array containing the coordinates of 1000 data points. In the default coordinate system, the coordinates of the four canvas corners are <code>(+/-1, +/-1)</code>. Here, we generate a random time-dependent signal in $[-1,1]$.</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython"><pre><span class="n">program</span><span class="p">[</span><span class="s">&#39;a_position&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">+</span><span class="mf">1.0</span><span class="p">,</span> <span class="mi">1000</span><span class="p">),</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">+</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ol start="7">
+<li>We create a callback function called when the window is being resized. Updating the <strong>OpenGL viewport</strong> lets us ensure that Vispy uses the entire canvas.</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython"><pre><span class="nd">@c.connect</span>
+<span class="k">def</span> <span class="nf">on_resize</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
+    <span class="n">gloo</span><span class="o">.</span><span class="n">set_viewport</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">*</span><span class="n">event</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ol start="8">
+<li>We create a callback function called when the canvas needs to be refreshed. This <code>on_draw</code> function renders the entire scene. First, we clear the window in white (it is necessary to do that at every frame). Then, we draw a succession of line segments using our OpenGL program. The vertices used for this visual are those returned by the vertex shader.</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython"><pre><span class="nd">@c.connect</span>
+<span class="k">def</span> <span class="nf">on_draw</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
+    <span class="n">gloo</span><span class="o">.</span><span class="n">clear</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">program</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s">&#39;line_strip&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ol start="9">
+<li>Finally, we show the canvas and we run the application.</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython"><pre><span class="n">c</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">();</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The following figure shows a screenshot:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="images/vispy.PNG" alt="Basic visualization example with Vispy"></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2>How it works...</h2>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>OpenGL is an open standard for hardware-accelerated interactive visualization. It is widely used in video games, industry software (Computer-Aided Design, or CAD, virtual reality) and scientific applications (medical imaging, computer graphics, and so on).</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>OpenGL is a mature technology created in the early 1990s. In the early 2000s, OpenGL 2.0 brought a major new feature: the possibility to customize fundamental steps of the <strong>rendering pipeline</strong>. This pipeline defines the way data is processed on the GPU for real-time rendering. Many OpenGL courses and tutorials cover the old, fixed pipeline. Vispy supports exclusively the modern, programmable pipeline.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Here, we introduce the fundamental concepts of the programmable pipeline used in this recipe. OpenGL is considerably more complex than what we will cover here. However, Vispy provides a vastly simplified API for the most common features of OpenGL.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Vispy is based on OpenGL ES 2.0, a flavor of OpenGL that is supported on desktop computers, mobile devices, and modern Web browsers (through <strong>WebGL</strong>). Modern graphics cards may support additional features. Those features will be available in future versions of Vispy.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>There are four major elements in the rendering pipeline of a given OpenGL program:</p>
+<ol>
+<li><strong>Data buffers</strong> store numerical data on the GPU. The main types of buffers are <strong>vertex buffers</strong>, <strong>index buffers</strong> and <strong>textures</strong>.</li>
+<li><strong>Variables</strong> are available in the shaders. There are four major types of variables: <strong>attributes</strong>, <strong>uniforms</strong>, <strong>varyings</strong> and <strong>texture samplers</strong>.</li>
+<li><strong>Shaders</strong> are GPU programs written in a C-like language called <strong>OpenGL Shading Language</strong> (GLSL). The two main types of shaders are <strong>vertex shaders</strong> and <strong>fragment shaders</strong>.</li>
+<li>The <strong>primitive type</strong> defines the way data points are rendered. The main types are points, lines and triangles.</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Here is how the rendering pipeline works:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ol>
+<li>Data is sent on the GPU and stored in buffers.</li>
+<li>The vertex shader processes the data in parallel and generates a number of 4D points in a normalized coordinate system <code>(+/-1, +/-1)</code>. The fourth dimension is a homogeneous coordinate (generally 1).</li>
+<li>Graphics primitives are generated from the data points returned by the vertex shader (<strong>primitive assembly</strong> and <strong>rasterization</strong>).</li>
+<li>The fragment shader processes all primitive pixels in parallel and returns each pixel's color as RGBA components.</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In this recipe's example, there is only one GPU variable: the attribute <code>a_position</code>. An attribute is a variable that takes one value per data point. Uniforms are global variables (shared by all data points), whereas varyings are used to pass values from the vertex shader to the fragment shader (with automatic linear interpolation for a pixel between 2 or 3 vertices).</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In <code>vispy.gloo</code>, a Program is created with the vertex and fragment shaders. Then, the variables declared in the shaders can be set with the syntax <code>program['varname'] = value</code>. When <code>varname</code> is an attribute variable, the value can just be a NumPy 2D array. In this array, every line contains the components of every data point.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Similarly, we could declare and set uniforms and textures in our program.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Finally, <code>program.draw()</code> renders the data using the specified primitive type. Here, the <code>line_strip</code> primitive type tells the GPU to run through all vertices (as returned by the vertex buffer) and to draw a line segment from one point to the next. If there are <em>n</em> points, there will be <em>n-1</em> line segments.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Other primitive types include points and triangles, with several ways of generating lines or triangles from a list of vertices.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In addition, an index buffer may be provided. An index buffer contains indices pointing to the vertex buffers. Using an index buffer would allow us to reuse any vertex multiple times during the primitive assembly stage. For example, when rendering a cube with a <code>triangles</code> primitive type (one triangle is generated for every triplet of points), we could use a vertex buffer with 8 data points and an index buffer with 36 indices (3 points per triangle, 2 triangles per face, 6 faces).</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2>There's more...</h2>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The example shown here is extremely simple. The approach provided by OpenGL and Vispy is nevertheless particularly powerful. It gives us full control on the rendering pipeline, and it allows us to leverage the computational power of the GPU in a nearly optimal way.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>High performance is achieved by minimizing the number of data transfers to the GPU. When displaying static data (for example, a scatter plot), it is possible to send the data to the GPU at initialization time only. Yet, rendering dynamic data is reasonably fast; the order of magnitude of data transfers is roughy 1 GB/s.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Besides, it is critical to use as few OpenGL draw calls as possible. Every draw incurs a significant overhead. High performance is achieved by rendering all similar primitive types at once (<strong>batch rendering</strong>). GPUs are particularly efficient with batch rendering, even when the properties of the points are different (for example, points with various sizes and colors).</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Finally, geometric or pixel transformations can be executed on the GPU with very high performance using the shaders. The massively parallel architecture of GPUs, consisting of hundreds or thousands of computing units, is fully leveraged when transformations are implemented in the shaders.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>General-purpose computations can be done in the shaders in a context of visualization. There is one major drawback compared to proper GPGPU frameworks like CUDA or OpenCL, though. In the vertex shader, a given thread has access to one data point only. Similarly, in the fragment shader, a thread has only access to one pixel. There are ways to mitigate this issue, but they lead to a drop of performance.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>However, it is possible to interoperate OpenGL with CUDA/OpenCL. Buffers can be shared between OpenGL and the GPGPU framework. Complex CUDA/OpenCL computations can be implemented on vertex buffers or textures in real-time, leading to highly efficient rendering of numerical simulations.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3>Vispy for scientific visualization</h3>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As we have seen in this recipe, Vispy requires the user to know OpenGL and GLSL. However, higher-level graphical interfaces are currently being developed. Those interfaces will bring to scientists the power of GPUs for high-performance interactive visualization.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Visuals</strong> will provide reusable, reactive graphical components like shapes, polygons, 3D meshes, surface plots, network graphs, and others. These visuals will be fully customizable and may be used without knowledge of OpenGL. A <strong>shader composition system</strong> will allow advanced users to reuse snippets of GLSL functionality in a modular way.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Visuals will be organized within a <strong>scene graph</strong> implementing GPU-based <strong>transformations</strong>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Scientific plotting interfaces will be implemented. Vispy could also serve as a high-performance backend for existing plotting libraries such as matplotlib.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Vispy will also support full integration in the IPython notebook using WebGL.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Eventually, Vispy could implement many kinds of scientific visualizations:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Scatter plots can be rendered efficiently with <strong>point sprites</strong>, using one vertex per data point. Panning and zooming can be implemented in the vertex shader, enabling fast interactive visualization of millions of points.</li>
+<li>Digital signals, static or dynamic (real-time) can be displayed with polylines. High-quality rendering of curves can be achieved using an OpenGL implementation of the <strong>Anti-grain Geometry</strong> (agg) library.</li>
+<li>Network graphs can be displayed by combining points and line segments.</li>
+<li>3D meshes can be displayed with triangles and index buffers. Geometric transformations and realistic lighting can be implemented in the vertex and fragment shader.</li>
+<li>Real-time streams of images can be displayed efficiently with textures.</li>
+<li>Axes, grids, ticks, text, and labels can be rendered efficiently in the fragment shader.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Many examples can be found in Vispy's gallery.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3>References</h3>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Here are a few references:</p>
+<ul>
+<li><a href="http://vispy.org/gallery.html">Vispy's gallery</a>.</li>
+<li><a href="http://www.loria.fr/~rougier/teaching/opengl/">A modern OpenGL tutorial by Nicolas P. Rougier</a>.</li>
+<li><a href="http://journal.frontiersin.org/Journal/10.3389/fninf.2013.00036/full">Hardware-accelerated interactive data visualization for neuroscience in Python</a>.</li>
+<li><a href="https://groups.google.com/forum/#!forum/vispy">Vispy users mailing list</a>.</li>
+<li><a href="https://groups.google.com/forum/#!forum/vispy-dev">Vispy-dev mailing list</a>.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p>This was a featured recipe from the <a href="http://ipython-books.github.io/">IPython Cookbook</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, Packt Publishing, 2014. If you liked this recipe, <a href="http://www.packtpub.com/ipython-interactive-computing-and-visualization-cookbook/book">pre-order the book now</a>! There's a time-limited 50% discount with the code <code>PICVCEB</code>.</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+    </div>
+  </div>
+  
+<!-- BEGIN FOOTER -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <p class="copyright text-muted small"><a href="http://ipython-books.github.io">IPython Cookbook</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, Packt Publishing, 2014.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+<script type="text/javascript">
+var sc_project=9752080; 
+var sc_invisible=1; 
+var sc_security="837928c1"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="web counter"
+href="http://statcounter.com/" target="_blank"><img
+class="statcounter"
+src="http://c.statcounter.com/9752080/0/837928c1/1/"
+alt="web counter"></a></div></noscript>
+
+  
+</body>
+</html>
