@@ -262,7 +262,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ol start="1">
+<ol>
 <li>Let's import NumPy, <strong>vispy.app</strong> (to display a canvas) and <strong>vispy.gloo</strong> (object-oriented interface to OpenGL).</li>
 </ol>
 
@@ -272,7 +272,7 @@ div#notebook {
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[]:
+In&nbsp;[1]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
@@ -291,7 +291,7 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ol start="2">
+<ol>
 <li>In order to display a window, we need to create a <strong>Canvas</strong>.</li>
 </ol>
 
@@ -301,11 +301,11 @@ In&nbsp;[]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[]:
+In&nbsp;[2]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython"><pre><span class="n">c</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">Canvas</span><span class="p">(</span><span class="n">close_keys</span><span class="o">=</span><span class="s">&#39;escape&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython"><pre><span class="n">c</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">Canvas</span><span class="p">(</span><span class="n">keys</span><span class="o">=</span><span class="s">&#39;interactive&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -318,7 +318,7 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ol start="3">
+<ol>
 <li>When using <code>vispy.gloo</code>, we need to write <strong>shaders</strong>. These programs, written in a C-like language called GLSL, run on the GPU and give us full flexibility for our visualizations. Here, we create a trivial <strong>vertex shader</strong> that directly displays 2D data points (stored in the <code>a_position</code> variable) in the canvas. The function <code>main()</code> executes once per data point (also called <strong>vertex</strong>). The variable <code>a_position</code> contains the <code>(x, y)</code> coordinates of the current vertex. All this function does is to pass these coordinates to the next stage of processing in the rendering pipeline. We give more details in the <em>How it works</em> section below.</li>
 </ol>
 
@@ -328,7 +328,7 @@ In&nbsp;[]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[]:
+In&nbsp;[3]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
@@ -351,7 +351,7 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ol start="4">
+<ol>
 <li>The other shader we need to create is the <strong>fragment shader</strong>. It lets us control the pixels' color. Here, we display all data points in black. This function runs once per generated pixel.</li>
 </ol>
 
@@ -361,7 +361,7 @@ In&nbsp;[]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[]:
+In&nbsp;[4]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
@@ -383,7 +383,7 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ol start="5">
+<ol>
 <li>Next, we create an <strong>OpenGL Program</strong>. This object contains the shaders and allows us to link the shader variables to Python/NumPy data.</li>
 </ol>
 
@@ -393,7 +393,7 @@ In&nbsp;[]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[]:
+In&nbsp;[5]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
@@ -410,7 +410,7 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ol start="6">
+<ol>
 <li>We link the variable <code>a_position</code> to a <code>(1000, 2)</code> NumPy array containing the coordinates of 1000 data points. In the default coordinate system, the coordinates of the four canvas corners are <code>(+/-1, +/-1)</code>. Here, we generate a random time-dependent signal in $[-1,1]$.</li>
 </ol>
 
@@ -420,7 +420,7 @@ In&nbsp;[]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[]:
+In&nbsp;[6]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
@@ -439,7 +439,7 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ol start="7">
+<ol>
 <li>We create a callback function called when the window is being resized. Updating the <strong>OpenGL viewport</strong> lets us ensure that Vispy uses the entire canvas.</li>
 </ol>
 
@@ -449,7 +449,7 @@ In&nbsp;[]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[]:
+In&nbsp;[7]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
@@ -468,7 +468,7 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ol start="8">
+<ol>
 <li>We create a callback function called when the canvas needs to be refreshed. This <code>on_draw</code> function renders the entire scene. First, we clear the window in white (it is necessary to do that at every frame). Then, we draw a succession of line segments using our OpenGL program. The vertices used for this visual are those returned by the vertex shader.</li>
 </ol>
 
@@ -478,7 +478,7 @@ In&nbsp;[]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[]:
+In&nbsp;[8]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
@@ -498,7 +498,7 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ol start="9">
+<ol>
 <li>Finally, we show the canvas and we run the application.</li>
 </ol>
 
@@ -508,7 +508,7 @@ In&nbsp;[]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[]:
+In&nbsp;[9]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
