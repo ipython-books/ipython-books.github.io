@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IPython Cookbook, ">
+
+
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+
+
+        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+
+        <title>IPython Cookbook - 10.2. Applying a linear filter to a digital signal</title>
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</head>
+
+<body>
+
+
+    <header id="header" class="pure-g">
+        <div class="pure-u-1 pure-u-md-3-4">
+             <div id="menu">
+                 <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="/">home</a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
+        <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
+        <li><a href="http://cyrille.rossant.net">author</a></li>
+</ul>                </div>
+            </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-4">
+            <div id="social">
+                <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="https://twitter.com/cyrillerossant"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd"><i class="fa fa-github"></i></a></li>
+</ul>                </div>
+            </div>
+        </div>
+    </header>
+       
+
+    
+    <div id="layout" class="pure-g">
+        <section id="content" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+
+    <header id="page-header">
+        <h1>10.2. Applying a linear filter to a digital signal</h1>
+    </header>
+
+    <section id="page">
+        <p><a href="/"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="130" style="margin-right: 20px; margin-bottom: 10px;" /></a> <em>This is one of the 100+ free recipes of the <a href="/">IPython Cookbook, Second Edition</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, a guide to numerical computing and data science in the Jupyter Notebook. The ebook and printed book are available for purchase at <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">Packt Publishing</a>.</em></p>
+<p>▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd">Text on GitHub</a> with a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a></em><br />
+▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
+<p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-10-signal-processing/"><strong><em>Go to</em></strong> <em>Chapter 10 : Signal Processing</em></a><br />
+▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter10_signal/02_filter.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
+<p>Linear filters play a fundamental role in signal processing. With a linear filter, one can extract meaningful information from a digital signal.</p>
+<p>In this recipe, we will show two examples using stock market data (the NASDAQ stock exchange). First, we will smooth out a very noisy signal with a low-pass filter to extract its slow variations. We will also apply a high-pass filter to the original time series to extract the fast variations. These are just two common examples among a wide variety of applications of linear filters.</p>
+<h2>How to do it...</h2>
+<p><strong>1.&nbsp;</strong> Let's import the packages:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy</span> <span class="kn">as</span> <span class="nn">sp</span>
+<span class="kn">import</span> <span class="nn">scipy.signal</span> <span class="kn">as</span> <span class="nn">sg</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+</pre></div>
+</div>
+
+
+<p><strong>2.&nbsp;</strong> We load the NASDAQ data (obtained from <a href="https://finance.yahoo.com/quote/%5EIXIC/history?period1=631148400&amp;period2=1510786800&amp;interval=1d&amp;filter=history&amp;frequency=1d">https://finance.yahoo.com/quote/%5EIXIC/history?period1=631148400&amp;period2=1510786800&amp;interval=1d&amp;filter=history&amp;frequency=1d</a>) with pandas:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">nasdaq_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="s1">&#39;https://github.com/ipython-books/&#39;</span>
+    <span class="s1">&#39;cookbook-2nd-data/blob/master/&#39;</span>
+    <span class="s1">&#39;nasdaq.csv?raw=true&#39;</span><span class="p">,</span>
+    <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span>
+    <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">nasdaq_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+
+
+<p><img alt="Output" src="http://ipython-books.github.io/pages/chapter10_signal/02_filter_files/02_filter_8_0.png" /></p>
+<p><strong>3.&nbsp;</strong> Let's extract two columns: the date and the daily closing value:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">date</span> <span class="o">=</span> <span class="n">nasdaq_df</span><span class="o">.</span><span class="n">index</span>
+<span class="n">nasdaq</span> <span class="o">=</span> <span class="n">nasdaq_df</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+
+
+<p><strong>4.&nbsp;</strong> Let's take a look at the raw signal:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">nasdaq</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><img alt="&lt;matplotlib.figure.Figure at 0x1204bcf8&gt;" src="http://ipython-books.github.io/pages/chapter10_signal/02_filter_files/02_filter_12_0.png" /></p>
+<p><strong>5.&nbsp;</strong> Now, we will follow the first approach to get the slow variations of the signal. We will convolve the signal with a triangular window, which corresponds to a <strong>FIR filter</strong>. We will explain the idea behind this method in the <em>How it works...</em> section of this recipe. For now, let's just say that we replace each value with a weighted mean of the signal around this value:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="c1"># We get a triangular window with 60 samples.</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">sg</span><span class="o">.</span><span class="n">get_window</span><span class="p">(</span><span class="s1">&#39;triang&#39;</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+<span class="c1"># We convolve the signal with this window.</span>
+<span class="n">fil</span> <span class="o">=</span> <span class="n">sg</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">nasdaq</span><span class="p">,</span> <span class="n">h</span> <span class="o">/</span> <span class="n">h</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="c1"># We plot the original signal...</span>
+<span class="n">nasdaq</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="c1"># ... and the filtered signal.</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot_date</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="n">fil</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">nasdaq</span><span class="p">)],</span>
+             <span class="s1">&#39;-w&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><img alt="&lt;matplotlib.figure.Figure at 0x1224fe10&gt;" src="http://ipython-books.github.io/pages/chapter10_signal/02_filter_files/02_filter_15_0.png" /></p>
+<p><strong>6.&nbsp;</strong> Now, let's use another method. We create an IIR Butterworth low-pass filter to extract the slow variations of the signal. The <code>filtfilt()</code> method allows us to apply a filter forward and backward in order to avoid phase delays:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">nasdaq</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="c1"># We create a 4-th order Butterworth low-pass filter.</span>
+<span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="n">sg</span><span class="o">.</span><span class="n">butter</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mf">2.</span> <span class="o">/</span> <span class="mi">365</span><span class="p">)</span>
+<span class="c1"># We apply this filter to the signal.</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot_date</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="n">sg</span><span class="o">.</span><span class="n">filtfilt</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">nasdaq</span><span class="p">),</span>
+             <span class="s1">&#39;-w&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><img alt="&lt;matplotlib.figure.Figure at 0x1223add8&gt;" src="http://ipython-books.github.io/pages/chapter10_signal/02_filter_files/02_filter_17_0.png" /></p>
+<p><strong>7.&nbsp;</strong> Finally, we use the same method to create a high-pass filter and extract the <em>fast</em> variations of the signal:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">nasdaq</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="n">sg</span><span class="o">.</span><span class="n">butter</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="mf">5.</span> <span class="o">/</span> <span class="mi">365</span><span class="p">,</span> <span class="n">btype</span><span class="o">=</span><span class="s1">&#39;high&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot_date</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="n">sg</span><span class="o">.</span><span class="n">filtfilt</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">nasdaq</span><span class="p">),</span>
+             <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><img alt="&lt;matplotlib.figure.Figure at 0x12230908&gt;" src="http://ipython-books.github.io/pages/chapter10_signal/02_filter_files/02_filter_19_0.png" /></p>
+<p>The fast variations around 2000 correspond to the <strong>dot-com bubble burst</strong>, reflecting the high-market volatility and the fast fluctuations of the stock market indices at that time. For more details, refer to <a href="https://en.wikipedia.org/wiki/Dot-com_bubble.">https://en.wikipedia.org/wiki/Dot-com_bubble.</a></p>
+<h2>How it works...</h2>
+<p>In this section, we explain the very basics of linear filters in the context of digital signals.</p>
+<p>A <strong>digital signal</strong> is a discrete sequence <span class="math">\((x_n)\)</span> indexed by <span class="math">\(n \geq 0\)</span>. Although we often assume infinite sequences, in practice, a signal is represented by a <em>vector</em> of the finite size <span class="math">\(N\)</span>.</p>
+<p>In the continuous case, we would rather manipulate time-dependent functions <span class="math">\(f(t)\)</span>. Loosely stated, we can go from continuous signals to discrete signals by discretizing time and transforming integrals into sums.</p>
+<h3>What are linear filters?</h3>
+<p>A <strong>linear filter</strong> <span class="math">\(F\)</span> transforms an input signal <span class="math">\(x = (x_n)\)</span> to an output signal <span class="math">\(y = (y_n)\)</span>. This transformation is linear—the transformation of the sum of two signals is the sum of the transformed signals: <span class="math">\(F(x+y) = F(x)+F(y)\)</span>.</p>
+<p>In addition to this, multiplying the input signal by a constant yields the same output as multiplying the original output signal by the same constant: <span class="math">\(F(\lambda x) = \lambda F(x)\)</span>.</p>
+<p>A <strong>Linear Time-Invariant (LTI) filter</strong> has an additional property: if the signal <span class="math">\((x_n)\)</span> is transformed to <span class="math">\((y_n)\)</span>, then the shifted signal <span class="math">\((x_{n-k})\)</span> is transformed to <span class="math">\((y_{n-k})\)</span>, for any fixed <span class="math">\(k\)</span>. In other words, the system is time-invariant because the output does not depend on the particular time the input is applied.</p>
+<blockquote>
+<p>From now on, we will only consider LTI filters.</p>
+</blockquote>
+<h3>Linear filters and convolutions</h3>
+<p>A very important result in the LTI system theory is that LTI filters can be described by a single signal: the impulse response <span class="math">\(h\)</span>. This is the output of the filter in response to an impulse signal. For digital filters, the impulse signal is <span class="math">\((1, 0, 0, 0, ...)\)</span>.</p>
+<p>It can be shown that <span class="math">\(x=(x_n)\)</span> is transformed to <span class="math">\(y=(y_n)\)</span> defined by the <strong>convolution</strong> of the impulse response <span class="math">\(h\)</span> with the signal <span class="math">\(x\)</span>:</p>
+<div class="math">$$\mathbf{y} = \mathbf{h} * \mathbf{x}, \quad \textrm{or} \quad y_n = \sum_{k=0}^{n} h_k x_{n-k}$$</div>
+<p>The convolution is a fundamental mathematical operation in signal processing. Intuitively, and considering a convolution function peaking around zero, the convolution is equivalent to taking a local average of the signal (<span class="math">\(x\)</span> here), weighted by a given window (<span class="math">\(h\)</span> here).</p>
+<p>It is implied, by our notations, that we restrict ourselves to <strong>causal filters</strong> (<span class="math">\(h_n = 0\)</span> for <span class="math">\(n &lt; 0\)</span>). This property means that the output of the signal only depends on the present and the past of the input, not the future. This is a natural property in many situations.</p>
+<h3>The FIR and IIR filters</h3>
+<p>The <strong>support</strong> of a signal <span class="math">\((h_n)\)</span> is the set of <span class="math">\(n\)</span> such that <span class="math">\(h_n \neq 0\)</span>. LTI filters can be classified into two categories:</p>
+<ul>
+<li><strong>A Finite Impulse Response (FIR) filter</strong> has an impulse response with finite support</li>
+<li><strong>A Infinite Impulse Response (IIR) filter</strong> has an impulse response with infinite support</li>
+</ul>
+<p>A FIR filter can be described by a finite impulse response of size <span class="math">\(N\)</span> (a vector). It works by convolving a signal with its impulse response. Let's define <span class="math">\(b_n = h_n\)</span> for <span class="math">\(n \leq N\)</span>. Then, <span class="math">\(y_n\)</span> is a linear combination of the last <span class="math">\(N+1\)</span> values of the input signal:</p>
+<div class="math">$$y_n = \sum_{k=0}^N b_k x_{n-k}$$</div>
+<p>On the other hand, an IIR filter is described by an infinite impulse response that cannot be represented exactly under this form. For this reason, we often use an alternative representation:</p>
+<div class="math">$$y_n = \frac{1}{a_0} \left( \sum_{k=0}^N b_k x_{n-k} - \sum_{l=1}^M a_l y_{n-l} \right)$$</div>
+<p>This <strong>difference equation</strong> expresses <span class="math">\(y_n\)</span> as a linear combination of the last <span class="math">\(N+1\)</span> values of the <em>input</em> signal (the <strong>feedforward term</strong>, like for a FIR filter) and a linear combination of the last <span class="math">\(M\)</span> values of the <em>output</em> signal (<strong>feedback term</strong>). The feedback term makes the IIR filter more complex than a FIR filter in that the output depends not only on the input but also on the previous values of the output (dynamics).</p>
+<h3>Filters in the frequency domain</h3>
+<p>We only described filters in the temporal domain. Alternate representations in other domains exist such as Laplace transforms, Z-transforms, and Fourier transforms.</p>
+<p>In particular, the <em>Fourier transform</em> has a very convenient property: it transforms convolutions into multiplications in the frequency domain. In other words, in the frequency domain, an LTI filter multiplies the Fourier transform of the input signal by the Fourier transform of the impulse response.</p>
+<h3>The low-, high-, and band-pass filters</h3>
+<p>Filters can be characterized by their effects on the amplitude of the input signal's frequencies. They are as follows:</p>
+<ul>
+<li>A <strong>low-pass filter</strong> attenuates the components of the signal at frequencies <em>higher</em> than a <strong>cutoff frequency</strong></li>
+<li>A <strong>high-pass filter</strong> attenuates the components of the signal at frequencies <em>lower</em> than a cutoff frequency</li>
+<li>A <strong>band-pass filter</strong> passes the components of the signal at frequencies within a certain range and attenuates those outside</li>
+</ul>
+<p>In this recipe, we first convolved the input signal with a triangular window (with finite support). It can be shown that this operation corresponds to a low-pass FIR filter. It is a particular case of the <strong>moving average method</strong>, which computes a local weighted average of every value in order to smooth out the signal.</p>
+<p>Then, we applied two instances of the <strong>Butterworth filter</strong>, a particular kind of IIR filter that can act as a low-pass, high-pass, or band-pass filter. In this recipe, we first used it as a low-pass filter to smooth out the signal, before using it as a high-pass filter to extract fast variations of the signal.</p>
+<h2>There's more...</h2>
+<p>Here are some general references about digital signal processing and linear filters:</p>
+<ul>
+<li>Digital signal processing on Wikipedia, available at <a href="https://en.wikipedia.org/wiki/Digital_signal_processing">https://en.wikipedia.org/wiki/Digital_signal_processing</a></li>
+<li>Linear filters on Wikipedia, available at <a href="https://en.wikipedia.org/wiki/Linear_filter">https://en.wikipedia.org/wiki/Linear_filter</a></li>
+<li>LTI filters on Wikipedia, available at <a href="https://en.wikipedia.org/wiki/LTI_system_theory">https://en.wikipedia.org/wiki/LTI_system_theory</a></li>
+</ul>
+<h2>See also</h2>
+<ul>
+<li>Analyzing the frequency components of a signal with a Fourier transform</li>
+</ul>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+    </section>
+
+            </div>
+        </section>
+
+        <footer id="footer" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+                <div>
+                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+        
+    </div>
+    
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=9752080; 
+var sc_invisible=1; 
+var sc_security="837928c1"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="hit counter"
+href="http://statcounter.com/free-hit-counter/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/9752080/0/837928c1/1/"
+alt="hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+</body>
+</html>
+

@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IPython Cookbook, ">
+
+
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+
+
+        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+
+        <title>IPython Cookbook - 6.6. Creating plots with Altair and the Vega-Lite specification</title>
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</head>
+
+<body>
+
+
+    <header id="header" class="pure-g">
+        <div class="pure-u-1 pure-u-md-3-4">
+             <div id="menu">
+                 <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="/">home</a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
+        <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
+        <li><a href="http://cyrille.rossant.net">author</a></li>
+</ul>                </div>
+            </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-4">
+            <div id="social">
+                <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="https://twitter.com/cyrillerossant"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd"><i class="fa fa-github"></i></a></li>
+</ul>                </div>
+            </div>
+        </div>
+    </header>
+       
+
+    
+    <div id="layout" class="pure-g">
+        <section id="content" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+
+    <header id="page-header">
+        <h1>6.6. Creating plots with Altair and the Vega-Lite specification</h1>
+    </header>
+
+    <section id="page">
+        <p><a href="/"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="130" style="margin-right: 20px; margin-bottom: 10px;" /></a> <em>This is one of the 100+ free recipes of the <a href="/">IPython Cookbook, Second Edition</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, a guide to numerical computing and data science in the Jupyter Notebook. The ebook and printed book are available for purchase at <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">Packt Publishing</a>.</em></p>
+<p>▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd">Text on GitHub</a> with a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a></em><br />
+▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
+<p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-6-data-visualization/"><strong><em>Go to</em></strong> <em>Chapter 6 : Data Visualization</em></a><br />
+▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter06_viz/06_altair.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
+<p><strong>Vega</strong> is a declarative format for designing static and interactive visualizations. It provides a JSON-based visualization grammar that focuses on the <em>what</em> instead of the <em>how</em>. <strong>Vega-Lite</strong> is a higher-level specification that is easier to use than Vega, and that compiles directly to Vega.</p>
+<p><strong>Altair</strong> is a Python library that provides a simple API to define and display Vega-Lite visualizations. It works in the Jupyter Notebook, JupyterLab, and nteract.</p>
+<blockquote>
+<p>Altair is under active development and some details of the API might change in future versions.</p>
+</blockquote>
+<h2>Getting started...</h2>
+<p>Install Altair with <code>conda install -c conda-forge altair</code>.</p>
+<h2>How to do it...</h2>
+<p><strong>1.&nbsp;</strong> Let's import Altair:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">altair</span> <span class="kn">as</span> <span class="nn">alt</span>
+</pre></div>
+</div>
+
+
+<p><strong>2.&nbsp;</strong> Altair provides several example datasets:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">alt</span><span class="o">.</span><span class="n">list_datasets</span><span class="p">()</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>[&#39;airports&#39;,
+ ...
+ &#39;driving&#39;,
+ &#39;flare&#39;,
+ &#39;flights-10k&#39;,
+ &#39;flights-20k&#39;,
+ &#39;flights-2k&#39;,
+ &#39;flights-3m&#39;,
+ &#39;flights-5k&#39;,
+ &#39;flights-airport&#39;,
+ &#39;gapminder&#39;,
+ ...
+ &#39;wheat&#39;,
+ &#39;world-110m&#39;]
+</pre></div>
+</div>
+
+
+<p><strong>3.&nbsp;</strong> We load the <code>flights-5k</code> dataset:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s1">&#39;flights-5k&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p>The <code>load_dataset()</code> function returns a pandas <code>DataFrame</code>.</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><img alt="Output" src="http://ipython-books.github.io/pages/chapter06_viz/06_altair_files/06_altair_12_0.png" /></p>
+<p>This dataset provides the date, origin, destination, flight distance, and delay of many flights.</p>
+<p><strong>4.&nbsp;</strong> Let's create a scatter plot showing the delay as a function of the date, with the marker size depending on the flight distance:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">mark_point</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="s1">&#39;date&#39;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s1">&#39;delay&#39;</span><span class="p">,</span>
+    <span class="n">size</span><span class="o">=</span><span class="s1">&#39;distance&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><img alt="A scatter plot" src="http://ipython-books.github.io/pages/chapter06_viz/06_altair_files/06_altair_15_0.png" /></p>
+<p>The <code>mark_point()</code> method specifies that we're creating a scatter plot. The <code>encode()</code> function allows us to link parameters of the plot (<em>x</em> and <em>y</em> coordinates, the point size) to specific columns in our DataFrame.</p>
+<p><strong>5.&nbsp;</strong> Next, we create a bar plot with the average delay of all flights departing from Los Angeles, as a function of time:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">df_la</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;origin&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;LAX&#39;</span><span class="p">]</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="nb">bin</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;average(delay)&#39;</span>
+
+<span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">df_la</span><span class="p">)</span><span class="o">.</span><span class="n">mark_bar</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><img alt="A bar plot" src="http://ipython-books.github.io/pages/chapter06_viz/06_altair_files/06_altair_18_0.png" /></p>
+<p>We select all flights departing from the <code>LAX</code> airport using pandas. For the <em>x</em> coordinate, we use the <code>alt.X</code> class to specify that we want a histogram (<code>bin=True</code>). For the <em>y</em> coordinate, we specify the average of all delays for every bin.</p>
+<p><strong>6.&nbsp;</strong> Now, we create a histogram of the average delay of every origin airport. We use the <code>sort</code> option of the <code>X</code> class to specify that we want to order the <em>x</em> axis (origin) as a function of the average delay, in descending order:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">sort_delay</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">SortField</span><span class="p">(</span>
+    <span class="s1">&#39;delay&#39;</span><span class="p">,</span> <span class="n">op</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;descending&#39;</span><span class="p">)</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s1">&#39;origin&#39;</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="n">sort_delay</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;average(delay)&#39;</span>
+
+<span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">mark_bar</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><img alt="A histogram" src="http://ipython-books.github.io/pages/chapter06_viz/06_altair_files/06_altair_21_0.png" /></p>
+<h2>How it works...</h2>
+<p>Altair provides a Python API to generate a Vega-Lite specification in JSON. The <code>to_json()</code> method of an Altair chart can be used to inspect the JSON created by Altair. For example, here is the JSON of the last chart example above:</p>
+<div class="highlight highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+ <span class="nt">&quot;$schema&quot;</span><span class="p">:</span> <span class="s2">&quot;https://vega.github.io/schema/vega-lite/v1.2.1.json&quot;</span><span class="p">,</span>
+ <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+  <span class="nt">&quot;values&quot;</span><span class="p">:</span> <span class="p">[</span>
+   <span class="p">{</span>
+    <span class="nt">&quot;date&quot;</span><span class="p">:</span> <span class="s2">&quot;2001-01-10 18:20:00&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;delay&quot;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+    <span class="nt">&quot;destination&quot;</span><span class="p">:</span> <span class="s2">&quot;HOU&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;distance&quot;</span><span class="p">:</span> <span class="mi">192</span><span class="p">,</span>
+    <span class="nt">&quot;origin&quot;</span><span class="p">:</span> <span class="s2">&quot;SAT&quot;</span>
+   <span class="p">},</span>
+   <span class="err">...</span>
+  <span class="p">]</span>
+ <span class="p">},</span>
+ <span class="nt">&quot;encoding&quot;</span><span class="p">:</span> <span class="p">{</span>
+  <span class="nt">&quot;x&quot;</span><span class="p">:</span> <span class="p">{</span>
+   <span class="nt">&quot;field&quot;</span><span class="p">:</span> <span class="s2">&quot;origin&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;sort&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;field&quot;</span><span class="p">:</span> <span class="s2">&quot;delay&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;op&quot;</span><span class="p">:</span> <span class="s2">&quot;average&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;order&quot;</span><span class="p">:</span> <span class="s2">&quot;descending&quot;</span>
+   <span class="p">},</span>
+   <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;nominal&quot;</span>
+  <span class="p">},</span>
+  <span class="nt">&quot;y&quot;</span><span class="p">:</span> <span class="p">{</span>
+   <span class="nt">&quot;aggregate&quot;</span><span class="p">:</span> <span class="s2">&quot;average&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;field&quot;</span><span class="p">:</span> <span class="s2">&quot;delay&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;quantitative&quot;</span>
+  <span class="p">}</span>
+ <span class="p">},</span>
+ <span class="nt">&quot;mark&quot;</span><span class="p">:</span> <span class="s2">&quot;bar&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+
+
+<p>The JSON may contain the data itself, like here, or a URL to a data file. It also defines the <em>encoding channels</em> which link the chart parameters to the data.</p>
+<p>In the Jupyter Notebook, Altair leverages the Vega-Lite library to create a Canvas or SVG figure with the requested plot.</p>
+<h2>There's more...</h2>
+<p>Altair and Vega-Lite support much more complex charts, as can be seen in the galleries of these projects.</p>
+<p>Vega-Lite supports interactive plots. The following example from the Vega-Lite gallery illustrates linked brushing between subplots, where a rectangular selection can be drawn with the mouse in any subplot:</p>
+<p><img alt="Linked brushing" src="http://ipython-books.github.io/pages/chapter06_viz/06_altair_files/brushing.png" /></p>
+<p>There is also an online editor on the Vega-Lite website that can be used to create plots directly in the browser without installing anything.</p>
+<p>Here are a few references:</p>
+<ul>
+<li>Altair documentation at <a href="https://altair-viz.github.io/">https://altair-viz.github.io/</a></li>
+<li>Altair gallery at <a href="https://altair-viz.github.io/gallery/index.html">https://altair-viz.github.io/gallery/index.html</a></li>
+<li>Vega-Lite documentation at <a href="https://vega.github.io/vega-lite/">https://vega.github.io/vega-lite/</a></li>
+<li>Vega-Lite gallery at <a href="https://vega.github.io/vega-lite/examples/">https://vega.github.io/vega-lite/examples/</a></li>
+<li>Vega-Lite online editor at <a href="https://vega.github.io/editor/#/custom/vega-lite">https://vega.github.io/editor/#/custom/vega-lite</a></li>
+</ul>
+<h2>See also</h2>
+<ul>
+<li>Creating statistical plots easily with seaborn</li>
+<li>Discovering interactive visualization libraries in the Notebook</li>
+</ul>
+    </section>
+
+            </div>
+        </section>
+
+        <footer id="footer" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+                <div>
+                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+        
+    </div>
+    
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=9752080; 
+var sc_invisible=1; 
+var sc_security="837928c1"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="hit counter"
+href="http://statcounter.com/free-hit-counter/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/9752080/0/837928c1/1/"
+alt="hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+</body>
+</html>
+

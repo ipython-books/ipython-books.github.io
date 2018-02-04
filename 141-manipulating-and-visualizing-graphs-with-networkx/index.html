@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IPython Cookbook, ">
+
+
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+
+
+        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+
+        <title>IPython Cookbook - 14.1. Manipulating and visualizing graphs with NetworkX</title>
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</head>
+
+<body>
+
+
+    <header id="header" class="pure-g">
+        <div class="pure-u-1 pure-u-md-3-4">
+             <div id="menu">
+                 <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="/">home</a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
+        <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
+        <li><a href="http://cyrille.rossant.net">author</a></li>
+</ul>                </div>
+            </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-4">
+            <div id="social">
+                <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="https://twitter.com/cyrillerossant"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd"><i class="fa fa-github"></i></a></li>
+</ul>                </div>
+            </div>
+        </div>
+    </header>
+       
+
+    
+    <div id="layout" class="pure-g">
+        <section id="content" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+
+    <header id="page-header">
+        <h1>14.1. Manipulating and visualizing graphs with NetworkX</h1>
+    </header>
+
+    <section id="page">
+        <p><a href="/"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="130" style="margin-right: 20px; margin-bottom: 10px;" /></a> <em>This is one of the 100+ free recipes of the <a href="/">IPython Cookbook, Second Edition</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, a guide to numerical computing and data science in the Jupyter Notebook. The ebook and printed book are available for purchase at <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">Packt Publishing</a>.</em></p>
+<p>▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd">Text on GitHub</a> with a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a></em><br />
+▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
+<p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-14-graphs-geometry-and-geographic-information-systems/"><strong><em>Go to</em></strong> <em>Chapter 14 : Graphs, Geometry, and Geographic Information Systems</em></a><br />
+▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter14_graphgeo/01_networkx.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
+<p>In this recipe, we will show how to create, manipulate, and visualize graphs with NetworkX.</p>
+<h2>Getting ready</h2>
+<p>NetworkX is installed by default in Anaconda. If needed, you can also install it manually with <code>conda install networkx</code>.</p>
+<h2>How to do it...</h2>
+<p><strong>1.&nbsp;</strong> Let's import NumPy, NetworkX, and matplotlib:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="kn">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+</pre></div>
+</div>
+
+
+<p><strong>2.&nbsp;</strong> There are many ways of creating a graph. Here, we create a list of edges (pairs of node indices):</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># Number of nodes in the graph.</span>
+<span class="c1"># Each node is connected to the two next nodes,</span>
+<span class="c1"># in a circular fashion.</span>
+<span class="n">adj</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+<span class="n">adj</span> <span class="o">+=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span> <span class="o">%</span> <span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+</pre></div>
+</div>
+
+
+<p><strong>3.&nbsp;</strong> We instantiate a <code>Graph</code> object with our list of edges:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">(</span><span class="n">adj</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><strong>4.&nbsp;</strong> Let's check the list of nodes and edges of the graph, and its adjacency matrix:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">nodes</span><span class="p">())</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">edges</span><span class="p">())</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>[(0, 1), (0, 9), (0, 2), (0, 8), (1, 2), ...,
+ (6, 8), (7, 8), (7, 9), (8, 9)]
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">(</span><span class="n">g</span><span class="p">))</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>  (0, 1)    1
+  (0, 2)    1
+  (0, 8)    1
+  (0, 9)    1
+  (1, 0)    1
+  ...
+  (8, 9)    1
+  (9, 0)    1
+  (9, 1)    1
+  (9, 7)    1
+  (9, 8)    1
+</pre></div>
+</div>
+
+
+<p><strong>5.&nbsp;</strong> Let's display this graph. NetworkX comes with a variety of drawing functions. We can either specify the nodes' positions explicitly, or we can use an algorithm to automatically compute an interesting layout. Here, we use the <code>draw_circular()</code> function that simply positions nodes linearly on a circle:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_circular</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><img alt="&lt;matplotlib.figure.Figure at 0x665edd8&gt;" src="http://ipython-books.github.io/pages/chapter14_graphgeo/01_networkx_files/01_networkx_17_0.png" /></p>
+<p><strong>6.&nbsp;</strong> Graphs can be modified easily. Here, we add a new node connected to all existing nodes. We also specify a <code>color</code> attribute to this node. In NetworkX, every node and edge comes with a Python dictionary containing arbitrary attributes.</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#fcff00&#39;</span><span class="p">)</span>
+<span class="c1"># We add an edge from every existing</span>
+<span class="c1"># node to the new node.</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><strong>7.&nbsp;</strong> Now, let's draw the modified graph again. This time, we specify the nodes' positions and colors explicitly:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="c1"># We define custom node positions on a circle</span>
+<span class="c1"># except the last node which is at the center.</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">pos</span><span class="p">[:</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="n">pos</span><span class="p">[:</span><span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+<span class="c1"># A node&#39;s color is specified by its &#39;color&#39;</span>
+<span class="c1"># attribute, or a default color if this attribute</span>
+<span class="c1"># doesn&#39;t exist.</span>
+<span class="n">color</span> <span class="o">=</span> <span class="p">[</span><span class="n">g</span><span class="o">.</span><span class="n">node</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;color&#39;</span><span class="p">,</span> <span class="s1">&#39;#88b0f3&#39;</span><span class="p">)</span>
+         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
+
+<span class="c1"># We now draw the graph with matplotlib.</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="n">pos</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
+</pre></div>
+</div>
+
+
+<p><img alt="&lt;matplotlib.figure.Figure at 0x61513c8&gt;" src="http://ipython-books.github.io/pages/chapter14_graphgeo/01_networkx_files/01_networkx_21_0.png" /></p>
+<p><strong>8.&nbsp;</strong> Let's also use an automatic layout algorithm:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_spectral</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
+</pre></div>
+</div>
+
+
+<p><img alt="&lt;matplotlib.figure.Figure at 0x7f357883e748&gt;" src="http://ipython-books.github.io/pages/chapter14_graphgeo/01_networkx_files/01_networkx_23_0.png" /></p>
+<h2>There's more...</h2>
+<p>In NetworkX, nodes are not necessarily integers. They can be numbers, strings, tuples, or instances of any hashable Python class.</p>
+<p>In addition, every node and edge comes with optional attributes (which form a dictionary).</p>
+<p>A few layout algorithms are implemented in NetworkX. The <code>draw_spectral()</code> function uses the eigenvectors of the graph's <strong>Laplacian matrix</strong>.</p>
+<p>The <code>draw_spring()</code> function implements the <strong>Fruchterman-Reingold force-directed algorithm</strong>. Nodes are considered as masses subject to edge-dependent forces. A force-directed graph drawing algorithm minimizes the system's energy so as to find an equilibrium configuration. This results in an aesthetically appealing layout with as few crossing edges as possible.</p>
+<p>Here are a few references:</p>
+<ul>
+<li>Graph drawing, described at <a href="https://en.wikipedia.org/wiki/Graph_drawing">https://en.wikipedia.org/wiki/Graph_drawing</a></li>
+<li>Laplacian matrix on Wikipedia, available at <a href="https://en.wikipedia.org/wiki/Laplacian_matrix">https://en.wikipedia.org/wiki/Laplacian_matrix</a></li>
+<li>Force-directed graph drawing, described at <a href="https://en.wikipedia.org/wiki/Force-directed_graph_drawing">https://en.wikipedia.org/wiki/Force-directed_graph_drawing</a></li>
+</ul>
+<h2>See also</h2>
+<ul>
+<li>Drawing flight routes with NetworkX</li>
+</ul>
+    </section>
+
+            </div>
+        </section>
+
+        <footer id="footer" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+                <div>
+                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+        
+    </div>
+    
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=9752080; 
+var sc_invisible=1; 
+var sc_security="837928c1"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="hit counter"
+href="http://statcounter.com/free-hit-counter/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/9752080/0/837928c1/1/"
+alt="hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+</body>
+</html>
+

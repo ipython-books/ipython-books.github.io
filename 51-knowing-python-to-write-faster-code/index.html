@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IPython Cookbook, ">
+
+
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+
+
+        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+
+        <title>IPython Cookbook - 5.1. Knowing Python to write faster code</title>
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</head>
+
+<body>
+
+
+    <header id="header" class="pure-g">
+        <div class="pure-u-1 pure-u-md-3-4">
+             <div id="menu">
+                 <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="/">home</a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
+        <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
+        <li><a href="http://cyrille.rossant.net">author</a></li>
+</ul>                </div>
+            </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-4">
+            <div id="social">
+                <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="https://twitter.com/cyrillerossant"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd"><i class="fa fa-github"></i></a></li>
+</ul>                </div>
+            </div>
+        </div>
+    </header>
+       
+
+    
+    <div id="layout" class="pure-g">
+        <section id="content" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+
+    <header id="page-header">
+        <h1>5.1. Knowing Python to write faster code</h1>
+    </header>
+
+    <section id="page">
+        <p><a href="/"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="130" style="margin-right: 20px; margin-bottom: 10px;" /></a> <em>This is one of the 100+ free recipes of the <a href="/">IPython Cookbook, Second Edition</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, a guide to numerical computing and data science in the Jupyter Notebook. The ebook and printed book are available for purchase at <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">Packt Publishing</a>.</em></p>
+<p>▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd">Text on GitHub</a> with a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a></em><br />
+▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
+<p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-5-high-performance-computing/"><strong><em>Go to</em></strong> <em>Chapter 5 : High-Performance Computing</em></a><br />
+▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter05_hpc/01_slow.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
+<p>The first way to make Python code run faster is to know all features of the language. Python brings many syntax features and modules in the standard library that run much faster than anything you could write by hand. Moreover, although Python may be slow if you write in Python like you would write in C or Java, it is often fast enough when you write Pythonic code.</p>
+<p>In this section, we show how badly-written Python code can be significantly improved when using all features of the language.</p>
+<blockquote>
+<p>Leveraging NumPy for efficient array operations is of course another possibility that we explored in the <em>Introducing the multidimensional array in NumPy for fast array computations</em> recipe of Chapter 1. This recipe focuses on cases where, for a reason or another, depending and using NumPy is not a possible or desirable option. For example, operations on dictionaries, graphs, or text may be easier to write in Python than in NumPy. In these cases, Python brings many features that can still let you make your code faster.</p>
+</blockquote>
+<h2>How to do it...</h2>
+<p><strong>1.&nbsp;</strong> Let's define a list of normally-distributed random variables, using the <em>random</em> built-in module instead of NumPy.</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">normalvariate</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100000</span><span class="p">)]</span>
+</pre></div>
+</div>
+
+
+<p><strong>2.&nbsp;</strong> Let's write a function that computes the sum of all numbers in that list. Someone inexperienced with Python may write in Python as if it was C, which would give the following function:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sum1</span><span class="p">():</span>
+    <span class="c1"># BAD: not Pythonic and slow</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)):</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">res</span> <span class="o">+</span> <span class="n">l</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">res</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">sum1</span><span class="p">()</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>319.346
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="n">sum1</span><span class="p">()</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>6.64 ms ± 69.1 µs per loop (mean ± std. dev. of 7 runs,
+    100 loops each)
+</pre></div>
+</div>
+
+
+<p>Six milliseconds to compute the sum of "only" 100,000 numbers is slow, which may lead some persons to say rather unfairly that "Python is slow".</p>
+<p><strong>3.&nbsp;</strong> Now, let's write a slightly improved version of this code, taking into account the fact that we can enumerate the elements of a list using <code>for x in l</code> instead of iterating with an index:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sum2</span><span class="p">():</span>
+    <span class="c1"># STILL BAD</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">l</span><span class="p">:</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">res</span> <span class="o">+</span> <span class="n">x</span>
+    <span class="k">return</span> <span class="n">res</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">sum2</span><span class="p">()</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>319.346
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="n">sum2</span><span class="p">()</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>3.3 ms ± 54.7 µs per loop (mean ± std. dev. of 7 runs,
+    100 loops each)
+</pre></div>
+</div>
+
+
+<p>This slight modification gave us a two-fold speed improvement.</p>
+<p><strong>3.&nbsp;</strong> Finally, we realize that Python brings a built-in function to compute the sum of all elements in a list:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sum3</span><span class="p">():</span>
+    <span class="c1"># GOOD</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">sum3</span><span class="p">()</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>319.346
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="n">sum3</span><span class="p">()</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>391 µs ± 840 ns per loop (mean ± std. dev. of 7 runs,
+    1000 loops each)
+</pre></div>
+</div>
+
+
+<p>This version is 17 times faster than the first version, and we only wrote pure Python code!</p>
+<p><strong>4.&nbsp;</strong> Let's move to another example involving strings. We create a list of strings representing all numbers in our previous list:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">strings</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;</span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">l</span><span class="p">]</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">strings</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>[&#39;-0.056&#39;, &#39;-0.417&#39;, &#39;-0.357&#39;]
+</pre></div>
+</div>
+
+
+<p><strong>5.&nbsp;</strong> We define a function concatenating all strings in that list. Again, an inexperienced Python programmer could write code such as the following:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">concat1</span><span class="p">():</span>
+    <span class="c1"># BAD: not Pythonic</span>
+    <span class="n">cat</span> <span class="o">=</span> <span class="n">strings</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">strings</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+        <span class="n">cat</span> <span class="o">=</span> <span class="n">cat</span> <span class="o">+</span> <span class="s1">&#39;, &#39;</span> <span class="o">+</span> <span class="n">s</span>
+    <span class="k">return</span> <span class="n">cat</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">concat1</span><span class="p">()[:</span><span class="mi">24</span><span class="p">]</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>&#39;-0.056, -0.417, -0.357, &#39;
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="n">concat1</span><span class="p">()</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>1.31 s ± 12.1 ms per loop (mean ± std. dev. of 7 runs,
+    1 loop each)
+</pre></div>
+</div>
+
+
+<p>This function is very slow because a large number of tiny strings are allocated.</p>
+<p><strong>6.&nbsp;</strong> Next, we realize that Python offers the option to easily concatenate several strings:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">concat2</span><span class="p">():</span>
+    <span class="c1"># GOOD</span>
+    <span class="k">return</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">strings</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">concat2</span><span class="p">()[:</span><span class="mi">24</span><span class="p">]</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>&#39;-0.056, -0.417, -0.357, &#39;
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="n">concat2</span><span class="p">()</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>797 µs ± 13.7 µs per loop (mean ± std. dev. of 7 runs,
+    1000 loops each)
+</pre></div>
+</div>
+
+
+<p>This function is 1640 times faster!</p>
+<p><strong>7.&nbsp;</strong> Finally, we want to count the number of occurrences of all numbers between 0 and 99 in a list containing 100,000 integers between 0 and 99:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100000</span><span class="p">)]</span>
+</pre></div>
+</div>
+
+
+<p><strong>8.&nbsp;</strong> The naive way would be to iterate over all elements in the list and making the histogram with a dictionary:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">hist1</span><span class="p">():</span>
+    <span class="c1"># BAD</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">l</span><span class="p">:</span>
+        <span class="c1"># We need to initialize every number</span>
+        <span class="c1"># the first time it appears in the list.</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">count</span><span class="p">:</span>
+            <span class="n">count</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">count</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">count</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">hist1</span><span class="p">()</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>{0: 979,
+ 1: 971,
+ 2: 990,
+ ...
+ 99: 995,
+ 100: 1009}
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="n">hist1</span><span class="p">()</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>8.7 ms ± 27.6 µs per loop (mean ± std. dev. of 7 runs,
+    100 loops each)
+</pre></div>
+</div>
+
+
+<p><strong>9.&nbsp;</strong> Next, we realize that Python offers a <code>defaultdict</code> structure that handles the automatic creation of dictionary keys:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">hist2</span><span class="p">():</span>
+    <span class="c1"># BETTER</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">l</span><span class="p">:</span>
+        <span class="c1"># The key is created and the value</span>
+        <span class="c1"># initialized at 0 when needed.</span>
+        <span class="n">count</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">count</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">hist2</span><span class="p">()</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>defaultdict(int,
+            {0: 979,
+             1: 971,
+             ...
+             99: 995,
+             100: 1009})
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="n">hist2</span><span class="p">()</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>6.82 ms ± 217 µs per loop (mean ± std. dev. of 7 runs,
+    100 loops each)
+</pre></div>
+</div>
+
+
+<p>This version is slightly faster.</p>
+<p><strong>10.&nbsp;</strong> Finally, we realize that the built-in <em>collections</em> module offers a <code>Counter</code> class that does exactly what we need:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">hist3</span><span class="p">():</span>
+    <span class="c1"># GOOD</span>
+    <span class="k">return</span> <span class="n">Counter</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">hist3</span><span class="p">()</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>Counter({0: 979,
+         1: 971,
+         ...
+         99: 995,
+         100: 1009})
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="n">hist3</span><span class="p">()</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>3.69 ms ± 105 µs per loop (mean ± std. dev. of 7 runs,
+    100 loops each)
+</pre></div>
+</div>
+
+
+<p>This version is twice as fast as the first one.</p>
+<h2>There's more...</h2>
+<p>When your code is too slow, the first step is to make sure you're not reinventing the wheel and that you're making good use of all features of the language.</p>
+<p>You can have an overview of all syntax features and built-in modules of Python by reading the documentation and other references:</p>
+<ul>
+<li>Documentation of Python 3 at <a href="https://docs.python.org/3/library/index.html">https://docs.python.org/3/library/index.html</a></li>
+<li>The Python Cookbook, by Brian Jones and David Beazley, O'Reilly Media at <a href="http://shop.oreilly.com/product/0636920027072.do">http://shop.oreilly.com/product/0636920027072.do</a></li>
+</ul>
+<h2>See also</h2>
+<ul>
+<li>Using the latest features of Python 3, in Chapter 2</li>
+</ul>
+    </section>
+
+            </div>
+        </section>
+
+        <footer id="footer" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+                <div>
+                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+        
+    </div>
+    
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=9752080; 
+var sc_invisible=1; 
+var sc_security="837928c1"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="hit counter"
+href="http://statcounter.com/free-hit-counter/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/9752080/0/837928c1/1/"
+alt="hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+</body>
+</html>
+

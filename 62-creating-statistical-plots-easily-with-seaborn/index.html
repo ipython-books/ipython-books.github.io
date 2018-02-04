@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IPython Cookbook, ">
+
+
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+
+
+        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+
+        <title>IPython Cookbook - 6.2. Creating statistical plots easily with seaborn</title>
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</head>
+
+<body>
+
+
+    <header id="header" class="pure-g">
+        <div class="pure-u-1 pure-u-md-3-4">
+             <div id="menu">
+                 <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="/">home</a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
+        <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
+        <li><a href="http://cyrille.rossant.net">author</a></li>
+</ul>                </div>
+            </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-4">
+            <div id="social">
+                <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="https://twitter.com/cyrillerossant"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd"><i class="fa fa-github"></i></a></li>
+</ul>                </div>
+            </div>
+        </div>
+    </header>
+       
+
+    
+    <div id="layout" class="pure-g">
+        <section id="content" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+
+    <header id="page-header">
+        <h1>6.2. Creating statistical plots easily with seaborn</h1>
+    </header>
+
+    <section id="page">
+        <p><a href="/"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="130" style="margin-right: 20px; margin-bottom: 10px;" /></a> <em>This is one of the 100+ free recipes of the <a href="/">IPython Cookbook, Second Edition</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, a guide to numerical computing and data science in the Jupyter Notebook. The ebook and printed book are available for purchase at <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">Packt Publishing</a>.</em></p>
+<p>▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd">Text on GitHub</a> with a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a></em><br />
+▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
+<p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-6-data-visualization/"><strong><em>Go to</em></strong> <em>Chapter 6 : Data Visualization</em></a><br />
+▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter06_viz/02_seaborn.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
+<p><strong>seaborn</strong> is a library that builds on top of matplotlib and pandas to provide easy-to-use statistical plotting routines. In this recipe, we give a few examples of the types of statistical plots that can be created with seaborn.</p>
+<h2>How to do it...</h2>
+<p><strong>1.&nbsp;</strong> Let's import NumPy, matplotlib, and seaborn:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="kn">as</span> <span class="nn">sns</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+</pre></div>
+</div>
+
+
+<p><strong>2.&nbsp;</strong> seaborn comes with builtin datasets, which are useful when making demos. The <code>tips</code> datasets contains the bills and tips of taxi trips:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">tips</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s1">&#39;tips&#39;</span><span class="p">)</span>
+<span class="n">tips</span>
+</pre></div>
+</div>
+
+
+<p><img alt="Tips dataset" src="http://ipython-books.github.io/pages/chapter06_viz/02_seaborn_files/02_seaborn_8_0.png" /></p>
+<p><strong>3.&nbsp;</strong> seaborn implements easy-to-use functions to visualize the distribution of datasets. Here, we plot the histogram, <strong>kernel density estimation</strong> (KDE), and a gamma distribution fit of our dataset:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="c1"># We create two subplots sharing the same y axis.</span>
+<span class="n">f</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span>
+                       <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+                       <span class="n">sharey</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c1"># Left subplot.</span>
+<span class="c1"># Histogram and KDE (active by default).</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">tips</span><span class="o">.</span><span class="n">total_bill</span><span class="p">,</span>
+             <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span>
+             <span class="n">hist</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c1"># Right subplot.</span>
+<span class="c1"># &quot;Rugplot&quot;, KDE, and gamma fit.</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">tips</span><span class="o">.</span><span class="n">total_bill</span><span class="p">,</span>
+             <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span>
+             <span class="n">hist</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+             <span class="n">kde</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+             <span class="n">rug</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+             <span class="n">fit</span><span class="o">=</span><span class="n">stats</span><span class="o">.</span><span class="n">gamma</span><span class="p">,</span>
+             <span class="n">fit_kws</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;gamma&#39;</span><span class="p">),</span>
+             <span class="n">kde_kws</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;kde&#39;</span><span class="p">))</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+
+
+<p><img alt="Kernel density estimation" src="http://ipython-books.github.io/pages/chapter06_viz/02_seaborn_files/02_seaborn_10_0.png" /></p>
+<p><strong>4.&nbsp;</strong> We can make a quick linear regression to visualize the correlation between two variables:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;tip&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><img alt="A regression plot" src="http://ipython-books.github.io/pages/chapter06_viz/02_seaborn_files/02_seaborn_12_0.png" /></p>
+<p><strong>5.&nbsp;</strong> We can also visualize the distribution of categorical data with different types of plots. Here, we display a bar plot, a violin plot, and a swarmplot, which show an increasing amount of details:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">,</span> <span class="n">ax3</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span>
+    <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">sharey</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;sex&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;tip&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;sex&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;tip&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">swarmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;sex&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;tip&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax3</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><img alt="Plotting distributions" src="http://ipython-books.github.io/pages/chapter06_viz/02_seaborn_files/02_seaborn_14_1.png" /></p>
+<p>The bar plot shows the mean and standard deviation of the tip, for males and females. The violin plot shows an estimation of the distribution in a more informative way than the bar plot, especially with non-Gaussian or multimodal distributions. The swarm plot displays all points, using the x axis to make them non-overlapping.</p>
+<p><strong>6.&nbsp;</strong> The <code>FacetGrid</code> lets us explore a multidimensional dataset with several subplots organized within a grid. Here, we plot the tip as a function of the bill with a linear regression, for every combination of smoker (Yes/No) and sex (Male/Female):</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">FacetGrid</span><span class="p">(</span><span class="n">tips</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s1">&#39;smoker&#39;</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="s1">&#39;sex&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">,</span> <span class="s1">&#39;total_bill&#39;</span><span class="p">,</span> <span class="s1">&#39;tip&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><img alt="A FacetGrid" src="http://ipython-books.github.io/pages/chapter06_viz/02_seaborn_files/02_seaborn_17_0.png" /></p>
+<h2>There's more...</h2>
+<p>Besides seaborn, there are other high-level plotting interfaces:</p>
+<ul>
+<li>The <em>Grammar of Graphics</em> is a book by Dr. Leland Wilkinson that has influenced many high-level plotting interfaces such as R's <em>ggplot2</em>, Python's <em>ggplot</em> by ŷhat, and others.</li>
+<li><strong>Vega</strong>, by Trifacta, is a declarative visualization grammar that can be translated to D3.js (a JavaScript visualization library). <strong>Altair</strong> provides a Python API for the Vega-Lite specification (a higher-level specification that compiles to Vega).</li>
+</ul>
+<p>Here are some more references:</p>
+<ul>
+<li>seaborn tutorial at <a href="https://seaborn.pydata.org/tutorial.html">https://seaborn.pydata.org/tutorial.html</a></li>
+<li>seaborn gallery at <a href="https://seaborn.pydata.org/examples/index.html">https://seaborn.pydata.org/examples/index.html</a></li>
+<li>Altair available at <a href="https://altair-viz.github.io">https://altair-viz.github.io</a></li>
+<li>plotnine, a Grammar of Graphics implementation in Python, at <a href="https://plotnine.readthedocs.io/en/stable/">https://plotnine.readthedocs.io/en/stable/</a></li>
+<li>ggplot for Python available at <a href="http://ggplot.yhathq.com/">http://ggplot.yhathq.com/</a></li>
+<li>ggplot2 for the R programming language, available at <a href="http://ggplot2.org/">http://ggplot2.org/</a></li>
+<li>Python Plotting for Exploratory Data Analysis at <a href="http://pythonplot.com/">http://pythonplot.com/</a></li>
+</ul>
+<h2>See also</h2>
+<ul>
+<li>Using matplotlib styles</li>
+<li>Discovering interactive visualization libraries in the Notebook</li>
+<li>Creating plots with Altair and the Vega-Lite specification</li>
+</ul>
+    </section>
+
+            </div>
+        </section>
+
+        <footer id="footer" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+                <div>
+                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+        
+    </div>
+    
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=9752080; 
+var sc_invisible=1; 
+var sc_security="837928c1"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="hit counter"
+href="http://statcounter.com/free-hit-counter/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/9752080/0/837928c1/1/"
+alt="hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+</body>
+</html>
+

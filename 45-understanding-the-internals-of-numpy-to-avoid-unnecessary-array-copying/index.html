@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IPython Cookbook, ">
+
+
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+
+
+        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+
+        <title>IPython Cookbook - 4.5. Understanding the internals of NumPy to avoid unnecessary array copying</title>
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</head>
+
+<body>
+
+
+    <header id="header" class="pure-g">
+        <div class="pure-u-1 pure-u-md-3-4">
+             <div id="menu">
+                 <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="/">home</a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
+        <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
+        <li><a href="http://cyrille.rossant.net">author</a></li>
+</ul>                </div>
+            </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-4">
+            <div id="social">
+                <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="https://twitter.com/cyrillerossant"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd"><i class="fa fa-github"></i></a></li>
+</ul>                </div>
+            </div>
+        </div>
+    </header>
+       
+
+    
+    <div id="layout" class="pure-g">
+        <section id="content" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+
+    <header id="page-header">
+        <h1>4.5. Understanding the internals of NumPy to avoid unnecessary array copying</h1>
+    </header>
+
+    <section id="page">
+        <p><a href="/"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="130" style="margin-right: 20px; margin-bottom: 10px;" /></a> <em>This is one of the 100+ free recipes of the <a href="/">IPython Cookbook, Second Edition</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, a guide to numerical computing and data science in the Jupyter Notebook. The ebook and printed book are available for purchase at <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">Packt Publishing</a>.</em></p>
+<p>▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd">Text on GitHub</a> with a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a></em><br />
+▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
+<p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-4-profiling-and-optimization/"><strong><em>Go to</em></strong> <em>Chapter 4 : Profiling and Optimization</em></a><br />
+▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter04_optimization/05_array_copies.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
+<p>We can achieve significant performance speedups with NumPy over native Python code, particularly when our computations follow the <strong>Single Instruction, Multiple Data (SIMD)</strong> paradigm. However, it is also possible to unintentionally write non-optimized code with NumPy.</p>
+<p>In the next few recipes, we will see some tricks that can help us write optimized NumPy code. In this recipe, we will see how to avoid unnecessary array copies in order to save memory. In that respect, we will need to dig into the internals of NumPy.</p>
+<h2>Getting ready</h2>
+<p>First, we need a way to check whether two arrays share the same underlying data buffer in memory. Let's define a function <code>aid()</code> that returns the memory location of the underlying data buffer:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">aid</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="c1"># This function returns the memory</span>
+    <span class="c1"># block address of an array.</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">.</span><span class="n">__array_interface__</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+
+
+<p>Two arrays with the same data location (as returned by <code>aid()</code>) share the same underlying data buffer. However, the opposite is true only if the arrays have the same <strong>offset</strong> (meaning that they have the same first element). Two shared arrays with different offsets will have slightly different memory locations, as shown in the following example:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">aid</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">aid</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>(21535472, 21535480)
+</pre></div>
+</div>
+
+
+<p>In the next few recipes, we'll make sure to use this method with arrays that have the same offset. Here is a more general and reliable solution for finding out whether two arrays share the same data:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_data_base</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;For a given NumPy array, find the base array</span>
+<span class="sd">    that owns the actual data.&quot;&quot;&quot;</span>
+    <span class="n">base</span> <span class="o">=</span> <span class="n">arr</span>
+    <span class="k">while</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">base</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="n">base</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">base</span>
+    <span class="k">return</span> <span class="n">base</span>
+
+
+<span class="k">def</span> <span class="nf">arrays_share_data</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">get_data_base</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="ow">is</span> <span class="n">get_data_base</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">arrays_share_data</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">copy</span><span class="p">()))</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">arrays_share_data</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">[:</span><span class="mi">1</span><span class="p">]))</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+
+
+<p>Thanks to Michael Droettboom for pointing this out and proposing this alternative solution.</p>
+<h2>How to do it...</h2>
+<p>Computations with NumPy arrays may involve internal copies between blocks of memory. These copies are not always necessary, in which case they should be avoided, as we will see in the following tips.</p>
+<p><strong>1.&nbsp;</strong> We may sometimes need to make a copy of an array; for instance, if we need to manipulate an array while keeping an original copy in memory:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">aid</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="n">ax</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>32250112
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">aid</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">==</span> <span class="n">ax</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+
+
+<p><strong>2.&nbsp;</strong> Array computations can involve in-place operations (the first example in the following code: the array is modified) or implicit-copy operations (the second example: a new array is created):</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">*=</span> <span class="mi">2</span>
+<span class="n">aid</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">==</span> <span class="n">ax</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="mi">2</span>
+<span class="n">aid</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">==</span> <span class="n">ax</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+
+
+<p>Implicit-copy operations are slower, as shown here:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">timeit</span> <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">10000000</span><span class="p">)</span>
+<span class="n">a</span> <span class="o">*=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>4.85 ms ± 24 µs per loop (mean ± std. dev. of 7 runs,
+100 loops each)
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">timeit</span> <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">10000000</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="mi">2</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>7.7 ms ± 105 µs per loop (mean ± std. dev. of 7 runs,
+100 loops each)
+</pre></div>
+</div>
+
+
+<p><strong>3.&nbsp;</strong> Reshaping an array may or may not involve a copy. The reasons will be explained in the <em>How it works...</em> section. For instance, reshaping a 2D matrix does not involve a copy, unless it is transposed (or more generally, <strong>non-contiguous</strong>):</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">aid</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">aid</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">==</span> <span class="n">ax</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">aid</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">==</span> <span class="n">ax</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+
+
+<p>Therefore, the latter instruction is significantly slower than the former:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>330 ns ± 0.517 ns per loop (mean ± std. dev. of 7 runs
+    1000000 loops each)
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="n">a</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>5 µs ± 5.68 ns per loop (mean ± std. dev. of 7 runs,
+    100000 loops each)
+</pre></div>
+</div>
+
+
+<p><strong>4.&nbsp;</strong> Both the <code>flatten()</code> and the <code>ravel()</code> methods of an array reshape it into a 1D vector (a flattened array). However, the <code>flatten()</code> method always returns a copy, and the <code>ravel()</code> method returns a copy only if necessary (thus it's faster, especially with large arrays).</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+<span class="n">aid</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="o">==</span> <span class="n">ax</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">e</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+<span class="n">aid</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="o">==</span> <span class="n">ax</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="n">a</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>2.3 µs ± 18.1 ns per loop (mean ± std. dev. of 7 runs,
+100000 loops each)
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="n">a</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>199 ns ± 5.02 ns per loop (mean ± std. dev. of 7 runs,
+10000000 loops each)
+</pre></div>
+</div>
+
+
+<p><strong>5.&nbsp;</strong> <strong>Broadcasting rules</strong> allow us to make computations on arrays with different but compatible shapes. In other words, we don't always need to reshape or tile our arrays to make their shapes match. The following example illustrates two ways of doing an <strong>outer product</strong> between two vectors: the first method involves array tiling, the second one (faster) involves broadcasting:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">ac</span> <span class="o">=</span> <span class="n">a</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>  <span class="c1"># column vector</span>
+<span class="n">ar</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:]</span>  <span class="c1"># row vector</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">ac</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">ar</span><span class="p">,</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>5.7 ms ± 42.6 µs per loop (mean ± std. dev. of 7 runs,
+100 loops each)
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="n">ar</span> <span class="o">*</span> <span class="n">ac</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>784 µs ± 2.39 µs per loop (mean ± std. dev. of 7 runs,
+1000 loops each)
+</pre></div>
+</div>
+
+
+<h2>How it works...</h2>
+<p>In this section, we will see what happens under the hood when using NumPy, and how this knowledge allows us to understand the tricks given in this recipe.</p>
+<h3>Why are NumPy arrays efficient?</h3>
+<p>A NumPy array is basically described by metadata (notably the number of dimensions, the shape, and the data type) and the actual data. The data is stored in a homogeneous and contiguous block of memory, at a particular address in system memory (<strong>Random Access Memory</strong>, or <strong>RAM</strong>). This block of memory is called the <strong>data buffer</strong>. This is the main difference between an array and a pure Python structure, such as a list, where the items are scattered across the system memory. This aspect is the critical feature that makes NumPy arrays so efficient.</p>
+<p>Why is this so important? Here are the main reasons:</p>
+<ul>
+<li>Computations on arrays can be written very efficiently in a low-level language such as C (and a large part of NumPy is actually written in C). Knowing the address of the memory block and the data type, it is just simple arithmetic to loop over all items, for example. There would be a significant overhead to do that in Python with a list.</li>
+<li><strong>Spatial locality</strong> in memory access patterns results in performance gains notably due to the CPU cache. Indeed, the cache loads bytes in chunks from RAM to the CPU registers. Adjacent items are then loaded very efficiently (<strong>sequential locality</strong>, or <strong>locality of reference</strong>).</li>
+<li>Finally, the fact that items are stored contiguously in memory allows NumPy to take advantage of <strong>vectorized instructions</strong> of modern CPUs, such as Intel's <strong>SSE</strong> and <strong>AVX</strong>, AMD's XOP, and so on. For example, multiple consecutive floating point numbers can be loaded in 128, 256, or 512 bits registers for vectorized arithmetical computations implemented as CPU instructions.</li>
+</ul>
+<blockquote>
+<p>Additionally, NumPy can be linked to highly optimized linear algebra libraries such as <strong>BLAS</strong> and <strong>LAPACK</strong> through <strong>ATLAS</strong> or the <strong>Intel Math Kernel Library (MKL)</strong>. A few specific matrix computations may also be multithreaded, taking advantage of the power of modern multicore processors.</p>
+</blockquote>
+<p>In conclusion, storing data in a contiguous block of memory ensures that the architecture of modern CPUs is used optimally, in terms of memory access patterns, CPU cache, and vectorized instructions.</p>
+<h3>What is the difference between in-place and implicit-copy operations?</h3>
+<p>Let's explain the example in step 2. An expression such as a <code>*= 2</code> corresponds to an in-place operation, where all values of the array are multiplied by two. By contrast, <code>a = a*2</code> means that a new array containing the values of <code>a*2</code> is created, and the variable <code>a</code> now points to this new array. The old array becomes unreferenced and will be deleted by the garbage collector. No memory allocation happens in the first case, contrary to the second case.</p>
+<p>More generally, expressions such as <code>a[i:j]</code> are <strong>views</strong> to parts of an array; they point to the memory buffer containing the data. Modifying them with in-place operations changes the original array.</p>
+<p>Knowing this subtlety of NumPy can help you fix some bugs (where an array is implicitly and unintentionally modified because of an operation on a view), and optimize the speed and memory consumption of your code by reducing the number of unnecessary copies.</p>
+<h3>Why can't some arrays be reshaped without a copy?</h3>
+<p>We explain the example in step 3 here, where a transposed 2D matrix cannot be flattened without a copy. A 2D matrix contains items indexed by two numbers (row and column), but it is stored internally as a 1D contiguous block of memory, accessible with a single number. There is more than one way of storing matrix items in a 1D block of memory: we can put the elements of the first row first, then the second row, and so on, or the elements of the first column first, then the second column, and so on. The first method is called <strong>row-major order</strong>, whereas the latter is called <strong>column-major order</strong>. Choosing between the two methods is only a matter of internal convention: NumPy uses the row-major order, like C, but unlike FORTRAN.</p>
+<p><img alt="Internal array layouts: row-major and column-major orders" src="http://ipython-books.github.io/pages/chapter04_optimization/images/layout.png" /></p>
+<p>More generally, NumPy uses the notion of <strong>strides</strong> to convert between a multidimensional index and the memory location of the underlying (1D) sequence of elements. The specific mapping between <code>array[i1, i2]</code> and the relevant byte address of the internal data is given by:</p>
+<div class="highlight"><pre><span></span>offset = array.strides[0] * i1 + array.strides[1] * i2
+</pre></div>
+
+
+<p>When reshaping an array, NumPy avoids copies when possible by modifying the <code>strides</code> attribute. For example, when transposing a matrix, the order of strides is reversed, but the underlying data remains identical. However, flattening a transposed array cannot be accomplished simply by modifying strides, so a copy is needed.</p>
+<p>Internal array layout can also explain some unexpected performance discrepancies between very similar NumPy operations. As a small exercise, can you explain the following benchmarks?</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">5000</span><span class="p">,</span> <span class="mi">5000</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>2.91 µs ± 20 ns per loop (mean ± std. dev. of 7 runs,
+    100000 loops each)
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="n">a</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>33.7 µs ± 22.7 ns per loop (mean ± std. dev. of 7 runs
+    10000 loops each)
+</pre></div>
+</div>
+
+
+<h3>What are NumPy broadcasting rules?</h3>
+<p>Broadcasting rules describe how arrays with different dimensions and/or shapes can be used for computations. The general rule is that <em>two dimensions are compatible when they are equal, or when one of them is 1</em>. NumPy uses this rule to compare the shapes of the two arrays element-wise, starting with the trailing dimensions and working its way forward. The smallest dimension is internally stretched to match the other dimension, but this operation does not involve any memory copy.</p>
+<h2>There's more...</h2>
+<p>Here are a few references:</p>
+<ul>
+<li>Broadcasting rules and examples, available at <a href="http://docs.scipy.org/doc/numpy/user/basics.broadcasting.html">http://docs.scipy.org/doc/numpy/user/basics.broadcasting.html</a></li>
+<li>Array interface in NumPy, at <a href="http://docs.scipy.org/doc/numpy/reference/arrays.interface.html">http://docs.scipy.org/doc/numpy/reference/arrays.interface.html</a></li>
+<li>Locality of reference, at <a href="https://en.wikipedia.org/wiki/Locality_of_reference">https://en.wikipedia.org/wiki/Locality_of_reference</a></li>
+<li>Internals of NumPy in the SciPy lectures notes, available at <a href="http://scipy-lectures.github.io/advanced/advanced_numpy/">http://scipy-lectures.github.io/advanced/advanced_numpy/</a></li>
+<li>100 NumPy exercises by Nicolas Rougier, available at <a href="http://www.loria.fr/~rougier/teaching/numpy.100/index.html">http://www.loria.fr/~rougier/teaching/numpy.100/index.html</a></li>
+</ul>
+<h2>See also</h2>
+<ul>
+<li>Using stride tricks with NumPy</li>
+</ul>
+    </section>
+
+            </div>
+        </section>
+
+        <footer id="footer" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+                <div>
+                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+        
+    </div>
+    
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=9752080; 
+var sc_invisible=1; 
+var sc_security="837928c1"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="hit counter"
+href="http://statcounter.com/free-hit-counter/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/9752080/0/837928c1/1/"
+alt="hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+</body>
+</html>
+

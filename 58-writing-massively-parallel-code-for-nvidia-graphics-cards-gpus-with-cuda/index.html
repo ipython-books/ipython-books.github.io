@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IPython Cookbook, ">
+
+
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+
+
+        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+
+        <title>IPython Cookbook - 5.8. Writing massively parallel code for NVIDIA graphics cards (GPUs) with CUDA</title>
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</head>
+
+<body>
+
+
+    <header id="header" class="pure-g">
+        <div class="pure-u-1 pure-u-md-3-4">
+             <div id="menu">
+                 <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="/">home</a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
+        <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
+        <li><a href="http://cyrille.rossant.net">author</a></li>
+</ul>                </div>
+            </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-4">
+            <div id="social">
+                <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="https://twitter.com/cyrillerossant"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd"><i class="fa fa-github"></i></a></li>
+</ul>                </div>
+            </div>
+        </div>
+    </header>
+       
+
+    
+    <div id="layout" class="pure-g">
+        <section id="content" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+
+    <header id="page-header">
+        <h1>5.8. Writing massively parallel code for NVIDIA graphics cards (GPUs) with CUDA</h1>
+    </header>
+
+    <section id="page">
+        <p><a href="/"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="130" style="margin-right: 20px; margin-bottom: 10px;" /></a> <em>This is one of the 100+ free recipes of the <a href="/">IPython Cookbook, Second Edition</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, a guide to numerical computing and data science in the Jupyter Notebook. The ebook and printed book are available for purchase at <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">Packt Publishing</a>.</em></p>
+<p>▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd">Text on GitHub</a> with a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a></em><br />
+▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
+<p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-5-high-performance-computing/"><strong><em>Go to</em></strong> <em>Chapter 5 : High-Performance Computing</em></a><br />
+▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter05_hpc/08_cuda.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
+<p><strong>Graphics Processing Units (GPUs)</strong> are powerful processors specialized in real-time rendering. We find GPUs in virtually any computer, laptop, video game console, tablet, or smartphone. Their massively parallel architecture comprises tens to thousands of cores. The video game industry has been fostering the development of increasingly powerful GPUs over the last two decades.</p>
+<p>Since the mid-2000s, GPUs are no longer limited to graphics processing. We can now implement scientific algorithms on a GPU. The only condition is that the algorithm follows the <strong>SIMD (Single Instruction, Multiple Data) paradigm</strong>, where a sequence of instructions is executed in parallel with multiple data. This is called <strong>General Purpose Programming on Graphics Processing Units (GPGPU)</strong>. GPGPU is used in many areas: meteorology, machine learning (most particularly deep learning), computer vision, image processing, finance, physics, bioinformatics, and many more. Writing code for GPUs can be challenging as it requires understanding the internal architecture of the hardware.</p>
+<p><strong>CUDA</strong> is a proprietary GPGPU framework created in 2007 by NVIDIA Corporation, one of the main GPU manufacturers. Programs written in CUDA only work on NVIDIA graphics cards. There is another competing GPGPU framework called <strong>OpenCL</strong>, an open standard supported by other major companies. OpenCL programs can work on GPUs and CPUs from most manufacturers (notably NVIDIA, AMD, and Intel).</p>
+<p>CUDA kernels are typically written in a C dialect that runs on the GPU. However, Numba allows us to CUDA kernels in Python. Numba takes care of compiling the code automatically for the GPU.</p>
+<p>In this recipe, we will implement the embarrassingly parallel computation of the Mandelbrot fractal in CUDA using Numba.</p>
+<h2>Getting ready</h2>
+<p>You need an NVIDIA graphics processing unit installed on your computer. You also need the CUDA toolkit which you can install with <code>conda install cudatoolkit</code>.</p>
+<h2>How to do it...</h2>
+<p><strong>1.&nbsp;</strong> Let's import the packages:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">numba</span> <span class="kn">import</span> <span class="n">cuda</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+</pre></div>
+</div>
+
+
+<p><strong>2.&nbsp;</strong> Let's check whether Numba correctly identifed our GPU:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">cuda</span><span class="o">.</span><span class="n">gpus</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>1
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">cuda</span><span class="o">.</span><span class="n">gpus</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>b&#39;GeForce GTX 980M&#39;
+</pre></div>
+</div>
+
+
+<p><strong>3.&nbsp;</strong> We write our function in Python. It will be compiled to CUDA code. The object <code>m</code> represents a pointer to the array stored on the GPU. The function is called on the GPU in parallel on every pixel of the image. Numba provides a <code>cuda.grid()</code> function that gives the index of the pixel in the image:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="nd">@cuda.jit</span>
+<span class="k">def</span> <span class="nf">mandelbrot_numba</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">iterations</span><span class="p">):</span>
+    <span class="c1"># Matrix index.</span>
+    <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="c1"># Skip threads outside the matrix.</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="n">size</span> <span class="ow">or</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="n">size</span><span class="p">:</span>
+        <span class="k">return</span>
+    <span class="c1"># Run the simulation.</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span> <span class="o">+</span> <span class="mf">3.</span> <span class="o">/</span> <span class="n">size</span> <span class="o">*</span> <span class="n">j</span> <span class="o">+</span>
+         <span class="mi">1j</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.5</span> <span class="o">-</span> <span class="mf">3.</span> <span class="o">/</span> <span class="n">size</span> <span class="o">*</span> <span class="n">i</span><span class="p">))</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iterations</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">:</span>
+            <span class="n">z</span> <span class="o">=</span> <span class="n">z</span> <span class="o">*</span> <span class="n">z</span> <span class="o">+</span> <span class="n">c</span>
+            <span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">n</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">break</span>
+</pre></div>
+</div>
+
+
+<p><strong>4.&nbsp;</strong> We initialize the matrix:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">size</span> <span class="o">=</span> <span class="mi">400</span>
+<span class="n">iterations</span> <span class="o">=</span> <span class="mi">100</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">))</span>
+</pre></div>
+</div>
+
+
+<p><strong>5.&nbsp;</strong> We initialize the execution grid (see the <em>How it works...</em> section):</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="c1"># 16x16 threads per block.</span>
+<span class="n">bs</span> <span class="o">=</span> <span class="mi">16</span>
+<span class="c1"># Number of blocks in the grid.</span>
+<span class="n">bpg</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">size</span> <span class="o">/</span> <span class="n">bs</span><span class="p">)</span>
+<span class="c1"># We prepare the GPU function.</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">mandelbrot_numba</span><span class="p">[(</span><span class="n">bpg</span><span class="p">,</span> <span class="n">bpg</span><span class="p">),</span> <span class="p">(</span><span class="n">bs</span><span class="p">,</span> <span class="n">bs</span><span class="p">)]</span>
+</pre></div>
+</div>
+
+
+<p><strong>6.&nbsp;</strong> We execute the GPU function, passing our empty array:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">iterations</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><strong>7.&nbsp;</strong> Let's display the result:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">m</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">hot</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
+</pre></div>
+</div>
+
+
+<p><img alt="&lt;matplotlib.figure.Figure at 0x7f1085fbd4a8&gt;" src="http://ipython-books.github.io/pages/chapter05_hpc/08_cuda_files/08_cuda_24_0.png" /></p>
+<p><strong>8.&nbsp;</strong> Now, let's benchmark this function:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n10</span> <span class="o">-</span><span class="n">r100</span> <span class="n">f</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">iterations</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>2.99 ms ± 173 µs per loop (mean ± std. dev. of 100 runs,
+    10 loops each)
+</pre></div>
+</div>
+
+
+<p>That's about 10 times faster than the CPU version obtained with Numba in the first recipe of this chapter, and 1800 times faster than the pure Python version! But we can do even better.</p>
+<p><strong>9.&nbsp;</strong> Numba takes care of transferring arrays automatically between the host machine (CPU) and the device (GPU). These data transfers are slow, sometimes even more than the actual on-device computation. Numba provides facilities to deal with these transfers manually, which can be interesting in some use-cases. Let's estimate the time of the data transfers and the computation on the GPU.</p>
+<p>First, we send the NumPy array to the GPU with the <code>cuda.to_device()</code> function:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n10</span> <span class="o">-</span><span class="n">r100</span> <span class="n">cuda</span><span class="o">.</span><span class="n">to_device</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>481 µs ± 106 µs per loop (mean ± std. dev. of 100 runs,
+    10 loops each)
+</pre></div>
+</div>
+
+
+<p><strong>10.&nbsp;</strong> Second, we run the computation on the GPU:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n10</span> <span class="o">-</span><span class="n">r100</span> <span class="n">m_gpu</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">to_device</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="n">f</span><span class="p">(</span><span class="n">m_gpu</span><span class="p">,</span> <span class="n">iterations</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>101 µs ± 11.8 µs per loop (mean ± std. dev. of 100 runs,
+    10 loops each)
+</pre></div>
+</div>
+
+
+<p><strong>11.&nbsp;</strong> Third, we copy the modified array from the GPU to the CPU.</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">m_gpu</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">to_device</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n10</span> <span class="o">-</span><span class="n">r100</span> <span class="n">m_gpu</span><span class="o">.</span><span class="n">copy_to_host</span><span class="p">()</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>238 µs ± 67.8 µs per loop (mean ± std. dev. of 100 runs,
+    10 loops each)
+</pre></div>
+</div>
+
+
+<p>If we consider only the GPU computation time excluding the data transfer times, we obtain a version that is 340 times faster than the version compiled on the CPU with Numba, and 54,000 times faster than the pure Python version!</p>
+<p>This astronomic speed improvement is explained by the fact that the GPU version is compiled and runs on 1536 CUDA cores on the NVIDIA GTX 980M, whereas the pure Python version is interpreted and runs on 1 CPU.</p>
+<h2>How it works...</h2>
+<p>GPU programming is a rich and highly technical topic, encompassing low-level architectural details of GPUs. Of course, we only scratched the surface here with the simplest paradigm possible (the "embarrassingly parallel" problem). We give further references in a later section.</p>
+<p>A CUDA GPU has a number of <strong>multiprocessors</strong>, and each multiprocessor has multiple <strong>stream processors</strong> (also called <strong>CUDA cores</strong>). Each multiprocessor executes in parallel with the others. Within a multiprocessor, the stream processors execute the same instruction at the same time, but on multiple data bits (SIMD paradigm).</p>
+<p>Central notions to the CUDA programming model are those of kernels, threads, blocks, and grids:</p>
+<ul>
+<li>A <strong>kernel</strong> is a program written in a C-like language that runs on the GPU.</li>
+<li>A <strong>thread</strong> represents one execution of a kernel on one stream processor.</li>
+<li>A <strong>block</strong> contains multiple threads executing on one multiprocessor.</li>
+<li>A <strong>grid</strong> contains a number of blocks.</li>
+</ul>
+<p>The number of threads per block is limited by the size of the multiprocessors and depends on the graphics card model (1024, for example). However, a grid can contain an arbitrary number of blocks.</p>
+<p>Within a block, threads are executed within <strong>warps</strong> of typically 32 threads. Better performance is achieved when conditional branching in a kernel is organized into groups of 32 threads.</p>
+<p>Threads within a block can synchronize at synchronization barriers using the CUDA <code>__syncthreads()</code> function. This feature enables inter-thread communication within one block. However, blocks execute independently so that two threads from different blocks cannot synchronize.</p>
+<p>Within a block, threads are organized into a 1D, 2D, or 3D structure, and similarly for blocks within a grid, as shown in the following figure. This structure is convenient as it matches most common multidimensional datasets encountered in real-world problems.</p>
+<p><img alt="The CUDA programming model (showing threads, blocks, and grids — image by NVIDIA Corporation)" src="http://ipython-books.github.io/pages/chapter05_hpc/images/cuda.png" /></p>
+<p>In CUDA, the kernel can retrieve the thread index within the block (<code>threadIdx</code>), as well as the block index within the grid (<code>blockIdx</code>) to determine which bit of data it should work on. In this recipe, the 2D image of the fractal is partitioned into 16 x 16 blocks, each block containing 256 pixels, with one thread per pixel. The kernel computes the color of a single pixel.</p>
+<p>Numba provides the <code>cuda.grid(ndim)</code> function to obtain directly the 1D, 2D, or 3D index of the thread within the grid. Alternatively, one can use the following code snippet to control the exact position of the current thread within the block and the grid (code given in the Numba documentation):</p>
+<div class="highlight"><pre><span></span># Thread id in a 1D block
+tx = cuda.threadIdx.x
+# Block id in a 1D grid
+ty = cuda.blockIdx.x
+# Block width, i.e. number of threads per block
+bw = cuda.blockDim.x
+# Compute flattened index inside the array
+pos = tx + ty * bw
+if pos &lt; an_array.size:  # Check array boundaries
+    # One can access `an_array[pos]`
+</pre></div>
+
+
+<p>There are several levels of memory on the GPU, ranging from small, fast, and local memory shared by a few threads within a block; to large, slow, and global memory shared by all blocks. We need to tweak the memory access patterns in the code to match the hardware constraints and achieve higher performance. In particular, data access is more efficient when the threads within a warp access consecutive addresses in the global memory; the hardware coalesces all memory accesses into a single access to consecutive <strong>DRAM (Dynamic Random Access Memory)</strong> locations.</p>
+<h2>There's more...</h2>
+<p>Here are a few references:</p>
+<ul>
+<li>Numba CUDA documentation at <a href="http://numba.pydata.org/numba-doc/dev/cuda/index.html">http://numba.pydata.org/numba-doc/dev/cuda/index.html</a></li>
+<li>Official CUDA portal at <a href="http://developer.nvidia.com/category/zone/cuda-zone">http://developer.nvidia.com/category/zone/cuda-zone</a></li>
+<li>Education and training for CUDA, at <a href="http://developer.nvidia.com/cuda-education-training">http://developer.nvidia.com/cuda-education-training</a></li>
+<li>Suggested books about CUDA, at <a href="http://developer.nvidia.com/suggested-reading">http://developer.nvidia.com/suggested-reading</a></li>
+</ul>
+<h2>See also</h2>
+<ul>
+<li>Accelerating pure Python code with Numba and just-in-time compilation</li>
+</ul>
+    </section>
+
+            </div>
+        </section>
+
+        <footer id="footer" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+                <div>
+                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+        
+    </div>
+    
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=9752080; 
+var sc_invisible=1; 
+var sc_security="837928c1"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="hit counter"
+href="http://statcounter.com/free-hit-counter/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/9752080/0/837928c1/1/"
+alt="hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+</body>
+</html>
+

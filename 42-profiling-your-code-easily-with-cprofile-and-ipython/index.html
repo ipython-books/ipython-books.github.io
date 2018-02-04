@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IPython Cookbook, ">
+
+
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+
+
+        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+
+        <title>IPython Cookbook - 4.2. Profiling your code easily with cProfile and IPython</title>
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</head>
+
+<body>
+
+
+    <header id="header" class="pure-g">
+        <div class="pure-u-1 pure-u-md-3-4">
+             <div id="menu">
+                 <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="/">home</a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
+        <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
+        <li><a href="http://cyrille.rossant.net">author</a></li>
+</ul>                </div>
+            </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-4">
+            <div id="social">
+                <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="https://twitter.com/cyrillerossant"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd"><i class="fa fa-github"></i></a></li>
+</ul>                </div>
+            </div>
+        </div>
+    </header>
+       
+
+    
+    <div id="layout" class="pure-g">
+        <section id="content" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+
+    <header id="page-header">
+        <h1>4.2. Profiling your code easily with cProfile and IPython</h1>
+    </header>
+
+    <section id="page">
+        <p><a href="/"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="130" style="margin-right: 20px; margin-bottom: 10px;" /></a> <em>This is one of the 100+ free recipes of the <a href="/">IPython Cookbook, Second Edition</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, a guide to numerical computing and data science in the Jupyter Notebook. The ebook and printed book are available for purchase at <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">Packt Publishing</a>.</em></p>
+<p>▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd">Text on GitHub</a> with a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a></em><br />
+▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
+<p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-4-profiling-and-optimization/"><strong><em>Go to</em></strong> <em>Chapter 4 : Profiling and Optimization</em></a><br />
+▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter04_optimization/02_profile.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
+<p>The <code>%timeit</code> magic command is often helpful, yet a bit limited when we need detailed information about what takes most of the execution time. This magic command is meant for <strong>benchmarking</strong> (comparing the execution times of different versions of a function) rather than <strong>profiling</strong> (getting a detailed report of the execution time, function by function).</p>
+<p>Python includes a profiler named <strong>cProfile</strong> that breaks down the execution time into the contributions of all called functions. IPython provides convenient ways to leverage this tool in an interactive session.</p>
+<h2>How to do it...</h2>
+<p>IPython offers the <code>%prun</code> line magic and the <code>%%prun</code> cell magic to easily profile one or multiple lines of code. The <code>%run</code> magic command also accepts a <code>-p</code> flag to run a Python script under the control of the profiler. These commands accept a lot of options as can be seen with <code>%prun?</code> and <code>%run?</code>.</p>
+<p>In this example, we will profile a numerical simulation of random walks. We will cover these kinds of simulations in more detail in <em>Chapter 13, Stochastic Dynamical Systems</em>.</p>
+<p><strong>1.&nbsp;</strong> Let's import NumPy:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+
+
+<p><strong>2.&nbsp;</strong> Let's create a function generating random +1 and -1 values in an array:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="o">*</span><span class="n">shape</span><span class="p">):</span>
+    <span class="c1"># Create a random n-vector with +1 or -1 values.</span>
+    <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random_sample</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span><span class="o">&lt;.</span><span class="mi">5</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+</pre></div>
+</div>
+
+
+<p><strong>3.&nbsp;</strong> Now, we write the simulation code in a cell starting with <code>%%prun</code> in order to profile the entire simulation. The various options allow us to save the report in a file and to sort the first 10 results by cumulative time. We will explain these options in more detail in the <em>How it works...</em> section.</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">prun</span> <span class="o">-</span><span class="n">s</span> <span class="n">cumulative</span> <span class="o">-</span><span class="n">q</span> <span class="o">-</span><span class="n">l</span> <span class="mi">10</span> <span class="o">-</span><span class="n">T</span> <span class="n">prun0</span>
+<span class="c1"># We profile the cell, sort the report by &quot;cumulative</span>
+<span class="c1"># time&quot;, limit it to 10 lines, and save it to a file</span>
+<span class="c1"># named &quot;prun0&quot;.</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">iterations</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">step</span><span class="p">(</span><span class="n">iterations</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">,:],</span> <span class="n">bins</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+               <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iterations</span><span class="p">)])</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>*** Profile printout saved to text file &#39;prun0&#39;.
+</pre></div>
+</div>
+
+
+<p><strong>4.&nbsp;</strong> The profiling report has been saved in a text file named <code>prun0</code>. Let's display it (the following output is a stripped down version that fits on this page):</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;prun0&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+</pre></div>
+</div>
+
+
+<p><img alt="Profiling result" src="http://ipython-books.github.io/pages/chapter04_optimization/02_profile_files/02_profile_13_0.png" /></p>
+<p>Here, we observe the time taken by the different functions involved, directly or indirectly, in our code.</p>
+<h2>How it works...</h2>
+<p>Python's profiler creates a detailed report of the execution time of our code, function by function. Here, we can observe the number of calls of the functions <code>histogram()</code>, <code>cumsum()</code>, <code>step()</code>, <code>sort()</code>, and <code>rand()</code>, and the total time spent in those functions during the code's execution. Internal functions are also profiled. For each function, we get the total number of calls, the total and cumulative times, and their per-call counterparts (division by <code>ncalls</code>). The <strong>total time</strong> represents how long the interpreter stays in a given function, <em>excluding</em> the time spent in calls to subfunctions. The <strong>cumulative time</strong> is similar but includes the time spent in calls to subfunctions. The filename, function name, and line number are displayed in the last column.</p>
+<p>The <code>%prun</code> and <code>%%prun</code> magic commands accept multiple optional options (type <code>%prun?</code> for more details). In the example, <code>-s</code> allows us to sort the report by a particular column, <code>-q</code> to suppress (quell) the pager output (which is useful when we want to integrate the output in a notebook), <code>-l</code> to limit the number of lines displayed or to filter the results by function name (which is useful when we are interested in a particular function), and <code>-T</code> to save the report in a text file. In addition, we can choose to save (dump) the binary report in a file with <code>-D</code>, or to return it in IPython with <code>-r</code>. This database-like object contains all information about the profiling and can be analyzed through Python's pstats module.</p>
+<blockquote>
+<p>Every profiler brings its own overhead that can bias the profiling results (<strong>probe effect</strong>). In other words, a profiled program may run significantly slower than a non-profiled program. That's a point to keep in mind.</p>
+</blockquote>
+<h3>"Premature optimization is the root of all evil"</h3>
+<p>As Donald Knuth's well-known quote suggests, optimizing code prematurely is generally considered a bad practice. Code optimization should only be conducted when it's really needed, that is, when the code is really too slow in normal situations. Additionally, we should know exactly where we need to optimize your code; typically, the vast majority of the execution time comprises a relatively small part of the code. The only way to find out is by profiling your code; optimization should never be done without preliminary profiling.</p>
+<blockquote>
+<p>I was once dealing with some fairly complicated code that was slower than expected. I thought I had a pretty good idea of what was causing the problem and how I could resolve it. The solution would involve significant changes in the code. By profiling my code first, I discovered that my diagnosis was wrong; I had written somewhere <code>max(x)</code> instead of <code>np.max(x)</code> by mistake, where <code>x</code> was a huge vector. It was Python's built-in function that was called, instead of NumPy's heavily optimized routine for arrays. If I hadn't profiled my code, I would probably have missed this mistake forever. The program was working perfectly fine, only 150 times slower!</p>
+</blockquote>
+<p>For more general advice on programming optimization, see <a href="https://en.wikipedia.org/wiki/Program_optimization.">https://en.wikipedia.org/wiki/Program_optimization.</a></p>
+<h2>There's more...</h2>
+<p>Profiling code in IPython is particularly simple (especially in the Notebook), as we have seen in this recipe. However, it may be undesirable or difficult to execute the code that we need to profile from IPython (GUIs, for example). In this case, we can use <code>cProfile</code> directly. It is slightly less straightforward than with IPython.</p>
+<p><strong>1.&nbsp;</strong> First, we call the following command:</p>
+<div class="highlight highlight-bash"><div class="highlight"><pre><span></span>$ python -m cProfile -o profresults myscript.py
+</pre></div>
+</div>
+
+
+<p>The file <code>profresults</code> will contain the dump of the profiling results of <code>myscript.py</code>.</p>
+<p><strong>2.&nbsp;</strong> Then, we execute the following code from Python or IPython to display the profiling results in a human-readable form:</p>
+<div class="highlight"><pre><span></span>import pstats
+p = pstats.Stats(&#39;profresults&#39;)
+p.strip_dirs().sort_stats(&quot;cumulative&quot;).print_stats()
+</pre></div>
+
+
+<p>Explore the documentation of the <code>cProfile</code> and <code>pstats</code> modules to discover all of the analyses that you can perform on the profiling reports.</p>
+<p>There are a few GUI tools for exploring and visualizing the output of a profiling session. For example, <strong>SnakeViz</strong> allows you to view profile dumps in a GUI program.</p>
+<p>Here are a few references:</p>
+<ul>
+<li>Documentation of cProfile and pstats, available at <a href="https://docs.python.org/3/library/profile.html">https://docs.python.org/3/library/profile.html</a></li>
+<li>SnakeViz, available at <a href="https://jiffyclub.github.io/snakeviz/">https://jiffyclub.github.io/snakeviz/</a></li>
+<li>Heat, magic command to profile and view Python code as a heat map, at <a href="https://github.com/csurfer/pyheatmagic">https://github.com/csurfer/pyheatmagic</a></li>
+<li>Python profiling tools, available at <a href="http://blog.ionelmc.ro/2013/06/08/python-profiling-tools/">http://blog.ionelmc.ro/2013/06/08/python-profiling-tools/</a></li>
+<li>accelerate.profiling at <a href="https://docs.anaconda.com/accelerate/profiling">https://docs.anaconda.com/accelerate/profiling</a></li>
+</ul>
+<h2>See also</h2>
+<ul>
+<li>Profiling your code line-by-line with line_profiler</li>
+</ul>
+    </section>
+
+            </div>
+        </section>
+
+        <footer id="footer" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+                <div>
+                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+        
+    </div>
+    
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=9752080; 
+var sc_invisible=1; 
+var sc_security="837928c1"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="hit counter"
+href="http://statcounter.com/free-hit-counter/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/9752080/0/837928c1/1/"
+alt="hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+</body>
+</html>
+

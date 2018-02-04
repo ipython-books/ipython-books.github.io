@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IPython Cookbook, ">
+
+
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+
+
+        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+
+        <title>IPython Cookbook - 8.4. Learning from text — Naive Bayes for Natural Language Processing</title>
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</head>
+
+<body>
+
+
+    <header id="header" class="pure-g">
+        <div class="pure-u-1 pure-u-md-3-4">
+             <div id="menu">
+                 <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="/">home</a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
+        <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
+        <li><a href="http://cyrille.rossant.net">author</a></li>
+</ul>                </div>
+            </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-4">
+            <div id="social">
+                <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="https://twitter.com/cyrillerossant"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd"><i class="fa fa-github"></i></a></li>
+</ul>                </div>
+            </div>
+        </div>
+    </header>
+       
+
+    
+    <div id="layout" class="pure-g">
+        <section id="content" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+
+    <header id="page-header">
+        <h1>8.4. Learning from text — Naive Bayes for Natural Language Processing</h1>
+    </header>
+
+    <section id="page">
+        <p><a href="/"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="130" style="margin-right: 20px; margin-bottom: 10px;" /></a> <em>This is one of the 100+ free recipes of the <a href="/">IPython Cookbook, Second Edition</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, a guide to numerical computing and data science in the Jupyter Notebook. The ebook and printed book are available for purchase at <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">Packt Publishing</a>.</em></p>
+<p>▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd">Text on GitHub</a> with a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a></em><br />
+▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
+<p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-8-machine-learning/"><strong><em>Go to</em></strong> <em>Chapter 8 : Machine Learning</em></a><br />
+▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter08_ml/04_text.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
+<p>In this recipe, we show how to handle text data with scikit-learn. Working with text requires careful preprocessing and feature extraction. It is also quite common to deal with highly sparse matrices.</p>
+<p>We will learn to recognize whether a comment posted during a public discussion is considered insulting to one of the participants. We will use a labeled dataset from Impermium, released during a Kaggle competition (see <a href="http://www.kaggle.com/c/detecting-insults-in-social-commentary">http://www.kaggle.com/c/detecting-insults-in-social-commentary</a>).</p>
+<h2>How to do it...</h2>
+<p><strong>1.&nbsp;</strong> Let's import our libraries:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">sklearn</span>
+<span class="kn">import</span> <span class="nn">sklearn.model_selection</span> <span class="kn">as</span> <span class="nn">ms</span>
+<span class="kn">import</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">as</span> <span class="nn">text</span>
+<span class="kn">import</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">as</span> <span class="nn">nb</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+</pre></div>
+</div>
+
+
+<p><strong>2.&nbsp;</strong> Let's open the CSV file with pandas:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://github.com/ipython-books/&#39;</span>
+                 <span class="s1">&#39;cookbook-2nd-data/blob/master/&#39;</span>
+                 <span class="s1">&#39;troll.csv?raw=true&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><strong>3.&nbsp;</strong> Each row is a comment. We will consider two columns: whether the comment is insulting (1) or not (0) and the unicode-encoded contents of the comment:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;Insult&#39;</span><span class="p">,</span> <span class="s1">&#39;Comment&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
+</pre></div>
+</div>
+
+
+<p><img alt="Output" src="http://ipython-books.github.io/pages/chapter08_ml/04_text_files/04_text_9_0.png" /></p>
+<p><strong>4.&nbsp;</strong> Now, we are going to define the feature matrix <code>X</code> and the labels <code>y</code>:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Insult&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+
+
+<p>Obtaining the feature matrix from the text is not trivial. scikit-learn can only work with numerical matrices. So how do we convert text into a matrix of numbers? A classical solution is to first extract a <strong>vocabulary</strong>, a list of words used throughout the corpus. Then, we count, for each sample, the frequency of each word. We end up with a <strong>sparse matrix</strong>, a huge matrix containing mostly zeros. Here, we do this in two lines. We will give more details in <em>How it works...</em>.</p>
+<blockquote>
+<p>The general rule here is that whenever one of our features is categorical (that is, the presence of a word, a color belonging to a fixed set of <span class="math">\(n\)</span> colors, and so on), we should <em>vectorize</em> it by considering one binary feature per item in the class. For example, instead of a feature color being <code>red</code>, <code>green</code>, or <code>blue</code>, we should consider three <em>binary</em> features <code>color_red</code>, <code>color_green</code>, and <code>color_blue</code>. We give further references in the <em>There's more...</em> section.</p>
+</blockquote>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">tf</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">TfidfVectorizer</span><span class="p">()</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Comment&#39;</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>(3947, 16469)
+</pre></div>
+</div>
+
+
+<p><strong>5.&nbsp;</strong> There are 3947 comments and 16469 different words. Let's estimate the sparsity of this feature matrix:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">X</span><span class="o">.</span><span class="n">nnz</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Each sample has ~{p:.2f}% non-zero features.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>Each sample has ~0.15% non-zero features.
+</pre></div>
+</div>
+
+
+<p><strong>6.&nbsp;</strong> Now, we are going to train a classifier as usual. We first split the data into a train and test set:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span> <span class="o">=</span> \
+    <span class="n">ms</span><span class="o">.</span><span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=.</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><strong>7.&nbsp;</strong> We use a <strong>Bernoulli Naive Bayes classifier</strong> with a grid search on the <span class="math">\(\alpha\)</span> parameter:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">bnb</span> <span class="o">=</span> <span class="n">ms</span><span class="o">.</span><span class="n">GridSearchCV</span><span class="p">(</span>
+    <span class="n">nb</span><span class="o">.</span><span class="n">BernoulliNB</span><span class="p">(),</span>
+    <span class="n">param_grid</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mi">50</span><span class="p">)})</span>
+<span class="n">bnb</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><strong>8.&nbsp;</strong> Let's check the performance of this classifier on the test dataset:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">bnb</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>0.761
+</pre></div>
+</div>
+
+
+<p><strong>9.&nbsp;</strong> Let's take a look at the words corresponding to the largest coefficients (the words we find frequently in insulting comments):</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="c1"># We first get the words corresponding to each feature</span>
+<span class="n">names</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">())</span>
+<span class="c1"># Next, we display the 50 words with the largest</span>
+<span class="c1"># coefficients.</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">names</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span>
+    <span class="n">bnb</span><span class="o">.</span><span class="n">best_estimator_</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:])[::</span><span class="o">-</span><span class="mi">1</span><span class="p">][:</span><span class="mi">50</span><span class="p">]]))</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>you,are,your,to,the,and,of,that,is,in,it,like,have,on,not,for,just,re,with,be,an,so,this,xa0,all,idiot,what,get,up,go,****,don,stupid,no,as,do,can,***,or,but,if,know,who,about,dumb,****,me,******,because,back
+</pre></div>
+</div>
+
+
+<p><strong>10.&nbsp;</strong> Finally, let's test our estimator on a few test sentences:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">bnb</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">transform</span><span class="p">([</span>
+    <span class="s2">&quot;I totally agree with you.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;You are so stupid.&quot;</span>
+<span class="p">])))</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>[0 1]
+</pre></div>
+</div>
+
+
+<h2>How it works...</h2>
+<p>scikit-learn implements several utility functions to obtain a sparse feature matrix from text data. A <strong>vectorizer</strong> such as <code>CountVectorizer()</code>extracts a vocabulary from a corpus (<code>fit()</code>) and constructs a sparse representation of the corpus based on this vocabulary (<code>transform()</code>). Each sample is represented by the vocabulary's word frequencies. The trained instance also contains attributes and methods to map feature indices to the corresponding words (<code>get_feature_names()</code>) and conversely (<code>vocabulary_</code>).</p>
+<p>N-grams can also be extracted: those are pairs or tuples of words occurring successively (<code>ngram_range</code> keyword).</p>
+<p>The frequency of the words can be weighted in different ways. Here, we have used <strong>tf-idf</strong>, or <strong>term frequency-inverse document frequency</strong>. This quantity reflects how important a word is to a corpus. Frequent words in comments have a high weight except if they appear in most comments (which means that they are common terms, for example, "the" and "and" would be filtered out using this technique).</p>
+<p>Naive Bayes algorithms are Bayesian methods based on the naive assumption of independence between the features. This strong assumption drastically simplifies the computations and leads to very fast yet decent classifiers.</p>
+<h2>There's more...</h2>
+<p>Here are a few references:</p>
+<ul>
+<li>Text feature extraction in scikit-learn's documentation, available at <a href="http://scikit-learn.org/stable/modules/feature_extraction.html#text-feature-extraction">http://scikit-learn.org/stable/modules/feature_extraction.html#text-feature-extraction</a></li>
+<li>Term frequency-inverse document-frequency on Wikipedia, available at <a href="https://en.wikipedia.org/wiki/tf-idf">https://en.wikipedia.org/wiki/tf-idf</a></li>
+<li>Vectorizer in scikit-learn's documentation, available at <a href="http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.DictVectorizer.html">http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.DictVectorizer.html</a></li>
+<li>Naive Bayes classifier on Wikipedia, at <a href="https://en.wikipedia.org/wiki/Naive_Bayes_classifier">https://en.wikipedia.org/wiki/Naive_Bayes_classifier</a></li>
+<li>Naive Bayes in scikit-learn's documentation, available at <a href="http://scikit-learn.org/stable/modules/naive_bayes.html">http://scikit-learn.org/stable/modules/naive_bayes.html</a></li>
+<li>Document classification example in scikit-learn's documentation, at <a href="http://scikit-learn.org/stable/datasets/twenty_newsgroups.html">http://scikit-learn.org/stable/datasets/twenty_newsgroups.html</a></li>
+</ul>
+<p>Here are other natural language processing libraries in Python:</p>
+<ul>
+<li>NLTK available at <a href="http://www.nltk.org">http://www.nltk.org</a></li>
+<li>spaCy available at <a href="https://spacy.io/">https://spacy.io/</a></li>
+<li>textacy available at <a href="http://textacy.readthedocs.io/en/stable/">http://textacy.readthedocs.io/en/stable/</a></li>
+</ul>
+<h2>See also</h2>
+<ul>
+<li>Predicting who will survive on the Titanic with logistic regression</li>
+<li>Learning to recognize handwritten digits with a K-nearest neighbors classifier</li>
+<li>Using support vector machines for classification tasks</li>
+</ul>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+    </section>
+
+            </div>
+        </section>
+
+        <footer id="footer" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+                <div>
+                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+        
+    </div>
+    
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=9752080; 
+var sc_invisible=1; 
+var sc_security="837928c1"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="hit counter"
+href="http://statcounter.com/free-hit-counter/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/9752080/0/837928c1/1/"
+alt="hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+</body>
+</html>
+

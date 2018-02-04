@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IPython Cookbook, ">
+
+
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+
+
+        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+
+        <title>IPython Cookbook - IPython Cookbook, Second Edition (2018)</title>
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</head>
+
+<body>
+
+
+    <header id="header" class="pure-g">
+        <div class="pure-u-1 pure-u-md-3-4">
+             <div id="menu">
+                 <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="/">home</a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
+        <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
+        <li><a href="http://cyrille.rossant.net">author</a></li>
+</ul>                </div>
+            </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-4">
+            <div id="social">
+                <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="https://twitter.com/cyrillerossant"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd"><i class="fa fa-github"></i></a></li>
+</ul>                </div>
+            </div>
+        </div>
+    </header>
+       
+
+    
+    <div id="layout" class="pure-g">
+        <section id="content" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+
+    <header id="page-header">
+        <h1>IPython Cookbook, Second Edition (2018)</h1>
+    </header>
+
+    <section id="page">
+        <p><a href="https://github.com/ipython-books/cookbook-2nd"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="200" style="margin-right: 20px;" /></a> <strong>IPython Interactive Computing and Visualization Cookbook, Second Edition</strong> (2018), by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, contains over 100 hands-on recipes on high-performance numerical computing and data science in the Jupyter Notebook.</p>
+<p>Most of the book is freely available on this website (<a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a>).</p>
+<p>▶ <a href="https://github.com/ipython-books/cookbook-2nd-code"><strong>Get the code</strong> as Jupyter notebooks</a><br />
+▶ <a href="https://chrome.google.com/webstore/detail/github-with-mathjax/ioemnmodlmafdkllaclgeombjnmnbima/"><strong>Get the Google Chrome extension</strong> to see LaTeX equations on GitHub</a><br />
+▶ <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e"><strong>Buy the book</strong></a>  </p>
+<h2>Contents</h2>
+<!-- START_TOC -->
+
+<h3><a href="http://ipython-books.github.io/chapter-1-a-tour-of-interactive-computing-with-jupyter-and-ipython/">Chapter 1 : A Tour of Interactive Computing with Jupyter and IPython</a></h3>
+<ul>
+<li><a href="http://ipython-books.github.io/11-introducing-ipython-and-the-jupyter-notebook/">1.1. Introducing IPython and the Jupyter Notebook</a></li>
+<li><a href="http://ipython-books.github.io/12-getting-started-with-exploratory-data-analysis-in-the-jupyter-notebook/">1.2. Getting started with exploratory data analysis in the Jupyter Notebook</a></li>
+<li><a href="http://ipython-books.github.io/13-introducing-the-multidimensional-array-in-numpy-for-fast-array-computations/">1.3. Introducing the multidimensional array in NumPy for fast array computations</a></li>
+<li><a href="http://ipython-books.github.io/14-creating-an-ipython-extension-with-custom-magic-commands/">1.4. Creating an IPython extension with custom magic commands</a></li>
+<li><a href="http://ipython-books.github.io/15-mastering-ipythons-configuration-system/">1.5. Mastering IPython's configuration system</a></li>
+<li><a href="http://ipython-books.github.io/16-creating-a-simple-kernel-for-jupyter/">1.6. Creating a simple kernel for Jupyter</a></li>
+</ul>
+<h3><a href="http://ipython-books.github.io/chapter-2-best-practices-in-interactive-computing/">Chapter 2 : Best practices in Interactive Computing</a></h3>
+<ul>
+<li><a href="http://ipython-books.github.io/21-learning-the-basics-of-the-unix-shell/">2.1. Learning the basics of the Unix shell</a></li>
+<li><a href="http://ipython-books.github.io/22-using-the-latest-features-of-python-3/">2.2. Using the latest features of Python 3</a></li>
+<li><a href="http://ipython-books.github.io/23-learning-the-basics-of-the-distributed-version-control-system-git/">2.3. Learning the basics of the distributed version control system Git</a></li>
+<li><a href="http://ipython-books.github.io/24-a-typical-workflow-with-git-branching/">2.4. A typical workflow with Git branching</a></li>
+<li><a href="http://ipython-books.github.io/25-efficient-interactive-computing-workflows-with-ipython/">2.5. Efficient interactive computing workflows with IPython</a></li>
+<li><a href="http://ipython-books.github.io/26-ten-tips-for-conducting-reproducible-interactive-computing-experiments/">2.6. Ten tips for conducting reproducible interactive computing experiments</a></li>
+<li><a href="http://ipython-books.github.io/27-writing-high-quality-python-code/">2.7. Writing high-quality Python code</a></li>
+<li><a href="http://ipython-books.github.io/28-writing-unit-tests-with-pytest/">2.8. Writing unit tests with py.test</a></li>
+<li><a href="http://ipython-books.github.io/29-debugging-code-with-ipython/">2.9. Debugging code with IPython</a></li>
+</ul>
+<h3><a href="http://ipython-books.github.io/chapter-3-mastering-the-jupyter-notebook/">Chapter 3 : Mastering the Jupyter Notebook</a></h3>
+<ul>
+<li><a href="http://ipython-books.github.io/31-teaching-programming-in-the-notebook-with-ipython-blocks/">3.1. Teaching programming in the Notebook with IPython blocks</a></li>
+<li><a href="http://ipython-books.github.io/32-converting-a-jupyter-notebook-to-other-formats-with-nbconvert/">3.2. Converting a Jupyter notebook to other formats with nbconvert</a></li>
+<li><a href="http://ipython-books.github.io/33-mastering-widgets-in-the-jupyter-notebook/">3.3. Mastering widgets in the Jupyter Notebook</a></li>
+<li><a href="http://ipython-books.github.io/34-creating-custom-jupyter-notebook-widgets-in-python-html-and-javascript/">3.4. Creating custom Jupyter Notebook widgets in Python, HTML, and JavaScript</a></li>
+<li><a href="http://ipython-books.github.io/35-configuring-the-jupyter-notebook/">3.5. Configuring the Jupyter Notebook</a></li>
+<li><a href="http://ipython-books.github.io/36-introducing-jupyterlab/">3.6. Introducing JupyterLab</a></li>
+</ul>
+<h3><a href="http://ipython-books.github.io/chapter-4-profiling-and-optimization/">Chapter 4 : Profiling and Optimization</a></h3>
+<ul>
+<li><a href="http://ipython-books.github.io/41-evaluating-the-time-taken-by-a-command-in-ipython/">4.1. Evaluating the time taken by a command in IPython</a></li>
+<li><a href="http://ipython-books.github.io/42-profiling-your-code-easily-with-cprofile-and-ipython/">4.2. Profiling your code easily with cProfile and IPython</a></li>
+<li><a href="http://ipython-books.github.io/43-profiling-your-code-line-by-line-with-line_profiler/">4.3. Profiling your code line-by-line with line_profiler</a></li>
+<li><a href="http://ipython-books.github.io/44-profiling-the-memory-usage-of-your-code-with-memory_profiler/">4.4. Profiling the memory usage of your code with memory_profiler</a></li>
+<li><a href="http://ipython-books.github.io/45-understanding-the-internals-of-numpy-to-avoid-unnecessary-array-copying/">4.5. Understanding the internals of NumPy to avoid unnecessary array copying</a></li>
+<li><a href="http://ipython-books.github.io/46-using-stride-tricks-with-numpy/">4.6. Using stride tricks with NumPy</a></li>
+<li><a href="http://ipython-books.github.io/47-implementing-an-efficient-rolling-average-algorithm-with-stride-tricks/">4.7. Implementing an efficient rolling average algorithm with stride tricks</a></li>
+<li><a href="http://ipython-books.github.io/48-processing-large-numpy-arrays-with-memory-mapping/">4.8. Processing large NumPy arrays with memory mapping</a></li>
+<li><a href="http://ipython-books.github.io/49-manipulating-large-arrays-with-hdf5/">4.9. Manipulating large arrays with HDF5</a></li>
+</ul>
+<h3><a href="http://ipython-books.github.io/chapter-5-high-performance-computing/">Chapter 5 : High-Performance Computing</a></h3>
+<ul>
+<li><a href="http://ipython-books.github.io/51-knowing-python-to-write-faster-code/">5.1. Knowing Python to write faster code</a></li>
+<li><a href="http://ipython-books.github.io/52-accelerating-pure-python-code-with-numba-and-just-in-time-compilation/">5.2. Accelerating pure Python code with Numba and just-in-time compilation</a></li>
+<li><a href="http://ipython-books.github.io/53-accelerating-array-computations-with-numexpr/">5.3. Accelerating array computations with Numexpr</a></li>
+<li><a href="http://ipython-books.github.io/54-wrapping-a-c-library-in-python-with-ctypes/">5.4. Wrapping a C library in Python with ctypes</a></li>
+<li><a href="http://ipython-books.github.io/55-accelerating-python-code-with-cython/">5.5. Accelerating Python code with Cython</a></li>
+<li><a href="http://ipython-books.github.io/56-optimizing-cython-code-by-writing-less-python-and-more-c/">5.6. Optimizing Cython code by writing less Python and more C</a></li>
+<li><a href="http://ipython-books.github.io/57-releasing-the-gil-to-take-advantage-of-multi-core-processors-with-cython-and-openmp/">5.7. Releasing the GIL to take advantage of multi-core processors with Cython and OpenMP</a></li>
+<li><a href="http://ipython-books.github.io/58-writing-massively-parallel-code-for-nvidia-graphics-cards-gpus-with-cuda/">5.8. Writing massively parallel code for NVIDIA graphics cards (GPUs) with CUDA</a></li>
+<li><a href="http://ipython-books.github.io/59-distributing-python-code-across-multiple-cores-with-ipython/">5.9. Distributing Python code across multiple cores with IPython</a></li>
+<li><a href="http://ipython-books.github.io/510-interacting-with-asynchronous-parallel-tasks-in-ipython/">5.10. Interacting with asynchronous parallel tasks in IPython</a></li>
+<li><a href="http://ipython-books.github.io/511-performing-out-of-core-computations-on-large-arrays-with-dask/">5.11. Performing out-of-core computations on large arrays with Dask</a></li>
+<li><a href="http://ipython-books.github.io/512-trying-the-julia-programming-language-in-the-jupyter-notebook/">5.12. Trying the Julia programming language in the Jupyter Notebook</a></li>
+</ul>
+<h3><a href="http://ipython-books.github.io/chapter-6-data-visualization/">Chapter 6 : Data Visualization</a></h3>
+<ul>
+<li><a href="http://ipython-books.github.io/61-using-matplotlib-styles/">6.1. Using matplotlib styles</a></li>
+<li><a href="http://ipython-books.github.io/62-creating-statistical-plots-easily-with-seaborn/">6.2. Creating statistical plots easily with seaborn</a></li>
+<li><a href="http://ipython-books.github.io/63-creating-interactive-web-visualizations-with-bokeh-and-holoviews/">6.3. Creating interactive Web visualizations with Bokeh and HoloViews</a></li>
+<li><a href="http://ipython-books.github.io/64-visualizing-a-networkx-graph-in-the-notebook-with-d3js/">6.4. Visualizing a NetworkX graph in the Notebook with D3.js</a></li>
+<li><a href="http://ipython-books.github.io/65-discovering-interactive-visualization-libraries-in-the-notebook/">6.5. Discovering interactive visualization libraries in the Notebook</a></li>
+<li><a href="http://ipython-books.github.io/66-creating-plots-with-altair-and-the-vega-lite-specification/">6.6. Creating plots with Altair and the Vega-Lite specification</a></li>
+</ul>
+<h3><a href="http://ipython-books.github.io/chapter-7-statistical-data-analysis/">Chapter 7 : Statistical Data Analysis</a></h3>
+<ul>
+<li><a href="http://ipython-books.github.io/71-exploring-a-dataset-with-pandas-and-matplotlib/">7.1. Exploring a dataset with pandas and matplotlib</a></li>
+<li><a href="http://ipython-books.github.io/72-getting-started-with-statistical-hypothesis-testing-a-simple-z-test/">7.2. Getting started with statistical hypothesis testing — a simple z-test</a></li>
+<li><a href="http://ipython-books.github.io/73-getting-started-with-bayesian-methods/">7.3. Getting started with Bayesian methods</a></li>
+<li><a href="http://ipython-books.github.io/74-estimating-the-correlation-between-two-variables-with-a-contingency-table-and-a-chi-squared-test/">7.4. Estimating the correlation between two variables with a contingency table and a chi-squared test</a></li>
+<li><a href="http://ipython-books.github.io/75-fitting-a-probability-distribution-to-data-with-the-maximum-likelihood-method/">7.5. Fitting a probability distribution to data with the maximum likelihood method</a></li>
+<li><a href="http://ipython-books.github.io/76-estimating-a-probability-distribution-nonparametrically-with-a-kernel-density-estimation/">7.6. Estimating a probability distribution nonparametrically with a kernel density estimation</a></li>
+<li><a href="http://ipython-books.github.io/77-fitting-a-bayesian-model-by-sampling-from-a-posterior-distribution-with-a-markov-chain-monte-carlo-method/">7.7. Fitting a Bayesian model by sampling from a posterior distribution with a Markov Chain Monte Carlo method</a></li>
+<li><a href="http://ipython-books.github.io/78-analyzing-data-with-the-r-programming-language-in-the-jupyter-notebook/">7.8. Analyzing data with the R programming language in the Jupyter Notebook</a></li>
+</ul>
+<h3><a href="http://ipython-books.github.io/chapter-8-machine-learning/">Chapter 8 : Machine Learning</a></h3>
+<ul>
+<li><a href="http://ipython-books.github.io/81-getting-started-with-scikit-learn/">8.1. Getting started with scikit-learn</a></li>
+<li><a href="http://ipython-books.github.io/82-predicting-who-will-survive-on-the-titanic-with-logistic-regression/">8.2. Predicting who will survive on the Titanic with logistic regression</a></li>
+<li><a href="http://ipython-books.github.io/83-learning-to-recognize-handwritten-digits-with-a-k-nearest-neighbors-classifier/">8.3. Learning to recognize handwritten digits with a K-nearest neighbors classifier</a></li>
+<li><a href="http://ipython-books.github.io/84-learning-from-text-naive-bayes-for-natural-language-processing/">8.4. Learning from text — Naive Bayes for Natural Language Processing</a></li>
+<li><a href="http://ipython-books.github.io/85-using-support-vector-machines-for-classification-tasks/">8.5. Using support vector machines for classification tasks</a></li>
+<li><a href="http://ipython-books.github.io/86-using-a-random-forest-to-select-important-features-for-regression/">8.6. Using a random forest to select important features for regression</a></li>
+<li><a href="http://ipython-books.github.io/87-reducing-the-dimensionality-of-a-dataset-with-a-principal-component-analysis/">8.7. Reducing the dimensionality of a dataset with a principal component analysis</a></li>
+<li><a href="http://ipython-books.github.io/88-detecting-hidden-structures-in-a-dataset-with-clustering/">8.8. Detecting hidden structures in a dataset with clustering</a></li>
+</ul>
+<h3><a href="http://ipython-books.github.io/chapter-9-numerical-optimization/">Chapter 9 : Numerical Optimization</a></h3>
+<ul>
+<li><a href="http://ipython-books.github.io/91-finding-the-root-of-a-mathematical-function/">9.1. Finding the root of a mathematical function</a></li>
+<li><a href="http://ipython-books.github.io/92-minimizing-a-mathematical-function/">9.2. Minimizing a mathematical function</a></li>
+<li><a href="http://ipython-books.github.io/93-fitting-a-function-to-data-with-nonlinear-least-squares/">9.3. Fitting a function to data with nonlinear least squares</a></li>
+<li><a href="http://ipython-books.github.io/94-finding-the-equilibrium-state-of-a-physical-system-by-minimizing-its-potential-energy/">9.4. Finding the equilibrium state of a physical system by minimizing its potential energy</a></li>
+</ul>
+<h3><a href="http://ipython-books.github.io/chapter-10-signal-processing/">Chapter 10 : Signal Processing</a></h3>
+<ul>
+<li><a href="http://ipython-books.github.io/101-analyzing-the-frequency-components-of-a-signal-with-a-fast-fourier-transform/">10.1. Analyzing the frequency components of a signal with a Fast Fourier Transform</a></li>
+<li><a href="http://ipython-books.github.io/102-applying-a-linear-filter-to-a-digital-signal/">10.2. Applying a linear filter to a digital signal</a></li>
+<li><a href="http://ipython-books.github.io/103-computing-the-autocorrelation-of-a-time-series/">10.3. Computing the autocorrelation of a time series</a></li>
+</ul>
+<h3><a href="http://ipython-books.github.io/chapter-11-image-and-audio-processing/">Chapter 11 : Image and Audio Processing</a></h3>
+<ul>
+<li><a href="http://ipython-books.github.io/111-manipulating-the-exposure-of-an-image/">11.1. Manipulating the exposure of an image</a></li>
+<li><a href="http://ipython-books.github.io/112-applying-filters-on-an-image/">11.2. Applying filters on an image</a></li>
+<li><a href="http://ipython-books.github.io/113-segmenting-an-image/">11.3. Segmenting an image</a></li>
+<li><a href="http://ipython-books.github.io/114-finding-points-of-interest-in-an-image/">11.4. Finding points of interest in an image</a></li>
+<li><a href="http://ipython-books.github.io/115-detecting-faces-in-an-image-with-opencv/">11.5. Detecting faces in an image with OpenCV</a></li>
+<li><a href="http://ipython-books.github.io/116-applying-digital-filters-to-speech-sounds/">11.6. Applying digital filters to speech sounds</a></li>
+<li><a href="http://ipython-books.github.io/117-creating-a-sound-synthesizer-in-the-notebook/">11.7. Creating a sound synthesizer in the Notebook</a></li>
+</ul>
+<h3><a href="http://ipython-books.github.io/chapter-12-deterministic-dynamical-systems/">Chapter 12 : Deterministic Dynamical Systems</a></h3>
+<ul>
+<li><a href="http://ipython-books.github.io/121-plotting-the-bifurcation-diagram-of-a-chaotic-dynamical-system/">12.1. Plotting the bifurcation diagram of a chaotic dynamical system</a></li>
+<li><a href="http://ipython-books.github.io/122-simulating-an-elementary-cellular-automaton/">12.2. Simulating an elementary cellular automaton</a></li>
+<li><a href="http://ipython-books.github.io/123-simulating-an-ordinary-differential-equation-with-scipy/">12.3. Simulating an ordinary differential equation with SciPy</a></li>
+<li><a href="http://ipython-books.github.io/124-simulating-a-partial-differential-equation-reaction-diffusion-systems-and-turing-patterns/">12.4. Simulating a partial differential equation — reaction-diffusion systems and Turing patterns</a></li>
+</ul>
+<h3><a href="http://ipython-books.github.io/chapter-13-stochastic-dynamical-systems/">Chapter 13 : Stochastic Dynamical Systems</a></h3>
+<ul>
+<li><a href="http://ipython-books.github.io/131-simulating-a-discrete-time-markov-chain/">13.1. Simulating a discrete-time Markov chain</a></li>
+<li><a href="http://ipython-books.github.io/132-simulating-a-poisson-process/">13.2. Simulating a Poisson process</a></li>
+<li><a href="http://ipython-books.github.io/133-simulating-a-brownian-motion/">13.3. Simulating a Brownian motion</a></li>
+<li><a href="http://ipython-books.github.io/134-simulating-a-stochastic-differential-equation/">13.4. Simulating a stochastic differential equation</a></li>
+</ul>
+<h3><a href="http://ipython-books.github.io/chapter-14-graphs-geometry-and-geographic-information-systems/">Chapter 14 : Graphs, Geometry, and Geographic Information Systems</a></h3>
+<ul>
+<li><a href="http://ipython-books.github.io/141-manipulating-and-visualizing-graphs-with-networkx/">14.1. Manipulating and visualizing graphs with NetworkX</a></li>
+<li><a href="http://ipython-books.github.io/142-drawing-flight-routes-with-networkx/">14.2. Drawing flight routes with NetworkX</a></li>
+<li><a href="http://ipython-books.github.io/143-resolving-dependencies-in-a-directed-acyclic-graph-with-a-topological-sort/">14.3. Resolving dependencies in a directed acyclic graph with a topological sort</a></li>
+<li><a href="http://ipython-books.github.io/144-computing-connected-components-in-an-image/">14.4. Computing connected components in an image</a></li>
+<li><a href="http://ipython-books.github.io/145-computing-the-voronoi-diagram-of-a-set-of-points/">14.5. Computing the Voronoi diagram of a set of points</a></li>
+<li><a href="http://ipython-books.github.io/146-manipulating-geospatial-data-with-cartopy/">14.6. Manipulating geospatial data with Cartopy</a></li>
+<li><a href="http://ipython-books.github.io/147-creating-a-route-planner-for-a-road-network/">14.7. Creating a route planner for a road network</a></li>
+</ul>
+<h3><a href="http://ipython-books.github.io/chapter-15-symbolic-and-numerical-mathematics/">Chapter 15 : Symbolic and Numerical Mathematics</a></h3>
+<ul>
+<li><a href="http://ipython-books.github.io/151-diving-into-symbolic-computing-with-sympy/">15.1. Diving into symbolic computing with SymPy</a></li>
+<li><a href="http://ipython-books.github.io/152-solving-equations-and-inequalities/">15.2. Solving equations and inequalities</a></li>
+<li><a href="http://ipython-books.github.io/153-analyzing-real-valued-functions/">15.3. Analyzing real-valued functions</a></li>
+<li><a href="http://ipython-books.github.io/154-computing-exact-probabilities-and-manipulating-random-variables/">15.4. Computing exact probabilities and manipulating random variables</a></li>
+<li><a href="http://ipython-books.github.io/155-a-bit-of-number-theory-with-sympy/">15.5. A bit of number theory with SymPy</a></li>
+<li><a href="http://ipython-books.github.io/156-finding-a-boolean-propositional-formula-from-a-truth-table/">15.6. Finding a Boolean propositional formula from a truth table</a></li>
+<li><a href="http://ipython-books.github.io/157-analyzing-a-nonlinear-differential-system-lotka-volterra-predator-prey-equations/">15.7. Analyzing a nonlinear differential system — Lotka-Volterra (predator-prey) equations</a></li>
+<li><a href="http://ipython-books.github.io/158-getting-started-with-sage/">15.8. Getting started with Sage</a></li>
+</ul>
+<!-- END_TOC -->
+
+<h2>Contributing</h2>
+<p>For any comment, question, or error, please <a href="https://github.com/ipython-books/cookbook-2nd/issues">open an issue</a> or <a href="https://github.com/ipython-books/cookbook-2nd/pulls">propose a pull request</a>.</p>
+<h2>Presentation</h2>
+<p>Python is one of the leading open source platforms for data science and numerical computing. IPython and the associated Jupyter Notebook offer efficient interfaces to Python for data analysis and interactive visualization, and they constitute an ideal gateway to the platform.</p>
+<p>IPython Interactive Computing and Visualization Cookbook, Second Edition contains many ready-to-use, focused recipes for high-performance scientific computing and data analysis, from the latest IPython/Jupyter features to the most advanced tricks, to help you write better and faster code. You will apply these state-of-the-art methods to various real-world examples, illustrating topics in applied mathematics, scientific modeling, and machine learning.</p>
+<p>The first part of the book covers programming techniques: code quality and reproducibility, code optimization, high- performance computing through just-in-time compilation, parallel computing, and graphics card programming. The second part tackles data science, statistics, machine learning, signal and image processing, dynamical systems, and pure and applied mathematics</p>
+    </section>
+
+            </div>
+        </section>
+
+        <footer id="footer" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+                <div>
+                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+        
+    </div>
+    
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=9752080; 
+var sc_invisible=1; 
+var sc_security="837928c1"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="hit counter"
+href="http://statcounter.com/free-hit-counter/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/9752080/0/837928c1/1/"
+alt="hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+</body>
+</html>
+

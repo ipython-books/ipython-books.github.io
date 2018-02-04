@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IPython Cookbook, ">
+
+
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+
+
+        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+
+        <title>IPython Cookbook - 9.4. Finding the equilibrium state of a physical system by minimizing its potential energy</title>
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</head>
+
+<body>
+
+
+    <header id="header" class="pure-g">
+        <div class="pure-u-1 pure-u-md-3-4">
+             <div id="menu">
+                 <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="/">home</a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
+        <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
+        <li><a href="http://cyrille.rossant.net">author</a></li>
+</ul>                </div>
+            </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-4">
+            <div id="social">
+                <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="https://twitter.com/cyrillerossant"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd"><i class="fa fa-github"></i></a></li>
+</ul>                </div>
+            </div>
+        </div>
+    </header>
+       
+
+    
+    <div id="layout" class="pure-g">
+        <section id="content" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+
+    <header id="page-header">
+        <h1>9.4. Finding the equilibrium state of a physical system by minimizing its potential energy</h1>
+    </header>
+
+    <section id="page">
+        <p><a href="/"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="130" style="margin-right: 20px; margin-bottom: 10px;" /></a> <em>This is one of the 100+ free recipes of the <a href="/">IPython Cookbook, Second Edition</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, a guide to numerical computing and data science in the Jupyter Notebook. The ebook and printed book are available for purchase at <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">Packt Publishing</a>.</em></p>
+<p>▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd">Text on GitHub</a> with a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a></em><br />
+▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
+<p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-9-numerical-optimization/"><strong><em>Go to</em></strong> <em>Chapter 9 : Numerical Optimization</em></a><br />
+▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter09_numoptim/04_energy.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
+<p>In this recipe, we will give an application example of the function minimization algorithms described earlier. We will try to numerically find the equilibrium state of a physical system by minimizing its potential energy.</p>
+<p>More specifically, we'll consider a structure made of masses and springs, attached to a vertical wall and subject to gravity. Starting from an initial position, we'll search for the equilibrium configuration where the gravity and elastic forces compensate.</p>
+<h2>How to do it...</h2>
+<p><strong>1.&nbsp;</strong> Let's import NumPy, SciPy, and matplotlib:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy.optimize</span> <span class="kn">as</span> <span class="nn">opt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+</pre></div>
+</div>
+
+
+<p><strong>2.&nbsp;</strong> We define a few constants in the International System of Units:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="mf">9.81</span>  <span class="c1"># gravity of Earth</span>
+<span class="n">m</span> <span class="o">=</span> <span class="o">.</span><span class="mi">1</span>  <span class="c1"># mass, in kg</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">20</span>  <span class="c1"># number of masses</span>
+<span class="n">e</span> <span class="o">=</span> <span class="o">.</span><span class="mi">1</span>  <span class="c1"># initial distance between the masses</span>
+<span class="n">l</span> <span class="o">=</span> <span class="n">e</span>  <span class="c1"># relaxed length of the springs</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mi">10000</span>  <span class="c1"># spring stiffness</span>
+</pre></div>
+</div>
+
+
+<p><strong>3.&nbsp;</strong> We define the initial positions of the masses. They are arranged on a two-dimensional grid with two lines and <span class="math">\(n/2\)</span> columns:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">P0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">P0</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">e</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n</span> <span class="o">//</span> <span class="mi">2</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">P0</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">e</span><span class="p">),</span> <span class="n">n</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><strong>4.&nbsp;</strong> Now, let's define the connectivity matrix between the masses. Coefficient <span class="math">\((i,j)\)</span> is 1 if masses <span class="math">\(i\)</span> and <span class="math">\(j\)</span> are connected by a spring, 0 otherwise:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="c1"># We display a graphic representation of</span>
+<span class="c1"># the matrix.</span>
+<span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
+</pre></div>
+</div>
+
+
+<p><img alt="&lt;matplotlib.figure.Figure at 0x7f93deeab668&gt;" src="http://ipython-books.github.io/pages/chapter09_numoptim/04_energy_files/04_energy_11_0.png" /></p>
+<p><strong>5.&nbsp;</strong> We also specify the spring stiffness of each spring. It is <span class="math">\(l\)</span>, except for <em>diagonal</em> springs where it is <span class="math">\(l \sqrt{2}\)</span> :</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="n">l</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">L</span><span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span> <span class="o">*=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><strong>6.&nbsp;</strong> We get the indices of the spring connections:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">I</span><span class="p">,</span> <span class="n">J</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><strong>7.&nbsp;</strong> This <code>dist()</code> function computes the distance matrix (distance between any pair of masses):</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">dist</span><span class="p">(</span><span class="n">P</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">P</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">P</span><span class="p">[:,</span><span class="mi">0</span><span class="p">][:,</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span>
+                   <span class="p">(</span><span class="n">P</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">P</span><span class="p">[:,</span><span class="mi">1</span><span class="p">][:,</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><strong>8.&nbsp;</strong> We define a function that displays the system. The springs are colored according to their tension:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">show_bar</span><span class="p">(</span><span class="n">P</span><span class="p">):</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+    <span class="c1"># Wall.</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+    <span class="c1"># Distance matrix.</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="n">dist</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
+
+    <span class="c1"># Get normalized elongation in [-1, 1].</span>
+    <span class="n">elong</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">D</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+                      <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">J</span><span class="p">)])</span>
+    <span class="n">elong_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">elong</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+
+    <span class="c1"># The color depends on the spring tension, which</span>
+    <span class="c1"># is proportional to the spring elongation.</span>
+    <span class="n">colors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">elong</span><span class="p">),</span> <span class="mi">4</span><span class="p">))</span>
+    <span class="n">colors</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># alpha channel is 1</span>
+
+    <span class="c1"># Use two different sequentials colormaps for</span>
+    <span class="c1"># positive and negative elongations, to show</span>
+    <span class="c1"># compression and extension in different colors.</span>
+    <span class="k">if</span> <span class="n">elong_max</span> <span class="o">&gt;</span> <span class="mf">1e-10</span><span class="p">:</span>
+        <span class="c1"># We don&#39;t use colors if all elongations are</span>
+        <span class="c1"># zero.</span>
+        <span class="n">elong</span> <span class="o">/=</span> <span class="n">elong_max</span>
+        <span class="n">pos</span><span class="p">,</span> <span class="n">neg</span> <span class="o">=</span> <span class="n">elong</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">elong</span> <span class="o">&lt;</span> <span class="mi">0</span>
+        <span class="n">colors</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">copper</span><span class="p">(</span><span class="n">elong</span><span class="p">[</span><span class="n">pos</span><span class="p">])</span>
+        <span class="n">colors</span><span class="p">[</span><span class="n">neg</span><span class="p">]</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">bone</span><span class="p">(</span><span class="o">-</span><span class="n">elong</span><span class="p">[</span><span class="n">neg</span><span class="p">])</span>
+
+    <span class="c1"># We plot the springs.</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">colors</span><span class="p">):</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">P</span><span class="p">[[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">],</span> <span class="mi">0</span><span class="p">],</span>
+                <span class="n">P</span><span class="p">[[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">],</span> <span class="mi">1</span><span class="p">],</span>
+                <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                <span class="n">color</span><span class="o">=</span><span class="n">c</span><span class="p">,</span>
+                <span class="p">)</span>
+
+    <span class="c1"># We plot the masses.</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">P</span><span class="p">[[</span><span class="n">I</span><span class="p">,</span> <span class="n">J</span><span class="p">],</span> <span class="mi">0</span><span class="p">],</span> <span class="n">P</span><span class="p">[[</span><span class="n">I</span><span class="p">,</span> <span class="n">J</span><span class="p">],</span> <span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;ok&#39;</span><span class="p">,)</span>
+
+    <span class="c1"># We configure the axes.</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">P</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="n">e</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+                <span class="n">P</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="n">e</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">P</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="n">e</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+                <span class="n">P</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="n">e</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">ax</span>
+</pre></div>
+</div>
+
+
+<p><strong>9.&nbsp;</strong> Here is the system in its initial configuration:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">show_bar</span><span class="p">(</span><span class="n">P0</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Initial configuration&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><img alt="&lt;matplotlib.figure.Figure at 0x7157668&gt;" src="http://ipython-books.github.io/pages/chapter09_numoptim/04_energy_files/04_energy_21_0.png" /></p>
+<p><strong>10.&nbsp;</strong> To find the equilibrium state, we need to minimize the total potential energy of the system. The following function computes the energy of the system given the positions of the masses. This function is explained in the <em>How it works...</em> section:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">energy</span><span class="p">(</span><span class="n">P</span><span class="p">):</span>
+    <span class="c1"># The argument P is a vector (flattened matrix).</span>
+    <span class="c1"># We convert it to a matrix here.</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="c1"># We compute the distance matrix.</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="n">dist</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
+    <span class="c1"># The potential energy is the sum of the</span>
+    <span class="c1"># gravitational and elastic potential energies.</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">g</span> <span class="o">*</span> <span class="n">m</span> <span class="o">*</span> <span class="n">P</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">+</span>
+            <span class="o">.</span><span class="mi">5</span> <span class="o">*</span> <span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">A</span> <span class="o">*</span> <span class="p">(</span><span class="n">D</span> <span class="o">-</span> <span class="n">L</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</pre></div>
+</div>
+
+
+<p><strong>11.&nbsp;</strong> Let's compute the potential energy of the initial configuration:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">energy</span><span class="p">(</span><span class="n">P0</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>-0.981
+</pre></div>
+</div>
+
+
+<p><strong>12.&nbsp;</strong> Now, let's minimize the potential energy with a function minimization method. We need a <strong>constrained optimization algorithm</strong>, because we make the assumption that the first two masses are fixed to the wall. Therefore, their positions cannot change. The <strong>L-BFGS-B algorithm</strong>, a variant of the BFGS algorithm, accepts bound constraints. Here, we force the first two points to stay at their initial positions, whereas there are no constraints on the other points. The <code>minimize()</code> function accepts a <code>bounds</code> list containing, for each dimension, a pair of <code>[min, max]</code> values:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">bounds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">P0</span><span class="p">[:</span><span class="mi">2</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span>
+               <span class="n">P0</span><span class="p">[:</span><span class="mi">2</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">ravel</span><span class="p">()]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="o">+</span> \
+    <span class="p">[[</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">]]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">P1</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">energy</span><span class="p">,</span> <span class="n">P0</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span>
+                  <span class="n">method</span><span class="o">=</span><span class="s1">&#39;L-BFGS-B&#39;</span><span class="p">,</span>
+                  <span class="n">bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">)</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+
+
+<p><strong>13.&nbsp;</strong> Let's display the stable configuration:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">show_bar</span><span class="p">(</span><span class="n">P1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Equilibrium configuration&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><img alt="&lt;matplotlib.figure.Figure at 0x74b6ef0&gt;" src="http://ipython-books.github.io/pages/chapter09_numoptim/04_energy_files/04_energy_30_0.png" /></p>
+<p>The springs near the wall are maximally extended (top) or compressed (bottom).</p>
+<h2>How it works...</h2>
+<p>This example is conceptually simple. The state of the system is only described by the positions of the masses. If we can write a Python function that returns the total energy of the system, finding the equilibrium is just a matter of minimizing this function. This is the <strong>principle of minimum total potential energy</strong>, due to the second law of thermodynamics.</p>
+<p>Here, we give an expression of the total energy of the system. Since we are only interested in the <em>equilibrium</em>, we omit any kinetic aspect and we only consider potential energy due to gravity (<strong>gravitational force</strong>) and spring forces (<strong>elastic potential energy</strong>).</p>
+<p>Letting <span class="math">\(U\)</span> be the total potential energy of the system, <span class="math">\(U\)</span> can be expressed as the sum of the gravitational potential energies of the masses and the elastic potential energies of the springs. Therefore:</p>
+<div class="math">$$U = \sum_{i=1}^n mgy_i + \frac{1}{2} \sum_{i,j=1}^n k a_{ij} \left( ||\mathbf{p}_i - \mathbf{p}_j|| - l_{ij} \right)^2$$</div>
+<p>Here:</p>
+<ul>
+<li><span class="math">\(m\)</span> is the mass</li>
+<li><span class="math">\(g\)</span> is the gravity of Earth</li>
+<li><span class="math">\(k\)</span> is the stiffness of the springs</li>
+<li><span class="math">\(p_i = (x_i, y_i)\)</span> is the position of mass <span class="math">\(i\)</span>,</li>
+<li><span class="math">\(a_{ij}\)</span> is 1 if masses <span class="math">\(i\)</span> and <span class="math">\(j\)</span> are attached by a spring, <span class="math">\(0\)</span> otherwise,</li>
+<li><span class="math">\(l_{ij}\)</span> is the relaxed length of spring <span class="math">\((i,j)\)</span>, or <span class="math">\(0\)</span> if masses <span class="math">\(i\)</span> and <span class="math">\(j\)</span> are not attached.</li>
+</ul>
+<p>The <code>energy()</code> function implements this formula using vectorized computations on NumPy arrays.</p>
+<h2>There's more...</h2>
+<p>The following references contain details about the physics behind this formula:</p>
+<ul>
+<li>Potential energy on Wikipedia, available at <a href="https://en.wikipedia.org/wiki/Potential_energy">https://en.wikipedia.org/wiki/Potential_energy</a></li>
+<li>Elastic potential energy on Wikipedia, available at <a href="https://en.wikipedia.org/wiki/Elastic_potential_energy">https://en.wikipedia.org/wiki/Elastic_potential_energy</a></li>
+<li>Hooke's law, which is the linear approximation of the springs' response, described at <a href="https://en.wikipedia.org/wiki/Hooke%27s_law">https://en.wikipedia.org/wiki/Hooke%27s_law</a></li>
+<li>Principle of minimum energy on Wikipedia, available at <a href="https://en.wikipedia.org/wiki/Minimum_total_potential_energy_principle">https://en.wikipedia.org/wiki/Minimum_total_potential_energy_principle</a></li>
+</ul>
+<p>Here is a reference about the optimization algorithm:</p>
+<ul>
+<li>L-BFGS-B algorithm on Wikipedia, available at <a href="https://en.wikipedia.org/wiki/Limited-memory_BFGS#L-BFGS-B">https://en.wikipedia.org/wiki/Limited-memory_BFGS#L-BFGS-B</a></li>
+</ul>
+<h2>See also</h2>
+<ul>
+<li>Minimizing a mathematical function</li>
+</ul>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+    </section>
+
+            </div>
+        </section>
+
+        <footer id="footer" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+                <div>
+                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+        
+    </div>
+    
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=9752080; 
+var sc_invisible=1; 
+var sc_security="837928c1"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="hit counter"
+href="http://statcounter.com/free-hit-counter/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/9752080/0/837928c1/1/"
+alt="hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+</body>
+</html>
+

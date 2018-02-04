@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IPython Cookbook, ">
+
+
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+
+
+        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+
+        <title>IPython Cookbook - 8.1. Getting started with scikit-learn</title>
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</head>
+
+<body>
+
+
+    <header id="header" class="pure-g">
+        <div class="pure-u-1 pure-u-md-3-4">
+             <div id="menu">
+                 <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="/">home</a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
+        <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
+        <li><a href="http://cyrille.rossant.net">author</a></li>
+</ul>                </div>
+            </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-4">
+            <div id="social">
+                <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="https://twitter.com/cyrillerossant"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd"><i class="fa fa-github"></i></a></li>
+</ul>                </div>
+            </div>
+        </div>
+    </header>
+       
+
+    
+    <div id="layout" class="pure-g">
+        <section id="content" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+
+    <header id="page-header">
+        <h1>8.1. Getting started with scikit-learn</h1>
+    </header>
+
+    <section id="page">
+        <p><a href="/"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="130" style="margin-right: 20px; margin-bottom: 10px;" /></a> <em>This is one of the 100+ free recipes of the <a href="/">IPython Cookbook, Second Edition</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, a guide to numerical computing and data science in the Jupyter Notebook. The ebook and printed book are available for purchase at <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">Packt Publishing</a>.</em></p>
+<p>▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd">Text on GitHub</a> with a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a></em><br />
+▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
+<p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-8-machine-learning/"><strong><em>Go to</em></strong> <em>Chapter 8 : Machine Learning</em></a><br />
+▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter08_ml/01_scikit.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
+<p>In this recipe, we introduce the basics of the machine learning <strong>scikit-learn</strong> package (http://scikit-learn.org). This package is the main tool we will use throughout this chapter. Its clean API makes it easy to define, train, and test models.</p>
+<p>We will show here a basic example of linear regression in the context of curve fitting. This toy example will allow us to illustrate key concepts such as linear models, overfitting, underfitting, regularization, and cross-validation.</p>
+<h2>Getting ready</h2>
+<p>You can find all instructions to install scikit-learn in the main documentation. For more information, refer to <a href="http://scikit-learn.org/stable/install.html.">http://scikit-learn.org/stable/install.html.</a> Anaconda comes with scikit-learn by default, but, if needed, you can install it manually by typing <code>conda install scikit-learn</code> in a terminal.</p>
+<h2>How to do it...</h2>
+<p>We will generate a one-dimensional dataset with a simple model (including some noise), and we will try to fit a function to this data. With this function, we can predict values on new data points. This is a curve fitting regression problem.</p>
+<p><strong>1.&nbsp;</strong> First, let's make all the necessary imports:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="kn">as</span> <span class="nn">st</span>
+<span class="kn">import</span> <span class="nn">sklearn.linear_model</span> <span class="kn">as</span> <span class="nn">lm</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+</pre></div>
+</div>
+
+
+<p><strong>2.&nbsp;</strong> We now define a deterministic nonlinear function underlying our generative model:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><strong>3.&nbsp;</strong> We generate the values along the curve on <span class="math">\([0, 2]\)</span>.</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">x_tr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">y_tr</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x_tr</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><strong>4.&nbsp;</strong> Now, let's generate data points within <span class="math">\([0, 1]\)</span>. We use the function <span class="math">\(f\)</span> and we add some Gaussian noise.</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">,</span> <span class="o">.</span><span class="mi">2</span><span class="p">,</span> <span class="o">.</span><span class="mi">5</span><span class="p">,</span> <span class="o">.</span><span class="mi">8</span><span class="p">,</span> <span class="o">.</span><span class="mi">9</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+
+
+<p><strong>5.&nbsp;</strong> Let's plot our data points on <span class="math">\([0, 1]\)</span>.</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_tr</span><span class="p">,</span> <span class="n">y_tr</span><span class="p">,</span> <span class="s1">&#39;--k&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;ok&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Generative model&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><img alt="&lt;matplotlib.figure.Figure at 0x7978470&gt;" src="http://ipython-books.github.io/pages/chapter08_ml/01_scikit_files/01_scikit_16_0.png" /></p>
+<p>In the image, the dotted curve represents the generative model.</p>
+<p><strong>6.&nbsp;</strong> Now, we use scikit-learn to fit a linear model to the data. There are three steps. First, we create the model (an instance of the <code>LinearRegression</code> class). Then, we fit the model to our data. Finally, we predict values from our trained model.</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="c1"># We create the model.</span>
+<span class="n">lr</span> <span class="o">=</span> <span class="n">lm</span><span class="o">.</span><span class="n">LinearRegression</span><span class="p">()</span>
+<span class="c1"># We train the model on our training dataset.</span>
+<span class="n">lr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span> <span class="n">y</span><span class="p">)</span>
+<span class="c1"># Now, we predict points with our trained model.</span>
+<span class="n">y_lr</span> <span class="o">=</span> <span class="n">lr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_tr</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">])</span>
+</pre></div>
+</div>
+
+
+<p>We need to convert <code>x</code> and <code>x_tr</code> to column vectors, as it is a general convention in scikit-learn that observations are rows, while features are columns. Here, we have seven observations with one feature.</p>
+<p><strong>7.&nbsp;</strong> We now plot the result of the trained linear model. We obtain a regression line in green here:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_tr</span><span class="p">,</span> <span class="n">y_tr</span><span class="p">,</span> <span class="s1">&#39;--k&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_tr</span><span class="p">,</span> <span class="n">y_lr</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;ok&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Linear regression&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><img alt="&lt;matplotlib.figure.Figure at 0x82eae10&gt;" src="http://ipython-books.github.io/pages/chapter08_ml/01_scikit_files/01_scikit_22_0.png" /></p>
+<p><strong>8.&nbsp;</strong> The linear fit is not well-adapted here, as the data points are generated according to a nonlinear model (an exponential curve). Therefore, we are now going to fit a nonlinear model. More precisely, we will fit a polynomial function to our data points. We can still use linear regression for this, by precomputing the exponents of our data points. This is done by generating a Vandermonde matrix, using the <code>np.vander()</code> function. We will explain this trick in <em>How it works...</em>. In the following code, we perform and plot the fit:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">lrp</span> <span class="o">=</span> <span class="n">lm</span><span class="o">.</span><span class="n">LinearRegression</span><span class="p">()</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_tr</span><span class="p">,</span> <span class="n">y_tr</span><span class="p">,</span> <span class="s1">&#39;--k&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">deg</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">]):</span>
+    <span class="n">lrp</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">vander</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">deg</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">y_lrp</span> <span class="o">=</span> <span class="n">lrp</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">vander</span><span class="p">(</span><span class="n">x_tr</span><span class="p">,</span> <span class="n">deg</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_tr</span><span class="p">,</span> <span class="n">y_lrp</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="n">f</span><span class="s1">&#39;degree {deg}&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
+    <span class="c1"># Print the model&#39;s coefficients.</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Coefficients, degree {deg}:</span><span class="se">\n\t</span><span class="s1">&#39;</span><span class="p">,</span>
+          <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;{c:.2f}&#39;</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">lrp</span><span class="o">.</span><span class="n">coef_</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;ok&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Linear regression&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>Coefficients, degree 2:
+    36.95 -18.92 0.00
+Coefficients, degree 5:
+    903.98 -2245.99 1972.43 -686.45 78.64 0.00
+</pre></div>
+</div>
+
+
+<p><img alt="&lt;matplotlib.figure.Figure at 0x82d34a8&gt;" src="http://ipython-books.github.io/pages/chapter08_ml/01_scikit_files/01_scikit_24_1.png" /></p>
+<p>We have fitted two polynomial models of degree 2 and 5. The degree 2 polynomial appears to fit the data points less precisely than the degree 5 polynomial. However, it seems more robust; the degree 5 polynomial seems really bad at predicting values outside the data points (look for example at the <span class="math">\(x \geq 1\)</span> portion). This is what we call <strong>overfitting</strong>; by using a too-complex model, we obtain a better fit on the trained dataset, but a less robust model outside this set.</p>
+<p><strong>9.&nbsp;</strong> We will now use a different learning model called <strong>ridge regression</strong>. It works like linear regression except that it prevents the polynomial's coefficients from becoming too big. This is what happened in the previous example. By adding a <strong>regularization term</strong> in the <strong>loss function</strong>, ridge regression imposes some structure on the underlying model. We will see more details in the next section.</p>
+<p>The ridge regression model has a meta-parameter, which represents the weight of the regularization term. We could try different values with trial and error using the <code>Ridge</code> class. However, scikit-learn provides another model called <code>RidgeCV</code>, which includes a parameter search with cross-validation. In practice, this means that we don't have to tweak this parameter by hand—scikit-learn does it for us. As the models of scikit-learn always follow the fit-predict API, all we have to do is replace <code>lm.LinearRegression()</code> with <code>lm.RidgeCV()</code> in the previous code. We will give more details in the next section.</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">ridge</span> <span class="o">=</span> <span class="n">lm</span><span class="o">.</span><span class="n">RidgeCV</span><span class="p">()</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_tr</span><span class="p">,</span> <span class="n">y_tr</span><span class="p">,</span> <span class="s1">&#39;--k&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">deg</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">]):</span>
+    <span class="n">ridge</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">vander</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">deg</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">y_ridge</span> <span class="o">=</span> <span class="n">ridge</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">vander</span><span class="p">(</span><span class="n">x_tr</span><span class="p">,</span> <span class="n">deg</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_tr</span><span class="p">,</span> <span class="n">y_ridge</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="s1">&#39;degree &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">deg</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
+    <span class="c1"># Print the model&#39;s coefficients.</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Coefficients, degree {deg}:&#39;</span><span class="p">,</span>
+          <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;{c:.2f}&#39;</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">ridge</span><span class="o">.</span><span class="n">coef_</span><span class="p">))</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;ok&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Ridge regression&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>Coefficients, degree 2: 14.43 3.27 0.00
+Coefficients, degree 5: 7.07 5.88 4.37 2.37 0.40 0.00
+</pre></div>
+</div>
+
+
+<p><img alt="&lt;matplotlib.figure.Figure at 0x81b99e8&gt;" src="http://ipython-books.github.io/pages/chapter08_ml/01_scikit_files/01_scikit_28_1.png" /></p>
+<p>This time, the degree 5 polynomial seems more precise than the simpler degree 2 polynomial (which now causes <strong>underfitting</strong>). Ridge regression mitigates the overfitting issue here. Observe how the degree 5 polynomial's coefficients are much smaller than in the previous example.</p>
+<h2>How it works...</h2>
+<p>In this section, we explain all the aspects covered in this recipe.</p>
+<h3>Scikit-learn API</h3>
+<p>scikit-learn implements a clean and coherent API for supervised and unsupervised learning. Our data points should be stored in an <span class="math">\((N, D)\)</span> matrix <span class="math">\(X\)</span>, where <span class="math">\(N\)</span> is the number of observations and <span class="math">\(D\)</span> is the number of features. In other words, each row is an observation. The first step in a machine learning task is to define what the matrix <span class="math">\(X\)</span> is exactly.</p>
+<p>In a supervised learning setup, we also have a <em>target</em>, an N-long vector <span class="math">\(y\)</span> with a scalar value for each observation. This value is either continuous or discrete, depending on whether we have a regression or classification problem, respectively.</p>
+<p>In scikit-learn, models are implemented in classes that have the <code>fit()</code> and <code>predict()</code> methods. The <code>fit()</code> method accepts the data matrix <span class="math">\(X\)</span> as input, and <span class="math">\(y\)</span> as well for supervised learning models. This method trains the model on the given data.</p>
+<p>The <code>predict()</code> method also takes data points as input (as an <span class="math">\((M, D)\)</span> matrix). It returns the labels or transformed points as predicted by the trained model.</p>
+<h3>Ordinary Least Squares regression</h3>
+<p><strong>Ordinary least squares regression</strong> is one of the simplest regression methods. It consists of approaching the output values <span class="math">\(y_i\)</span> with a linear combination of <span class="math">\(X_ij\)</span>:</p>
+<div class="math">$$\forall i \in \{1, \ldots, N\}, \quad \hat{y}_i = \sum_{j=1}^D w_j X_{ij}, \quad \textrm{or, in matrix form:} \quad \mathbf{\hat{y}} = \mathbf{X} \mathbf{w}.$$</div>
+<p>Here, <span class="math">\(w = (w_1, ..., w_D)\)</span> is the (unknown) <strong>parameter vector</strong>. Also, <span class="math">\(\hat y\)</span> represents the model's output. We want this vector to match the data points <span class="math">\(y\)</span> as closely as possible. Of course, the exact equality <span class="math">\(\hat y = y\)</span> cannot hold in general (there is always some noise and uncertainty—models are idealizations of reality). Therefore, we want to <em>minimize</em> the difference between these two vectors. The ordinary least squares regression method consists of minimizing the following <strong>loss function</strong>:</p>
+<div class="math">$$\min_{\mathbf{w}} \left\lVert \mathbf{y} - \mathbf{X} \mathbf{w} \right\rVert_2^2 = \min_{\mathbf{w}} \left( \sum_{i=1}^N \left(y_i - \hat{y}_i\right)^2 \right)$$</div>
+<p>This sum of the components squared is called the <strong>L² norm</strong>. It is convenient because it leads to <em>differentiable</em> loss functions so that gradients can be computed and common optimization procedures can be performed.</p>
+<h3>Polynomial interpolation with linear regression</h3>
+<p>Ordinary least squares regression fits a linear model to the data. The model is linear both in the data points <span class="math">\(X_i\)</span> and in the parameters <span class="math">\(w_j\)</span>. In our example, we obtain a poor fit because the data points were generated according to a nonlinear generative model (an exponential function).</p>
+<p>However, we can still use the linear regression method with a model that is linear in <span class="math">\(w_j\)</span> but nonlinear in <span class="math">\(x_i\)</span>. To do this, we need to increase the number of dimensions in our dataset by using a basis of polynomial functions. In other words, we consider the following data points:</p>
+<div class="math">$$\mathbf{x}_i, \mathbf{x}_i^2, \ldots, \mathbf{x}_i^D$$</div>
+<p>Here, <span class="math">\(D\)</span> is the maximum degree. The input matrix <span class="math">\(X\)</span> is therefore the <strong>Vandermonde matrix</strong> associated to the original data points <span class="math">\(x_i\)</span>. For more information on the Vandermonde matrix, refer to <a href="https://en.wikipedia.org/wiki/Vandermonde_matrix.">https://en.wikipedia.org/wiki/Vandermonde_matrix.</a></p>
+<p>Training a linear model on these new data points is equivalent to training a polynomial model on the original data points.</p>
+<h3>Ridge regression</h3>
+<p>Polynomial interpolation with linear regression can lead to overfitting if the degree of the polynomials is too large. By capturing the random fluctuations (noise) instead of the general trend of the data, the model loses some of its predictive power. This corresponds to a divergence of the polynomial's coefficients <span class="math">\(w_j\)</span>.</p>
+<p>A solution to this problem is to prevent these coefficients from growing unboundedly. With <strong>ridge regression</strong> (also known as <strong>Tikhonov regularization</strong>), this is done by adding a regularization term to the loss function. For more details on Tikhonov regularization, refer to <a href="https://en.wikipedia.org/wiki/Tikhonov_regularization.">https://en.wikipedia.org/wiki/Tikhonov_regularization.</a></p>
+<div class="math">$$\min_{\mathbf{w}} || \mathbf{y} - \mathbf{X} \mathbf{w} ||_2^2 + \alpha ||\mathbf{w}||_2^2$$</div>
+<p>By minimizing this loss function, we not only minimize the error between the model and the data (first term, related to the bias), but also the size of the model's coefficients (second term, related to the variance). The bias-variance trade-off is quantified by the hyperparameter <span class="math">\(\alpha\)</span>, which specifies the relative weight between the two terms in the loss function.</p>
+<p>Here, ridge regression led to a polynomial with smaller coefficients, and thus a better fit.</p>
+<h3>Cross-validation and grid search</h3>
+<p>A drawback of the ridge regression model compared to the ordinary least squares model is the presence of an extra hyperparameter <span class="math">\(\alpha\)</span>. The quality of the prediction depends on the choice of this parameter. One possibility would be to fine-tune this parameter manually, but this procedure can be tedious and can also lead to overfitting problems.</p>
+<p>To solve this problem, we can use a <strong>grid search</strong>; we loop over many possible values for <span class="math">\(\alpha\)</span>, and we evaluate the performance of the model for each possible value. Then, we choose the parameter that yields the best performance.</p>
+<p>How can we assess the performance of a model with a given <span class="math">\(\alpha\)</span> value? A common solution is to use <strong>cross-validation</strong>. This procedure consists of splitting the dataset into a training set and a test set. We fit the model on the train set, and we test its predictive performance on the test set. By testing the model on a different dataset than the one used for training, we reduce overfitting.</p>
+<p>There are many ways to split the initial dataset into two parts like this. One possibility is to remove <em>one</em> sample to form the train set and to put this one sample into the test set. This is called <strong>Leave-One-Out cross-validation</strong>. With <span class="math">\(N\)</span> samples, we obtain <span class="math">\(N\)</span> sets of train and test sets. The cross-validated performance is the average performance on all these set decompositions.</p>
+<p>As we will see later, scikit-learn implements several easy-to-use functions to do cross-validation and grid search. In this recipe, we used a special estimator called <code>RidgeCV</code> that implements a cross-validation and grid search procedure that is specific to the ridge regression model. Using this class ensures that the best hyperparameter <span class="math">\(\alpha\)</span> is found automatically for us.</p>
+<h2>There's more...</h2>
+<p>Here are a few references about least squares:</p>
+<ul>
+<li>Ordinary least squares on Wikipedia, available at <a href="https://en.wikipedia.org/wiki/Ordinary_least_squares">https://en.wikipedia.org/wiki/Ordinary_least_squares</a></li>
+<li>Linear least squares on Wikipedia, available at <a href="https://en.wikipedia.org/wiki/Linear_least_squares_%28mathematics%29">https://en.wikipedia.org/wiki/Linear_least_squares_%28mathematics%29</a></li>
+</ul>
+<p>Here are a few references about cross-validation and grid search:</p>
+<ul>
+<li>Cross-validation in scikit-learn's documentation, available at <a href="http://scikit-learn.org/stable/modules/cross_validation.html">http://scikit-learn.org/stable/modules/cross_validation.html</a></li>
+<li>Grid search in scikit-learn's documentation, available at <a href="http://scikit-learn.org/stable/modules/grid_search.html">http://scikit-learn.org/stable/modules/grid_search.html</a></li>
+<li>Cross-validation on Wikipedia, available at <a href="https://en.wikipedia.org/wiki/Cross-validation_%28statistics%29">https://en.wikipedia.org/wiki/Cross-validation_%28statistics%29</a></li>
+</ul>
+<p>Here are a few references about scikit-learn:</p>
+<ul>
+<li>scikit-learn basic tutorial available at <a href="http://scikit-learn.org/stable/tutorial/basic/tutorial.html">http://scikit-learn.org/stable/tutorial/basic/tutorial.html</a></li>
+<li>scikit-learn tutorial given at the SciPy 2017 conference, available at <a href="https://www.youtube.com/watch?v=2kT6QOVSgSg">https://www.youtube.com/watch?v=2kT6QOVSgSg</a></li>
+</ul>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+    </section>
+
+            </div>
+        </section>
+
+        <footer id="footer" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+                <div>
+                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+        
+    </div>
+    
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=9752080; 
+var sc_invisible=1; 
+var sc_security="837928c1"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="hit counter"
+href="http://statcounter.com/free-hit-counter/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/9752080/0/837928c1/1/"
+alt="hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+</body>
+</html>
+

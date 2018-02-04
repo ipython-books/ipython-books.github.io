@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IPython Cookbook, ">
+
+
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+
+
+        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+
+        <title>IPython Cookbook - 8.8. Detecting hidden structures in a dataset with clustering</title>
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</head>
+
+<body>
+
+
+    <header id="header" class="pure-g">
+        <div class="pure-u-1 pure-u-md-3-4">
+             <div id="menu">
+                 <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="/">home</a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
+        <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
+        <li><a href="http://cyrille.rossant.net">author</a></li>
+</ul>                </div>
+            </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-4">
+            <div id="social">
+                <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="https://twitter.com/cyrillerossant"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd"><i class="fa fa-github"></i></a></li>
+</ul>                </div>
+            </div>
+        </div>
+    </header>
+       
+
+    
+    <div id="layout" class="pure-g">
+        <section id="content" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+
+    <header id="page-header">
+        <h1>8.8. Detecting hidden structures in a dataset with clustering</h1>
+    </header>
+
+    <section id="page">
+        <p><a href="/"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="130" style="margin-right: 20px; margin-bottom: 10px;" /></a> <em>This is one of the 100+ free recipes of the <a href="/">IPython Cookbook, Second Edition</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, a guide to numerical computing and data science in the Jupyter Notebook. The ebook and printed book are available for purchase at <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">Packt Publishing</a>.</em></p>
+<p>▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd">Text on GitHub</a> with a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a></em><br />
+▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
+<p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-8-machine-learning/"><strong><em>Go to</em></strong> <em>Chapter 8 : Machine Learning</em></a><br />
+▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter08_ml/08_clustering.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
+<p>A large part of unsupervised learning is devoted to the <strong>clustering</strong> problem. The goal is to group similar points together in a totally unsupervised way. Clustering is a hard problem, as the very definition of <strong>clusters</strong> (or <strong>groups</strong>) is not necessarily well posed. In most datasets, stating that two points should belong to the same cluster may be context-dependent or even subjective.</p>
+<p>There are many clustering algorithms. We will see a few of them in this recipe, applied to a toy example.</p>
+<h2>How to do it...</h2>
+<p><strong>1.&nbsp;</strong> Let's import the libraries:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">permutations</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">sklearn</span>
+<span class="kn">import</span> <span class="nn">sklearn.decomposition</span> <span class="kn">as</span> <span class="nn">dec</span>
+<span class="kn">import</span> <span class="nn">sklearn.cluster</span> <span class="kn">as</span> <span class="nn">clu</span>
+<span class="kn">import</span> <span class="nn">sklearn.datasets</span> <span class="kn">as</span> <span class="nn">ds</span>
+<span class="kn">import</span> <span class="nn">sklearn.model_selection</span> <span class="kn">as</span> <span class="nn">ms</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+</pre></div>
+</div>
+
+
+<p><strong>2.&nbsp;</strong> Let's generate a random dataset with three clusters:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">make_blobs</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+                     <span class="n">n_features</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                     <span class="n">centers</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                     <span class="n">cluster_std</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
+                     <span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><strong>3.&nbsp;</strong> We need a couple of functions to relabel and display the results of the clustering algorithms:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">relabel</span><span class="p">(</span><span class="n">cl</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Relabel a clustering with three clusters</span>
+<span class="sd">    to match the original classes.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">cl</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">cl</span>
+    <span class="n">perms</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">permutations</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))))</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">perm</span><span class="p">[</span><span class="n">cl</span><span class="p">]</span> <span class="o">-</span> <span class="n">y</span><span class="p">))</span>
+                   <span class="k">for</span> <span class="n">perm</span> <span class="ow">in</span> <span class="n">perms</span><span class="p">])</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">perms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">p</span><span class="p">[</span><span class="n">cl</span><span class="p">]</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">display_clustering</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">title</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Plot the data points with the cluster</span>
+<span class="sd">    colors.&quot;&quot;&quot;</span>
+
+    <span class="c1"># We relabel the classes when there are 3 clusters</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="n">relabel</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+                             <span class="n">sharey</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="c1"># Display the points with the true labels on the</span>
+    <span class="c1"># left, and with the clustering labels on the</span>
+    <span class="c1"># right.</span>
+    <span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">title</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span>
+            <span class="n">axes</span><span class="p">,</span>
+            <span class="p">[</span><span class="n">y</span><span class="p">,</span> <span class="n">labels</span><span class="p">],</span>
+            <span class="p">[</span><span class="s2">&quot;True labels&quot;</span><span class="p">,</span> <span class="n">title</span><span class="p">]):</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">c</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+                   <span class="n">linewidths</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">rainbow</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><strong>4.&nbsp;</strong> Now, we cluster the dataset with the <strong>K-means</strong> algorithm, a classic and simple clustering algorithm:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">km</span> <span class="o">=</span> <span class="n">clu</span><span class="o">.</span><span class="n">KMeans</span><span class="p">()</span>
+<span class="n">km</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">display_clustering</span><span class="p">(</span><span class="n">km</span><span class="o">.</span><span class="n">labels_</span><span class="p">,</span> <span class="s2">&quot;KMeans&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><img alt="&lt;matplotlib.figure.Figure at 0x8110198&gt;" src="http://ipython-books.github.io/pages/chapter08_ml/08_clustering_files/08_clustering_12_0.png" /></p>
+<blockquote>
+<p>If you're reading the printed version of this book, you might not be able to distinguish the colors. You will find the colored images on the book's website.</p>
+</blockquote>
+<p><strong>5.&nbsp;</strong> This algorithm needs to know the number of clusters at initialization time. In general, however, we do not necessarily know the number of clusters in the dataset. Here, let's try with <code>n_clusters=3</code> (that's cheating, because we happen to know that there are 3 clusters):</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">km</span> <span class="o">=</span> <span class="n">clu</span><span class="o">.</span><span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">km</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">display_clustering</span><span class="p">(</span><span class="n">km</span><span class="o">.</span><span class="n">labels_</span><span class="p">,</span> <span class="s2">&quot;KMeans(3)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><img alt="&lt;matplotlib.figure.Figure at 0x81100f0&gt;" src="http://ipython-books.github.io/pages/chapter08_ml/08_clustering_files/08_clustering_15_0.png" /></p>
+<p><strong>6.&nbsp;</strong> Let's try a few other clustering algorithms implemented in scikit-learn. The simplicity of the API makes it really easy to try different methods; it is just a matter of changing the name of the class:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span>
+                         <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
+                         <span class="n">sharex</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                         <span class="n">sharey</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span>
+                   <span class="n">c</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+                   <span class="n">linewidths</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                   <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">rainbow</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;True labels&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">est</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="p">[</span>
+    <span class="n">clu</span><span class="o">.</span><span class="n">SpectralClustering</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span>
+    <span class="n">clu</span><span class="o">.</span><span class="n">AgglomerativeClustering</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span>
+    <span class="n">clu</span><span class="o">.</span><span class="n">MeanShift</span><span class="p">(),</span>
+    <span class="n">clu</span><span class="o">.</span><span class="n">AffinityPropagation</span><span class="p">(),</span>
+    <span class="n">clu</span><span class="o">.</span><span class="n">DBSCAN</span><span class="p">(),</span>
+<span class="p">]):</span>
+    <span class="n">est</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">relabel</span><span class="p">(</span><span class="n">est</span><span class="o">.</span><span class="n">labels_</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">c</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+               <span class="n">linewidths</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">rainbow</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">est</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="c1"># Fix the spacing between subplots.</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+
+
+<p><img alt="&lt;matplotlib.figure.Figure at 0x80f4da0&gt;" src="http://ipython-books.github.io/pages/chapter08_ml/08_clustering_files/08_clustering_17_0.png" /></p>
+<p>The first two algorithms required the number of clusters as input. The next one did not, but it was able to find the right number. The last two failed at finding the correct number of clusters (this is <em>overclustering</em>—too many clusters have been found).</p>
+<h2>How it works...</h2>
+<p>The K-means clustering algorithm consists of partitioning the data points <span class="math">\(x_j\)</span> into <span class="math">\(K\)</span> clusters <span class="math">\(S_i\)</span> so as to minimize the within-cluster sum of squares:</p>
+<div class="math">$$\underset{\mathbf{S}} {\operatorname{arg min}}  \sum_{i=1}^{k} \sum_{\mathbf{x}_j \in S_i} \left\| \mathbf{x}_j - \mathbf{\mu}_i \right\|_2^2$$</div>
+<p>Here, <span class="math">\(\mu_i\)</span> is the center of the cluster <span class="math">\(i\)</span> (average of all points in <span class="math">\(S_i\)</span>).</p>
+<p>Although it is very hard to solve this problem exactly, approximation algorithms exist. A popular one is <strong>Lloyd's algorithm</strong>. It consists of starting from an initial set of <span class="math">\(K\)</span> means <span class="math">\(\mu_i\)</span> and alternating between two steps:</p>
+<ul>
+<li>In the <em>assignment step</em>, the points are assigned to the cluster associated to the closest mean</li>
+<li>In the <em>update step</em>, the means are recomputed from the last assignments</li>
+</ul>
+<p>The algorithm converges to a solution that is not guaranteed to be optimal.</p>
+<p>The <strong>expectation-maximization algorithm</strong> can be seen as a probabilistic version of the K-means algorithm. It is implemented in the <code>mixture</code> module of scikit-learn.</p>
+<p>The other clustering algorithms used in this recipe are explained in the scikit-learn documentation. There is no clustering algorithm that works uniformly better than all the others, and every algorithm has its strengths and weaknesses. You will find more details in the references in the next section.</p>
+<h2>There's more...</h2>
+<p>Here are a few references:</p>
+<ul>
+<li>The K-means clustering algorithm on Wikipedia, available at <a href="https://en.wikipedia.org/wiki/K-means_clustering">https://en.wikipedia.org/wiki/K-means_clustering</a></li>
+<li>The expectation-maximization algorithm on Wikipedia, available at <a href="https://en.wikipedia.org/wiki/Expectation-maximization_algorithm">https://en.wikipedia.org/wiki/Expectation-maximization_algorithm</a></li>
+<li>Clustering in scikit-learn's documentation, available at <a href="http://scikit-learn.org/stable/modules/clustering.html">http://scikit-learn.org/stable/modules/clustering.html</a></li>
+<li>t-distributed stochastic neighbor embedding, or t-SNE clustering method, at <a href="https://lvdmaaten.github.io/tsne/">https://lvdmaaten.github.io/tsne/</a></li>
+<li>scikit-learn t-SNE implementation, at <a href="http://scikit-learn.org/stable/modules/generated/sklearn.manifold.TSNE.html">http://scikit-learn.org/stable/modules/generated/sklearn.manifold.TSNE.html</a></li>
+<li>Uniform Manifold Approximation and Projection, or UMAP, a t-SNE alternative, at <a href="https://github.com/lmcinnes/umap">https://github.com/lmcinnes/umap</a></li>
+</ul>
+<h2>See also</h2>
+<ul>
+<li>Reducing the dimensionality of a dataset with a principal component analysis</li>
+</ul>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+    </section>
+
+            </div>
+        </section>
+
+        <footer id="footer" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+                <div>
+                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+        
+    </div>
+    
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=9752080; 
+var sc_invisible=1; 
+var sc_security="837928c1"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="hit counter"
+href="http://statcounter.com/free-hit-counter/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/9752080/0/837928c1/1/"
+alt="hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+</body>
+</html>
+

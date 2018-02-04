@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IPython Cookbook, ">
+
+
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+
+
+        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+
+        <title>IPython Cookbook - 5.7. Releasing the GIL to take advantage of multi-core processors with Cython and OpenMP</title>
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</head>
+
+<body>
+
+
+    <header id="header" class="pure-g">
+        <div class="pure-u-1 pure-u-md-3-4">
+             <div id="menu">
+                 <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="/">home</a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
+        <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
+        <li><a href="http://cyrille.rossant.net">author</a></li>
+</ul>                </div>
+            </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-4">
+            <div id="social">
+                <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="https://twitter.com/cyrillerossant"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd"><i class="fa fa-github"></i></a></li>
+</ul>                </div>
+            </div>
+        </div>
+    </header>
+       
+
+    
+    <div id="layout" class="pure-g">
+        <section id="content" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+
+    <header id="page-header">
+        <h1>5.7. Releasing the GIL to take advantage of multi-core processors with Cython and OpenMP</h1>
+    </header>
+
+    <section id="page">
+        <p><a href="/"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="130" style="margin-right: 20px; margin-bottom: 10px;" /></a> <em>This is one of the 100+ free recipes of the <a href="/">IPython Cookbook, Second Edition</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, a guide to numerical computing and data science in the Jupyter Notebook. The ebook and printed book are available for purchase at <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">Packt Publishing</a>.</em></p>
+<p>▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd">Text on GitHub</a> with a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a></em><br />
+▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
+<p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-5-high-performance-computing/"><strong><em>Go to</em></strong> <em>Chapter 5 : High-Performance Computing</em></a><br />
+▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter05_hpc/07_openmp.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
+<p>As we have seen in this chapter's introduction, CPython's GIL prevents pure Python code from taking advantage of multi-core processors. With Cython, we have a way to release the GIL temporarily in a portion of the code in order to enable multi-core computing. This is done with <strong>OpenMP</strong>, a multiprocessing API that is supported by most C compilers.</p>
+<p>In this recipe, we will see how to parallelize the previous recipe's code on multiple cores.</p>
+<h2>Getting ready</h2>
+<p>To enable OpenMP in Cython, you just need to specify some options to the compiler. There is nothing special to install on your computer besides a good C compiler. See the instructions in this chapter's introduction for more details.</p>
+<p>The code of this recipe has been written for gcc on Ubuntu. It can be adapted to other systems with minor changes to the <code>%%cython</code> options.</p>
+<h2>How to do it...</h2>
+<p>Our simple ray tracing engine implementation is "embarrassingly parallel" (see <a href="https://en.wikipedia.org/wiki/Embarrassingly_parallel">https://en.wikipedia.org/wiki/Embarrassingly_parallel</a>); there is a main loop over all pixels, within which the exact same function is called repetitively. There is no crosstalk between loop iterations. Therefore, it would be theoretically possible to execute all iterations in parallel.</p>
+<p>Here, we will execute one loop (over all columns in the image) in parallel with OpenMP.</p>
+<p>You will find the entire code on the book's website (<code>ray7</code> example). We will only show the most important steps here:</p>
+<p><strong>1.&nbsp;</strong> We use the following magic command:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">cython</span> <span class="o">--</span><span class="nb">compile</span><span class="o">-</span><span class="n">args</span><span class="o">=-</span><span class="n">fopenmp</span> <span class="o">--</span><span class="n">link</span><span class="o">-</span><span class="n">args</span><span class="o">=-</span><span class="n">fopenmp</span> <span class="o">--</span><span class="n">force</span>
+</pre></div>
+</div>
+
+
+<p><strong>2.&nbsp;</strong> We import the <code>prange()</code> function:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cython.parallel</span> <span class="kn">import</span> <span class="n">prange</span>
+</pre></div>
+</div>
+
+
+<p><strong>3.&nbsp;</strong> We add <code>nogil</code> after each function definition in order to remove the GIL. We cannot use any Python variable or function inside a function annotated with <code>nogil</code>. For example:</p>
+<div class="highlight highlight-cython"><div class="highlight"><pre><span></span><span class="k">cdef</span> <span class="kt">Vec3</span> <span class="nf">add</span><span class="p">(</span><span class="n">Vec3</span> <span class="n">x</span><span class="p">,</span> <span class="n">Vec3</span> <span class="n">y</span><span class="p">)</span> <span class="k">nogil</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">vec3</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">y</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">z</span> <span class="o">+</span> <span class="n">y</span><span class="o">.</span><span class="n">z</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><strong>4.&nbsp;</strong> To run a loop in parallel over the cores with OpenMP, we use <code>prange()</code>:</p>
+<div class="highlight highlight-cython"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="k">nogil</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">prange</span><span class="p">(</span><span class="n">w</span><span class="p">):</span>
+        <span class="c"># ...</span>
+</pre></div>
+</div>
+
+
+<p>The GIL needs to be released before using any parallel computing feature such as <code>prange()</code>.</p>
+<p><strong>5.&nbsp;</strong> With these changes, we reach a 3x speedup on a quad-core processor compared to the fastest version of the previous recipe.</p>
+<h2>How it works...</h2>
+<p>The GIL has been described in the introduction of this chapter. The <code>nogil</code> keyword tells Cython that a particular function or code section should be executed without the GIL. When the GIL is released, it is not possible to make any Python API calls, meaning that only C variables and C functions (declared with <code>cdef</code>) can be used.</p>
+<h2>See also</h2>
+<ul>
+<li>Accelerating Python code with Cython</li>
+<li>Optimizing Cython code by writing less Python and more C</li>
+<li>Distributing Python code across multiple cores with IPython</li>
+</ul>
+    </section>
+
+            </div>
+        </section>
+
+        <footer id="footer" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+                <div>
+                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+        
+    </div>
+    
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=9752080; 
+var sc_invisible=1; 
+var sc_security="837928c1"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="hit counter"
+href="http://statcounter.com/free-hit-counter/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/9752080/0/837928c1/1/"
+alt="hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+</body>
+</html>
+

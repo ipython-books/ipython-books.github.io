@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IPython Cookbook, ">
+
+
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+
+
+        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+
+        <title>IPython Cookbook - 11.4. Finding points of interest in an image</title>
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</head>
+
+<body>
+
+
+    <header id="header" class="pure-g">
+        <div class="pure-u-1 pure-u-md-3-4">
+             <div id="menu">
+                 <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="/">home</a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
+        <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
+        <li><a href="http://cyrille.rossant.net">author</a></li>
+</ul>                </div>
+            </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-4">
+            <div id="social">
+                <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="https://twitter.com/cyrillerossant"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd"><i class="fa fa-github"></i></a></li>
+</ul>                </div>
+            </div>
+        </div>
+    </header>
+       
+
+    
+    <div id="layout" class="pure-g">
+        <section id="content" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+
+    <header id="page-header">
+        <h1>11.4. Finding points of interest in an image</h1>
+    </header>
+
+    <section id="page">
+        <p><a href="/"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="130" style="margin-right: 20px; margin-bottom: 10px;" /></a> <em>This is one of the 100+ free recipes of the <a href="/">IPython Cookbook, Second Edition</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, a guide to numerical computing and data science in the Jupyter Notebook. The ebook and printed book are available for purchase at <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">Packt Publishing</a>.</em></p>
+<p>▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd">Text on GitHub</a> with a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a></em><br />
+▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
+<p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-11-image-and-audio-processing/"><strong><em>Go to</em></strong> <em>Chapter 11 : Image and Audio Processing</em></a><br />
+▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter11_image/04_interest.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
+<p>In an image, <strong>points of interest</strong> are positions where there might be edges, corners, or interesting objects. For example, in a landscape picture, points of interest can be located near a house or a person. Detecting points of interest is useful in image recognition, computer vision, or medical imaging.</p>
+<p>In this recipe, we will find points of interest in an image with scikit-image. This will allow us to crop an image around the subject of the picture, even when this subject is not in the center of the image.</p>
+<h2>How to do it...</h2>
+<p><strong>1.&nbsp;</strong> Let's import the packages:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">skimage</span>
+<span class="kn">import</span> <span class="nn">skimage.feature</span> <span class="kn">as</span> <span class="nn">sf</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+</pre></div>
+</div>
+
+
+<p><strong>2.&nbsp;</strong> We create a function to display a colored or grayscale image:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">show</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="n">cmap</span> <span class="o">=</span> <span class="n">cmap</span> <span class="ow">or</span> <span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">gray</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">ax</span>
+</pre></div>
+</div>
+
+
+<p><strong>3.&nbsp;</strong> We load an image:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">img</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;https://github.com/ipython-books/&#39;</span>
+                 <span class="s1">&#39;cookbook-2nd-data/blob/master/&#39;</span>
+                 <span class="s1">&#39;child.png?raw=true&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">show</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><img alt="&lt;matplotlib.figure.Figure at 0x79ca5c0&gt;" src="http://ipython-books.github.io/pages/chapter11_image/04_interest_files/04_interest_12_0.png" /></p>
+<p><strong>4.&nbsp;</strong> Let's find salient points in the image with the Harris corner method. The first step consists of computing the <strong>Harris corner measure response image</strong> with the <code>corner_harris()</code> function (we will explain this measure in <em>How it works...</em>). This function requires a grayscale image, thus we select the first RGB component:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">corners</span> <span class="o">=</span> <span class="n">sf</span><span class="o">.</span><span class="n">corner_harris</span><span class="p">(</span><span class="n">img</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">show</span><span class="p">(</span><span class="n">corners</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><img alt="&lt;matplotlib.figure.Figure at 0x718ab38&gt;" src="http://ipython-books.github.io/pages/chapter11_image/04_interest_files/04_interest_15_0.png" /></p>
+<p>We see that the patterns in the child's coat are well detected by this algorithm.</p>
+<p><strong>5.&nbsp;</strong> The next step is to detect corners from this measure image, using the <code>corner_peaks()</code> function:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">peaks</span> <span class="o">=</span> <span class="n">sf</span><span class="o">.</span><span class="n">corner_peaks</span><span class="p">(</span><span class="n">corners</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">show</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">peaks</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">peaks</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;or&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><img alt="&lt;matplotlib.figure.Figure at 0x7d9ffd0&gt;" src="http://ipython-books.github.io/pages/chapter11_image/04_interest_files/04_interest_19_0.png" /></p>
+<p><strong>6.&nbsp;</strong> Finally, we create a box around the median position of the corner points to define our region of interest:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="c1"># The median defines the approximate position of</span>
+<span class="c1"># the corner points.</span>
+<span class="n">ym</span><span class="p">,</span> <span class="n">xm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">peaks</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="c1"># The standard deviation gives an estimation</span>
+<span class="c1"># of the spread of the corner points.</span>
+<span class="n">ys</span><span class="p">,</span> <span class="n">xs</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">peaks</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">xm</span><span class="p">,</span> <span class="n">ym</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">xm</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">ym</span><span class="p">)</span>
+<span class="n">xs</span><span class="p">,</span> <span class="n">ys</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">xs</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">ys</span><span class="p">)</span>
+<span class="n">show</span><span class="p">(</span><span class="n">img</span><span class="p">[</span><span class="n">ym</span> <span class="o">-</span> <span class="n">ys</span><span class="p">:</span><span class="n">ym</span> <span class="o">+</span> <span class="n">ys</span><span class="p">,</span> <span class="n">xm</span> <span class="o">-</span> <span class="n">xs</span><span class="p">:</span><span class="n">xm</span> <span class="o">+</span> <span class="n">xs</span><span class="p">])</span>
+</pre></div>
+</div>
+
+
+<p><img alt="&lt;matplotlib.figure.Figure at 0x7fe06da0a278&gt;" src="http://ipython-books.github.io/pages/chapter11_image/04_interest_files/04_interest_21_0.png" /></p>
+<h2>How it works...</h2>
+<p>Let's explain the method used in this recipe. The first step consists of computing the <strong>structure tensor</strong> (or <strong>Harris matrix</strong>) of the image:</p>
+<div class="math">$$A = \begin{bmatrix}
+\langle I_x^2 \rangle &amp; \langle I_x I_y \rangle\\
+\langle I_x I_y \rangle &amp; \langle I_y^2 \rangle
+\end{bmatrix}$$</div>
+<p>Here, <span class="math">\(I(x, y)\)</span> is the image, <span class="math">\(I_x\)</span> and <span class="math">\(I_y\)</span> are the partial derivatives, and the brackets denote the local spatial average around neighboring values.</p>
+<p>This tensor associates a <span class="math">\((2,2)\)</span> positive symmetric matrix at each point. This matrix is used to calculate a sort of autocorrelation of the image at each point.</p>
+<p>Let <span class="math">\(\lambda\)</span> and <span class="math">\(\mu\)</span> be the two eigenvalues of this matrix (the matrix is diagonalizable because it is real and symmetric). Roughly, a corner is characterized by a large variation of the autocorrelation in all directions, or in large positive eigenvalues <span class="math">\(\lambda\)</span> and <span class="math">\(\mu\)</span>. The corner measure image is defined as:</p>
+<div class="math">$$M = \det(A) - k \times \mathrm{trace}(A)^2 = \lambda\mu - k(\lambda+\mu)^2$$</div>
+<p>Here, <span class="math">\(k\)</span> is a tunable parameter. <span class="math">\(M\)</span> is large when there is a corner. Finally, <code>corner_peaks()</code> finds corner points by looking at local maxima in the corner measure image.</p>
+<h2>There's more...</h2>
+<p>Here are a few references:</p>
+<ul>
+<li>A corner detection example with scikit-image available at <a href="http://scikit-image.org/docs/dev/auto_examples/features_detection/plot_corner.html">http://scikit-image.org/docs/dev/auto_examples/features_detection/plot_corner.html</a></li>
+<li>An image processing tutorial with scikit-image available at <a href="http://blog.yhathq.com/posts/image-processing-with-scikit-image.html">http://blog.yhathq.com/posts/image-processing-with-scikit-image.html</a></li>
+<li>Corner detection on Wikipedia, available at <a href="https://en.wikipedia.org/wiki/Corner_detection">https://en.wikipedia.org/wiki/Corner_detection</a></li>
+<li>Structure tensor on Wikipedia, available at <a href="https://en.wikipedia.org/wiki/Structure_tensor">https://en.wikipedia.org/wiki/Structure_tensor</a></li>
+<li>API reference of the skimage.feature module available at <a href="http://scikit-image.org/docs/dev/api/skimage.feature.html">http://scikit-image.org/docs/dev/api/skimage.feature.html</a></li>
+</ul>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+    </section>
+
+            </div>
+        </section>
+
+        <footer id="footer" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+                <div>
+                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+        
+    </div>
+    
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=9752080; 
+var sc_invisible=1; 
+var sc_security="837928c1"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="hit counter"
+href="http://statcounter.com/free-hit-counter/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/9752080/0/837928c1/1/"
+alt="hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+</body>
+</html>
+

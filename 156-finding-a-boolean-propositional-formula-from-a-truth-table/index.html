@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IPython Cookbook, ">
+
+
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+
+
+        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+
+        <title>IPython Cookbook - 15.6. Finding a Boolean propositional formula from a truth table</title>
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</head>
+
+<body>
+
+
+    <header id="header" class="pure-g">
+        <div class="pure-u-1 pure-u-md-3-4">
+             <div id="menu">
+                 <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="/">home</a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
+        <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
+        <li><a href="http://cyrille.rossant.net">author</a></li>
+</ul>                </div>
+            </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-4">
+            <div id="social">
+                <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="https://twitter.com/cyrillerossant"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd"><i class="fa fa-github"></i></a></li>
+</ul>                </div>
+            </div>
+        </div>
+    </header>
+       
+
+    
+    <div id="layout" class="pure-g">
+        <section id="content" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+
+    <header id="page-header">
+        <h1>15.6. Finding a Boolean propositional formula from a truth table</h1>
+    </header>
+
+    <section id="page">
+        <p><a href="/"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="130" style="margin-right: 20px; margin-bottom: 10px;" /></a> <em>This is one of the 100+ free recipes of the <a href="/">IPython Cookbook, Second Edition</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, a guide to numerical computing and data science in the Jupyter Notebook. The ebook and printed book are available for purchase at <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">Packt Publishing</a>.</em></p>
+<p>▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd">Text on GitHub</a> with a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a></em><br />
+▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
+<p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-15-symbolic-and-numerical-mathematics/"><strong><em>Go to</em></strong> <em>Chapter 15 : Symbolic and Numerical Mathematics</em></a><br />
+▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter15_symbolic/06_logic.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
+<p>The logic module in SymPy lets us manipulate complex Boolean expressions, also known as <strong>propositional formulas</strong>.</p>
+<p>This recipe will show an example where this module can be useful. Let's suppose that, in a program, we need to write a complex <code>if</code> statement depending on three Boolean variables. We can think about each of the eight possible cases (true, true and false, and so on) and evaluate what the outcome should be. SymPy offers a function to generate a compact logic expression that satisfies our truth table.</p>
+<h2>How to do it...</h2>
+<p><strong>1.&nbsp;</strong> Let's import SymPy:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">init_printing</span><span class="p">()</span>
+</pre></div>
+</div>
+
+
+<p><strong>2.&nbsp;</strong> Let's define a few symbols:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">var</span><span class="p">(</span><span class="s1">&#39;x y z&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><img alt="(x, y, z)" src="http://ipython-books.github.io/pages/chapter15_symbolic/06_logic_files/06_logic_7_0.png" /></p>
+<p><strong>3.&nbsp;</strong> We can define propositional formulas with symbols and a few operators:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">y</span> <span class="o">|</span> <span class="o">~</span><span class="n">z</span><span class="p">)</span>
+<span class="n">P</span>
+</pre></div>
+</div>
+
+
+<p><img alt="Formula" src="http://ipython-books.github.io/pages/chapter15_symbolic/06_logic_files/06_logic_9_0.png" /></p>
+<p><strong>4.&nbsp;</strong> We can use <code>subs()</code> to evaluate a formula on actual Boolean values:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">P</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span> <span class="n">z</span><span class="p">:</span> <span class="bp">True</span><span class="p">})</span>
+</pre></div>
+</div>
+
+
+<p><img alt="False" src="http://ipython-books.github.io/pages/chapter15_symbolic/06_logic_files/06_logic_11_0.png" /></p>
+<p><strong>5.&nbsp;</strong> Now, we want to find a propositional formula depending on x, y, and z, with the following truth table:</p>
+<p><img alt="A truth table" src="http://ipython-books.github.io/pages/chapter15_symbolic/06_logic_files/truth.png" /></p>
+<p><strong>6.&nbsp;</strong> Let's write down all combinations that we want to evaluate to <code>True</code>, and those for which the outcome does not matter:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">minterms</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
+<span class="n">dontcare</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
+</pre></div>
+</div>
+
+
+<p><strong>7.&nbsp;</strong> Now, we use the <code>SOPform()</code> function to derive an adequate formula:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">Q</span> <span class="o">=</span> <span class="n">SOPform</span><span class="p">([</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">],</span> <span class="n">minterms</span><span class="p">,</span> <span class="n">dontcare</span><span class="p">)</span>
+<span class="n">Q</span>
+</pre></div>
+</div>
+
+
+<p><img alt="SOP form" src="http://ipython-books.github.io/pages/chapter15_symbolic/06_logic_files/06_logic_17_0.png" /></p>
+<p><strong>8.&nbsp;</strong> Let's test that this proposition works:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">Q</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span> <span class="n">z</span><span class="p">:</span> <span class="bp">False</span><span class="p">}),</span> <span class="n">Q</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span>
+    <span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span> <span class="n">z</span><span class="p">:</span> <span class="bp">True</span><span class="p">})</span>
+</pre></div>
+</div>
+
+
+<p><img alt="(True, False)" src="http://ipython-books.github.io/pages/chapter15_symbolic/06_logic_files/06_logic_19_0.png" /></p>
+<h2>How it works...</h2>
+<p>The <code>SOPform()</code> function generates a full expression corresponding to a truth table and simplifies it using the <strong>Quine-McCluskey algorithm</strong>. It returns the smallest <em>Sum of Products</em> form (or disjunction of conjunctions). Similarly, the <code>POSform()</code> function returns a Product of Sums.</p>
+<p>The given truth table can occur in this case: suppose that we want to write a file if it doesn't already exist (<code>z</code>), or if the user wants to force the writing (<code>x</code>). In addition, the user can prevent the writing (<code>y</code>). The expression evaluates to <code>True</code> if the file is to be written. The resulting SOP formula works if we explicitly forbid <code>x</code> and <code>y</code> in the first place (forcing and preventing the writing at the same time is forbidden).</p>
+<h2>There's more...</h2>
+<p>Here are a few references:</p>
+<ul>
+<li>SymPy logic module documentation at <a href="http://docs.sympy.org/latest/modules/logic.html">http://docs.sympy.org/latest/modules/logic.html</a></li>
+<li>The propositional formula on Wikipedia, at <a href="https://en.wikipedia.org/wiki/Propositional_formula">https://en.wikipedia.org/wiki/Propositional_formula</a></li>
+<li>Sum of Products on Wikipedia, at <a href="https://en.wikipedia.org/wiki/Canonical_normal_form">https://en.wikipedia.org/wiki/Canonical_normal_form</a></li>
+<li>The Quine–McCluskey algorithm on Wikipedia, at <a href="https://en.wikipedia.org/wiki/Quine%E2%80%93McCluskey_algorithm">https://en.wikipedia.org/wiki/Quine%E2%80%93McCluskey_algorithm</a></li>
+<li>Logic lectures on Awesome Math, at <a href="https://github.com/rossant/awesome-math/#logic">https://github.com/rossant/awesome-math/#logic</a></li>
+</ul>
+    </section>
+
+            </div>
+        </section>
+
+        <footer id="footer" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+                <div>
+                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+        
+    </div>
+    
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=9752080; 
+var sc_invisible=1; 
+var sc_security="837928c1"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="hit counter"
+href="http://statcounter.com/free-hit-counter/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/9752080/0/837928c1/1/"
+alt="hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+</body>
+</html>
+

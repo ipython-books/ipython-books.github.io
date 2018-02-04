@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IPython Cookbook, ">
+
+
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+
+
+        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+
+        <title>IPython Cookbook - Chapter 14 : Graphs, Geometry, and Geographic Information Systems</title>
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</head>
+
+<body>
+
+
+    <header id="header" class="pure-g">
+        <div class="pure-u-1 pure-u-md-3-4">
+             <div id="menu">
+                 <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="/">home</a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
+        <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
+        <li><a href="http://cyrille.rossant.net">author</a></li>
+</ul>                </div>
+            </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-4">
+            <div id="social">
+                <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="https://twitter.com/cyrillerossant"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd"><i class="fa fa-github"></i></a></li>
+</ul>                </div>
+            </div>
+        </div>
+    </header>
+       
+
+    
+    <div id="layout" class="pure-g">
+        <section id="content" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+
+    <header id="page-header">
+        <h1>Chapter 14 : Graphs, Geometry, and Geographic Information Systems</h1>
+    </header>
+
+    <section id="page">
+        <p>In this chapter, we will cover the following topics:</p>
+<ul>
+<li><a href="http://ipython-books.github.io/141-manipulating-and-visualizing-graphs-with-networkx/">14.1. Manipulating and visualizing graphs with NetworkX</a></li>
+<li><a href="http://ipython-books.github.io/142-drawing-flight-routes-with-networkx/">14.2. Drawing flight routes with NetworkX</a></li>
+<li><a href="http://ipython-books.github.io/143-resolving-dependencies-in-a-directed-acyclic-graph-with-a-topological-sort/">14.3. Resolving dependencies in a directed acyclic graph with a topological sort</a></li>
+<li><a href="http://ipython-books.github.io/144-computing-connected-components-in-an-image/">14.4. Computing connected components in an image</a></li>
+<li><a href="http://ipython-books.github.io/145-computing-the-voronoi-diagram-of-a-set-of-points/">14.5. Computing the Voronoi diagram of a set of points</a></li>
+<li><a href="http://ipython-books.github.io/146-manipulating-geospatial-data-with-cartopy/">14.6. Manipulating geospatial data with Cartopy</a></li>
+<li><a href="http://ipython-books.github.io/147-creating-a-route-planner-for-a-road-network/">14.7. Creating a route planner for a road network</a></li>
+</ul>
+<p>In this chapter, we will cover Python's capabilities in graph theory, geometry, and geography.</p>
+<p><strong>Graphs</strong> are mathematical objects describing relations between items. They are ubiquitous in science and engineering, as they can represent many kinds of real-world relations: friends in a social network, atoms in a molecule, website links, cells in a neural network, neighboring pixels in an image, and so on. Graphs are also classical data structures in computer science. Finally, many domain-specific problems may be re-expressed as graph problems, and then solved with well-known algorithms.</p>
+<p>We will also see a few recipes related to <strong>geometry</strong> and <strong>Geographic Information Systems (GIS)</strong>, which refers to the processing and analysis of any kind of spatial, geographical, or topographical data.</p>
+<p>In this introduction, we will give a brief overview of these topics.</p>
+<h2>Graphs</h2>
+<p>Mathematically, a <strong>graph</strong> <span class="math">\(G = (V, E)\)</span> is defined by a set <span class="math">\(V\)</span> of <strong>vertices</strong> or <strong>nodes</strong>, and a set <span class="math">\(E\)</span> of <strong>edges</strong> (two-element subsets of <span class="math">\(V\)</span>). Two nodes <span class="math">\(v\)</span> and <span class="math">\(v'\)</span> are said to be <strong>connected</strong> if <span class="math">\((v, v')\)</span> is an edge (element of <span class="math">\(E\)</span>).</p>
+<ul>
+<li>If the edges are <em>unordered</em> (meaning that <span class="math">\((v,v') = (v',v)\)</span>), the graph is said to be <strong>undirected</strong></li>
+<li>If the edges are <em>ordered</em> (meaning that <span class="math">\((v,v') \neq (v',v)\)</span>), the graph is said to be <strong>directed</strong></li>
+</ul>
+<p>An edge in an undirected graph is represented by a line segment between the two nodes. In a directed graph, it is represented by an arrow.</p>
+<p><img alt="Undirected and directed graphs" src="http://ipython-books.github.io/pages/chapter14_graphgeo/images/graphs.png" /></p>
+<p>A graph can be represented by different data structures, such as an <strong>adjacency list</strong> (for each vertex, a list of adjacent vertices) or an <strong>adjacency matrix</strong> (matrix of connections between vertices).</p>
+<h3>Problems in graph theory</h3>
+<p>Here are a few examples of classical graph problems:</p>
+<ul>
+<li><strong>Graph traversal</strong>: How to walk through a graph, discussed at <a href="https://en.wikipedia.org/wiki/Graph_traversal">https://en.wikipedia.org/wiki/Graph_traversal</a></li>
+<li><strong>Graph coloring</strong>: How to color nodes in a graph such that no two adjacent vertices share the same color, discussed at <a href="https://en.wikipedia.org/wiki/Graph_coloring">https://en.wikipedia.org/wiki/Graph_coloring</a></li>
+<li><strong>Connected components</strong>: How to find connected components in a graph, explained at <a href="https://en.wikipedia.org/wiki/Connected_component_%28graph_theory%29">https://en.wikipedia.org/wiki/Connected_component_%28graph_theory%29</a></li>
+<li><strong>Shortest paths</strong>: What is the shortest path from one node to another in a given graph?, discussed at <a href="https://en.wikipedia.org/wiki/Shortest_path_problem">https://en.wikipedia.org/wiki/Shortest_path_problem</a></li>
+<li><strong>Hamiltonian paths</strong>: Does a graph include a Hamiltonian path, visiting every vertex exactly once?, explained at <a href="https://en.wikipedia.org/wiki/Hamiltonian_path">https://en.wikipedia.org/wiki/Hamiltonian_path</a></li>
+<li><strong>Eulerian paths</strong>: Does a graph include an Eulerian path, visiting every edge exactly once?, discussed at <a href="https://en.wikipedia.org/wiki/Eulerian_path">https://en.wikipedia.org/wiki/Eulerian_path</a></li>
+<li><strong>Traveling Salesman Problem</strong>: What is the shortest route visiting every node exactly once (Hamiltonian path)?, explained at <a href="https://en.wikipedia.org/wiki/Traveling_salesman_problem">https://en.wikipedia.org/wiki/Traveling_salesman_problem</a></li>
+</ul>
+<h3>Random graphs</h3>
+<p><strong>Random graphs</strong> are particular kinds of graphs defined with probabilistic rules. They are useful for understanding the structure of large real-world graphs such as social graphs.</p>
+<p>In particular, <strong>small-world networks</strong> have sparse connections, but most nodes can be reached from every other node in a small number of steps. This property is due to the existence of a small number of <strong>hubs</strong> that have a high number of connections.</p>
+<h3>Graphs in Python</h3>
+<p>Although graphs can be manipulated with native Python structures, it is more convenient to use a dedicated library implementing specific data structures and manipulation routines. In this chapter, we will use <strong>NetworkX</strong>, a pure Python library. An alternative library is <strong>graph-tool</strong>, largely written in C++.</p>
+<p>NetworkX implements a flexible data structure for graphs, and it contains many algorithms. NetworkX also lets us draw graphs easily with matplotlib.</p>
+<h2>Geometry in Python</h2>
+<p><strong>Shapely</strong> is a Python library used to manipulate 2D geometrical shapes such as points, lines, and polygons. It is most notably useful in Geographic Information Systems.</p>
+<h2>Geographical Information Systems in Python</h2>
+<p>There are several Python modules used to manipulate geographical data and plotting maps.</p>
+<p>In this chapter, we will use cartopy and Shapely to handle GIS files.</p>
+<p>The ESRI <strong>shapefile</strong> is a popular geospatial vector data format. It can be read by cartopy and NetworkX.</p>
+<p><strong>Cartopy</strong> is a Python library that provides cartographic tools for Python. We can use it to perform map projections and draw maps with matplotlib. It relies on Shapely.</p>
+<p><strong>geoplot</strong> is a young high-level geospatial data visualization library in Python that builds on top of cartopy and matplotlib.</p>
+<p>We will also use the <strong>OpenStreetMap</strong> service, a free, open source, collaborative service providing maps of the world.</p>
+<p>Other GIS/mapping systems in Python that we couldn't cover in this chapter include GeoPandas and Kartograph.</p>
+<h2>References</h2>
+<p>Here are a few references about graphs:</p>
+<ul>
+<li>Graph theory on Wikipedia, available at <a href="https://en.wikipedia.org/wiki/Graph_theory">https://en.wikipedia.org/wiki/Graph_theory</a></li>
+<li>Graph theory lectures on Awesome Math, available at <a href="https://github.com/rossant/awesome-math/#graph-theory">https://github.com/rossant/awesome-math/#graph-theory</a></li>
+<li>Data structures for graphs, described at <a href="https://en.wikipedia.org/wiki/Graph_%28abstract_data_type%29">https://en.wikipedia.org/wiki/Graph_%28abstract_data_type%29</a></li>
+<li>Random graphs on Wikipedia, available at <a href="https://en.wikipedia.org/wiki/Random_graph">https://en.wikipedia.org/wiki/Random_graph</a></li>
+<li>Small-world graphs on Wikipedia, available at <a href="https://en.wikipedia.org/wiki/Small-world_network">https://en.wikipedia.org/wiki/Small-world_network</a></li>
+<li>NetworkX package, available at <a href="http://networkx.github.io">http://networkx.github.io</a></li>
+<li>The graph-tool package, available at <a href="http://graph-tool.skewed.de">http://graph-tool.skewed.de</a></li>
+</ul>
+<p>Here are a few references about geometry and maps in Python:</p>
+<ul>
+<li>cartopy at <a href="http://scitools.org.uk/cartopy/">http://scitools.org.uk/cartopy/</a></li>
+<li>Shapely at <a href="https://github.com/Toblerity/Shapely">https://github.com/Toblerity/Shapely</a></li>
+<li>Shapefile at <a href="https://en.wikipedia.org/wiki/Shapefile">https://en.wikipedia.org/wiki/Shapefile</a></li>
+<li>geoplot at <a href="https://github.com/ResidentMario/geoplot">https://github.com/ResidentMario/geoplot</a></li>
+<li>Folium at <a href="https://github.com/wrobstory/folium">https://github.com/wrobstory/folium</a></li>
+<li>GeoPandas at <a href="http://geopandas.org">http://geopandas.org</a></li>
+<li>Kartograph at <a href="http://kartograph.org">http://kartograph.org</a></li>
+<li>OpenStreetMap at <a href="http://www.openstreetmap.org">http://www.openstreetmap.org</a></li>
+</ul>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+    </section>
+
+            </div>
+        </section>
+
+        <footer id="footer" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+                <div>
+                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+        
+    </div>
+    
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=9752080; 
+var sc_invisible=1; 
+var sc_security="837928c1"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="hit counter"
+href="http://statcounter.com/free-hit-counter/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/9752080/0/837928c1/1/"
+alt="hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+</body>
+</html>
+

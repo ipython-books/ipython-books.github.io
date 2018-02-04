@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IPython Cookbook, ">
+
+
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+
+
+        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+
+        <title>IPython Cookbook - Chapter 8 : Machine Learning</title>
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</head>
+
+<body>
+
+
+    <header id="header" class="pure-g">
+        <div class="pure-u-1 pure-u-md-3-4">
+             <div id="menu">
+                 <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="/">home</a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
+        <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
+        <li><a href="http://cyrille.rossant.net">author</a></li>
+</ul>                </div>
+            </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-4">
+            <div id="social">
+                <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="https://twitter.com/cyrillerossant"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd"><i class="fa fa-github"></i></a></li>
+</ul>                </div>
+            </div>
+        </div>
+    </header>
+       
+
+    
+    <div id="layout" class="pure-g">
+        <section id="content" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+
+    <header id="page-header">
+        <h1>Chapter 8 : Machine Learning</h1>
+    </header>
+
+    <section id="page">
+        <p>In this chapter, we will cover the following topics:</p>
+<ul>
+<li><a href="http://ipython-books.github.io/81-getting-started-with-scikit-learn/">8.1. Getting started with scikit-learn</a></li>
+<li><a href="http://ipython-books.github.io/82-predicting-who-will-survive-on-the-titanic-with-logistic-regression/">8.2. Predicting who will survive on the Titanic with logistic regression</a></li>
+<li><a href="http://ipython-books.github.io/83-learning-to-recognize-handwritten-digits-with-a-k-nearest-neighbors-classifier/">8.3. Learning to recognize handwritten digits with a K-nearest neighbors classifier</a></li>
+<li><a href="http://ipython-books.github.io/84-learning-from-text-naive-bayes-for-natural-language-processing/">8.4. Learning from text — Naive Bayes for Natural Language Processing</a></li>
+<li><a href="http://ipython-books.github.io/85-using-support-vector-machines-for-classification-tasks/">8.5. Using support vector machines for classification tasks</a></li>
+<li><a href="http://ipython-books.github.io/86-using-a-random-forest-to-select-important-features-for-regression/">8.6. Using a random forest to select important features for regression</a></li>
+<li><a href="http://ipython-books.github.io/87-reducing-the-dimensionality-of-a-dataset-with-a-principal-component-analysis/">8.7. Reducing the dimensionality of a dataset with a principal component analysis</a></li>
+<li><a href="http://ipython-books.github.io/88-detecting-hidden-structures-in-a-dataset-with-clustering/">8.8. Detecting hidden structures in a dataset with clustering</a></li>
+</ul>
+<p>In the previous chapter, we were interested in getting insight into data, understanding complex phenomena through partial observations, and making informed decisions in the presence of uncertainty. Here, we are still interested in analyzing and processing data using statistical tools. However, the goal is not necessarily to <em>understand</em> the data, but to <em>learn</em> from it.</p>
+<p>Learning from data is close to what we do as humans. From our experience, we intuitively learn general facts and relations about the world, even if we don't fully understand their complexity. The increasing computational power of computers makes them able to learn from data too. That's the heart of <strong>machine learning</strong>, a branch of artificial intelligence at the intersection of computer science, statistics, and applied mathematics.</p>
+<p>This chapter is a hands-on introduction to some of the most basic methods in machine learning. These methods are routinely used by data scientists. We will use these methods with <strong>scikit-learn</strong>, a popular and user-friendly Python package for machine learning.</p>
+<h2>A bit of vocabulary</h2>
+<p>In this introduction, we will explain the fundamental definitions and concepts of machine learning.</p>
+<h3>Learning from data</h3>
+<p>In machine learning, most data can be represented as a table of numerical values. Every row is called an <strong>observation</strong>, a <strong>sample</strong>, or a <strong>data point</strong>. Every column is called a <strong>feature</strong> or a <strong>variable</strong>.</p>
+<p>Let's call <span class="math">\(N\)</span> the number of rows (or the number of points) and <span class="math">\(D\)</span> the number of columns (or number of features). The number <span class="math">\(D\)</span> is also called the <strong>dimensionality</strong> of the data. The reason is that we can view this table as a set <span class="math">\(E\)</span> of vectors in a space with <span class="math">\(D\)</span> dimensions (or vector space). Here, a vector <span class="math">\(x\)</span> contains <span class="math">\(D\)</span> numbers <span class="math">\((x_1, ..., x_D)\)</span>, also called <strong>components</strong>. This mathematical point of view is very useful and we will use it throughout this chapter.</p>
+<p>We make the distinction between <em>supervised learning</em> and <em>unsupervised learning</em>:</p>
+<ul>
+<li><strong>Supervised learning</strong> is when we have a label <span class="math">\(y\)</span> associated with a data point <span class="math">\(x\)</span>. The goal is to learn the mapping from <span class="math">\(x\)</span> to <span class="math">\(y\)</span> from our data. The data gives us this mapping for a finite set of points, but what we want is to generalize this mapping to the full set <span class="math">\(E\)</span>, or at least to a larger set of points.</li>
+<li><strong>Unsupervised learning</strong> is when we don't have any labels. What we want to do is discover some form of hidden structure in the data.</li>
+</ul>
+<h3>Supervised learning</h3>
+<p>Mathematically, supervised learning consists of finding a function <span class="math">\(f\)</span> that maps the set of points <span class="math">\(E\)</span> to a set of labels <span class="math">\(F\)</span>, knowing a finite set of associations <span class="math">\((x, y)\)</span>, which is given by our data. This is what <em>generalization</em> is about: after observing the pairs <span class="math">\((x_i, y_i)\)</span>, given a new <span class="math">\(x\)</span>, we are able to find the corresponding <span class="math">\(y\)</span> by applying the function <span class="math">\(f\)</span> to <span class="math">\(x\)</span>.</p>
+<p>It is a common practice to split the set of data points into two subsets: the <strong>training set</strong> and the <strong>test set</strong>. We learn the function <span class="math">\(f\)</span> on the training set and test it on the test set. This is essential when assessing the predictive power of a model. By training and testing a model on the same set, our model might not be able to generalize well. This is the fundamental concept of <strong>overfitting</strong>, which we will detail later in this chapter.</p>
+<p>We generally make the distinction between classification and regression, two particular instances of supervised learning.</p>
+<p><strong>Classification</strong> is when our labels <span class="math">\(y\)</span> can only take a finite set of values (categories). Examples include:</p>
+<ul>
+<li><strong>Handwritten digit recognition</strong>: <span class="math">\(x\)</span> is an image with a handwritten digit; <span class="math">\(y\)</span> is a digit between 0 and 9</li>
+<li><strong>Spam filtering</strong>: <span class="math">\(x\)</span> is an e-mail and <span class="math">\(y\)</span> is 1 or 0, depending on whether that e-mail is spam or not</li>
+</ul>
+<p><strong>Regression</strong> is when our labels <span class="math">\(y\)</span> can take any real (continuous) value. Examples include:</p>
+<ul>
+<li>Predicting stock market data</li>
+<li>Predicting sales</li>
+<li>Detecting the age of a person from a picture</li>
+</ul>
+<p>A classification task yields a division of our space <span class="math">\(E\)</span> in different regions (also called <strong>partitions</strong>), each region being associated to one particular value of the label <span class="math">\(y\)</span>. A regression task yields a mathematical model that associates a real number to any point <span class="math">\(x\)</span> in the space <span class="math">\(E\)</span>. This difference is illustrated in the following figure:</p>
+<p><img alt="Difference between classification and regression" src="http://ipython-books.github.io/pages/chapter08_ml/images/class_regr.png" /></p>
+<p>Classification and regression can be combined. For example, in the <strong>probit model</strong>, although the dependent variable is binary (classification), the <em>probability</em> that this variable belongs to one category can also be modeled (regression). We will see an example in the recipe about logistic regression. For more information on the probit model, refer to <a href="https://en.wikipedia.org/wiki/Probit_model.">https://en.wikipedia.org/wiki/Probit_model.</a></p>
+<h3>Unsupervised learning</h3>
+<p>Broadly speaking, unsupervised learning helps us discover systemic structures in our data. This is harder to grasp than supervised learning, in that there is generally no precise question and answer.</p>
+<p>Here are a few important tasks related to unsupervised learning:</p>
+<ul>
+<li><strong>Clustering</strong>: Grouping similar points together within clusters</li>
+<li><strong>Density estimation</strong>: Estimating a probability density function that can explain the distribution of the data points</li>
+<li><strong>Dimension reduction</strong>: Getting a simple representation of high-dimensional data points by projecting them onto a lower-dimensional space (notably for data visualization)</li>
+<li><strong>Manifold learning</strong>: Finding a low-dimensional manifold containing the data points (also known as nonlinear dimension reduction)</li>
+</ul>
+<h3>Feature selection and feature extraction</h3>
+<p>In a supervised learning context, when our data contains many features, it is sometimes necessary to choose a subset of them. The features we want to keep are those that are most relevant to our question. This is the problem of <strong>feature selection</strong>.</p>
+<p>Additionally, we might want to extract new features by applying complex transformations on our original dataset. This is <strong>feature extraction</strong>. For example, in computer vision, training a classifier directly on the pixels is not the most efficient method in general. We might want to extract the relevant points of interest or make appropriate mathematical transformations. These steps depend on our dataset and on the questions we want to answer.</p>
+<p>For example, it is often necessary to preprocess the data before learning models. <strong>Feature scaling</strong> (or <strong>data normalization</strong>) is a common preprocessing step where features are linearly rescaled to fit in the range <span class="math">\([-1,1]\)</span> or <span class="math">\([0,1]\)</span>.</p>
+<p>Feature extraction and feature selection involve a balanced combination of domain expertise, intuition, and mathematical methods. These early steps are crucial, and they might be even more important than the learning steps themselves. The reason is that the few dimensions that are relevant to our problem are generally hidden in the high dimensionality of our dataset. We need to uncover the low-dimensional structure of interest to improve the efficiency of the learning models.</p>
+<p>We will see a few feature selection and feature extraction methods in this chapter. Methods that are specific to signals, images, or sounds will be covered in <em>Chapter 10, Signal Processing</em>, and <em>Chapter 11, Image and Audio Processing</em>.</p>
+<p><strong>Deep learning</strong> has profoundly revolutionized machine learning in the last few years. A major characteristic of this range of methods is that feature selection and extraction are often included in the model itself. The most relevant features are automatically selected by the algorithm. This method works particularly well on images, sounds, and videos. Typically, however, deep learning requires a huge amount of training data and computational power. Covering deep learning methods in Python is beyond the scope of this book, but we give a few references at the end of this introduction.</p>
+<p>Here are a few further references:</p>
+<ul>
+<li>Feature selection in scikit-learn, documented at <a href="http://scikit-learn.org/stable/modules/feature_selection.html">http://scikit-learn.org/stable/modules/feature_selection.html</a></li>
+<li>Feature selection on Wikipedia at <a href="https://en.wikipedia.org/wiki/Feature_selection">https://en.wikipedia.org/wiki/Feature_selection</a></li>
+</ul>
+<h3>Overfitting, underfitting, and the bias-variance tradeoff</h3>
+<p>A central notion in machine learning is the trade-off between <strong>overfitting</strong> and <strong>underfitting</strong>. A model may be able to represent our data accurately. However, if it is <em>too</em> accurate, it might not generalize well to unobserved data. For example, in facial recognition, a too-accurate model would be unable to identify someone who styled their hair differently that day. The reason is that our model might learn irrelevant features in the training data. On the contrary, an insufficiently trained model would not generalize well either. For example, it would be unable to correctly recognize twins. For more information on overfitting, refer to <a href="https://en.wikipedia.org/wiki/Overfitting.">https://en.wikipedia.org/wiki/Overfitting.</a></p>
+<p>A popular solution to reduce overfitting consists of adding structure to the model, for example, with <strong>regularization</strong>. This method favors simpler models during training (Occam's razor). You will find more information at <a href="https://en.wikipedia.org/wiki/Regularization_%28mathematics%29.">https://en.wikipedia.org/wiki/Regularization_%28mathematics%29.</a></p>
+<p>The <strong>bias-variance dilemma</strong> is closely related to the issue of overfitting and underfitting. The bias of a model quantifies how precise it is across training sets. The <strong>variance</strong> quantifies how sensitive the model is to small changes in the training set. A <strong>robust</strong> model is not overly sensitive to small changes. The dilemma involves minimizing both bias and variance; we want a precise and robust model. Simpler models tend to be less accurate but more robust. Complex models tend to be more accurate but less robust. For more information on the bias-variance dilemma, refer to <a href="https://en.wikipedia.org/wiki/Bias-variance_dilemma.">https://en.wikipedia.org/wiki/Bias-variance_dilemma.</a></p>
+<p>The importance of this trade-off cannot be overstated. This question pervades the entire discipline of machine learning. We will see concrete examples in this chapter.</p>
+<h3>Model selection</h3>
+<p>As we will see in this chapter, there are many supervised and unsupervised algorithms. For example, well-known classifiers that we will cover in this chapter include logistic regression, nearest-neighbors, Naive Bayes, and support vector machines. There are many other algorithms that we can't cover here.</p>
+<p>No model performs uniformly better than the others. One model may perform well on one dataset and badly on another. This is the question of <strong>model selection</strong>.</p>
+<p>We will see systematic methods to assess the quality of a model on a particular dataset (notably cross-validation). In practice, machine learning is not an "exact science" in that it frequently involves trial and error. We need to try different models and empirically choose the one that performs best.</p>
+<p>That being said, understanding the details of the learning models allows us to gain intuition about which model is best adapted to our current problem.</p>
+<p>Here are a few references on this question:</p>
+<ul>
+<li>Model selection on Wikipedia, available at <a href="https://en.wikipedia.org/wiki/Model_selection">https://en.wikipedia.org/wiki/Model_selection</a></li>
+<li>Model evaluation in scikit-learn's documentation, available at <a href="http://scikit-learn.org/stable/modules/model_evaluation.html">http://scikit-learn.org/stable/modules/model_evaluation.html</a></li>
+<li>Blog post on how to choose a classifier, available at <a href="http://blog.echen.me/2011/04/27/choosing-a-machine-learning-classifier/">http://blog.echen.me/2011/04/27/choosing-a-machine-learning-classifier/</a></li>
+</ul>
+<h3>Machine learning references</h3>
+<p>Here are a few excellent, math-heavy textbooks on machine learning:</p>
+<ul>
+<li><em>Pattern Recognition and Machine Learning, Christopher M. Bishop, (2006), Springer</em></li>
+<li><em>Machine Learning – A Probabilistic Perspective, Kevin P. Murphy, (2012), MIT Press</em></li>
+<li><em>The Elements of Statistical Learning, Trevor Hastie, Robert Tibshirani, Jerome Friedman, (2009), Springer</em></li>
+</ul>
+<p>Here are a few books more oriented toward programmers without a strong mathematical background:</p>
+<ul>
+<li><em>Machine Learning for Hackers, Drew Conway, John Myles White, (2012), O'Reilly Media</em></li>
+<li><em>Machine Learning in Action, Peter Harrington, (2012), Manning Publications Co.</em></li>
+<li><em>Python Machine Learning, Sebastian Raschka (2015), Packt Publishing.</em></li>
+</ul>
+<p>Further references can be found here:</p>
+<ul>
+<li>Awesome Machine Learning resources, at <a href="https://github.com/josephmisiti/awesome-machine-learning">https://github.com/josephmisiti/awesome-machine-learning</a></li>
+<li>Statistical Learning lectures on Awesome Math, at <a href="https://github.com/rossant/awesome-math/#statistical-learning">https://github.com/rossant/awesome-math/#statistical-learning</a></li>
+</ul>
+<p>Important classes of machine learning methods that we couldn't cover in this chapter include <strong>neural networks</strong> and <strong>deep learning</strong>. Deep learning is the subject of very active research in machine learning. Many state-of-the-art results are currently achieved by using deep learning methods.</p>
+<p>Here are few references on deep learning:</p>
+<ul>
+<li>Awesome Deep Learning resources, at <a href="https://github.com/ChristosChristofidis/awesome-deep-learning">https://github.com/ChristosChristofidis/awesome-deep-learning</a></li>
+<li>Coursera Deep Learning course, at <a href="https://www.coursera.org/specializations/deep-learning">https://www.coursera.org/specializations/deep-learning</a></li>
+<li>Udacity Deep Learning course, at <a href="https://www.udacity.com/course/deep-learning--ud730">https://www.udacity.com/course/deep-learning--ud730</a></li>
+<li>Keras Tutorial: Deep Learning in Python, at <a href="https://www.datacamp.com/community/tutorials/deep-learning-python">https://www.datacamp.com/community/tutorials/deep-learning-python</a></li>
+<li>Deep learning with Python, a book by François Chollet, Manning Publications, at <a href="https://www.manning.com/books/deep-learning-with-python">https://www.manning.com/books/deep-learning-with-python</a></li>
+</ul>
+<p>Finally, here are a few lists of public datasets that can be used for data science projects:</p>
+<ul>
+<li>List of datasets for machine learning research, at <a href="https://en.wikipedia.org/wiki/List_of_datasets_for_machine_learning_research">https://en.wikipedia.org/wiki/List_of_datasets_for_machine_learning_research</a></li>
+<li>Awesome public datasets, at <a href="https://github.com/caesar0301/awesome-public-datasets">https://github.com/caesar0301/awesome-public-datasets</a></li>
+<li>Datasets for Data Science and Machine Learning at <a href="https://elitedatascience.com/datasets">https://elitedatascience.com/datasets</a></li>
+<li>Kaggle Datasets, at <a href="https://www.kaggle.com/datasets">https://www.kaggle.com/datasets</a></li>
+</ul>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+    </section>
+
+            </div>
+        </section>
+
+        <footer id="footer" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+                <div>
+                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+        
+    </div>
+    
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=9752080; 
+var sc_invisible=1; 
+var sc_security="837928c1"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="hit counter"
+href="http://statcounter.com/free-hit-counter/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/9752080/0/837928c1/1/"
+alt="hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+</body>
+</html>
+

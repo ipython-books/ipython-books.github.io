@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IPython Cookbook, ">
+
+
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+
+
+        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+
+        <title>IPython Cookbook - 2.5. Efficient interactive computing workflows with IPython</title>
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</head>
+
+<body>
+
+
+    <header id="header" class="pure-g">
+        <div class="pure-u-1 pure-u-md-3-4">
+             <div id="menu">
+                 <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="/">home</a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
+        <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
+        <li><a href="http://cyrille.rossant.net">author</a></li>
+</ul>                </div>
+            </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-4">
+            <div id="social">
+                <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="https://twitter.com/cyrillerossant"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd"><i class="fa fa-github"></i></a></li>
+</ul>                </div>
+            </div>
+        </div>
+    </header>
+       
+
+    
+    <div id="layout" class="pure-g">
+        <section id="content" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+
+    <header id="page-header">
+        <h1>2.5. Efficient interactive computing workflows with IPython</h1>
+    </header>
+
+    <section id="page">
+        <p><a href="/"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="130" style="margin-right: 20px; margin-bottom: 10px;" /></a> <em>This is one of the 100+ free recipes of the <a href="/">IPython Cookbook, Second Edition</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, a guide to numerical computing and data science in the Jupyter Notebook. The ebook and printed book are available for purchase at <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">Packt Publishing</a>.</em></p>
+<p>▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd">Text on GitHub</a> with a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a></em><br />
+▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
+<p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-2-best-practices-in-interactive-computing/"><strong><em>Go to</em></strong> <em>Chapter 2 : Best practices in Interactive Computing</em></a><br />
+▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter02_best_practices/05_workflows.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
+<p>There are multiple ways of using IPython for interactive computing. Some of them are better in terms of flexibility, modularity, reusability, and reproducibility. We will review and discuss them in this recipe.</p>
+<p>Any interactive computing workflow is based on the following cycle:</p>
+<ul>
+<li>Write some code</li>
+<li>Execute it</li>
+<li>Interpret the results</li>
+<li>Repeat</li>
+</ul>
+<p>This fundamental loop (also known as <strong>Read-Eval-Print Loop</strong> or <strong>REPL</strong>) is particularly useful when doing exploratory research on data or model simulations, or when building a complex algorithm step by step. A more classical workflow (the edit-compile-run-debug loop) would consist of writing a full-blown program, and then performing a complete analysis. This is generally more tedious. It is more common to build an algorithmic solution iteratively, by doing small-scale experiments and tweaking the parameters, and this is precisely what interactive computing is about.</p>
+<p><strong>Integrated Development Environments (IDEs)</strong>, providing comprehensive facilities for software development (such as a source code editor, compiler, and debugger), are widely used for classical workflows. However, when it comes to interactive computing, alternatives to IDEs exist. We will review them here.</p>
+<h2>How to do it...</h2>
+<p>Here are a few possible workflows for interactive computing, by increasing order of complexity. Of course, IPython is at the core of all of these methods.</p>
+<h3>The IPython terminal</h3>
+<p>IPython is the de facto standard for interactive computing in Python. The IPython terminal (the <code>ipython</code> command) offers a command-line interface specifically designed for REPLs. It is a much more powerful tool than the native Python interpreter (the <code>python</code> command). The IPython terminal is a convenient tool for quick experiments, simple shell interactions, and to find help. Forgot the input arguments of NumPy's <code>savetxt</code> function? Just type in <code>numpy.savetxt?</code> in IPython (you will first need to use import numpy, of course). Some people even use the IPython terminal as a (sophisticated) calculator!</p>
+<p>Yet, the terminal quickly becomes limited when it is used alone. The main issue is that the terminal is not a code editor, and thus entering more than a few lines of code can be inconvenient. Fortunately, there are various ways of solving this problem, as detailed in the following sections.</p>
+<h3>IPython and text editor</h3>
+<p>The simplest solution to the not-a-text-editor problem is to use IPython along with a text editor. The <code>%run</code> magic command then becomes the central tool in this workflow:</p>
+<ul>
+<li>Write some code in your favorite text editor and save it in a <code>myscript.py</code> Python script file.</li>
+<li>In IPython, assuming you are in the right directory, type in <code>%run myscript.py</code>.</li>
+<li>The script is executed. The standard output is displayed in real time in the IPython terminal along with possible errors. Top-level variables defined in the script are accessible in the IPython terminal at the end of the script's execution.</li>
+<li>If code changes are required in the script, repeat the process.</li>
+</ul>
+<p>With a good text editor, this workflow can be quite efficient. As the script is reloaded when you execute <code>%run</code>, your changes will be taken into account automatically. Things become more complicated when your script imports other Python modules that you modify, as these won't be reloaded with <code>%run</code>. To overcome this problem, you can use the <code>autoreload</code> IPython extension as described at <a href="http://ipython.readthedocs.io/en/stable/config/extensions/autoreload.html.">http://ipython.readthedocs.io/en/stable/config/extensions/autoreload.html.</a></p>
+<h3>The Jupyter Notebook</h3>
+<p>The Jupyter Notebook plays a central role in efficient interactive workflows. It is a well-designed mix between a code editor and a terminal, bringing the best of both worlds within a unified environment.</p>
+<p>You can start writing all your code in your notebook's cells. You write, execute, and test your code at the same place, thereby improving your productivity. You can put long comments in Markdown cells and structure your notebook with Markdown headers.</p>
+<p>Once portions of your code become mature enough and do not require further changes, you refactor them into reusable Python components (functions, classes, and modules). In practice, you copy and paste the code into Python scripts (files with the <code>.py</code> extension). Jupyter notebooks are currently not easily reusable by third-party code. They are designed for preliminary analyses and exploratory research, not for production-ready code.</p>
+<p>A major advantage of notebooks is that they give you documents retracing everything you did with your code, which is particularly useful for reproducible research. Since notebooks are saved in human-readable JSON documents, they don't work that well with version control systems such as Git.</p>
+<p>The <strong>ipymd</strong> module, available at <a href="https://github.com/rossant/ipymd/">https://github.com/rossant/ipymd/</a>, and the more recent <strong>podoc</strong> module, available at <a href="https://github.com/podoc/podoc">https://github.com/podoc/podoc</a>, allow you to use Markdown instead of JSON for notebooks. In podoc, images are saved in external files instead of being embedded in the JSON notebook, which is more convenient when working with a version control system.</p>
+<p><strong>JupyterLab</strong>, the next generation of the Jupyter Notebook, bridges the gap between the Jupyter Notebook and IDEs. It is covered in the last recipe of Chapter 3.</p>
+<h3>Integrated Development Environments</h3>
+<p>IDEs are particularly well-adapted for classic software development, but they can also be used for interactive computing. A good Python IDE combines a powerful text editor (for example, one that includes features such as syntax highlighting and tab completion), an IPython terminal, and a debugger within a unified environment.</p>
+<p>There are multiple open-source and commercial IDEs. <strong>Rodeo</strong> is an IDE for data analysis made by ŷhat. <strong>Spyder</strong> is another open source IDE with good integration of IPython and matplotlib. <strong>Eclipse/PyDev</strong> is a popular (although slightly heavy) open source cross-platform environment.</p>
+<p><strong>PyCharm</strong> is one of many commercial environments that support IPython.</p>
+<p>Microsoft's IDE for Windows, Visual Studio, has an open source plugin named <strong>Python Tools for Visual Studio (PTVS)</strong>. This tool brings Python support to Visual Studio. PTVS natively supports IPython. You don't necessarily need a paid version of Visual Studio; you can download a free package bundling PTVS with Visual Studio.</p>
+<h2>There's more...</h2>
+<p>Here are a few links to various IDEs for Python:</p>
+<ul>
+<li>Rodeo at <a href="https://www.yhat.com/products/rodeo">https://www.yhat.com/products/rodeo</a></li>
+<li>Spyder at <a href="https://github.com/spyder-ide/spyder">https://github.com/spyder-ide/spyder</a></li>
+<li>PyDev at <a href="http://pydev.org">http://pydev.org</a></li>
+<li>PyCharm at <a href="http://www.jetbrains.com/pycharm/">http://www.jetbrains.com/pycharm/</a></li>
+<li>PyTools for Microsoft Visual Studio at <a href="https://microsoft.github.io/PTVS/">https://microsoft.github.io/PTVS/</a></li>
+</ul>
+<h2>See also</h2>
+<ul>
+<li>Learning the basics of the distributed version control system Git</li>
+<li>Debugging your code with IPython</li>
+</ul>
+    </section>
+
+            </div>
+        </section>
+
+        <footer id="footer" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+                <div>
+                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+        
+    </div>
+    
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=9752080; 
+var sc_invisible=1; 
+var sc_security="837928c1"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="hit counter"
+href="http://statcounter.com/free-hit-counter/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/9752080/0/837928c1/1/"
+alt="hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+</body>
+</html>
+

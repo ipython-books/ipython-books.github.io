@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IPython Cookbook, ">
+
+
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+
+
+        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+
+        <title>IPython Cookbook - 2.4. A typical workflow with Git branching</title>
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</head>
+
+<body>
+
+
+    <header id="header" class="pure-g">
+        <div class="pure-u-1 pure-u-md-3-4">
+             <div id="menu">
+                 <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="/">home</a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
+        <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
+        <li><a href="http://cyrille.rossant.net">author</a></li>
+</ul>                </div>
+            </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-4">
+            <div id="social">
+                <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="https://twitter.com/cyrillerossant"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd"><i class="fa fa-github"></i></a></li>
+</ul>                </div>
+            </div>
+        </div>
+    </header>
+       
+
+    
+    <div id="layout" class="pure-g">
+        <section id="content" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+
+    <header id="page-header">
+        <h1>2.4. A typical workflow with Git branching</h1>
+    </header>
+
+    <section id="page">
+        <p><a href="/"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="130" style="margin-right: 20px; margin-bottom: 10px;" /></a> <em>This is one of the 100+ free recipes of the <a href="/">IPython Cookbook, Second Edition</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, a guide to numerical computing and data science in the Jupyter Notebook. The ebook and printed book are available for purchase at <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">Packt Publishing</a>.</em></p>
+<p>▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd">Text on GitHub</a> with a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a></em><br />
+▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
+<p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-2-best-practices-in-interactive-computing/"><strong><em>Go to</em></strong> <em>Chapter 2 : Best practices in Interactive Computing</em></a><br />
+▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter02_best_practices/04_git_advanced.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
+<p>A distributed version control system such as Git is designed for the complex and nonlinear workflows that are typical in interactive computing and exploratory research. A central concept is <strong>branching</strong>, which we will discuss in this recipe.</p>
+<h2>Getting ready</h2>
+<p>You need to work in a local Git repository for this recipe (see the previous recipe, <em>Learning the basics of the distributed version control system Git</em>).</p>
+<h2>How to do it...</h2>
+<p><strong>1.&nbsp;</strong> We go to the <code>myproject</code> repository and we create a new branch named <code>newidea</code>:</p>
+<div class="highlight highlight-bash"><div class="highlight"><pre><span></span><span class="nb">pwd</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>/home/cyrille/git/cookbook-2nd/chapter02
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> myproject
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-bash"><div class="highlight"><pre><span></span>git branch newidea
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-bash"><div class="highlight"><pre><span></span>git branch
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>* master
+  newidea
+</pre></div>
+</div>
+
+
+<p>As indicated by the star <code>*</code>, we are still on the master branch.</p>
+<p><strong>2.&nbsp;</strong> We switch to the newly-created <code>newidea</code> branch:</p>
+<div class="highlight highlight-bash"><div class="highlight"><pre><span></span>git checkout newidea
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>Switched to branch &#39;newidea&#39;
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-bash"><div class="highlight"><pre><span></span>git branch
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>  master
+* newidea
+</pre></div>
+</div>
+
+
+<p><strong>3.&nbsp;</strong> We make changes to the code, for instance, by creating a new file:</p>
+<div class="highlight highlight-bash"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s2">&quot;print(&#39;new&#39;)&quot;</span> &gt; newfile.py
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-bash"><div class="highlight"><pre><span></span>cat newfile.py
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>print(&#39;new&#39;)
+</pre></div>
+</div>
+
+
+<p><strong>4.&nbsp;</strong> We add this file to the staging area and we commit our changes:</p>
+<div class="highlight highlight-bash"><div class="highlight"><pre><span></span>git add newfile.py
+git commit -m <span class="s2">&quot;Testing new idea&quot;</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>[newidea 8ebee32] Testing new idea
+ 1 file changed, 1 insertion(+)
+ create mode 100644 newfile.py
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-bash"><div class="highlight"><pre><span></span>ls
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>file.txt  newfile.py
+</pre></div>
+</div>
+
+
+<p><strong>5.&nbsp;</strong> If we are happy with the changes, we merge the branch to the master branch (the default):</p>
+<div class="highlight highlight-bash"><div class="highlight"><pre><span></span>git checkout master
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>Switched to branch &#39;master&#39;
+</pre></div>
+</div>
+
+
+<p>On the master branch, our new file is not there:</p>
+<div class="highlight highlight-bash"><div class="highlight"><pre><span></span>ls
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>file.txt
+</pre></div>
+</div>
+
+
+<p>If we merge the new branch into the master branch, the file appears:</p>
+<div class="highlight highlight-bash"><div class="highlight"><pre><span></span>git merge newidea
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>Updating 045df6a..8ebee32
+Fast-forward
+ newfile.py | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 newfile.py
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-bash"><div class="highlight"><pre><span></span>ls
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>file.txt  newfile.py
+</pre></div>
+</div>
+
+
+<p><strong>6.&nbsp;</strong> If we are not happy with the changes, we can just delete the branch, and the new file will be deleted. Here, since we have just merged the branch, we need to undo the last commit:</p>
+<div class="highlight highlight-bash"><div class="highlight"><pre><span></span>git reset --hard HEAD~1
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>HEAD is now at 045df6 Add exclamation mark to file.txt
+</pre></div>
+</div>
+
+
+<p>We are still on the master branch, but before we merged the <code>newidea</code> branch:</p>
+<div class="highlight highlight-bash"><div class="highlight"><pre><span></span>git branch
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>* master
+  new idea
+</pre></div>
+</div>
+
+
+<p>We can delete the branch as follows:</p>
+<div class="highlight highlight-bash"><div class="highlight"><pre><span></span>git branch -D newidea
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>Deleted branch newidea (was 8ebee32).
+</pre></div>
+</div>
+
+
+<p>The Python file is gone:</p>
+<div class="highlight highlight-bash"><div class="highlight"><pre><span></span>ls
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>file.txt
+</pre></div>
+</div>
+
+
+<p><strong>7.&nbsp;</strong> It may happen that while we are halfway through some work, we need to make some other change in another commit or another branch. We could commit our half-done work, but this is not ideal. A better idea is to stash our working copy in a secure location so that we can recover all of our uncommitted changes later. We save our uncommitted changes with the following command:</p>
+<div class="highlight highlight-bash"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s2">&quot;new line&quot;</span> &gt;&gt; file.txt
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-bash"><div class="highlight"><pre><span></span>cat file.txt
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>Hello world!
+new line
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-bash"><div class="highlight"><pre><span></span>git stash
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>Saved working directory and index state WIP on master:
+045df6a Add exclamation mark to file.txt
+HEAD is now at 045df6 Add exclamation mark to file.txt
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-bash"><div class="highlight"><pre><span></span>cat file.txt
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>Hello world!
+</pre></div>
+</div>
+
+
+<p>We can do anything we want with the repository: checkout a branch, commit changes, pull or push from a remote repository, and so on. When we want to recover our uncommitted changes, we type the following command:</p>
+<div class="highlight highlight-bash"><div class="highlight"><pre><span></span>git stash pop
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>On branch master
+Changes not staged for commit:
+
+    modified:   file.txt
+
+no changes added to commit
+    (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+Dropped refs/stash@{0} (c9071a)
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-bash"><div class="highlight"><pre><span></span>cat file.txt
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>Hello world!
+new line
+</pre></div>
+</div>
+
+
+<p>We can have several stashed states in the repository. More information about stashing can be found with <code>git stash --help</code>.</p>
+<h2>How it works...</h2>
+<p>Let's imagine that in order to test a new idea, you need to make non-trivial changes to your code in multiple files. You create a new branch, test your idea, and end up with a modified version of your code. If this idea was a dead end, you switch back to the original branch of your code. However, if you are happy with the changes, you <strong>merge</strong> it into the main branch.</p>
+<p>The strength of this workflow is that the main branch can evolve independently from the branch with the new idea. This is particularly useful when multiple collaborators are working on the same repository. However, it is also a good habit to have, even when there is a single contributor.</p>
+<p>Merging is not always a trivial operation, as it can involve two divergent branches with potential conflicts. Git tries to resolve conflicts automatically, but it is not always successful. In this case, you need to resolve the conflicts manually.</p>
+<p>An alternative to merging is <strong>rebasing</strong>, which is useful when the main branch has changed while you were working on your branch. Rebasing your branch on the main branch allows you to move your branching point to a more recent point. This process may require you to resolve conflicts.</p>
+<p>Git branches are lightweight objects. Creating and manipulating them is cheap. They are meant to be used frequently. It is important to perfectly grasp all related notions and Git commands (notably <code>checkout</code>, <code>merge</code>, and <code>rebase</code>). The previous recipe contains many references.</p>
+<h2>There's more...</h2>
+<p>Many people have thought about effective workflows. For example, a common but complex workflow, called git-flow, is described at <a href="http://nvie.com/posts/a-successful-git-branching-model/.">http://nvie.com/posts/a-successful-git-branching-model/.</a> However, it may be preferable to use a simpler workflow in small and mid-size projects, such as the one described at <a href="http://scottchacon.com/2011/08/31/github-flow.html.">http://scottchacon.com/2011/08/31/github-flow.html.</a> The latter workflow elaborates on the simplistic example shown in this recipe.</p>
+<p>A related notion to branching is <strong>forking</strong>. There can be multiple copies of the same repository on different servers. Imagine that you want to contribute to IPython's code stored on GitHub. You probably don't have the permission to modify their repository, but you can make a copy into your personal account—this is called forking. In this copy, you can create a branch and propose a new feature or a bug fix. Then, you can propose the IPython developers to merge your branch into their master branch with a <strong>pull request</strong>. They can review your changes, propose suggestions, and eventually merge your work (or not). GitHub is built around this idea and thereby offers a clean way to collaborate on open source projects.</p>
+<p>Performing code reviews before merging pull requests leads to higher code quality in a collaborative project. When at least two people review any piece of code, the probability of merging bad or wrong code is reduced.</p>
+<p>There is, of course, much more to say about Git. Version control systems are complex and quite powerful in general, and Git is no exception. Mastering Git requires time and experimentation. The previous recipe contains many excellent references.</p>
+<p>Here are a few further references about branches and workflows:</p>
+<ul>
+<li>Git workflows available at <a href="http://www.atlassian.com/git/workflows">http://www.atlassian.com/git/workflows</a></li>
+<li>Learn Git branching at <a href="http://pcottle.github.io/learnGitBranching/">http://pcottle.github.io/learnGitBranching/</a></li>
+<li>The Git workflow recommended on the NumPy project (and others), described at <a href="http://docs.scipy.org/doc/numpy/dev/gitwash/development_workflow.html">http://docs.scipy.org/doc/numpy/dev/gitwash/development_workflow.html</a></li>
+<li>A post on the IPython mailing list about an efficient Git workflow, by Fernando Perez, available at <a href="http://mail.scipy.org/pipermail/ipython-dev/2010-October/006746.html">http://mail.scipy.org/pipermail/ipython-dev/2010-October/006746.html</a></li>
+</ul>
+<h2>See also</h2>
+<ul>
+<li>Learning the baics of the distributed version control system Git</li>
+</ul>
+    </section>
+
+            </div>
+        </section>
+
+        <footer id="footer" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+                <div>
+                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+        
+    </div>
+    
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=9752080; 
+var sc_invisible=1; 
+var sc_security="837928c1"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="hit counter"
+href="http://statcounter.com/free-hit-counter/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/9752080/0/837928c1/1/"
+alt="hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+</body>
+</html>
+

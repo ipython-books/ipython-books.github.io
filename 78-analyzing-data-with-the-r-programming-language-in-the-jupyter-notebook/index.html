@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IPython Cookbook, ">
+
+
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+
+
+        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+
+        <title>IPython Cookbook - 7.8. Analyzing data with the R programming language in the Jupyter Notebook</title>
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</head>
+
+<body>
+
+
+    <header id="header" class="pure-g">
+        <div class="pure-u-1 pure-u-md-3-4">
+             <div id="menu">
+                 <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="/">home</a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
+        <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
+        <li><a href="http://cyrille.rossant.net">author</a></li>
+</ul>                </div>
+            </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-4">
+            <div id="social">
+                <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="https://twitter.com/cyrillerossant"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd"><i class="fa fa-github"></i></a></li>
+</ul>                </div>
+            </div>
+        </div>
+    </header>
+       
+
+    
+    <div id="layout" class="pure-g">
+        <section id="content" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+
+    <header id="page-header">
+        <h1>7.8. Analyzing data with the R programming language in the Jupyter Notebook</h1>
+    </header>
+
+    <section id="page">
+        <p><a href="/"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="130" style="margin-right: 20px; margin-bottom: 10px;" /></a> <em>This is one of the 100+ free recipes of the <a href="/">IPython Cookbook, Second Edition</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, a guide to numerical computing and data science in the Jupyter Notebook. The ebook and printed book are available for purchase at <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">Packt Publishing</a>.</em></p>
+<p>▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd">Text on GitHub</a> with a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a></em><br />
+▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
+<p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-7-statistical-data-analysis/"><strong><em>Go to</em></strong> <em>Chapter 7 : Statistical Data Analysis</em></a><br />
+▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter07_stats/08_r.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
+<p><strong>R</strong> (http://www.r-project.org) is an open-source domain-specific programming language for statistics. Its syntax is well-adapted to statistical modeling and data analysis. By contrast, Python's syntax is typically more convenient for general-purpose programming. Luckily, Jupyter allows us to have the best of both worlds. For example, we can insert R code snippets anywhere in a normal Jupyter notebook. We can continue using Python and pandas for data loading and wrangling, and switch to R to design and fit statistical models. Using R instead of Python for these tasks is more than a matter of programming syntax; R comes with an impressive statistical toolbox.</p>
+<p>In this recipe, we will show how to interface R with Python in the Jupyter Notebook , and we will illustrate the most basic capabilities of R with a simple data analysis example.</p>
+<blockquote>
+<p>There is another way of using R in the Jupyter Notebook, which is to install <strong>IR</strong>, the R kernel for Jupyter. Using this method, all of the code of an IR notebook is written in R, not in Python. You will find more information at <a href="https://irkernel.github.io/installation/.">https://irkernel.github.io/installation/.</a></p>
+</blockquote>
+<h2>Getting ready</h2>
+<p>You need the statsmodels package for this recipe. It should be installed by default with Anaconda, but you can always install it with <code>conda install statsmodels</code>.</p>
+<p>You also need R and rpy2 (https://rpy2.readthedocs.io/). There are three steps to use R with Python:</p>
+<p><strong>1.&nbsp;</strong> Download R from <a href="https://cran.r-project.org/">https://cran.r-project.org/</a> and install it.
+<strong>2.&nbsp;</strong> Install rpy2 with <code>conda install rpy2</code>.
+<strong>3.&nbsp;</strong> Run the <code>%load_ext rpy2.ipython</code> command in a Jupyter notebook.</p>
+<blockquote>
+<p>rpy2 does not appear to work well on Windows. We recommend using Linux or macOS.</p>
+</blockquote>
+<h2>How to do it...</h2>
+<p>Here, we will use the following workflow: first, we load data from Python. Then, we use R to design and fit a model, and to make some plots in the Jupyter Notebook. We could also use R only for the entire recipe, or Python only. The goal of this recipe is precisely to show how to use both languages in the same Jupyter notebook.</p>
+<p><strong>1.&nbsp;</strong> Let's load the <em>longley</em> dataset with the statsmodels package. This dataset contains a few economic indicators in the US from 1947 to 1962. We also load the IPython R extension:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.datasets</span> <span class="kn">as</span> <span class="nn">sd</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">sd</span><span class="o">.</span><span class="n">longley</span><span class="o">.</span><span class="n">load_pandas</span><span class="p">()</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">load_ext</span> <span class="n">rpy2</span><span class="o">.</span><span class="n">ipython</span>
+</pre></div>
+</div>
+
+
+<p><strong>2.&nbsp;</strong> We define <code>x</code> and <code>y</code> as the <strong>exogeneous</strong> (independent) and <strong>endogenous</strong> (dependent) variables, respectively. The endogenous variable quantifies the total employment in the country.</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">endog_name</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">exog_name</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>(&#39;TOTEMP&#39;, [&#39;GNPDEFL&#39;, &#39;GNP&#39;, &#39;UNEMP&#39;,
+            &#39;ARMED&#39;, &#39;POP&#39;, &#39;YEAR&#39;])
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">endog</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">exog</span>
+</pre></div>
+</div>
+
+
+<p><strong>3.&nbsp;</strong> For convenience, we add the endogenous variable to the <code>x</code> DataFrame:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;TOTEMP&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">x</span>
+</pre></div>
+</div>
+
+
+<p><img alt="Output" src="http://ipython-books.github.io/pages/chapter07_stats/08_r_files/08_r_20_0.png" /></p>
+<p><strong>4.&nbsp;</strong> We will make a simple plot in R. First, we need to pass Python variables to R. We use the <code>%R -i var1,var2</code> magic. Then, we call R's <code>plot()</code> command:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">gnp</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;GNP&#39;</span><span class="p">]</span>
+<span class="n">totemp</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;TOTEMP&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">R</span> <span class="o">-</span><span class="n">i</span> <span class="n">totemp</span><span class="p">,</span><span class="n">gnp</span> <span class="n">plot</span><span class="p">(</span><span class="n">gnp</span><span class="p">,</span> <span class="n">totemp</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><img alt="Output" src="http://ipython-books.github.io/pages/chapter07_stats/08_r_files/08_r_23_0.png" /></p>
+<p><strong>5.&nbsp;</strong> Now that the data has been passed to R, we can fit a linear model to the data. In R, the <code>lm()</code> function lets us perform a linear regression. Here, we want to express <code>totemp</code> (total employment) as a function of the country's GNP. We use the <code>%%R</code> cell magic to write several lines of R code in a cell:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">R</span>
+<span class="c1"># Least-squares regression</span>
+<span class="n">fit</span> <span class="o">&lt;-</span> <span class="n">lm</span><span class="p">(</span><span class="n">totemp</span> <span class="o">~</span> <span class="n">gnp</span><span class="p">)</span>
+<span class="c1"># Display the coefficients of the fit.</span>
+<span class="k">print</span><span class="p">(</span><span class="n">fit</span><span class="err">$</span><span class="n">coefficients</span><span class="p">)</span>
+<span class="c1"># Plot the data points.</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">gnp</span><span class="p">,</span> <span class="n">totemp</span><span class="p">)</span>
+<span class="c1"># And plot the linear regression.</span>
+<span class="n">abline</span><span class="p">(</span><span class="n">fit</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><img alt="Output" src="http://ipython-books.github.io/pages/chapter07_stats/08_r_files/08_r_25_1.png" /></p>
+<h2>How it works...</h2>
+<p>The <code>-i</code> and <code>-o</code> options of the <code>%R</code> magic allow us to pass variables back and forth between IPython and R. The variable names need to be separated by commas. You can find more information about the <code>%R</code> magic in the documentation available at <a href="https://rpy2.readthedocs.io/.">https://rpy2.readthedocs.io/.</a></p>
+<p>In R, the tilde (~) expresses the dependence of a dependent variable upon one or several independent variables. The <code>lm()</code> function allows us to fit a simple linear regression model to the data. Here, <code>totemp</code> is expressed as a function of gnp:</p>
+<div class="math">$$\mathrm{totemp} = a \times \mathrm{gnp} + b$$</div>
+<p>Here, <code>b</code> (intercept) and <code>a</code> are the coefficients of the linear regression model. These two values are returned by <code>fit$coefficients</code> in R, where <code>fit</code> is the fitted model.</p>
+<p>Our data points do not satisfy this relation exactly, but the coefficients are chosen so as to minimize the error between this linear prediction and the actual values. This is typically done by minimizing the following least squares error:</p>
+<div class="math">$$r(a,b) = \sum_{i=1}^n (\mathrm{totemp}_i - (a \times \mathrm{gnp}_i + b))^2$$</div>
+<p>The data points are <span class="math">\((gnp_i, totemp_i)\)</span> here. The coefficients <span class="math">\(a\)</span> and <span class="math">\(b\)</span> that are returned by <code>lm()</code> make this sum minimal: they fit the data best.</p>
+<h2>There's more...</h2>
+<p>Regression is an important statistical concept that we will see in greater detail in the next chapter. Here are a few references:</p>
+<ul>
+<li>Regression analysis on Wikipedia, available at <a href="https://en.wikipedia.org/wiki/Regression_analysis">https://en.wikipedia.org/wiki/Regression_analysis</a></li>
+<li>Least squares method on Wikipedia, available at <a href="https://en.wikipedia.org/wiki/Linear_least_squares_%28mathematics%29">https://en.wikipedia.org/wiki/Linear_least_squares_%28mathematics%29</a></li>
+</ul>
+<p>Here are a few references about R:</p>
+<ul>
+<li>Introduction to R available at <a href="http://cran.r-project.org/doc/manuals/R-intro.html">http://cran.r-project.org/doc/manuals/R-intro.html</a></li>
+<li>R tutorial available at <a href="http://www.cyclismo.org/tutorial/R/">http://www.cyclismo.org/tutorial/R/</a></li>
+<li>CRAN, or Comprehensive R Archive Network, containing many packages for R, available at <a href="http://cran.r-project.org">http://cran.r-project.org</a></li>
+</ul>
+<h2>See also</h2>
+<ul>
+<li>Exploring a dataset with Pandas and matplotlib</li>
+</ul>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+    </section>
+
+            </div>
+        </section>
+
+        <footer id="footer" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+                <div>
+                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+        
+    </div>
+    
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=9752080; 
+var sc_invisible=1; 
+var sc_security="837928c1"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="hit counter"
+href="http://statcounter.com/free-hit-counter/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/9752080/0/837928c1/1/"
+alt="hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+</body>
+</html>
+

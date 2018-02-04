@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IPython Cookbook, ">
+
+
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+
+
+        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+
+        <title>IPython Cookbook - 1.4. Creating an IPython extension with custom magic commands</title>
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</head>
+
+<body>
+
+
+    <header id="header" class="pure-g">
+        <div class="pure-u-1 pure-u-md-3-4">
+             <div id="menu">
+                 <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="/">home</a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
+        <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
+        <li><a href="http://cyrille.rossant.net">author</a></li>
+</ul>                </div>
+            </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-4">
+            <div id="social">
+                <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="https://twitter.com/cyrillerossant"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd"><i class="fa fa-github"></i></a></li>
+</ul>                </div>
+            </div>
+        </div>
+    </header>
+       
+
+    
+    <div id="layout" class="pure-g">
+        <section id="content" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+
+    <header id="page-header">
+        <h1>1.4. Creating an IPython extension with custom magic commands</h1>
+    </header>
+
+    <section id="page">
+        <p><a href="/"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="130" style="margin-right: 20px; margin-bottom: 10px;" /></a> <em>This is one of the 100+ free recipes of the <a href="/">IPython Cookbook, Second Edition</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, a guide to numerical computing and data science in the Jupyter Notebook. The ebook and printed book are available for purchase at <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">Packt Publishing</a>.</em></p>
+<p>▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd">Text on GitHub</a> with a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a></em><br />
+▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
+<p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-1-a-tour-of-interactive-computing-with-jupyter-and-ipython/"><strong><em>Go to</em></strong> <em>Chapter 1 : A Tour of Interactive Computing with Jupyter and IPython</em></a><br />
+▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter01_basic/04_magic.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
+<p>Although IPython comes with a wide variety of magic commands, there are cases where we need to implement custom functionality in new magic commands. In this recipe, we will show how to create line and magic cells, and how to integrate them in an IPython extension.</p>
+<h2>How to do it...</h2>
+<p><strong>1.&nbsp;</strong> Let's import a few functions from the IPython magic system:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.core.magic</span> <span class="kn">import</span> <span class="p">(</span><span class="n">register_line_magic</span><span class="p">,</span>
+                                <span class="n">register_cell_magic</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><strong>2.&nbsp;</strong> Defining a new line magic is particularly simple. First, we create a function that accepts the contents of the line (except the initial <code>%</code>-prefixed name). The name of this function is the name of the magic. Then, we decorate this function with <code>@register_line_magic</code>:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="nd">@register_line_magic</span>
+<span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">line</span> <span class="o">==</span> <span class="s1">&#39;french&#39;</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Salut tout le monde!&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Hello world!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">hello</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>Hello world!
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">hello</span> <span class="n">french</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>Salut tout le monde!
+</pre></div>
+</div>
+
+
+<p><strong>3.&nbsp;</strong> Let's create a slightly more useful <code>%%csv</code> cell magic that parses a CSV string and returns a pandas <code>DataFrame</code> object. This time, the arguments of the function are the command's options and the contents of the cell.</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span>
+
+<span class="nd">@register_cell_magic</span>
+<span class="k">def</span> <span class="nf">csv</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">cell</span><span class="p">):</span>
+    <span class="c1"># We create a string buffer containing the</span>
+    <span class="c1"># contents of the cell.</span>
+    <span class="n">sio</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
+    <span class="c1"># We use Pandas&#39; read_csv function to parse</span>
+    <span class="c1"># the CSV string.</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">sio</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">csv</span>
+<span class="n">col1</span><span class="p">,</span><span class="n">col2</span><span class="p">,</span><span class="n">col3</span>
+<span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span>
+<span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span>
+<span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span>
+</pre></div>
+</div>
+
+
+<p><img alt="Output" src="http://ipython-books.github.io/pages/chapter01_basic/04_magic_files/04_magic_11_0.png" /></p>
+<p>We can access the returned object with <code>_</code>.</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">_</span>
+<span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+
+
+<p><img alt="Output" src="http://ipython-books.github.io/pages/chapter01_basic/04_magic_files/04_magic_13_0.png" /></p>
+<p><strong>4.&nbsp;</strong> The method we described is useful in an interactive session. If we want to use the same magic in multiple notebooks or if we want to distribute it, then we need to create an <strong>IPython extension</strong> that implements our custom magic command. The first step is to create a Python script (<code>csvmagic.py</code> here) that implements the magic. We also need to define a special function <code>load_ipython_extension(ipython)</code>:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">writefile</span> <span class="n">csvmagic</span><span class="o">.</span><span class="n">py</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span>
+
+<span class="k">def</span> <span class="nf">csv</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">cell</span><span class="p">):</span>
+    <span class="n">sio</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">sio</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">load_ipython_extension</span><span class="p">(</span><span class="n">ipython</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This function is called when the extension is</span>
+<span class="sd">    loaded. It accepts an IPython InteractiveShell</span>
+<span class="sd">    instance. We can register the magic with the</span>
+<span class="sd">    `register_magic_function` method of the shell</span>
+<span class="sd">    instance.&quot;&quot;&quot;</span>
+    <span class="n">ipython</span><span class="o">.</span><span class="n">register_magic_function</span><span class="p">(</span><span class="n">csv</span><span class="p">,</span> <span class="s1">&#39;cell&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>Writing csvmagic.py
+</pre></div>
+</div>
+
+
+<p><strong>5.&nbsp;</strong> Once the extension module is created, we need to import it into the IPython session. We can do this with the <code>%load_ext</code> magic command. Here, loading our extension immediately registers our <code>%%csv</code> magic function in the interactive shell:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">load_ext</span> <span class="n">csvmagic</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">csv</span>
+<span class="n">col1</span><span class="p">,</span><span class="n">col2</span><span class="p">,</span><span class="n">col3</span>
+<span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span>
+<span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span>
+<span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span>
+</pre></div>
+</div>
+
+
+<p><img alt="Output" src="http://ipython-books.github.io/pages/chapter01_basic/04_magic_files/04_magic_18_0.png" /></p>
+<h2>How it works...</h2>
+<p>An IPython extension is a Python module that implements the top-level <code>load_ipython_extension(ipython)</code> function. When the <code>%load_ext</code> magic command is called, the module is loaded and the <code>load_ipython_extension(ipython)</code> function is called. This function is passed the current <code>InteractiveShell</code> instance as an argument. This object implements several methods we can use to interact with the current IPython session.</p>
+<h3>The InteractiveShell class</h3>
+<p>An interactive IPython session is represented by a (singleton) instance of the <code>InteractiveShell</code> class. This object handles the history, interactive namespace, and most features available in the session.</p>
+<p>Within an interactive shell, we can get the current <code>InteractiveShell</code> instance with the <code>get_ipython()</code> function.</p>
+<p>The list of all methods of <code>InteractiveShell</code> can be found in the reference API (see the reference at the end of this recipe). The following are the most important attributes and methods:</p>
+<ul>
+<li><code>user_ns</code>: The user namespace (a dictionary).</li>
+<li><code>push()</code>: Push (or inject) Python variables in the interactive namespace.</li>
+<li><code>ev()</code>: Evaluate a Python expression in the user namespace.</li>
+<li><code>ex()</code>: Execute a Python statement in the user namespace.</li>
+<li><code>run_cell()</code>: Run a cell (given as a string), possibly containing IPython magic commands.</li>
+<li><code>safe_execfile()</code>: Safely execute a Python script.</li>
+<li><code>system()</code>: Execute a system command.</li>
+<li><code>write()</code>: Write a string to the default output.</li>
+<li><code>write_err()</code>: Write a string to the default error output.</li>
+<li><code>register_magic_function()</code>: Register a standalone function as an IPython magic function. We used this method in this recipe.</li>
+</ul>
+<h3>Loading an extension</h3>
+<p>The Python extension module needs to be importable when using <code>%load_ext</code>. Here, our module is in the current directory. In other situations, it has to be in the Python path. It can also be stored in <code>~/.ipython/extensions</code>, which is automatically put in the Python path.</p>
+<p>To ensure that our magic is automatically defined in our IPython profile, we can instruct IPython to load our extension automatically when a new interactive shell is launched. To do this, we have to open the <code>~/.ipython/profile_default/ipython_config.py</code> file and put <code>'csvmagic'</code> in the <code>c.InteractiveShellApp.extensions</code> list. The <code>csvmagic</code> module needs to be importable. It is common to create a Python package that implements an IPython extension, which itself defines custom magic commands.</p>
+<h2>There's more...</h2>
+<p>Many third-party extensions and magic commands exist, for example the <code>%%cython</code> magic that allows one to write Cython code directly in a notebook.</p>
+<p>Here are a few references:</p>
+<ul>
+<li>Documentation of IPython's extension system available at <a href="http://ipython.readthedocs.io/en/stable/config/extensions/index.html">http://ipython.readthedocs.io/en/stable/config/extensions/index.html</a></li>
+<li>Defining new magic commands explained at <a href="http://ipython.readthedocs.io/en/stable/config/custommagics.html">http://ipython.readthedocs.io/en/stable/config/custommagics.html</a></li>
+<li>Index of IPython extensions at <a href="https://github.com/ipython/ipython/wiki/Extensions-Index">https://github.com/ipython/ipython/wiki/Extensions-Index</a></li>
+<li>API reference of InteractiveShell available at <a href="http://ipython.readthedocs.io/en/stable/api/generated/IPython.core.interactiveshell.html">http://ipython.readthedocs.io/en/stable/api/generated/IPython.core.interactiveshell.html</a></li>
+</ul>
+<h2>See also</h2>
+<ul>
+<li>Mastering IPython's configuration system</li>
+</ul>
+    </section>
+
+            </div>
+        </section>
+
+        <footer id="footer" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+                <div>
+                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+        
+    </div>
+    
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=9752080; 
+var sc_invisible=1; 
+var sc_security="837928c1"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="hit counter"
+href="http://statcounter.com/free-hit-counter/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/9752080/0/837928c1/1/"
+alt="hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+</body>
+</html>
+

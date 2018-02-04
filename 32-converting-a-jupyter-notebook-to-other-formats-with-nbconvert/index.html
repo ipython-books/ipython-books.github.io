@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IPython Cookbook, ">
+
+
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+
+
+        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+
+        <title>IPython Cookbook - 3.2. Converting a Jupyter notebook to other formats with nbconvert</title>
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</head>
+
+<body>
+
+
+    <header id="header" class="pure-g">
+        <div class="pure-u-1 pure-u-md-3-4">
+             <div id="menu">
+                 <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="/">home</a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
+        <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
+        <li><a href="http://cyrille.rossant.net">author</a></li>
+</ul>                </div>
+            </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-4">
+            <div id="social">
+                <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="https://twitter.com/cyrillerossant"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd"><i class="fa fa-github"></i></a></li>
+</ul>                </div>
+            </div>
+        </div>
+    </header>
+       
+
+    
+    <div id="layout" class="pure-g">
+        <section id="content" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+
+    <header id="page-header">
+        <h1>3.2. Converting a Jupyter notebook to other formats with nbconvert</h1>
+    </header>
+
+    <section id="page">
+        <p><a href="/"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="130" style="margin-right: 20px; margin-bottom: 10px;" /></a> <em>This is one of the 100+ free recipes of the <a href="/">IPython Cookbook, Second Edition</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, a guide to numerical computing and data science in the Jupyter Notebook. The ebook and printed book are available for purchase at <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">Packt Publishing</a>.</em></p>
+<p>▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd">Text on GitHub</a> with a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a></em><br />
+▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
+<p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-3-mastering-the-jupyter-notebook/"><strong><em>Go to</em></strong> <em>Chapter 3 : Mastering the Jupyter Notebook</em></a><br />
+▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter03_notebook/02_nbformat.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
+<p>A Jupyter notebook is saved in a JSON text file. This file contains the entire contents of the notebook: text, code, and outputs. The matplotlib figures are encoded as base64 strings within the notebooks, resulting in standalone, but sometimes big, notebook files.</p>
+<blockquote>
+<p>JSON is a human-readable, text-based, open standard format that can represent structured data. Although derived from JavaScript, it is language independent. Its syntax bears some resemblance with Python dictionaries. JSON can be parsed in many languages including JavaScript and Python (using the <code>json</code> module in Python's standard library).</p>
+</blockquote>
+<p><strong>nbconvert</strong> (https://nbconvert.readthedocs.io/en/stable/) is a tool that can convert notebooks to other formats: raw text, Markdown, HTML, LaTeX/PDF, and even slides with the reveal.js library. You will find more information about the different supported formats on the nbconvert documentation.</p>
+<p>One typically uses the <strong>nbformat</strong> (https://nbformat.readthedocs.io/en/latest/) library to manipulate a notebook. However, in this recipe, we will see how to manipulate the contents of a notebook (which is just a plain text JSON file) directly with Python, and how to convert it to other formats with nbconvert.</p>
+<h2>Getting ready</h2>
+<p>You need to install pandoc, available at <a href="http://pandoc.org.">http://pandoc.org.</a> This tool is used to convert markup files to various formats. On Ubuntu, type <code>sudo apt-get install pandoc</code> in a terminal.</p>
+<p>To convert a notebook to PDF, you need a LaTeX distribution, which you can download and install at <a href="http://latex-project.org/ftp.html.">http://latex-project.org/ftp.html.</a></p>
+<h2>How to do it...</h2>
+<p><strong>1.&nbsp;</strong> Let's download and open the test notebook. A notebook is just a plain text file (JSON):</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">io</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;https://github.com/ipython-books/&#39;</span>
+       <span class="s1">&#39;cookbook-2nd-data/blob/master/&#39;</span>
+       <span class="s1">&#39;test.ipynb?raw=true&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">contents</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">contents</span><span class="p">))</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>3857
+</pre></div>
+</div>
+
+
+<p><strong>2.&nbsp;</strong> Here is an excerpt of the <code>test.ipynb</code> file:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">contents</span><span class="p">[:</span><span class="mi">345</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;...&#39;</span> <span class="o">+</span> <span class="n">contents</span><span class="p">[</span><span class="o">-</span><span class="mi">33</span><span class="p">:])</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>{
+ &quot;cells&quot;: [
+  {
+   &quot;cell_type&quot;: &quot;markdown&quot;,
+   &quot;metadata&quot;: {},
+   &quot;source&quot;: [
+    &quot;# First chapter&quot;
+   ]
+  },
+  {
+   &quot;cell_type&quot;: &quot;markdown&quot;,
+   &quot;metadata&quot;: {
+    &quot;my_field&quot;: [
+     &quot;value1&quot;,
+     &quot;2405&quot;
+    ]
+   },
+   &quot;source&quot;: [
+    &quot;Let&#39;s write some *rich* **text** with
+        [links](http://www.ipython.org) and lists:\n&quot;,
+    &quot;\n&quot;,
+    &quot;* item1...rmat&quot;: 4,
+ &quot;nbformat_minor&quot;: 4
+}
+</pre></div>
+</div>
+
+
+<p><strong>3.&nbsp;</strong> Now that we have loaded the notebook in a string, let's parse it with the <code>json</code> module as follows:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="n">nb</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><strong>4.&nbsp;</strong> Let's have a look at the keys in the notebook dictionary:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">nb</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;nbformat </span><span class="si">%d</span><span class="s1">.</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">nb</span><span class="p">[</span><span class="s1">&#39;nbformat&#39;</span><span class="p">],</span>
+                          <span class="n">nb</span><span class="p">[</span><span class="s1">&#39;nbformat_minor&#39;</span><span class="p">]))</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>dict_keys([&#39;cells&#39;, &#39;metadata&#39;,
+           &#39;nbformat&#39;, &#39;nbformat_minor&#39;])
+nbformat 4.4
+</pre></div>
+</div>
+
+
+<p><strong>5.&nbsp;</strong> Each cell has a type, optional metadata, some contents (text or code), possibly one or several outputs, and other information. Let's look at a Markdown cell and a code cell:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">nb</span><span class="p">[</span><span class="s1">&#39;cells&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>{&#39;cell_type&#39;: &#39;markdown&#39;,
+ &#39;metadata&#39;: {&#39;my_field&#39;: [&#39;value1&#39;, &#39;2405&#39;]},
+ &#39;source&#39;: [&quot;Let&#39;s write some *rich* **text** with
+        [links](http://www.ipython.org) and lists:\n&quot;,
+  &#39;\n&#39;,
+  &#39;* item1\n&#39;,
+  &#39;* item2\n&#39;,
+  &#39;    1. subitem\n&#39;,
+  &#39;    2. subitem\n&#39;,
+  &#39;* item3&#39;]}
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">nb</span><span class="p">[</span><span class="s1">&#39;cells&#39;</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>{&#39;cell_type&#39;: &#39;code&#39;,
+ &#39;execution_count&#39;: 1,
+ &#39;metadata&#39;: {},
+ &#39;outputs&#39;: [{&#39;data&#39;: {&#39;image/png&#39;: &#39;iVBOR...QmCC\n&#39;,
+    &#39;text/plain&#39;: [&#39;&lt;matplotlib Figure at ...&gt;&#39;]},
+   &#39;metadata&#39;: {},
+   &#39;output_type&#39;: &#39;display_data&#39;}],
+ &#39;source&#39;: [&#39;import numpy as np\n&#39;,
+  &#39;import matplotlib.pyplot as plt\n&#39;,
+  &#39;%matplotlib inline\n&#39;,
+  &#39;plt.figure(figsize=(2,2));\n&#39;,
+  &quot;plt.imshow(np.random.rand(10,10),
+              interpolation=&#39;none&#39;);\n&quot;,
+  &quot;plt.axis(&#39;off&#39;);\n&quot;,
+  &#39;plt.tight_layout();&#39;]}
+</pre></div>
+</div>
+
+
+<p><strong>6.&nbsp;</strong> Once parsed, the notebook is represented as a Python dictionary. Manipulating it is therefore quite convenient in Python. Here, we count the number of Markdown and code cells as follows:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">cells</span> <span class="o">=</span> <span class="n">nb</span><span class="p">[</span><span class="s1">&#39;cells&#39;</span><span class="p">]</span>
+<span class="n">nm</span> <span class="o">=</span> <span class="nb">len</span><span class="p">([</span><span class="n">cell</span> <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">cells</span>
+          <span class="k">if</span> <span class="n">cell</span><span class="p">[</span><span class="s1">&#39;cell_type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;markdown&#39;</span><span class="p">])</span>
+<span class="n">nc</span> <span class="o">=</span> <span class="nb">len</span><span class="p">([</span><span class="n">cell</span> <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">cells</span>
+          <span class="k">if</span> <span class="n">cell</span><span class="p">[</span><span class="s1">&#39;cell_type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;code&#39;</span><span class="p">])</span>
+<span class="k">print</span><span class="p">((</span><span class="n">f</span><span class="s2">&quot;There are {nm} Markdown cells and &quot;</span>
+       <span class="n">f</span><span class="s2">&quot;{nc} code cells.&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>There are 2 Markdown cells and 1 code cells.
+</pre></div>
+</div>
+
+
+<p><strong>7.&nbsp;</strong> Let's have a closer look at the image output of the cell with the matplotlib figure:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">cells</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="s1">&#39;outputs&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>{&#39;image/png&#39;: &#39;iVBOR...QmCC\n&#39;,
+ &#39;text/plain&#39;: [&#39;&lt;matplotlib.figure.Figure at ...&gt;&#39;]}
+</pre></div>
+</div>
+
+
+<p>In general, there can be zero, one, or multiple outputs. Additionally, each output can have multiple representations. Here, the matplotlib figure has a PNG representation (the base64-encoded image) and a text representation (the internal representation of the figure).
+<strong>8.&nbsp;</strong> Now, we convert our text notebook to HTML using nbconvert:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="c1"># We write the notebook to a file on disk.</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test.ipynb&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="err">!</span><span class="n">jupyter</span> <span class="n">nbconvert</span> <span class="o">--</span><span class="n">to</span> <span class="n">html</span> <span class="n">test</span><span class="o">.</span><span class="n">ipynb</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>[NbConvertApp] Converting notebook test.ipynb to html
+[NbConvertApp] Writing 253784 bytes to test.html
+</pre></div>
+</div>
+
+
+<p><strong>9.&nbsp;</strong> Let's display this document in an <code>&lt;iframe&gt;</code> (a small window showing an external HTML document within the notebook):</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">IFrame</span>
+<span class="n">IFrame</span><span class="p">(</span><span class="s1">&#39;test.html&#39;</span><span class="p">,</span> <span class="mi">600</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><img alt="HTML export" src="http://ipython-books.github.io/pages/chapter03_notebook/02_nbformat_files/02_nbformat_30_0.png" /></p>
+<p><strong>10.&nbsp;</strong> We can also convert the notebook to LaTeX and PDF. In order to specify the title and author of the document, we need to extend the default LaTeX template. First, we create a file called <code>temp.tplx</code> that extends the default <code>article.tplx</code> template provided by nbconvert. We specify the contents of the author and title blocks as follows:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">writefile</span> <span class="n">temp</span><span class="o">.</span><span class="n">tplx</span>
+<span class="p">((</span><span class="o">*-</span> <span class="n">extends</span> <span class="s1">&#39;article.tplx&#39;</span> <span class="o">-*</span><span class="p">))</span>
+
+<span class="p">((</span><span class="o">*</span> <span class="n">block</span> <span class="n">author</span> <span class="o">*</span><span class="p">))</span>
+\<span class="n">author</span><span class="p">{</span><span class="n">Cyrille</span> <span class="n">Rossant</span><span class="p">}</span>
+<span class="p">((</span><span class="o">*</span> <span class="n">endblock</span> <span class="n">author</span> <span class="o">*</span><span class="p">))</span>
+
+<span class="p">((</span><span class="o">*</span> <span class="n">block</span> <span class="n">title</span> <span class="o">*</span><span class="p">))</span>
+\<span class="n">title</span><span class="p">{</span><span class="n">My</span> <span class="n">document</span><span class="p">}</span>
+<span class="p">((</span><span class="o">*</span> <span class="n">endblock</span> <span class="n">title</span> <span class="o">*</span><span class="p">))</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>Writing temp.tplx
+</pre></div>
+</div>
+
+
+<p><strong>11.&nbsp;</strong> Then, we can run nbconvert by specifying our custom template as follows:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">bash</span>
+<span class="n">jupyter</span> <span class="n">nbconvert</span> <span class="o">--</span><span class="n">to</span> <span class="n">pdf</span> <span class="o">--</span><span class="n">template</span> <span class="n">temp</span> <span class="n">test</span><span class="o">.</span><span class="n">ipynb</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>[NbConvertApp] Converting notebook test.ipynb to pdf
+[NbConvertApp] Support files will be in test_files/
+[NbConvertApp] Making directory test_files
+[NbConvertApp] Writing 16695 bytes to notebook.tex
+[NbConvertApp] Building PDF
+[NbConvertApp] Running xelatex 3 times:
+    [&#39;xelatex&#39;, &#39;notebook.tex&#39;]
+[NbConvertApp] Running bibtex 1 time:
+    [&#39;bibtex&#39;, &#39;notebook&#39;]
+[NbConvertApp] PDF successfully created
+[NbConvertApp] Writing 16147 bytes to test.pdf
+</pre></div>
+</div>
+
+
+<p>We used nbconvert to convert the notebook to LaTeX, and pdflatex (coming with our LaTeX distribution) to compile the LaTeX document to PDF. The following screenshot shows the PDF version of the notebook:</p>
+<p><img alt="PDF output" src="http://ipython-books.github.io/pages/chapter03_notebook/02_nbformat_files/doc.png" /></p>
+<h2>How it works...</h2>
+<p>As we have seen in this recipe, an <code>.ipynb</code> file contains a structured representation of the notebook. This JSON file can be easily parsed and manipulated in Python and other languages. However, it is better practice to use the <strong>nbformat</strong> package to manipulate a notebook. The internal JSON format may change, whereas the nbformat API is not expected to change.</p>
+<p>nbconvert is a tool for converting a notebook to another format. The conversion can be customized in several ways. Here, we extended an existing template using jinja2, a templating package (see <a href="http://jinja.pocoo.org/docs/">http://jinja.pocoo.org/docs/</a>).</p>
+<h2>There's more...</h2>
+<p>There is a free online service, <strong>nbviewer</strong>, that lets us render Jupyter notebooks in HTML dynamically in the cloud. The idea is that we provide to nbviewer a URL to a raw notebook (in JSON), and we get a rendered HTML output. The main page of nbviewer (http://nbviewer.jupyter.org/) contains a few examples. This service is maintained by the Jupyter developers and is hosted on Rackspace (https://www.rackspace.com).</p>
+<p>GitHub automatically renders Jupyter notebooks stored in repositories.</p>
+<p><strong>binder</strong>, available at <a href="https://mybinder.org">https://mybinder.org</a>, allows one to turn a GitHub repository into a collection of interactive notebooks in the cloud. The service is free and the code is open source, so that anyone can provide their own binder service.</p>
+<p>Here are some more references:</p>
+<ul>
+<li>Documentation of nbconvert, at <a href="https://nbconvert.readthedocs.io/en/stable/">https://nbconvert.readthedocs.io/en/stable/</a></li>
+<li>RISE, create interactive slideshows out of Jupyter notebooks, at <a href="https://damianavila.github.io/RISE/">https://damianavila.github.io/RISE/</a></li>
+</ul>
+    </section>
+
+            </div>
+        </section>
+
+        <footer id="footer" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+                <div>
+                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+        
+    </div>
+    
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=9752080; 
+var sc_invisible=1; 
+var sc_security="837928c1"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="hit counter"
+href="http://statcounter.com/free-hit-counter/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/9752080/0/837928c1/1/"
+alt="hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+</body>
+</html>
+

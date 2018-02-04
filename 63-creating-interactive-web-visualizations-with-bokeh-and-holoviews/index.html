@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IPython Cookbook, ">
+
+
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+
+
+        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+
+        <title>IPython Cookbook - 6.3. Creating interactive Web visualizations with Bokeh and HoloViews</title>
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</head>
+
+<body>
+
+
+    <header id="header" class="pure-g">
+        <div class="pure-u-1 pure-u-md-3-4">
+             <div id="menu">
+                 <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="/">home</a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
+        <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
+        <li><a href="http://cyrille.rossant.net">author</a></li>
+</ul>                </div>
+            </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-4">
+            <div id="social">
+                <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="https://twitter.com/cyrillerossant"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd"><i class="fa fa-github"></i></a></li>
+</ul>                </div>
+            </div>
+        </div>
+    </header>
+       
+
+    
+    <div id="layout" class="pure-g">
+        <section id="content" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+
+    <header id="page-header">
+        <h1>6.3. Creating interactive Web visualizations with Bokeh and HoloViews</h1>
+    </header>
+
+    <section id="page">
+        <p><a href="/"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="130" style="margin-right: 20px; margin-bottom: 10px;" /></a> <em>This is one of the 100+ free recipes of the <a href="/">IPython Cookbook, Second Edition</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, a guide to numerical computing and data science in the Jupyter Notebook. The ebook and printed book are available for purchase at <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">Packt Publishing</a>.</em></p>
+<p>▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd">Text on GitHub</a> with a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a></em><br />
+▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
+<p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-6-data-visualization/"><strong><em>Go to</em></strong> <em>Chapter 6 : Data Visualization</em></a><br />
+▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter06_viz/03_bokeh.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
+<p><strong>Bokeh</strong> (http://bokeh.pydata.org/en/latest/) is a library for creating rich interactive visualizations in a browser. Plots are designed in Python, and they are rendered in the browser.</p>
+<p>In this recipe, we will give a few examples of interactive Bokeh figures in the Jupyter Notebook. We will also introduce <strong>HoloViews</strong> which provides a high-level API for bokeh and other plotting libraries.</p>
+<h2>Getting ready</h2>
+<p>Bokeh should be installed by default in Anaconda, but you can also install it manually by typing <code>conda install bokeh</code> in a terminal.</p>
+<p>To install HoloViews, type <code>conda install -c ioam holoviews</code>.</p>
+<h2>How to do it...</h2>
+<p><strong>1.&nbsp;</strong> Let's import NumPy and Bokeh. We need to call <code>output_notebook()</code> to tell Bokeh to render plots in the Jupyter Notebook.</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">bokeh</span>
+<span class="kn">import</span> <span class="nn">bokeh.plotting</span> <span class="kn">as</span> <span class="nn">bkh</span>
+<span class="n">bkh</span><span class="o">.</span><span class="n">output_notebook</span><span class="p">()</span>
+</pre></div>
+</div>
+
+
+<p><strong>2.&nbsp;</strong> Let's create a scatter plot of random data:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">bkh</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">),</span>
+         <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">),</span>
+         <span class="n">size</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1000</span><span class="p">),</span>
+         <span class="n">alpha</span><span class="o">=.</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">bkh</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><img alt="Output" src="http://ipython-books.github.io/pages/chapter06_viz/03_bokeh_files/03_bokeh_10_0.png" /></p>
+<p>An interactive plot is rendered in the notebook. We can pan and zoom by clicking on the toolbar buttons on the right.</p>
+<p><strong>3.&nbsp;</strong> Let's load a sample dataset, <code>sea_surface_temperature</code>:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">bokeh.sampledata</span> <span class="kn">import</span> <span class="n">sea_surface_temperature</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">sea_surface_temperature</span><span class="o">.</span><span class="n">sea_surface_temperature</span>
+<span class="n">data</span>
+</pre></div>
+</div>
+
+
+<p><img alt="Output" src="http://ipython-books.github.io/pages/chapter06_viz/03_bokeh_files/03_bokeh_13_0.png" /></p>
+<p><strong>4.&nbsp;</strong> Now, we plot the evolution of the temperature as a function of time:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">bkh</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">x_axis_type</span><span class="o">=</span><span class="s2">&quot;datetime&quot;</span><span class="p">,</span>
+               <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Sea surface temperature&quot;</span><span class="p">,</span>
+               <span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">temperature</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">axis_label</span> <span class="o">=</span> <span class="s2">&quot;Date&quot;</span>
+<span class="n">f</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">axis_label</span> <span class="o">=</span> <span class="s2">&quot;Temperature&quot;</span>
+<span class="n">bkh</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><img alt="Output" src="http://ipython-books.github.io/pages/chapter06_viz/03_bokeh_files/03_bokeh_15_0.png" /></p>
+<p><strong>5.&nbsp;</strong> We use pandas to plot the hourly average temperature:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">months</span> <span class="o">=</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<span class="n">data_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">month</span> <span class="o">==</span> <span class="n">m</span><span class="p">]</span>
+             <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">months</span><span class="p">]</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="c1"># We group by the hour of the measure:</span>
+<span class="n">data_avg</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">hour</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data_list</span><span class="p">]</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">bkh</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span>
+               <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Hourly average sea temperature&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">d</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">data_avg</span><span class="p">,</span>
+                   <span class="n">bokeh</span><span class="o">.</span><span class="n">palettes</span><span class="o">.</span><span class="n">Inferno</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                   <span class="p">(</span><span class="s1">&#39;June&#39;</span><span class="p">,</span> <span class="s1">&#39;July&#39;</span><span class="p">,</span> <span class="s1">&#39;August&#39;</span><span class="p">)):</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">temperature</span><span class="p">,</span>
+           <span class="n">line_width</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+           <span class="n">line_color</span><span class="o">=</span><span class="n">c</span><span class="p">,</span>
+           <span class="n">legend</span><span class="o">=</span><span class="n">m</span><span class="p">,</span>
+           <span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">axis_label</span> <span class="o">=</span> <span class="s2">&quot;Hour&quot;</span>
+<span class="n">f</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">axis_label</span> <span class="o">=</span> <span class="s2">&quot;Average temperature&quot;</span>
+<span class="n">f</span><span class="o">.</span><span class="n">legend</span><span class="o">.</span><span class="n">location</span> <span class="o">=</span> <span class="s1">&#39;center_right&#39;</span>
+<span class="n">bkh</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><img alt="Output" src="http://ipython-books.github.io/pages/chapter06_viz/03_bokeh_files/03_bokeh_19_0.png" /></p>
+<p><strong>6.&nbsp;</strong> Let's move to HoloViews:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">holoviews</span> <span class="kn">as</span> <span class="nn">hv</span>
+<span class="n">hv</span><span class="o">.</span><span class="n">extension</span><span class="p">(</span><span class="s1">&#39;bokeh&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><strong>7.&nbsp;</strong> We create a 3D array which could represent a time-dependent 2D image:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">ds</span> <span class="o">=</span> <span class="n">hv</span><span class="o">.</span><span class="n">Dataset</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
+                 <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span>
+                 <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span>
+                 <span class="n">data</span><span class="p">),</span>
+                <span class="n">kdims</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">],</span>
+                <span class="n">vdims</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;z&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">ds</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>:Dataset   [time,y,x]   (z)
+</pre></div>
+</div>
+
+
+<p>The <code>ds</code> object is a <code>Dataset</code> instance representing our time-dependent data. The <strong>kdims</strong> are the key dimensions (time and space) whereas the <strong>vdims</strong> are the quantities of interest (here, a scalar <code>z</code>). In other words, the kdims represent the axes of the 3D array <code>data</code>, whereas the vdims represent the values stored in the array.</p>
+<p><strong>8.&nbsp;</strong> We can easily display the 2D image with a slider to change the time, and a histogram of <code>z</code> as a function of time:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">opts</span> <span class="n">Image</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">hv</span><span class="o">.</span><span class="n">Image</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">hist</span><span class="p">()</span>
+</pre></div>
+</div>
+
+
+<p><img alt="Output" src="http://ipython-books.github.io/pages/chapter06_viz/03_bokeh_files/03_bokeh_28_0.png" /></p>
+<h2>There's more...</h2>
+<p>Bokeh figures in the Notebook are interactive even in the absence of a Python server. For example, our figures can be interactive in nbviewer. Bokeh can also generate standalone HTML/JavaScript documents from our plots. More examples can be found in the gallery.</p>
+<p>The <strong>xarray</strong> library (see <a href="http://xarray.pydata.org/en/stable/">http://xarray.pydata.org/en/stable/</a>) provides a way to represent multidimensional arrays with axes. HoloViews can work with xarray objects.</p>
+<p><strong>plotly</strong> is a company specialized in interactive visualization. They provide an open-source Python visualization library (see <a href="https://plot.ly/python/">https://plot.ly/python/</a>). They also propose tools for building dashboard-style Web-based interfaces (see <a href="https://plot.ly/products/dash/">https://plot.ly/products/dash/</a>).</p>
+<p><strong>Datashader</strong> (http://datashader.readthedocs.io/en/latest/) and <strong>vaex</strong> (http://vaex.astro.rug.nl/) are two visualization libraries that target very large datasets.</p>
+<p>Here are a few references:</p>
+<ul>
+<li>Bokeh user guide at <a href="http://bokeh.pydata.org/en/latest/docs/user_guide.html">http://bokeh.pydata.org/en/latest/docs/user_guide.html</a></li>
+<li>Bokeh gallery at <a href="http://bokeh.pydata.org/en/latest/docs/gallery.html">http://bokeh.pydata.org/en/latest/docs/gallery.html</a></li>
+<li>Using Bokeh in the Notebook, available at <a href="http://bokeh.pydata.org/en/latest/docs/user_guide/notebook.html">http://bokeh.pydata.org/en/latest/docs/user_guide/notebook.html</a></li>
+<li>HoloViews at <a href="http://holoviews.org">http://holoviews.org</a></li>
+<li>HoloViews gallery at <a href="http://holoviews.org/gallery/index.html">http://holoviews.org/gallery/index.html</a></li>
+<li>HoloViews tutorial at <a href="https://github.com/ioam/jupytercon2017-holoviews-tutorial">https://github.com/ioam/jupytercon2017-holoviews-tutorial</a></li>
+</ul>
+    </section>
+
+            </div>
+        </section>
+
+        <footer id="footer" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+                <div>
+                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+        
+    </div>
+    
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=9752080; 
+var sc_invisible=1; 
+var sc_security="837928c1"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="hit counter"
+href="http://statcounter.com/free-hit-counter/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/9752080/0/837928c1/1/"
+alt="hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+</body>
+</html>
+

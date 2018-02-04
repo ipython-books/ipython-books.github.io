@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IPython Cookbook, ">
+
+
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+
+
+        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+
+        <title>IPython Cookbook - 3.6. Introducing JupyterLab</title>
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</head>
+
+<body>
+
+
+    <header id="header" class="pure-g">
+        <div class="pure-u-1 pure-u-md-3-4">
+             <div id="menu">
+                 <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="/">home</a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
+        <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
+        <li><a href="http://cyrille.rossant.net">author</a></li>
+</ul>                </div>
+            </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-4">
+            <div id="social">
+                <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="https://twitter.com/cyrillerossant"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd"><i class="fa fa-github"></i></a></li>
+</ul>                </div>
+            </div>
+        </div>
+    </header>
+       
+
+    
+    <div id="layout" class="pure-g">
+        <section id="content" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+
+    <header id="page-header">
+        <h1>3.6. Introducing JupyterLab</h1>
+    </header>
+
+    <section id="page">
+        <p><a href="/"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="130" style="margin-right: 20px; margin-bottom: 10px;" /></a> <em>This is one of the 100+ free recipes of the <a href="/">IPython Cookbook, Second Edition</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, a guide to numerical computing and data science in the Jupyter Notebook. The ebook and printed book are available for purchase at <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">Packt Publishing</a>.</em></p>
+<p>▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd">Text on GitHub</a> with a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a></em><br />
+▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
+<p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-3-mastering-the-jupyter-notebook/"><strong><em>Go to</em></strong> <em>Chapter 3 : Mastering the Jupyter Notebook</em></a><br />
+▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter03_notebook/06_jupyterlab.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
+<p><strong>JupyterLab</strong> is the next generation of the Jupyter Notebook. It aims at fixing many usability issues of the Notebook, and it greatly expands its scope. JupyterLab offers a general framework for interactive computing and data science in the browser, using Python, Julia, R, or one of many other languages.</p>
+<p>In addition to providing an improved interface to existing notebooks, JupyterLab also brings within the same interface a file browser, consoles, terminals, text editors, Markdown editors, CSV editors, JSON editors, interactive maps, widgets, and so on. The architecture is completely extensible and open to developers. In a word, JupyterLab is a web-based, hackable IDE for data science and interactive computing.</p>
+<p>JupyterLab uses the exact same Notebook server and file format as the classic Jupyter Notebook, so that it is fully compatible with the existing notebooks and kernels. The Classic Notebook and Jupyterlab can run side to side on the same computer. One can easily switch between the two interfaces.</p>
+<blockquote>
+<p>At the time of this writing, JupyterLab is still in an early stage of development. However, it is already fairly usable. The interface may change until the production release. The developer API used to customize JupyterLab is still not stable. There is no user documentation yet.</p>
+</blockquote>
+<h2>Getting ready</h2>
+<p>To install JupyterLab, type <code>conda install -c conda-forge jupyterlab</code> in a terminal.</p>
+<p>To be able to render GeoJSON files in an interactive map, install the GeoJSON JupyterLab extension with: <code>jupyter labextension install @jupyterlab/geojson-extension</code>.</p>
+<h2>How to do it...</h2>
+<p><strong>1.&nbsp;</strong> We can launch JupyterLab by typing <code>jupyter lab</code> in a terminal. Then, we go to <code>http://localhost:8888/lab</code> in the web browser.
+<strong>2.&nbsp;</strong> The dashboard shows, on the left, a list of files and subdirectories in the current working directory. On the right, the launcher lets us create notebooks, text files, or open a Jupyter console or a terminal. Available Jupyter kernels are automatically displayed (here, IPython, but also IR and IJulia).</p>
+<p><img alt="JupyterLab home" src="http://ipython-books.github.io/pages/chapter03_notebook/06_jupyterlab_files/home.png" /></p>
+<p><strong>3.&nbsp;</strong> On the left panel, we can also see the list of open tabs, the list of running sessions, or the list of available commands:</p>
+<p><img alt="Running sessions" src="http://ipython-books.github.io/pages/chapter03_notebook/06_jupyterlab_files/running.png" /></p>
+<p><img alt="Available commands" src="http://ipython-books.github.io/pages/chapter03_notebook/06_jupyterlab_files/commands.png" /></p>
+<p><strong>4.&nbsp;</strong> If we open a Jupyter notebook, we get an interface that closely resembles the classic Notebook interface:</p>
+<p><img alt="A notebook" src="http://ipython-books.github.io/pages/chapter03_notebook/06_jupyterlab_files/nb.png" /></p>
+<p>There are a few improvements compared to the classic Notebook. For example, we can drag and drop one or several cells:</p>
+<p><img alt="Drag-and-drop in the notebook" src="http://ipython-books.github.io/pages/chapter03_notebook/06_jupyterlab_files/nbdrag.png" /></p>
+<p>We can also collapse cells.</p>
+<p><strong>5.&nbsp;</strong> If we right-click in the notebook, a contextual menu appears:</p>
+<p><img alt="Contextual menu in the notebook" src="http://ipython-books.github.io/pages/chapter03_notebook/06_jupyterlab_files/nbmenu.png" /></p>
+<p>If we click on <em>Create Console for Notebook</em>, a new tab appears with a standard IPython console. We can drag and drop the tab anywhere in the screen, for example below the notebook panel:</p>
+<p><img alt="Notebook and console" src="http://ipython-books.github.io/pages/chapter03_notebook/06_jupyterlab_files/nbconsole.png" /></p>
+<p>The IPython console is connected to the same kernel as the Notebook, so they share the same namespace. We can also open a new IPython console from the launcher, running in a separate kernel.</p>
+<p><strong>6.&nbsp;</strong> We can also open a system shell directly in the browser, using the term.js library:</p>
+<p><img alt="Notebook and shell" src="http://ipython-books.github.io/pages/chapter03_notebook/06_jupyterlab_files/nbshell.png" /></p>
+<p><strong>7.&nbsp;</strong> JupyterLab includes a text editor. We can create a new text file from the launcher, rename it by giving it the <code>.md</code> extension, and edit it:</p>
+<p><img alt="Markdown document" src="http://ipython-books.github.io/pages/chapter03_notebook/06_jupyterlab_files/md.png" /></p>
+<p>Let's right-click on the Markdown file. A contextual menu appears:</p>
+<p><img alt="Contextual menu in a Markdown file" src="http://ipython-books.github.io/pages/chapter03_notebook/06_jupyterlab_files/mdmenu.png" /></p>
+<p>We can add a new panel that renders the Markdown file in real-time:</p>
+<p><img alt="Markdown rendered" src="http://ipython-books.github.io/pages/chapter03_notebook/06_jupyterlab_files/mdrender.png" /></p>
+<p>We can also attach an IPython console to our Markdown file. By clicking within a code block and pressing <em>Shift+Enter</em>, we send the code directly to the console:</p>
+<p><img alt="Markdown and console" src="http://ipython-books.github.io/pages/chapter03_notebook/06_jupyterlab_files/mdconsole.png" /></p>
+<p><strong>8.&nbsp;</strong> We can also create and open CSV files in JupyterLab:</p>
+<p><img alt="CSV file" src="http://ipython-books.github.io/pages/chapter03_notebook/06_jupyterlab_files/makecsv.png" /></p>
+<p>The CSV viewer is highly efficient. It can smoothly display huge tables with millions or even billions of values:</p>
+<p><img alt="Viewing a CSV file" src="http://ipython-books.github.io/pages/chapter03_notebook/06_jupyterlab_files/csv.png" /></p>
+<p><strong>9.&nbsp;</strong> GeoJSON files (files that contain geographic information) can also be edited or viewed with the Leaflet mapping library:</p>
+<p><img alt="Editing a GeoJSON file" src="http://ipython-books.github.io/pages/chapter03_notebook/06_jupyterlab_files/geojson.png" />
+<img alt="Viewing a GeoJSON file" src="http://ipython-books.github.io/pages/chapter03_notebook/06_jupyterlab_files/leaflet.png" /></p>
+<h2>There's more...</h2>
+<p>JupyterLab is fully extendable. In fact, the philosophy is that all existing features are implemented as plugins.</p>
+<p>It is possible to work collaboratively on a notebook, like with Google Docs. This feature is still in active development at the time of this writing.</p>
+<p>Here are a few references:</p>
+<ul>
+<li>JupyterLab GitHub project at <a href="https://github.com/jupyterlab/jupyterlab">https://github.com/jupyterlab/jupyterlab</a></li>
+<li>Jupyter renderers at <a href="https://github.com/jupyterlab/jupyter-renderers">https://github.com/jupyterlab/jupyter-renderers</a></li>
+<li>Talk at PyData 2017, available at <a href="https://channel9.msdn.com/Events/PyData/Seattle2017/BRK11">https://channel9.msdn.com/Events/PyData/Seattle2017/BRK11</a></li>
+<li>Talk at PlotCON 2017, available at <a href="https://www.youtube.com/watch?v=p7Hr54VhOp0">https://www.youtube.com/watch?v=p7Hr54VhOp0</a></li>
+<li>Talk at ESIP Tech, available at <a href="https://www.youtube.com/watch?v=K1AsGeak51A">https://www.youtube.com/watch?v=K1AsGeak51A</a></li>
+<li>JupyterLab screencast at <a href="https://www.youtube.com/watch?v=sf8PuLcijuA">https://www.youtube.com/watch?v=sf8PuLcijuA</a></li>
+<li>Realtime collaboration and cloud storage for JupyterLab through Google Drive, at <a href="https://github.com/jupyterlab/jupyterlab-google-drive">https://github.com/jupyterlab/jupyterlab-google-drive</a></li>
+</ul>
+<h2>See also</h2>
+<ul>
+<li>Introducing IPython and the Jupyter Notebook</li>
+</ul>
+    </section>
+
+            </div>
+        </section>
+
+        <footer id="footer" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+                <div>
+                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+        
+    </div>
+    
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=9752080; 
+var sc_invisible=1; 
+var sc_security="837928c1"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="hit counter"
+href="http://statcounter.com/free-hit-counter/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/9752080/0/837928c1/1/"
+alt="hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+</body>
+</html>
+

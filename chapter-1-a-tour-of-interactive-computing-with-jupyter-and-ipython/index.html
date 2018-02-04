@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IPython Cookbook, ">
+
+
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+
+
+        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+
+        <title>IPython Cookbook - Chapter 1 : A Tour of Interactive Computing with Jupyter and IPython</title>
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</head>
+
+<body>
+
+
+    <header id="header" class="pure-g">
+        <div class="pure-u-1 pure-u-md-3-4">
+             <div id="menu">
+                 <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="/">home</a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
+        <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
+        <li><a href="http://cyrille.rossant.net">author</a></li>
+</ul>                </div>
+            </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-4">
+            <div id="social">
+                <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="https://twitter.com/cyrillerossant"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd"><i class="fa fa-github"></i></a></li>
+</ul>                </div>
+            </div>
+        </div>
+    </header>
+       
+
+    
+    <div id="layout" class="pure-g">
+        <section id="content" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+
+    <header id="page-header">
+        <h1>Chapter 1 : A Tour of Interactive Computing with Jupyter and IPython</h1>
+    </header>
+
+    <section id="page">
+        <p>In this chapter, we will cover the following topics:</p>
+<ul>
+<li><a href="http://ipython-books.github.io/11-introducing-ipython-and-the-jupyter-notebook/">1.1. Introducing IPython and the Jupyter Notebook</a></li>
+<li><a href="http://ipython-books.github.io/12-getting-started-with-exploratory-data-analysis-in-the-jupyter-notebook/">1.2. Getting started with exploratory data analysis in the Jupyter Notebook</a></li>
+<li><a href="http://ipython-books.github.io/13-introducing-the-multidimensional-array-in-numpy-for-fast-array-computations/">1.3. Introducing the multidimensional array in NumPy for fast array computations</a></li>
+<li><a href="http://ipython-books.github.io/14-creating-an-ipython-extension-with-custom-magic-commands/">1.4. Creating an IPython extension with custom magic commands</a></li>
+<li><a href="http://ipython-books.github.io/15-mastering-ipythons-configuration-system/">1.5. Mastering IPython's configuration system</a></li>
+<li><a href="http://ipython-books.github.io/16-creating-a-simple-kernel-for-jupyter/">1.6. Creating a simple kernel for Jupyter</a></li>
+</ul>
+<p>In this introduction, we will give a broad overview of Python, IPython, Jupyter, and the scientific Python ecosystem.</p>
+<h2>What is Python?</h2>
+<p>Python is a high-level, open-source, general-purpose programming language originally conceived by Guido van Rossum in the late 1980s (the name was inspired by the British comedy <em>Monty Python's Flying Circus</em>). This easy-to-use language is commonly used by system administrators as a glue language, linking various system components together. It is also a robust language for large-scale software development. In addition, Python comes with an extremely rich standard library (the <em>batteries included</em> philosophy), which covers string processing, Internet Protocols, operating system interfaces, and many other domains.</p>
+<p>In the last twenty years, Python has been increasingly used for scientific computing and data analysis as well. Other competing platforms include commercial software such as MATLAB, Maple, Mathematica, Excel, SPSS, SAS, and others. Competing open-source platforms include Julia, R, Octave, and Scilab. These tools are dedicated to scientific computing, whereas Python is a general-purpose programming language that was not initially designed for scientific computing.</p>
+<p>However, a wide ecosystem of tools has been developed to bring Python to the level of these other scientific computing systems. Today, the main advantage of Python, and one of the main reasons why it is so popular, is that it brings scientific computing features to a general-purpose language that is used in many research areas and industries. This makes the transition from research to production much easier.</p>
+<h2>What is IPython?</h2>
+<p><strong>IPython</strong> is a Python library that was originally meant to improve the default interactive console provided by Python, and to make it scientist-friendly. In 2011, ten years after the first release of IPython, the <strong>IPython Notebook</strong> was introduced. This web-based interface to IPython combines code, text, mathematical expressions, inline plots, interactive figures, widgets, graphical interfaces, and other rich media within a standalone sharable web document. This platform provides an ideal gateway to interactive scientific computing and data analysis. IPython has become essential to researchers, engineers, data scientists, teachers and their students.</p>
+<h2>What is Jupyter?</h2>
+<p>Within a few years, IPython gained an incredible popularity among the scientific and engineering communities. The Notebook started to support more and more programming languages beyond Python. In 2014, the IPython developers announced the <strong>Jupyter</strong> project, an initiative created to improve the implementation of the Notebook and make it language-agnostic by design. The name of the project reflects the importance of three of the main scientific computing languages supported by the Notebook: Julia, Python, and R.</p>
+<p>Today, Jupyter is an ecosystem by itself that comprehends several alternative Notebook interfaces (JupyterLab, nteract, Hydrogen, and others), interactive visualization libraries, authoring tools compatible with notebooks. Jupyter has its own conference named JupyterCon. The project received funding from several companies as well as the Alfred P. Sloan Foundation and the Gordon and Betty Moore Foundation.</p>
+<h2>What is the SciPy ecosystem?</h2>
+<p>SciPy is the name of a Python package for scientific computing, but it refers also, more generally, to the collection of all Python tools that have been developed to bring scientific computing features to Python.</p>
+<p>In the late 1990s, Travis Oliphant and others started to build efficient tools to deal with numerical data in Python: Numeric, Numarray, and finally, <strong>NumPy</strong>. <strong>SciPy</strong>, which implements many numerical computing algorithms, was also created on top of NumPy. In the early 2000s, John Hunter created <strong>matplotlib</strong> to bring scientific graphics to Python. At the same time, Fernando Perez created <strong>IPython</strong> to improve interactivity and productivity in Python. In the late 2000s, Wes McKinney created <strong>pandas</strong> for the manipulation and analysis of numerical tables and time series. Since then, hundreds of engineers and researchers collaboratively worked on this platform to make SciPy one of the leading open source platforms for scientific computing and data science.</p>
+<blockquote>
+<p>Many of the SciPy tools are supported by NumFOCUS, a nonprofit that was created as a legal structure to promote the sustainable development of the ecosystem. NumFOCUS is supported by several large companies including Microsoft, IBM, and Intel.</p>
+</blockquote>
+<p>SciPy has its own conferences too, SciPy (in the US) and EuroSciPy (in Europe) (see <a href="https://conference.scipy.org/">https://conference.scipy.org/</a>).</p>
+<h2>What's new in the SciPy ecosystem?</h2>
+<p>What are some of the main changes in the SciPy ecosystem since the first edition of this book, published in 2014? We give here a very brief selection.</p>
+<blockquote>
+<p>Feel free to skip this section if you are new to the platform.</p>
+</blockquote>
+<p>The last version of IPython at the time of writing is IPython 6.0, released in April 2017. It is the first version of IPython that is no longer compatible with Python 2. This decision allowed the developers to make the internal code simpler and to make better use of the new features of the language.</p>
+<p>IPython now has a web-based terminal interface that can be used along with notebooks. Keyboard shortcuts can be edited directly from the Notebook interface. Multiple cells can be selected and copy/pasted between notebooks. There is a new restart-and-run-all button and a find-and-replace option in the Notebook. See <a href="http://ipython.readthedocs.io/en/stable/whatsnew/version6.html">http://ipython.readthedocs.io/en/stable/whatsnew/version6.html</a> for more details.</p>
+<p>NumPy, which last version 1.13 was released in June 2017, now supports the <code>@</code> matrix multiplication operator between matrices (it was previously accessible via the <code>np.dot()</code> function). Operations such as <code>a + b + c</code> use less memory and be faster on some systems (temporary elision). The new <code>np.block()</code> function lets one define block matrices. The new <code>np.stack()</code> function joins a sequence of arrays along a new axis. See <a href="https://docs.scipy.org/doc/numpy-1.13.0/release.html">https://docs.scipy.org/doc/numpy-1.13.0/release.html</a> for more details.</p>
+<p>SciPy 1.0 was released in October 2017. For the developers, the 1.0 version means that the library has reached some stability and maturity reached after 16 years of development. See <a href="https://docs.scipy.org/doc/scipy/reference/release.html">https://docs.scipy.org/doc/scipy/reference/release.html</a> for more details.</p>
+<p>Matplotlib, which version 2.1 was released in October 2017, has an improved styling and a much better default color palette with the <em>viridis</em> color map instead of jet. See <a href="https://github.com/matplotlib/matplotlib/releases">https://github.com/matplotlib/matplotlib/releases</a> for more details.</p>
+<p>Pandas 0.21 was released in October 2017. Pandas now supports categorical data. Several deprecations were done in the past years, with the deprecation of the <code>.ix</code> syntax and Panels (which may be replaced via the xarray library). See <a href="https://pandas.pydata.org/pandas-docs/stable/release.html">https://pandas.pydata.org/pandas-docs/stable/release.html</a> for more details.</p>
+<h2>How to install Python ?</h2>
+<p>In this book, we use the <strong>Anaconda distribution</strong>, which is available at <a href="https://www.anaconda.com/download/.">https://www.anaconda.com/download/.</a> Anaconda works on Linux, macOS, and Windows. You should install the latest version of Anaconda (5.0.1 at the time of writing) with the latest 64-bit version of Python (3.6 at the time of writing). Python 2.7 is an old version that will be officially unsupported in 2020.</p>
+<p>Anaconda comes with Python, IPython, Jupyter, NumPy, SciPy, pandas, matplotlib, and almost all of the other scientific packages we will be using in this book. The list of all packages is available at <a href="https://docs.anaconda.com/anaconda/packages/pkg-docs.">https://docs.anaconda.com/anaconda/packages/pkg-docs.</a></p>
+<blockquote>
+<p>Miniconda is a light version of Anaconda with only Python and a few other essential packages. You can install only the packages you need one by one using the <code>conda</code> package manager of Anaconda.</p>
+</blockquote>
+<p>We won't cover in this book the various other ways of installing a scientific Python distribution.</p>
+<p>The Anaconda website should give you all the instructions to install Anaconda on your system. To install new packages, you can use the <code>conda</code> package manager that comes with Anaconda. For example, to install the ipyparallel package (which is currently not installed by default in Anaconda), type <code>conda install ipyparallel</code> in a system shell.</p>
+<blockquote>
+<p>There is a short introduction to system shells in <em>Chapter 2, Learning the basics of the Unix shell</em>.</p>
+</blockquote>
+<p>Another way of installing packages is with <strong>conda-forge</strong>, available at <a href="https://conda-forge.org/.">https://conda-forge.org/.</a> This is a community-driven effort to automatically build the latest versions of packages available on GitHub, and make them available with <code>conda</code>. If a package is not available with <code>conda install somepackage</code>, one may use instead <code>conda install --channel conda-forge somepackage</code> if the package is supported by conda-forge.</p>
+<blockquote>
+<p>GitHub is a commercial service that provides free and paid hosting for software repositories. It is one of the most popular platforms for open source collaborative development.</p>
+</blockquote>
+<p><strong>Pip</strong> is the Python system manager. Contrary to <code>conda</code>, <code>pip</code> works with any Python distribution, not just with Anaconda. Packages installable by pip are stored on the Python Package Index available at <a href="https://pypi.python.org/pypi.">https://pypi.python.org/pypi.</a></p>
+<p>Almost all Python packages available in conda are also available in pip, but the inverse is not true. In practice, if a package is not available in conda or conda-forge, it should be available with <code>pip install somepackage</code>. Conda packages typically include binaries compiled for the most common platforms, whereas that is not necessarily the case with pip packages. Pip packages may contain source code that has to be compiled locally (which requires that a compatible compiler is installed and configured), but they may also contain compiled binaries.</p>
+<h2>References</h2>
+<p>Here are a few references:</p>
+<ul>
+<li>The Python webpage at <a href="https://www.python.org">https://www.python.org</a></li>
+<li>Python on Wikipedia at <a href="https://en.wikipedia.org/wiki/Python_%28programming_language%29">https://en.wikipedia.org/wiki/Python_%28programming_language%29</a></li>
+<li>Python's standard library at <a href="https://docs.python.org/3/library/">https://docs.python.org/3/library/</a></li>
+<li>Conversation with Guido van Rossum on the birth of Python available at <a href="http://www.artima.com/intv/pythonP.html">http://www.artima.com/intv/pythonP.html</a></li>
+<li>History of scientific Python available at <a href="http://fr.slideshare.net/shoheihido/sci-pyhistory">http://fr.slideshare.net/shoheihido/sci-pyhistory</a></li>
+<li>History of the Jupyter Notebook at <a href="http://blog.fperez.org/2012/01/ipython-notebook-historical.html">http://blog.fperez.org/2012/01/ipython-notebook-historical.html</a></li>
+<li>JupyterCon at <a href="https://conferences.oreilly.com/jupyter/jup-ny">https://conferences.oreilly.com/jupyter/jup-ny</a></li>
+</ul>
+<p>Here are a few resources on scientific Python:</p>
+<ul>
+<li>Introduction to Python for Computational Science and Engineering, at <a href="https://github.com/fangohr/introduction-to-python-for-computational-science-and-engineering">https://github.com/fangohr/introduction-to-python-for-computational-science-and-engineering</a></li>
+<li>Statistical Computing and Computation, at <a href="http://people.duke.edu/~ccc14/sta-663-2017/">http://people.duke.edu/~ccc14/sta-663-2017/</a></li>
+<li>SciPy 2017 videos at <a href="https://www.youtube.com/playlist?list=PLYx7XA2nY5GfdAFycPLBdUDOUtdQIVoMf">https://www.youtube.com/playlist?list=PLYx7XA2nY5GfdAFycPLBdUDOUtdQIVoMf</a></li>
+</ul>
+    </section>
+
+            </div>
+        </section>
+
+        <footer id="footer" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+                <div>
+                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+        
+    </div>
+    
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=9752080; 
+var sc_invisible=1; 
+var sc_security="837928c1"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="hit counter"
+href="http://statcounter.com/free-hit-counter/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/9752080/0/837928c1/1/"
+alt="hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+</body>
+</html>
+

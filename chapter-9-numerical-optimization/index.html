@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IPython Cookbook, ">
+
+
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+
+
+        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+
+        <title>IPython Cookbook - Chapter 9 : Numerical Optimization</title>
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</head>
+
+<body>
+
+
+    <header id="header" class="pure-g">
+        <div class="pure-u-1 pure-u-md-3-4">
+             <div id="menu">
+                 <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="/">home</a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
+        <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
+        <li><a href="http://cyrille.rossant.net">author</a></li>
+</ul>                </div>
+            </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-4">
+            <div id="social">
+                <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="https://twitter.com/cyrillerossant"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd"><i class="fa fa-github"></i></a></li>
+</ul>                </div>
+            </div>
+        </div>
+    </header>
+       
+
+    
+    <div id="layout" class="pure-g">
+        <section id="content" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+
+    <header id="page-header">
+        <h1>Chapter 9 : Numerical Optimization</h1>
+    </header>
+
+    <section id="page">
+        <p>In this chapter, we will cover the following topics:</p>
+<ul>
+<li><a href="http://ipython-books.github.io/91-finding-the-root-of-a-mathematical-function/">9.1. Finding the root of a mathematical function</a></li>
+<li><a href="http://ipython-books.github.io/92-minimizing-a-mathematical-function/">9.2. Minimizing a mathematical function</a></li>
+<li><a href="http://ipython-books.github.io/93-fitting-a-function-to-data-with-nonlinear-least-squares/">9.3. Fitting a function to data with nonlinear least squares</a></li>
+<li><a href="http://ipython-books.github.io/94-finding-the-equilibrium-state-of-a-physical-system-by-minimizing-its-potential-energy/">9.4. Finding the equilibrium state of a physical system by minimizing its potential energy</a></li>
+</ul>
+<p><strong>Mathematical optimization</strong> is a wide area of applied mathematics. It consists of finding the best solution to a given problem. Many real-world problems can be expressed in an optimization framework. What is the shortest path on the road from point A to point B? What is the best strategy to solve a puzzle? What is the most energy-efficient shape of a car (automotive aerodynamics)? Mathematical optimization is relevant in many domains including engineering, economics, finance, operations research, image processing, data analysis, and others.</p>
+<p>Mathematically, an optimization problem consists of finding the maximum or minimum value of a function. We sometimes use the terms <strong>continuous optimization</strong> or <strong>discrete optimization</strong>, according to whether the function variable is real-valued or discrete.</p>
+<p>In this chapter, we will focus on numerical methods for solving continuous optimization problems. Many optimization algorithms are implemented in the <code>scipy.optimize</code> module. We will come across other instances of optimization problems in several other chapters of this book. For example, we will see discrete optimization problems in <em>Chapter 14, Graphs, Geometry, and Geographic Information Systems</em>.</p>
+<p>In this introduction, we give a few important definitions and key concepts related to mathematical optimization.</p>
+<h2>The objective function</h2>
+<p>We will study methods to find a root or an <strong>extremum</strong> of a real-valued function <span class="math">\(f\)</span> called the <strong>objective function</strong>. An extremum is either a maximum or a minimum of a function. It can accept one or several variables, it can be continuous or not, and so on. The more assumptions we have about the function, the easier it can be optimized.</p>
+<blockquote>
+<p>A maximum of <span class="math">\(f\)</span> is a minimum of <span class="math">\(-f\)</span>, so any minimization algorithm can be used to maximize a function by considering the opposite of that function. Therefore, from now on, when we talk about <em>minimization</em>, we will really mean <em>minimization or maximization</em>.</p>
+</blockquote>
+<p><strong>Convex functions</strong> are easier to optimize than non-convex functions, as they satisfy certain useful properties. For example, any local minimum is necessarily a global minimum. The field of <strong>convex optimization</strong> deals with algorithms that are specifically adapted to the optimization of convex functions on convex domains. Convex optimization is an advanced topic, and we can't cover much of it here.</p>
+<p><strong>Differentiable functions</strong> have gradients, and these gradients can be particularly useful in optimization algorithms. Similarly, <strong>continuous functions</strong> are typically easier to optimize than non-continuous functions.</p>
+<p>Also, functions with a single variable are easier to optimize than functions with multiple variables.</p>
+<p>The choice of the most adequate optimization algorithm depends on the properties satisfied by the objective function.</p>
+<h2>Local and global minima</h2>
+<p>A <strong>minimum</strong> of a function <span class="math">\(f\)</span> is a point <span class="math">\(x_0\)</span> such that <span class="math">\(f(x) \geq f(x_0)\)</span>, for a particular set of points <span class="math">\(x\)</span> in <span class="math">\(E\)</span>. When this inequality is satisfied on the whole set <span class="math">\(E\)</span>, we refer to <span class="math">\(x_0\)</span> as a <strong>global minimum</strong>. When it is only satisfied locally (around the point <span class="math">\(x_0\)</span>), we say that <span class="math">\(x_0\)</span> is a <strong>local minimum</strong>. A <strong>maximum</strong> is defined similarly.</p>
+<p>If <span class="math">\(f\)</span> is differentiable, an extremum <span class="math">\(x_0\)</span> satisfies:</p>
+<div class="math">$$f'(\mathbf{x}_0)=0$$</div>
+<p>Therefore, finding the extrema of an objective function is closely related to finding the roots of the derivative. However, a point <span class="math">\(x_0\)</span> satisfying this property is not necessarily an extremum.</p>
+<p>It is more difficult to find global minima than to find local minima. In general, when an algorithm finds a local minimum, there is no guarantee that it is also a global minimum. Frequently, an algorithm seeking a global minimum stays stuck in a local minimum. This problem needs to be accounted for, specifically in global minimization algorithms. However, things are simpler with convex functions since these do not have strictly local minima. Moreover, there are many cases where finding a local minimum is good enough (for example, when looking for a good solution to a problem rather than the absolute best solution).</p>
+<p>Finally, let's note that a global minimum or maximum does not necessarily exist (the function can go to infinity). In that case, it may be necessary to constrain the space search; this is the subject of <strong>constrained optimization</strong>.</p>
+<p><img alt="Local and global extrema (from https://en.wikipedia.org/wiki/Maxima_and_minima#/media/File:Extrema_example_original.svg)" src="http://ipython-books.github.io/pages/chapter09_numoptim/images/extrema.png" /></p>
+<h2>Constrained and unconstrained optimization</h2>
+<ul>
+<li><strong>Unconstrained optimization</strong>: Finding the minimum of a function <span class="math">\(f\)</span> on the full set <span class="math">\(E\)</span> where <span class="math">\(f\)</span> is defined</li>
+<li><strong>Constrained optimization</strong>: Finding the minimum of a function <span class="math">\(f\)</span> on a subset <span class="math">\(E'\)</span> of <span class="math">\(E\)</span>; this set is generally described by equalities and inequalities:</li>
+</ul>
+<div class="math">$$\mathbf{x} \in E' \Longleftrightarrow \forall i, j, \quad g_i(\mathbf{x}) = c_i, \quad h_j(\mathbf{x}) \leq d_j$$</div>
+<p>Here, the <span class="math">\(g_i\)</span> and <span class="math">\(h_j\)</span> are arbitrary functions defining the constraints.</p>
+<p>For example, optimizing the aerodynamic shape of a car requires constraints on parameters such as the volume and mass of the car, the cost of the production process, and others.</p>
+<h2>Deterministic and stochastic algorithms</h2>
+<p>Some global optimization algorithms are <strong>deterministic</strong>, others are <strong>stochastic</strong>. Stochastic methods are useful when dealing with the highly irregular and noisy functions that are typical of real-world data. Deterministic algorithms may be stuck in local minima, particularly if there are many non-global local minima. By spending some time exploring the space <span class="math">\(E\)</span>, stochastic algorithms may have a chance of finding a global minimum.</p>
+<h2>References</h2>
+<ul>
+<li>The SciPy lecture notes are an excellent reference on mathematical optimization with SciPy and are available at <a href="http://scipy-lectures.github.io/advanced/mathematical_optimization/index.html">http://scipy-lectures.github.io/advanced/mathematical_optimization/index.html</a></li>
+<li>Reference manual of scipy.optimize available at <a href="http://docs.scipy.org/doc/scipy/reference/optimize.html">http://docs.scipy.org/doc/scipy/reference/optimize.html</a></li>
+<li>Numerical Analysis on Awesome Math, at <a href="https://github.com/rossant/awesome-math/#numerical-analysis">https://github.com/rossant/awesome-math/#numerical-analysis</a></li>
+<li>Overview of mathematical optimization on Wikipedia, available at <a href="https://en.wikipedia.org/wiki/Mathematical_optimization">https://en.wikipedia.org/wiki/Mathematical_optimization</a></li>
+<li>Extrema, minima, and maxima on Wikipedia, available at <a href="https://en.wikipedia.org/wiki/Maxima_and_minima">https://en.wikipedia.org/wiki/Maxima_and_minima</a></li>
+<li>Convex optimization on Wikipedia, available at <a href="https://en.wikipedia.org/wiki/Convex_optimization">https://en.wikipedia.org/wiki/Convex_optimization</a></li>
+</ul>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+    </section>
+
+            </div>
+        </section>
+
+        <footer id="footer" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+                <div>
+                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+        
+    </div>
+    
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=9752080; 
+var sc_invisible=1; 
+var sc_security="837928c1"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="hit counter"
+href="http://statcounter.com/free-hit-counter/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/9752080/0/837928c1/1/"
+alt="hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+</body>
+</html>
+

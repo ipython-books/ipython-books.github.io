@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IPython Cookbook, ">
+
+
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+
+
+        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+
+        <title>IPython Cookbook - 7.6. Estimating a probability distribution nonparametrically with a kernel density estimation</title>
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</head>
+
+<body>
+
+
+    <header id="header" class="pure-g">
+        <div class="pure-u-1 pure-u-md-3-4">
+             <div id="menu">
+                 <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="/">home</a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
+        <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
+        <li><a href="http://cyrille.rossant.net">author</a></li>
+</ul>                </div>
+            </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-4">
+            <div id="social">
+                <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="https://twitter.com/cyrillerossant"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd"><i class="fa fa-github"></i></a></li>
+</ul>                </div>
+            </div>
+        </div>
+    </header>
+       
+
+    
+    <div id="layout" class="pure-g">
+        <section id="content" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+
+    <header id="page-header">
+        <h1>7.6. Estimating a probability distribution nonparametrically with a kernel density estimation</h1>
+    </header>
+
+    <section id="page">
+        <p><a href="/"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="130" style="margin-right: 20px; margin-bottom: 10px;" /></a> <em>This is one of the 100+ free recipes of the <a href="/">IPython Cookbook, Second Edition</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, a guide to numerical computing and data science in the Jupyter Notebook. The ebook and printed book are available for purchase at <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">Packt Publishing</a>.</em></p>
+<p>▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd">Text on GitHub</a> with a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a></em><br />
+▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
+<p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-7-statistical-data-analysis/"><strong><em>Go to</em></strong> <em>Chapter 7 : Statistical Data Analysis</em></a><br />
+▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter07_stats/06_kde.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
+<p>In the previous recipe, we applied a <strong>parametric estimation method</strong>. We had a statistical model (the exponential distribution) describing our data, and we estimated a single parameter (the rate of the distribution). <strong>Nonparametric estimation</strong> deals with statistical models that do not belong to a known family of distributions. The parameter space is then <em>infinite-dimensional</em> instead of <em>finite-dimensional</em> (that is, we estimate <em>functions</em> rather than <em>numbers</em>).</p>
+<p>Here, we use a <strong>kernel density estimation (KDE)</strong> to estimate the density of probability of a spatial distribution. We look at the geographical locations of tropical cyclones from 1848 to 2013, based on data provided by the NOAA, the US' National Oceanic and Atmospheric Administration.</p>
+<h2>Getting ready</h2>
+<p>You need <strong>cartopy</strong>, available at <a href="http://scitools.org.uk/cartopy/.">http://scitools.org.uk/cartopy/.</a> You can install it with <code>conda install -c conda-forge cartopy</code>.</p>
+<h2>How to do it...</h2>
+<p><strong>1.&nbsp;</strong> Let's import the usual packages. The kernel density estimation with a Gaussian kernel is implemented in <code>scipy.stats</code>:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="kn">as</span> <span class="nn">st</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="kn">import</span> <span class="n">ListedColormap</span>
+<span class="kn">import</span> <span class="nn">cartopy.crs</span> <span class="kn">as</span> <span class="nn">ccrs</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+</pre></div>
+</div>
+
+
+<p><strong>2.&nbsp;</strong> Let's open the data with pandas:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="c1"># www.ncdc.noaa.gov/ibtracs/index.php?name=wmo-data</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://github.com/ipython-books/&#39;</span>
+                 <span class="s1">&#39;cookbook-2nd-data/blob/master/&#39;</span>
+                 <span class="s1">&#39;Allstorms.ibtracs_wmo.v03r05.csv?&#39;</span>
+                 <span class="s1">&#39;raw=true&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><strong>3.&nbsp;</strong> The dataset contains information about most storms since 1848. A single storm may appear multiple times across several consecutive days.</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]]]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+
+
+<p><img alt="Storm dataset" src="http://ipython-books.github.io/pages/chapter07_stats/06_kde_files/06_kde_11_0.png" /></p>
+<p><strong>4.&nbsp;</strong> We use pandas' <code>groupby()</code> function to obtain the average location of every storm:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">dfs</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Serial_Num&#39;</span><span class="p">)</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">[[</span><span class="s1">&#39;Latitude&#39;</span><span class="p">,</span> <span class="s1">&#39;Longitude&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">pos</span><span class="o">.</span><span class="n">Longitude</span><span class="o">.</span><span class="n">values</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">pos</span><span class="o">.</span><span class="n">Latitude</span><span class="o">.</span><span class="n">values</span>
+<span class="n">pos</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+
+
+<p><img alt="Storm locations" src="http://ipython-books.github.io/pages/chapter07_stats/06_kde_files/06_kde_13_0.png" /></p>
+<p><strong>5.&nbsp;</strong> We display the storms on a map with cartopy. This toolkit allows us to easily project the geographical coordinates on the map.</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="c1"># We use a simple equirectangular projection,</span>
+<span class="c1"># also called Plate Carree.</span>
+<span class="n">crs</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">()</span>
+<span class="c1"># We create the map plot.</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">crs</span><span class="p">)</span>
+<span class="c1"># We display the world map picture.</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">stock_img</span><span class="p">()</span>
+<span class="c1"># We display the storm locations.</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=.</span><span class="mi">5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=.</span><span class="mi">25</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><img alt="Location of the storms" src="http://ipython-books.github.io/pages/chapter07_stats/06_kde_files/06_kde_15_0.png" /></p>
+<p><strong>6.&nbsp;</strong> Before performing the kernel density estimation, we transform the storms' positions from the <strong>geodetic coordinate system</strong> (longitude and latitude) into the map's coordinate system, called <strong>plate carrée</strong>.</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">geo</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">Geodetic</span><span class="p">()</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">geo</span><span class="o">.</span><span class="n">transform_points</span><span class="p">(</span><span class="n">crs</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">T</span>
+<span class="n">h</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>(2, 6940)
+</pre></div>
+</div>
+
+
+<p><strong>7.&nbsp;</strong> Now, we perform the kernel density estimation on our <code>(2, N)</code> array.</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">kde</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">gaussian_kde</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><strong>8.&nbsp;</strong> The <code>gaussian_kde()</code> routine returned a Python function. To see the results on a map, we need to evaluate this function on a 2D grid spanning the entire map. We create this grid with <code>meshgrid()</code>, and we pass the <code>x</code> and <code>y</code> values to the <code>kde()</code> function:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">k</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="c1"># Coordinates of the four corners of the map.</span>
+<span class="n">x0</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">y1</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_extent</span><span class="p">()</span>
+<span class="c1"># We create the grid.</span>
+<span class="n">tx</span><span class="p">,</span> <span class="n">ty</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">k</span><span class="p">),</span>
+                     <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">y0</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">k</span><span class="p">))</span>
+<span class="c1"># We reshape the grid for the kde() function.</span>
+<span class="n">mesh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">tx</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">ty</span><span class="o">.</span><span class="n">ravel</span><span class="p">()))</span>
+<span class="c1"># We evaluate the kde() functionon the grid.</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">kde</span><span class="p">(</span><span class="n">mesh</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">k</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">k</span><span class="p">))</span>
+</pre></div>
+</div>
+
+
+<p><strong>9.&nbsp;</strong> Before displaying the KDE heatmap on the map, we need to use a special colormap with a transparent channel. This will allow us to superimpose the heatmap on the stock image:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="c1"># [https://stackoverflow.com/a/37334212/1595060](https://stackoverflow.com/a/37334212/1595060)</span>
+<span class="n">cmap</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;Reds&#39;</span><span class="p">)</span>
+<span class="n">my_cmap</span> <span class="o">=</span> <span class="n">cmap</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">cmap</span><span class="o">.</span><span class="n">N</span><span class="p">))</span>
+<span class="n">my_cmap</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">cmap</span><span class="o">.</span><span class="n">N</span><span class="p">)</span>
+<span class="n">my_cmap</span> <span class="o">=</span> <span class="n">ListedColormap</span><span class="p">(</span><span class="n">my_cmap</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><strong>10.&nbsp;</strong> Finally, we display the estimated density with <code>imshow()</code>:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">crs</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">stock_img</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span>
+          <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="n">x0</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">y1</span><span class="p">],</span>
+          <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;bilinear&#39;</span><span class="p">,</span>
+          <span class="n">cmap</span><span class="o">=</span><span class="n">my_cmap</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><img alt="Kernel density estimation" src="http://ipython-books.github.io/pages/chapter07_stats/06_kde_files/06_kde_25_0.png" /></p>
+<h2>How it works...</h2>
+<p>The kernel density estimator of a set of n points <span class="math">\(\{x_i\}\)</span> is given as:</p>
+<div class="math">$$\hat{f}_h(x) = \frac{1}{nh} \sum_{i=1}^n K\Big(\frac{x-x_i}{h}\Big)$$</div>
+<p>Here, <span class="math">\(h&gt;0\)</span> is a scaling parameter (the <strong>bandwidth</strong>) and <span class="math">\(K(u)\)</span> is the <strong>kernel</strong>, a symmetric function that integrates to 1. This estimator is to be compared with a classical histogram, where the kernel would be a <em>top-hat</em> function (a rectangle function taking its values in <span class="math">\(\{0,1\}\)</span>), but the blocks would be located on a regular grid instead of the data points. For more information on kernel density estimator, refer to <a href="https://en.wikipedia.org/wiki/Kernel_density_estimation.">https://en.wikipedia.org/wiki/Kernel_density_estimation.</a></p>
+<p>Multiple kernels can be chosen. Here, we chose a <strong>Gaussian kernel</strong>, so that the KDE is the superposition of Gaussian functions centered on all the data points. It is an estimation of the density.</p>
+<p>The choice of the bandwidth is not trivial; there is a tradeoff between a too low value (small bias, high variance: overfitting) and a too high value (high bias, small variance: underfitting). We will return to this important concept of <strong>bias-variance tradeoff</strong> in the next chapter. For more information on the bias-variance tradeoff, refer to <a href="https://en.wikipedia.org/wiki/Bias-variance_dilemma.">https://en.wikipedia.org/wiki/Bias-variance_dilemma.</a></p>
+<p>There are several methods to automatically choose a sensible bandwidth. SciPy uses a <strong>rule of thumb</strong> called <strong>Scott's Rule</strong>: <code>h = n**(-1. / (d + 4))</code>. You will find more information at <a href="http://scipy.github.io/devdocs/generated/scipy.stats.gaussian_kde.html.">http://scipy.github.io/devdocs/generated/scipy.stats.gaussian_kde.html.</a></p>
+<p>The following figure illustrates the KDE. The sample dataset contains four points in <span class="math">\([0,1]\)</span> (black lines). The estimated density is a smooth curve, represented here with different bandwidth values.</p>
+<p><img alt="Kernel density estimation" src="http://ipython-books.github.io/pages/chapter07_stats/06_kde_files/kde.png" /></p>
+<blockquote>
+<p>There are other implementations of KDE in statsmodels and scikit-learn. You can find more information here: <a href="http://jakevdp.github.io/blog/2013/12/01/kernel-density-estimation/">http://jakevdp.github.io/blog/2013/12/01/kernel-density-estimation/</a></p>
+</blockquote>
+<h2>See also</h2>
+<ul>
+<li>Fitting a probability distribution to data with the maximum likelihood method</li>
+</ul>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+    </section>
+
+            </div>
+        </section>
+
+        <footer id="footer" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+                <div>
+                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+        
+    </div>
+    
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=9752080; 
+var sc_invisible=1; 
+var sc_security="837928c1"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="hit counter"
+href="http://statcounter.com/free-hit-counter/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/9752080/0/837928c1/1/"
+alt="hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+</body>
+</html>
+

@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IPython Cookbook, ">
+
+
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+
+
+        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+
+        <title>IPython Cookbook - 1.3. Introducing the multidimensional array in NumPy for fast array computations</title>
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</head>
+
+<body>
+
+
+    <header id="header" class="pure-g">
+        <div class="pure-u-1 pure-u-md-3-4">
+             <div id="menu">
+                 <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="/">home</a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
+        <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
+        <li><a href="http://cyrille.rossant.net">author</a></li>
+</ul>                </div>
+            </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-4">
+            <div id="social">
+                <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="https://twitter.com/cyrillerossant"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd"><i class="fa fa-github"></i></a></li>
+</ul>                </div>
+            </div>
+        </div>
+    </header>
+       
+
+    
+    <div id="layout" class="pure-g">
+        <section id="content" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+
+    <header id="page-header">
+        <h1>1.3. Introducing the multidimensional array in NumPy for fast array computations</h1>
+    </header>
+
+    <section id="page">
+        <p><a href="/"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="130" style="margin-right: 20px; margin-bottom: 10px;" /></a> <em>This is one of the 100+ free recipes of the <a href="/">IPython Cookbook, Second Edition</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, a guide to numerical computing and data science in the Jupyter Notebook. The ebook and printed book are available for purchase at <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">Packt Publishing</a>.</em></p>
+<p>▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd">Text on GitHub</a> with a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a></em><br />
+▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
+<p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-1-a-tour-of-interactive-computing-with-jupyter-and-ipython/"><strong><em>Go to</em></strong> <em>Chapter 1 : A Tour of Interactive Computing with Jupyter and IPython</em></a><br />
+▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter01_basic/03_numpy.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
+<p>NumPy is the main foundation of the scientific Python ecosystem. This library offers a specific data structure for high-performance numerical computing: the <strong>multidimensional array</strong>. The rationale behind NumPy is the following: Python being a high-level dynamic language, it is easier to use but slower than a low-level language such as C. NumPy implements the multidimensional array structure in C and provides a convenient Python interface, thus bringing together high performance and ease of use. NumPy is used by many Python libraries. For example, pandas is built on top of NumPy.</p>
+<p>In this recipe, we will illustrate the basic concepts of the multidimensional array. A more comprehensive coverage of the topic can be found in the <em>Learning IPython for Interactive Computing and Data Visualization Second Edition</em> book.</p>
+<h2>How to do it...</h2>
+<p><strong>1.&nbsp;</strong> Let's import the built-in <code>random</code> Python module and NumPy:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+
+
+<p><strong>2.&nbsp;</strong> We generate two Python lists, <code>x</code> and <code>y</code>, each one containing 1 million random numbers between 0 and 1:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">1000000</span>
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span> <span class="n">y</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>([0.926, 0.722, 0.962], [0.291, 0.339, 0.819])
+</pre></div>
+</div>
+
+
+<p><strong>3.&nbsp;</strong> Let's compute the element-wise sum of all of these numbers: the first element of <code>x</code> plus the first element of <code>y</code>, and so on. We use a <code>for</code> loop in a list comprehension:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">z</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+<span class="n">z</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>[1.217, 1.061, 1.781]
+</pre></div>
+</div>
+
+
+<p><strong>4.&nbsp;</strong> How long does this computation take? IPython defines a handy <code>%timeit</code> magic command to quickly evaluate the time taken by a single statement:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>101 ms ± 5.12 ms per loop (mean ± std. dev. of 7 runs,
+    10 loops each)
+</pre></div>
+</div>
+
+
+<p><strong>5.&nbsp;</strong> Now, we will perform the same operation with NumPy. NumPy works on multidimensional arrays, so we need to convert our lists to arrays. The <code>np.array()</code> function does just that:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">xa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">ya</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">xa</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>array([ 0.926,  0.722,  0.962])
+</pre></div>
+</div>
+
+
+<p>The <code>xa</code> and <code>ya</code> arrays contain the exact same numbers that our original lists, <code>x</code> and <code>y</code>, contained. Those lists were instances of the <code>list</code> built-in class, while our arrays are instances of the <code>ndarray</code> NumPy class. These types are implemented very differently in Python and NumPy. In this example, we will see that using arrays instead of lists leads to drastic performance improvements.</p>
+<p><strong>6.&nbsp;</strong> To compute the element-wise sum of these arrays, we don't need to do a <code>for</code> loop anymore. In NumPy, adding two arrays means adding the elements of the arrays component-by-component. This is the standard mathematical notation in linear algebra (operations on vectors and matrices):</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">za</span> <span class="o">=</span> <span class="n">xa</span> <span class="o">+</span> <span class="n">ya</span>
+<span class="n">za</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>array([ 1.217,  1.061,  1.781])
+</pre></div>
+</div>
+
+
+<p>We see that the <code>z</code> list and the <code>za</code> array contain the same elements (the sum of the numbers in <code>x</code> and <code>y</code>).</p>
+<blockquote>
+<p>Be careful not to use the <code>+</code> operator between vectors when they are represented as Python lists! This operator is valid between lists, so it would not raise an error and it could lead to subtle and silent bugs. In fact, <code>list1 + list2</code> is the <em>concatenation</em> of two lists, not the element-wise addition.</p>
+</blockquote>
+<p><strong>7.&nbsp;</strong> Let's compare the performance of this NumPy operation with the native Python loop:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="n">xa</span> <span class="o">+</span> <span class="n">ya</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>1.09 ms ± 37.3 µs per loop (mean ± std. dev. of 7 runs,
+    1000 loops each)
+</pre></div>
+</div>
+
+
+<p>With NumPy, we went from 100 ms down to 1 ms to compute one million additions!</p>
+<p><strong>8.&nbsp;</strong> Now, we will compute something else: the sum of all elements in <code>x</code> or <code>xa</code>. Although this is not an element-wise operation, NumPy is still highly efficient here. The pure Python version uses the built-in <code>sum()</code> function on an iterable. The NumPy version uses the <code>np.sum()</code> function on a NumPy array:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># pure Python</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>3.94 ms ± 4.44 µs per loop (mean ± std. dev. of 7 runs
+    100 loops each)
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">xa</span><span class="p">)</span>  <span class="c1"># NumPy</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>298 µs ± 4.62 µs per loop (mean ± std. dev. of 7 runs,
+    1000 loops each)
+</pre></div>
+</div>
+
+
+<p>We also observe a significant speedup here.</p>
+<p><strong>9.&nbsp;</strong> Finally, let's perform one last operation: computing the arithmetic distance between any pair of numbers in our two lists (we only consider the first 1000 elements to keep computing times reasonable). First, we implement this in pure Python with two nested <code>for</code> loops:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+     <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">)]</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">d</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>[0.635, 0.587, 0.106]
+</pre></div>
+</div>
+
+
+<p><strong>10.&nbsp;</strong> Now, we use a NumPy implementation, bringing out two slightly more advanced notions. First, we consider a <strong>two-dimensional array</strong> (or matrix). This is how we deal with the two indices, <code>i</code> and <code>j</code>. Second, we use <strong>broadcasting</strong> to perform an operation between a 2D array and 1D array. We will give more details in the <em>How it works...</em> section.</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">da</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">xa</span><span class="p">[:</span><span class="mi">1000</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">-</span> <span class="n">ya</span><span class="p">[:</span><span class="mi">1000</span><span class="p">])</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">da</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>array([[ 0.635,  0.587,  ...,  0.849,  0.046],
+       [ 0.431,  0.383,  ...,  0.646,  0.158],
+       ...,
+       [ 0.024,  0.024,  ...,  0.238,  0.566],
+       [ 0.081,  0.033,  ...,  0.295,  0.509]])
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> \
+         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span> \
+         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">)]</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>134 ms ± 1.79 ms per loop (mean ± std. dev. of 7 runs,
+    1000 loops each)
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">xa</span><span class="p">[:</span><span class="mi">1000</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">-</span> <span class="n">ya</span><span class="p">[:</span><span class="mi">1000</span><span class="p">])</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>1.54 ms ± 48.9 µs per loop (mean ± std. dev. of 7 runs
+    1000 loops each)
+</pre></div>
+</div>
+
+
+<p>Here again, we observe a significant speedup.</p>
+<h2>How it works...</h2>
+<p>A NumPy array is a homogeneous block of data organized in a multidimensional finite grid. All elements of the array share the same <strong>data type</strong>, also called <strong>dtype</strong> (integer, floating-point number, and so on). The <strong>shape</strong> of the array is an n-tuple that gives the size of each axis.</p>
+<p>A 1D array is a <strong>vector</strong>; its shape is just the number of components.</p>
+<p>A 2D array is a <strong>matrix</strong>; its shape is <code>(number of rows, number of columns)</code>.</p>
+<p>The following figure illustrates the structure of a 3D <code>(3, 4, 2)</code> array that contains 24 elements:</p>
+<p><img alt="A NumPy array" src="http://ipython-books.github.io/pages/chapter01_basic/images/numpy.png" /></p>
+<p>The slicing syntax in Python translates nicely to array indexing in NumPy. Also, we can add an extra dimension to an existing array, using <code>np.newaxis</code> in the index.</p>
+<p>Element-wise arithmetic operations can be performed on NumPy arrays that have the <em>same shape</em>. However, broadcasting relaxes this condition by allowing operations on arrays with different shapes in certain conditions. Notably, when one array has fewer dimensions than the other, it can be virtually stretched to match the other array's dimension. This is how we computed the pairwise distance between any pair of elements in <code>xa</code> and <code>ya</code>.</p>
+<p>How can array operations be so much faster than Python loops? There are several reasons, and we will review them in detail in <em>Chapter 4, Profiling and Optimization</em>. We can already say here that:</p>
+<ul>
+<li>In NumPy, array operations are implemented internally with C loops rather than Python loops. Python is typically slower than C because of its interpreted and dynamically-typed nature.</li>
+<li>The data in a NumPy array is stored in a <strong>contiguous</strong> block of memory in RAM. This property leads to more efficient use of CPU cycles and cache.</li>
+</ul>
+<h2>There's more...</h2>
+<p>There's obviously much more to say about this subject. The prequel of this book, <em>Learning IPython for Interactive Computing and Data Visualization Second Edition</em>, contains more details about basic array operations. We will use the array data structure routinely throughout this book. Notably, <em>Chapter 4, Profiling and Optimization</em>, covers advanced techniques of using NumPy arrays.</p>
+<p>Here are some more references:</p>
+<ul>
+<li>Introduction to the ndarray on NumPy's documentation available at <a href="http://docs.scipy.org/doc/numpy/reference/arrays.ndarray.html">http://docs.scipy.org/doc/numpy/reference/arrays.ndarray.html</a></li>
+<li>Tutorial on the NumPy array available at <a href="https://docs.scipy.org/doc/numpy-dev/user/quickstart.html">https://docs.scipy.org/doc/numpy-dev/user/quickstart.html</a></li>
+<li>The NumPy array in the SciPy lectures notes, at <a href="http://scipy-lectures.github.io/intro/numpy/array_object.html">http://scipy-lectures.github.io/intro/numpy/array_object.html</a></li>
+<li>NumPy for MATLAB users, at <a href="https://docs.scipy.org/doc/numpy-dev/user/numpy-for-matlab-users.html">https://docs.scipy.org/doc/numpy-dev/user/numpy-for-matlab-users.html</a></li>
+</ul>
+<h2>See also</h2>
+<ul>
+<li>Getting started with data exploratory analysis in the Jupyter Notebook</li>
+<li>Understanding the internals of NumPy to avoid unnecessary array copying</li>
+</ul>
+    </section>
+
+            </div>
+        </section>
+
+        <footer id="footer" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+                <div>
+                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+        
+    </div>
+    
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=9752080; 
+var sc_invisible=1; 
+var sc_security="837928c1"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="hit counter"
+href="http://statcounter.com/free-hit-counter/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/9752080/0/837928c1/1/"
+alt="hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+</body>
+</html>
+

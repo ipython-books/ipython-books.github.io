@@ -1,0 +1,362 @@
+
+/*
+When setting the primary font stack, apply it to the Pure grid units along
+with `html`, `button`, `input`, `select`, and `textarea`. Pure Grids use
+specific font stacks to ensure the greatest OS/browser compatibility.
+*/
+html, button, input, select, textarea,
+.pure-g [class *= "pure-u"] {
+    /* Set your content font stack here: */
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 18px;
+    font-weight: 300;
+    color: #000;
+}
+
+#layout, #header {
+    margin: 0 auto;
+    padding: 0 2em;
+    max-width: 800px;
+}
+
+a {
+    color: #0088cc;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #005580;
+}
+
+
+
+/****** MENU ******/
+#header {
+    margin-top: 3em;
+    margin-bottom: 3em;
+    padding: 0 2em;
+}
+#header ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    height: 100%;
+}
+#header li {
+    margin: 0;
+    padding: 0;
+    text-align: left;
+}
+#header a  {
+    font-size: 1.25em;
+    padding: .5em .5em .5em 0em;
+    margin: 0 1.5em 0 0;
+    border: 0;
+}
+#header li a:hover {
+    color: #000;
+    background-color: inherit;
+    border: 0;
+}
+#menu a {
+    text-transform: lowercase;
+}
+#social div {
+    text-align: right;
+}
+#social a  {
+    margin-right: 0em;
+    font-size: 1.59em;
+    margin: 0 .5em 0 0;
+    padding: .2em 0 .25em 0em;
+}
+
+
+
+/****** CONTENT ******/
+#content {
+    padding: 0;
+    margin: 0;
+}
+
+#content header {
+    margin: 0 0 1em 0;
+}
+
+#content header .post-meta {
+    margin: 0;
+    padding: 0;
+    color: #777;
+    font-size: .85em;
+    text-align: right;
+    text-transform: lowercase;
+}
+#content header .post-tags {
+    margin: 0;
+    padding: 0;
+    color: #777;
+    font-size: .85em;
+    text-align: right;
+    text-transform: lowercase;
+}
+#content header .post-tags ul {
+    margin: 0 0 1em 0;
+    padding: 0;
+    list-style: none;
+}
+#content header .post-tags li {
+    margin: 0 0 0 .5em;
+    padding: 0;
+    display: inline;
+}
+#content .l-box {
+    margin: 0;
+    padding: 0 0 0 0;
+    position: relative;
+}
+
+#post {
+}
+
+code {
+    /*font-size: .9em;*/
+    font-family: 'Ubuntu Mono';
+    padding: 0 .1em;
+}
+
+
+
+/************ BUTTONS BOOKS ***************/
+.buttons-books {
+    text-align: center;
+}
+
+.buttons-books button {
+    color: white;
+    margin: .35em .25em;
+}
+
+.buttons-book1 button {
+    background-color: #F89321;
+}
+
+.buttons-book2 button {
+    background-color: #6DBC51;
+}
+
+.buttons-books .button-book1-order, .buttons-books .button-book2-order {
+    background-color: #000;
+}
+
+
+.highlight pre {
+    font-family: 'Ubuntu Mono';
+    font-size: .9em;
+    padding: .5em;
+    word-wrap: normal;
+    overflow: auto;
+    white-space: pre;
+}
+
+
+/***** IPYNB INPUT OUTPUT ******/
+.highlight pre {
+    margin: 0;
+    border-left: 1em solid #888;
+}
+
+.highlight-text pre {
+    font-size: .9em;
+    padding: .5em;
+    border: 0;
+    color: black;
+    margin: 0 0 1em 0;
+    background-color: #ccc;
+}
+
+
+
+#post embed {
+    width: 672px;
+    height: 378px;
+    margin: 1em 0;
+}
+
+#post img, .post img, .page img, #page img {
+    max-width: calc(100% - 10px);
+    max-height: 600px;
+    margin: 0 auto;
+    text-align: center;
+    display: block;
+}
+
+section > p > img {
+    border: 5px solid #eee;
+}
+
+
+
+
+/****** POSTS HEADER ******/
+/*#posts .post .post-header h3 {
+    margin: 1.75em 0 .2em 0;
+}
+#posts .post .post-header h3 a {
+}*/
+#posts hr, #tag-posts hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    /*width: 75%;*/
+    margin: 2.5em 10% 2em 10%;
+    padding: 0;
+}
+#posts .read-more {
+    text-align: right;
+}
+blockquote {
+    color: #777;
+    border-left: .5em solid #eee;
+    padding: 0 0 0 .75em;
+}
+
+
+
+
+/****** HEADERS ******/
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 300;
+}
+
+h1 {
+    font-size: 2.25em;
+    margin: 0 0 .1em -.025em;
+    padding: 0 0 .25em 0;
+    border-bottom: 1px solid #aaa;
+}
+
+
+h2 {
+    color: #555;
+    font-size: 1.75em;
+    margin: 1.75em 0 .5em 0;
+    padding: 0 0 .25em 0;
+    border-bottom: 1px solid #ddd;
+}
+#content .sub-header-2 {
+    text-align: right;
+    margin: -1.25em 0 0 0;
+    font-size: .9em;
+    color: #999;
+}
+
+
+h3 {
+    color: #777;
+    margin: 1.25em 0 .75em 0;
+    font-size: 1.35em;
+}
+#content .sub-header-3 {
+    margin: -1em 0 0 0;
+    font-size: .9em;
+    color: #999;
+}
+
+
+h4 {
+    color: #888;
+    margin: 1.25em 0 .75em 0;
+    font-size: 1.1em;
+}
+
+
+/****** PAGINATION ******/
+.pagination-wrapper {
+    text-transform: lowercase;
+    color: #777;
+    padding: 6px 0 0em 0;
+    /*border-bottom: 1px solid #eee;*/
+    /*font-size: 100%;*/
+    /*font-weight: 500;*/
+    /*letter-spacing: 0.1em;*/
+}
+.pagination-left, .pagination-right {
+    position: absolute;
+    top: 0;
+}
+.pagination {
+    font-size: .9em;
+    text-align: center;
+    position: relative;
+    margin: 2em 2em -2em 2em;
+    /*max-width: 100%;*/
+}
+.pagination-left {
+    left: 0;
+    text-align: left;
+}
+.pagination-right {
+    right: 0;
+    text-align: right;
+}
+
+
+
+.comments {
+    margin: 7em 0 0 0;
+}
+
+
+
+/****** FOOTER ******/
+#footer {
+    text-align: center;
+    color: #777;
+}
+
+#footer .l-box {
+    margin: 1em 0 1em 0;
+    padding: .25em 0 1em 0;
+}
+
+#footer .l-box > div {
+    padding: .5em 0;
+    margin: 0;
+    border-top: 1px solid #ddd;
+    font-size: 75%;
+}
+
+
+#footer .l-box p {
+    margin: 0;
+    padding: 0;
+}
+
+
+
+
+
+/****** MEDIA ******/
+@media screen and (max-width: 47.999em) {
+    #content .l-box {
+        padding: 0 0 3em 0;
+    }
+
+    #header {
+        padding: 0 1em;
+    }
+
+    #layout {
+        padding: 1em 1em;
+    }
+
+    #sidebar {
+        padding-top: 1em;
+        border-top: 1px solid #ddd;
+    }
+
+    #footer .l-box {
+        padding-right: 0;
+    }
+}

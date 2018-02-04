@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IPython Cookbook, ">
+
+
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+
+
+        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+
+        <title>IPython Cookbook - Chapter 7 : Statistical Data Analysis</title>
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</head>
+
+<body>
+
+
+    <header id="header" class="pure-g">
+        <div class="pure-u-1 pure-u-md-3-4">
+             <div id="menu">
+                 <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="/">home</a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
+        <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
+        <li><a href="http://cyrille.rossant.net">author</a></li>
+</ul>                </div>
+            </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-4">
+            <div id="social">
+                <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="https://twitter.com/cyrillerossant"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd"><i class="fa fa-github"></i></a></li>
+</ul>                </div>
+            </div>
+        </div>
+    </header>
+       
+
+    
+    <div id="layout" class="pure-g">
+        <section id="content" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+
+    <header id="page-header">
+        <h1>Chapter 7 : Statistical Data Analysis</h1>
+    </header>
+
+    <section id="page">
+        <p>In this chapter, we will cover the following topics:</p>
+<ul>
+<li><a href="http://ipython-books.github.io/71-exploring-a-dataset-with-pandas-and-matplotlib/">7.1. Exploring a dataset with pandas and matplotlib</a></li>
+<li><a href="http://ipython-books.github.io/72-getting-started-with-statistical-hypothesis-testing-a-simple-z-test/">7.2. Getting started with statistical hypothesis testing — a simple z-test</a></li>
+<li><a href="http://ipython-books.github.io/73-getting-started-with-bayesian-methods/">7.3. Getting started with Bayesian methods</a></li>
+<li><a href="http://ipython-books.github.io/74-estimating-the-correlation-between-two-variables-with-a-contingency-table-and-a-chi-squared-test/">7.4. Estimating the correlation between two variables with a contingency table and a chi-squared test</a></li>
+<li><a href="http://ipython-books.github.io/75-fitting-a-probability-distribution-to-data-with-the-maximum-likelihood-method/">7.5. Fitting a probability distribution to data with the maximum likelihood method</a></li>
+<li><a href="http://ipython-books.github.io/76-estimating-a-probability-distribution-nonparametrically-with-a-kernel-density-estimation/">7.6. Estimating a probability distribution nonparametrically with a kernel density estimation</a></li>
+<li><a href="http://ipython-books.github.io/77-fitting-a-bayesian-model-by-sampling-from-a-posterior-distribution-with-a-markov-chain-monte-carlo-method/">7.7. Fitting a Bayesian model by sampling from a posterior distribution with a Markov Chain Monte Carlo method</a></li>
+<li><a href="http://ipython-books.github.io/78-analyzing-data-with-the-r-programming-language-in-the-jupyter-notebook/">7.8. Analyzing data with the R programming language in the Jupyter Notebook</a></li>
+</ul>
+<p>In the previous chapters, we reviewed technical aspects of high-performance interactive computing in Python. We now begin the second part of this book by illustrating a variety of scientific questions that can be tackled with Python.</p>
+<p>In this chapter, we introduce statistical methods for data analysis. In addition to covering statistical packages such as pandas, statsmodels, and PyMC3, we will explain the basics of the underlying mathematical principles. Therefore, this chapter will be most profitable if you have basic experience with probability theory and calculus.</p>
+<p>The next chapter, <em>Chapter 8, Machine Learning</em>, is closely related; the underlying mathematics is very similar, but the goals are slightly different. In this chapter, we show how to gain insight into real-world data and how to make informed decisions in the presence of uncertainty. In the next chapter, the goal is to learn from data, that is, to generalize and to predict outcomes from partial observations.</p>
+<p>In this introduction, we will give a broad, high-level overview of the methods we will see in this chapter.</p>
+<h2>What is statistical data analysis?</h2>
+<p>The goal of statistical data analysis is to understand a complex, real-world phenomenon from partial and uncertain observations. The uncertainty in the data results in uncertainty in the knowledge we get about the phenomenon. A major goal of the theory is to <em>quantify</em> this uncertainty.</p>
+<p>It is important to make the distinction between the mathematical theory underlying statistical data analysis, and the decisions made after conducting an analysis. The former is perfectly rigorous; perhaps surprisingly, mathematicians were able to build an exact mathematical framework to deal with uncertainty. Nevertheless, there is a subjective part in the way statistical analysis yields actual human decisions. Understanding the risk and the uncertainty behind statistical results is critical in the decision-making process.</p>
+<p>In this chapter, we will see the basic notions, principles, and theories behind statistical data analysis, covering in particular how to make decisions with a quantified risk. Of course, we will always show how to implement these methods with Python.</p>
+<h2>A bit of vocabulary</h2>
+<p>There are many terms that need introduction before we get started with the recipes. These notions allow us to classify statistical techniques within multiple dimensions.</p>
+<h3>Exploration, Inference, Decision, Prediction</h3>
+<p><strong>Exploratory methods</strong> allow us to get a preliminary look at a dataset through basic statistical aggregates and interactive visualization. We covered these basic methods in the first chapter of this book and in the prequel book <em>IPython for Interactive Computing and Data Visualization, Second Edition</em>, Packt Publishing. The first recipe of this chapter, <em>Exploring a dataset with pandas and matplotlib</em>, shows another example.</p>
+<p><strong>Statistical inference</strong> consists of getting information about an unknown process through partial and uncertain observations. In particular, <strong>estimation</strong> entails obtaining approximate quantities for the mathematical variables describing this process. Three recipes in this chapter deal with statistical inference:</p>
+<ul>
+<li>The <em>Fitting a probability distribution to data with the maximum likelihood method</em> recipe</li>
+<li>The <em>Estimating a probability distribution nonparametrically with a kernel density estimation</em> recipe</li>
+<li>The <em>Fitting a Bayesian model by sampling from a posterior distribution with a Markov chain Monte Carlo method</em> recipe</li>
+</ul>
+<p><strong>Decision theory</strong> allows us to make decisions about an unknown process from random observations, with a controlled risk. The following two recipes show how to make statistical decisions:</p>
+<ul>
+<li>The <em>Getting started with statistical hypothesis testing – a simple z-test</em> recipe</li>
+<li>The <em>Estimating the correlation between two variables with a contingency table and a chi-squared test</em> recipe</li>
+</ul>
+<p><strong>Prediction</strong> consists of learning from data, that is, predicting the outcomes of a random process based on a limited number of observations. This is the topic of the next chapter, <em>Chapter 8, Machine Learning</em>.</p>
+<h3>Univariate and Multivariate methods</h3>
+<p>In most cases, you can consider two dimensions in your data:</p>
+<ul>
+<li><strong>Observations</strong> (or <strong>samples</strong>, for machine learning people)</li>
+<li><strong>Variables</strong> (or <strong>features</strong>)</li>
+</ul>
+<p>Typically, observations are independent realizations of the same random process. Each observation is made of one or several variables. Most of the time, variables are either numbers, or elements belonging to a finite set (that is, taking a finite number of values). The first step in an analysis is to understand what your observations and variables are.</p>
+<p>Your problem is <strong>univariate</strong> if you have one variable. It is <strong>bivariate</strong> if you have two variables and <strong>multivariate</strong> if you have at least two variables. Univariate methods are typically simpler. That being said, univariate methods may be used on multivariate data, using one dimension at a time. Although interactions between variables cannot be explored in that case, it is often an interesting first approach.</p>
+<h3>Frequentist and Bayesian methods</h3>
+<p>There are at least two different ways of considering uncertainty, resulting in two different classes of methods for inference, decision, and other statistical questions. These are called <strong>frequentist and Bayesian methods</strong>. Some people prefer frequentist methods, while others prefer Bayesian methods.</p>
+<p>Frequentists interpret a probability as a <em>statistical average</em> across many independent realizations (law of large numbers). Bayesians interpret it as a <em>degree of belief</em> (no need for many realizations). The Bayesian interpretation is very useful when only a single trial is considered. In addition, Bayesian theory takes into account our <strong>prior knowledge</strong> about a random process. This prior probability distribution is updated into a posterior distribution as we get more and more data.</p>
+<p>Both frequentist and Bayesian methods have their advantages and disadvantages. For instance, one could say that frequentist methods might be easier to apply than Bayesian methods, but more difficult to interpret. For classic misuses of frequentist methods, see <a href="http://www.refsmmat.com/statistics/.">http://www.refsmmat.com/statistics/.</a></p>
+<p>In any case, if you are a beginner in statistical data analysis, you probably want to learn the basics of both approaches before choosing sides. This chapter introduces you to both types of methods.</p>
+<p>The following recipes are exclusively Bayesian:</p>
+<ul>
+<li>The <em>Getting started with Bayesian methods</em> recipe</li>
+<li>The <em>Fitting a Bayesian model by sampling from a posterior distribution with a Markov chain Monte Carlo method</em> recipe</li>
+</ul>
+<p>Jake Vanderplas has written several blog posts about frequentism and Bayesianism, with examples in Python. The first post of the series is available at <a href="http://jakevdp.github.io/blog/2014/03/11/frequentism-and-bayesianism-a-practical-intro/.">http://jakevdp.github.io/blog/2014/03/11/frequentism-and-bayesianism-a-practical-intro/.</a></p>
+<h3>Parametric and non-parametric inference methods</h3>
+<p>In many cases, you base your analysis on a <strong>probabilistic model</strong>. This model describes how your data is generated. A probabilistic model has no reality; it is only a mathematical object that guides you in your analysis. A good model can be helpful, whereas a bad model may misguide you.</p>
+<p>With a <strong>parametric method</strong>, you assume that your model belongs to a known family of probability distributions. The model has one or multiple numerical <em>parameters</em> that you can <em>estimate</em>.</p>
+<p>With a <strong>nonparametric model</strong>, you do not make such an assumption in your model. This gives you more flexibility. However, these methods are typically more complicated to implement and to interpret.</p>
+<p>The following recipes are parametric and nonparametric, respectively:</p>
+<ul>
+<li>The <em>Fitting a probability distribution to data with the maximum likelihood method</em> recipe</li>
+<li>The <em>Estimating a probability distribution nonparametrically with a kernel density estimation</em> recipe</li>
+</ul>
+<p>This chapter only gives you an idea of the wide range of possibilities that Python offers for statistical data analysis. You can find many books and online courses that cover statistical methods in much greater detail, such as:</p>
+<ul>
+<li>Statistics resources on Awesome Math, available at <a href="https://github.com/rossant/awesome-math#statistics">https://github.com/rossant/awesome-math#statistics</a></li>
+<li>Statistics on WikiBooks at <a href="http://en.wikibooks.org/wiki/Statistics">http://en.wikibooks.org/wiki/Statistics</a></li>
+<li>Free statistical textbooks available at <a href="http://stats.stackexchange.com/questions/170/free-statistical-textbooks">http://stats.stackexchange.com/questions/170/free-statistical-textbooks</a></li>
+</ul>
+    </section>
+
+            </div>
+        </section>
+
+        <footer id="footer" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+                <div>
+                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+        
+    </div>
+    
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=9752080; 
+var sc_invisible=1; 
+var sc_security="837928c1"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="hit counter"
+href="http://statcounter.com/free-hit-counter/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/9752080/0/837928c1/1/"
+alt="hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+</body>
+</html>
+

@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IPython Cookbook, ">
+
+
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+
+
+        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+
+        <title>IPython Cookbook - 3.3. Mastering widgets in the Jupyter Notebook</title>
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</head>
+
+<body>
+
+
+    <header id="header" class="pure-g">
+        <div class="pure-u-1 pure-u-md-3-4">
+             <div id="menu">
+                 <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="/">home</a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
+        <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
+        <li><a href="http://cyrille.rossant.net">author</a></li>
+</ul>                </div>
+            </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-4">
+            <div id="social">
+                <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="https://twitter.com/cyrillerossant"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd"><i class="fa fa-github"></i></a></li>
+</ul>                </div>
+            </div>
+        </div>
+    </header>
+       
+
+    
+    <div id="layout" class="pure-g">
+        <section id="content" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+
+    <header id="page-header">
+        <h1>3.3. Mastering widgets in the Jupyter Notebook</h1>
+    </header>
+
+    <section id="page">
+        <p><a href="/"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="130" style="margin-right: 20px; margin-bottom: 10px;" /></a> <em>This is one of the 100+ free recipes of the <a href="/">IPython Cookbook, Second Edition</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, a guide to numerical computing and data science in the Jupyter Notebook. The ebook and printed book are available for purchase at <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">Packt Publishing</a>.</em></p>
+<p>▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd">Text on GitHub</a> with a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a></em><br />
+▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
+<p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-3-mastering-the-jupyter-notebook/"><strong><em>Go to</em></strong> <em>Chapter 3 : Mastering the Jupyter Notebook</em></a><br />
+▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter03_notebook/03_widgets.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
+<p>The <strong>ipywidgets</strong> package provides many common user interface controls for exploring code and data interactively. These controls can be assembled and customized to create complex graphical user interfaces. In this recipe, we introduce the various ways we can create user interfaces with ipywidgets.</p>
+<h2>Getting ready</h2>
+<p>The ipywidgets package should be installed by default in Anaconda, but you can also install it manually with <code>conda install ipywidgets</code>.</p>
+<p>Alternatively, you can install ipywidgets with <code>pip install ipywidgets</code>, but then you also need to type the following command in order to enable the extension in the Jupyter Notebook:</p>
+<div class="highlight highlight-bash"><div class="highlight"><pre><span></span>jupyter nbextension <span class="nb">enable</span> --py --sys-prefix widgetsnbextension
+</pre></div>
+</div>
+
+
+<h2>How to do it...</h2>
+<p><strong>1.&nbsp;</strong> Let's import the packages:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="kn">as</span> <span class="nn">widgets</span>
+<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">HBox</span><span class="p">,</span> <span class="n">VBox</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+</pre></div>
+</div>
+
+
+<p><strong>2.&nbsp;</strong> The <code>@interact</code> decorator shows a widget for controlling the arguments of a function. Here, the function <code>f()</code> accepts an integer as an argument. By default, the <code>@interact</code> decorator displays a slider to control the value passed to the function:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="nd">@widgets.interact</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><img alt="Interact" src="http://ipython-books.github.io/pages/chapter03_notebook/03_widgets_files/03_widgets_6_0.png" /></p>
+<p>The function <code>f()</code> is called whenever the slider value changes.</p>
+<p><strong>3.&nbsp;</strong> We can customize the slider parameters. Here, we specify a minimum and maximum integer range for the slider:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="nd">@widgets.interact</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><img alt="Interact" src="http://ipython-books.github.io/pages/chapter03_notebook/03_widgets_files/03_widgets_9_0.png" /></p>
+<p><strong>4.&nbsp;</strong> There is also an <code>@interact_manual</code> decorator which provides a button to call the function manually. This is useful with long-lasting computations that should not run every time a widget value changes. Here, we create a simple user interface for controlling four parameters of a function that displays a plot. There are two floating-point sliders, a dropdown menu for choosing a value among a few predefined options, and a checkbox for boolean values:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="nd">@widgets.interact_manual</span><span class="p">(</span>
+    <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">],</span> <span class="n">lw</span><span class="o">=</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">10.</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="n">freq</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="o">+</span><span class="mf">1.</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">freq</span> <span class="o">*</span> <span class="n">t</span><span class="p">),</span>
+            <span class="n">lw</span><span class="o">=</span><span class="n">lw</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><img alt="Interact manual" src="http://ipython-books.github.io/pages/chapter03_notebook/03_widgets_files/03_widgets_11_0.png" /></p>
+<p><strong>5.&nbsp;</strong> In addition to the <code>@interact</code> and <code>@interact_manual</code> decorators, ipywidgets provides a simple API to create individual widgets. Here, we create a floating-point slider:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">freq_slider</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">FloatSlider</span><span class="p">(</span>
+    <span class="n">value</span><span class="o">=</span><span class="mf">2.</span><span class="p">,</span>
+    <span class="nb">min</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span>
+    <span class="nb">max</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span>
+    <span class="n">step</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Frequency:&#39;</span><span class="p">,</span>
+    <span class="n">readout_format</span><span class="o">=</span><span class="s1">&#39;.1f&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">freq_slider</span>
+</pre></div>
+</div>
+
+
+<p><img alt="Interact manual" src="http://ipython-books.github.io/pages/chapter03_notebook/03_widgets_files/03_widgets_13_0.png" /></p>
+<p><strong>6.&nbsp;</strong> Here is an example of slider for selecting pairs of numbers, like intervals and ranges:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">range_slider</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">FloatRangeSlider</span><span class="p">(</span>
+    <span class="n">value</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="o">+</span><span class="mf">1.</span><span class="p">],</span>
+    <span class="nb">min</span><span class="o">=-</span><span class="mf">5.</span><span class="p">,</span> <span class="nb">max</span><span class="o">=+</span><span class="mf">5.</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;xlim:&#39;</span><span class="p">,</span>
+    <span class="n">readout_format</span><span class="o">=</span><span class="s1">&#39;.1f&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">range_slider</span>
+</pre></div>
+</div>
+
+
+<p><img alt="Range slider" src="http://ipython-books.github.io/pages/chapter03_notebook/03_widgets_files/03_widgets_15_0.png" /></p>
+<p><strong>7.&nbsp;</strong> The toggle button can control a boolean value:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">grid_button</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">ToggleButton</span><span class="p">(</span>
+    <span class="n">value</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Grid&#39;</span><span class="p">,</span>
+    <span class="n">icon</span><span class="o">=</span><span class="s1">&#39;check&#39;</span>
+<span class="p">)</span>
+<span class="n">grid_button</span>
+</pre></div>
+</div>
+
+
+<p><img alt="Toggle button widget" src="http://ipython-books.github.io/pages/chapter03_notebook/03_widgets_files/03_widgets_17_0.png" /></p>
+<p><strong>8.&nbsp;</strong> Dropdown menus and toggle buttons are useful when selecting a value among a predefined set of options:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">color_buttons</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">ToggleButtons</span><span class="p">(</span>
+    <span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">],</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Color:&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">color_buttons</span>
+</pre></div>
+</div>
+
+
+<p><img alt="Toggle buttons" src="http://ipython-books.github.io/pages/chapter03_notebook/03_widgets_files/03_widgets_19_0.png" /></p>
+<p><strong>9.&nbsp;</strong> The text widget allows the user to write a string:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">title_textbox</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span>
+    <span class="n">value</span><span class="o">=</span><span class="s1">&#39;Hello World&#39;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Title:&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">title_textbox</span>
+</pre></div>
+</div>
+
+
+<p><img alt="Text widget" src="http://ipython-books.github.io/pages/chapter03_notebook/03_widgets_files/03_widgets_21_0.png" /></p>
+<p><strong>10.&nbsp;</strong> We can let the user choose a color using the built-in system color picker:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">color_picker</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">ColorPicker</span><span class="p">(</span>
+    <span class="n">concise</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Background color:&#39;</span><span class="p">,</span>
+    <span class="n">value</span><span class="o">=</span><span class="s1">&#39;#efefef&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">color_picker</span>
+</pre></div>
+</div>
+
+
+<p><img alt="Color picker" src="http://ipython-books.github.io/pages/chapter03_notebook/03_widgets_files/03_widgets_23_0.png" /></p>
+<p><strong>11.&nbsp;</strong> We can also simply create a button:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">button</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Plot&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">button</span>
+</pre></div>
+</div>
+
+
+<p><img alt="Button widget" src="http://ipython-books.github.io/pages/chapter03_notebook/03_widgets_files/03_widgets_25_0.png" /></p>
+<p><strong>12.&nbsp;</strong> Now, we will see how to combine these widgets into a complex graphical user interface, and how to react to user interactions with these controls. We create a function that will display a plot as defined by the created controls. We can access the control value with the <code>value</code> property of the widgets:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot2</span><span class="p">(</span><span class="n">b</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="n">xlim</span> <span class="o">=</span> <span class="n">range_slider</span><span class="o">.</span><span class="n">value</span>
+    <span class="n">freq</span> <span class="o">=</span> <span class="n">freq_slider</span><span class="o">.</span><span class="n">value</span>
+    <span class="n">grid</span> <span class="o">=</span> <span class="n">grid_button</span><span class="o">.</span><span class="n">value</span>
+    <span class="n">color</span> <span class="o">=</span> <span class="n">color_buttons</span><span class="o">.</span><span class="n">value</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">title_textbox</span><span class="o">.</span><span class="n">value</span>
+    <span class="n">bgcolor</span> <span class="o">=</span> <span class="n">color_picker</span><span class="o">.</span><span class="n">value</span>
+
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xlim</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">xlim</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1000</span><span class="p">)</span>
+    <span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">freq</span> <span class="o">*</span> <span class="n">t</span><span class="p">),</span>
+            <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><strong>13.&nbsp;</strong> The <code>on_click</code> decorator of a button widget lets us react to click events. Here, we simply declare that the plotting function should be called when the button is pressed:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="nd">@button.on_click</span>
+<span class="k">def</span> <span class="nf">plot_on_click</span><span class="p">(</span><span class="n">b</span><span class="p">):</span>
+    <span class="n">plot2</span><span class="p">()</span>
+</pre></div>
+</div>
+
+
+<p><strong>14.&nbsp;</strong> To display all of our widgets in a unified graphical interface, we define a layout with two tabs. The first tab shows widgets related to the plot itself, whereas the second tab shows widgets related to the styling of the plot. Each tab contains a vertical stack of widgets defined with the <code>VBox</code> class:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">tab1</span> <span class="o">=</span> <span class="n">VBox</span><span class="p">(</span><span class="n">children</span><span class="o">=</span><span class="p">[</span><span class="n">freq_slider</span><span class="p">,</span>
+                      <span class="n">range_slider</span><span class="p">,</span>
+                      <span class="p">])</span>
+<span class="n">tab2</span> <span class="o">=</span> <span class="n">VBox</span><span class="p">(</span><span class="n">children</span><span class="o">=</span><span class="p">[</span><span class="n">color_buttons</span><span class="p">,</span>
+                      <span class="n">HBox</span><span class="p">(</span><span class="n">children</span><span class="o">=</span><span class="p">[</span><span class="n">title_textbox</span><span class="p">,</span>
+                                     <span class="n">color_picker</span><span class="p">,</span>
+                                     <span class="n">grid_button</span><span class="p">]),</span>
+                                     <span class="p">])</span>
+</pre></div>
+</div>
+
+
+<p><strong>15.&nbsp;</strong> Finally, we create the <code>Tab</code> instance with our two tabs, we set the titles of the tabs, and we add the plot button below the tabs:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">tab</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Tab</span><span class="p">(</span><span class="n">children</span><span class="o">=</span><span class="p">[</span><span class="n">tab1</span><span class="p">,</span> <span class="n">tab2</span><span class="p">])</span>
+<span class="n">tab</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;plot&#39;</span><span class="p">)</span>
+<span class="n">tab</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;styling&#39;</span><span class="p">)</span>
+<span class="n">VBox</span><span class="p">(</span><span class="n">children</span><span class="o">=</span><span class="p">[</span><span class="n">tab</span><span class="p">,</span> <span class="n">button</span><span class="p">])</span>
+</pre></div>
+</div>
+
+
+<p><img alt="Complex widget" src="http://ipython-books.github.io/pages/chapter03_notebook/03_widgets_files/03_widgets_33_0.png" /></p>
+<h2>There's more...</h2>
+<p>The documentation of ipywidgets demonstrates many other features of the package. The styling of the widgets can be customized. New widgets can be created by writing Python and JavaScript code (see recipe <em>Creating custom Jupyter Notebook widgets in Python, HTML, and JavaScript</em>). Widgets can also remain at least partly functional in a static notebook export.</p>
+<p>Here are a few references:</p>
+<ul>
+<li>ipywidgets user guide at <a href="https://ipywidgets.readthedocs.io/en/stable/user_guide.html">https://ipywidgets.readthedocs.io/en/stable/user_guide.html</a></li>
+<li>Building a custom widget at <a href="https://ipywidgets.readthedocs.io/en/stable/examples/Widget%20Custom.html">https://ipywidgets.readthedocs.io/en/stable/examples/Widget%20Custom.html</a></li>
+</ul>
+<h2>See also</h2>
+<ul>
+<li>Creating custom Jupyter Notebook widgets in Python, HTML, and JavaScript</li>
+</ul>
+    </section>
+
+            </div>
+        </section>
+
+        <footer id="footer" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+                <div>
+                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+        
+    </div>
+    
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=9752080; 
+var sc_invisible=1; 
+var sc_security="837928c1"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="hit counter"
+href="http://statcounter.com/free-hit-counter/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/9752080/0/837928c1/1/"
+alt="hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+</body>
+</html>
+

@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IPython Cookbook, ">
+
+
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+
+
+        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+
+        <title>IPython Cookbook - 5.9. Distributing Python code across multiple cores with IPython</title>
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</head>
+
+<body>
+
+
+    <header id="header" class="pure-g">
+        <div class="pure-u-1 pure-u-md-3-4">
+             <div id="menu">
+                 <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="/">home</a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
+        <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
+        <li><a href="http://cyrille.rossant.net">author</a></li>
+</ul>                </div>
+            </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-4">
+            <div id="social">
+                <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="https://twitter.com/cyrillerossant"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd"><i class="fa fa-github"></i></a></li>
+</ul>                </div>
+            </div>
+        </div>
+    </header>
+       
+
+    
+    <div id="layout" class="pure-g">
+        <section id="content" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+
+    <header id="page-header">
+        <h1>5.9. Distributing Python code across multiple cores with IPython</h1>
+    </header>
+
+    <section id="page">
+        <p><a href="/"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="130" style="margin-right: 20px; margin-bottom: 10px;" /></a> <em>This is one of the 100+ free recipes of the <a href="/">IPython Cookbook, Second Edition</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, a guide to numerical computing and data science in the Jupyter Notebook. The ebook and printed book are available for purchase at <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">Packt Publishing</a>.</em></p>
+<p>▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd">Text on GitHub</a> with a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a></em><br />
+▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
+<p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-5-high-performance-computing/"><strong><em>Go to</em></strong> <em>Chapter 5 : High-Performance Computing</em></a><br />
+▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter05_hpc/09_ipyparallel.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
+<p>Despite CPython's GIL, it is possible to execute several tasks in parallel on multi-core computers using multiple processes instead of multiple threads. Python offers a native <strong>multiprocessing</strong> module. IPython's parallel extension, called <strong>ipyparallel</strong>, offers an even simpler interface that brings powerful parallel computing features in an interactive environment. We will describe this tool here.</p>
+<h2>Getting started</h2>
+<p>You need to install ipyparallel with <code>conda install ipyparallel</code>.</p>
+<p>Then, you need to activate the ipyparallel Jupyter extension with <code>ipcluster nbextension enable --user</code>.</p>
+<h2>How to do it...</h2>
+<p><strong>1.&nbsp;</strong> First, we launch four IPython engines in separate processes. We have basically two options to do this:</p>
+<ul>
+<li>Executing <code>ipcluster start -n 4</code> in a system shell</li>
+<li>Using the web interface provided in the Jupyter Notebook's main page by clicking on the <em>IPython Clusters</em> tab and launching four engines</li>
+</ul>
+<p><strong>2.&nbsp;</strong> Then, we create a client that will act as a proxy to the IPython engines. The client automatically detects the running engines:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ipyparallel</span> <span class="kn">import</span> <span class="n">Client</span>
+<span class="n">rc</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>
+</pre></div>
+</div>
+
+
+<p><strong>3.&nbsp;</strong> Let's check the number of running engines:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">rc</span><span class="o">.</span><span class="n">ids</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>[0, 1, 2, 3]
+</pre></div>
+</div>
+
+
+<p><strong>4.&nbsp;</strong> To run commands in parallel over the engines, we can use the <code>%px</code> line magic or the <code>%%px</code> cell magic:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">px</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Process {os.getpid():d}.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>[stdout:0] Process 10784.
+[stdout:1] Process 10785.
+[stdout:2] Process 10787.
+[stdout:3] Process 10791.
+</pre></div>
+</div>
+
+
+<p><strong>5.&nbsp;</strong> We can specify which engines to run the commands on using the <code>--targets</code> or <code>-t</code> option:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">px</span> <span class="o">-</span><span class="n">t</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span>
+<span class="c1"># The os module has already been imported in</span>
+<span class="c1"># the previous cell.</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Process {os.getpid():d}.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>[stdout:1] Process 10785.
+[stdout:2] Process 10787.
+</pre></div>
+</div>
+
+
+<p><strong>6.&nbsp;</strong> By default, the <code>%px</code> magic executes commands in <strong>blocking mode</strong>; the cell only returns when the commands have completed on all engines. It is possible to run non-blocking commands with the <code>--noblock</code> or <code>-a</code> option. In this case, the cell returns immediately, and the task's status and results can be polled asynchronously from IPython's interactive session:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">px</span> <span class="o">-</span><span class="n">a</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>&lt;AsyncResult: execute&gt;
+</pre></div>
+</div>
+
+
+<p><strong>7.&nbsp;</strong> The previous command returned an <code>ASyncResult</code> instance that we can use to poll the task's status:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">_</span><span class="o">.</span><span class="n">elapsed</span><span class="p">,</span> <span class="n">_</span><span class="o">.</span><span class="n">ready</span><span class="p">())</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>1.522944 False
+</pre></div>
+</div>
+
+
+<p><strong>8.&nbsp;</strong> The <code>%pxresult</code> blocks until the task finishes:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">pxresult</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">_</span><span class="o">.</span><span class="n">elapsed</span><span class="p">,</span> <span class="n">_</span><span class="o">.</span><span class="n">ready</span><span class="p">())</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>5.044711 True
+</pre></div>
+</div>
+
+
+<p><strong>9.&nbsp;</strong> ipyparallel provides convenient functions for common use cases, such as a parallel <code>map()</code> function:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">v</span> <span class="o">=</span> <span class="n">rc</span><span class="p">[:]</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>[0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+</pre></div>
+</div>
+
+
+<h2>How it works...</h2>
+<p>There are several steps to distribute code across multiple cores:</p>
+<p><strong>1.&nbsp;</strong> Launching several IPython <strong>engines</strong> (there is typically one process per core).
+<strong>2.&nbsp;</strong> Creating a <code>Client</code> that acts as a proxy to these engines.
+<strong>3.&nbsp;</strong> Using the client to launch tasks on the engines and retrieve the results.</p>
+<p>Engines are Python processes that execute code on different computing units. They are very similar to IPython kernels.</p>
+<p>There are two main interfaces for accessing the engines:</p>
+<ul>
+<li>With the <strong>direct interface</strong>, we access engines directly and explicitly with their identifiers.</li>
+<li>With the <strong>load-balanced interface</strong>, we access engines through an interface that automatically and dynamically assigns work to appropriate engines.</li>
+</ul>
+<p>We can also create custom interfaces for alternative styles of parallelism.</p>
+<p>In this recipe, we used the direct interface; we addressed individual engines explicitly by specifying their identifiers in the <code>%px</code> magics.</p>
+<p>As we have seen in this recipe, tasks can be launched synchronously or asynchronously. The <code>%px*</code> magic commands are particularly convenient in the Notebook, as they let us work seamlessly on multiple engines in parallel.</p>
+<h2>There's more...</h2>
+<p>The parallel computing capabilities of ipyparallel offer an easy way to launch independent jobs in parallel over multiple cores. A more advanced use case is when jobs have <strong>dependencies</strong>.</p>
+<p>There are two types of dependencies:</p>
+<ul>
+<li><strong>Functional dependency</strong>: It determines whether a given task can execute on a given engine, according to the engine's operating system, the presence or absence of specific Python modules, or other conditions. ipyparallel provides a <code>@require</code> decorator for functions that need specific Python modules to run on the engines. Another decorator is <code>@depend</code>; it lets us define arbitrary conditions implemented in a Python function returning <code>True</code> or <code>False</code>.</li>
+<li><strong>Graph dependency</strong>: It determines whether a given task can execute at a given time on a given engine. We may require a task to run only after one or several other tasks have finished. Additionally, we can impose this condition within any individual engine; an engine may need to execute a specific set of tasks before executing our task. For example, here is how to require tasks B and C (with asynchronous results <code>arB</code> and <code>arC</code>) to finish before task A starts:</li>
+</ul>
+<div class="highlight"><pre><span></span>with view.temp_flags(after=[arB, arC]):
+    arA = view.apply_async(f)
+</pre></div>
+
+
+<p>ipyparallel provides options to specify whether all or any of the dependencies should be met for the task to run. Additionally, we can specify whether success- and/or failure-dependent tasks should be considered as met or not.</p>
+<p>When a task's dependency is unmet, the scheduler reassigns it to one engine, then to another engine, and so on until an appropriate engine is found. If the dependency cannot be met on any engine, an <code>ImpossibleDependency</code> error is raised for the task.</p>
+<p>Passing data between dependent tasks is not particularly easy with ipyparallel. A first possibility is to use blocking calls in the interactive session; wait for tasks to finish, retrieve the results, and send them back to the next tasks. Another possibility is to share data between engines via the filesystem, but this solution does not work well on multiple computers. An alternative solution is described at: <a href="http://nbviewer.ipython.org/gist/minrk/11415238.">http://nbviewer.ipython.org/gist/minrk/11415238.</a></p>
+<h3>References</h3>
+<p>Here are a few references about ipyparallel:</p>
+<ul>
+<li>Documentation of ipyparallel available at <a href="https://ipyparallel.readthedocs.io/en/latest/">https://ipyparallel.readthedocs.io/en/latest/</a></li>
+<li>Dependencies in ipyparallel, explained at <a href="https://ipyparallel.readthedocs.io/en/latest/task.html#dependencies">https://ipyparallel.readthedocs.io/en/latest/task.html#dependencies</a></li>
+<li>DAG dependencies, described at <a href="https://ipyparallel.readthedocs.io/en/latest/dag_dependencies.html">https://ipyparallel.readthedocs.io/en/latest/dag_dependencies.html</a></li>
+<li>Using MPI with ipyparallel, at <a href="http://ipyparallel.readthedocs.io/en/latest/mpi.html">http://ipyparallel.readthedocs.io/en/latest/mpi.html</a></li>
+</ul>
+<p>Here are some references about alternative parallel computing solutions in Python:</p>
+<ul>
+<li>Dask available at <a href="https://dask.pydata.org/en/latest/">https://dask.pydata.org/en/latest/</a></li>
+<li>Joblib available at <a href="http://pythonhosted.org/joblib/parallel.html">http://pythonhosted.org/joblib/parallel.html</a></li>
+<li>List of parallel computing packages available at <a href="http://wiki.python.org/moin/ParallelProcessing">http://wiki.python.org/moin/ParallelProcessing</a></li>
+</ul>
+<h2>See also</h2>
+<ul>
+<li>Interacting with asynchronous parallel tasks in IPython</li>
+<li>Performing out-of-core computations on large arrays with Dask</li>
+</ul>
+    </section>
+
+            </div>
+        </section>
+
+        <footer id="footer" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+                <div>
+                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+        
+    </div>
+    
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=9752080; 
+var sc_invisible=1; 
+var sc_security="837928c1"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="hit counter"
+href="http://statcounter.com/free-hit-counter/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/9752080/0/837928c1/1/"
+alt="hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+</body>
+</html>
+

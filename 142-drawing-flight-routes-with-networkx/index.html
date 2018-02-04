@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IPython Cookbook, ">
+
+
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+
+
+        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+
+        <title>IPython Cookbook - 14.2. Drawing flight routes with NetworkX</title>
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</head>
+
+<body>
+
+
+    <header id="header" class="pure-g">
+        <div class="pure-u-1 pure-u-md-3-4">
+             <div id="menu">
+                 <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="/">home</a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
+        <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
+        <li><a href="http://cyrille.rossant.net">author</a></li>
+</ul>                </div>
+            </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-4">
+            <div id="social">
+                <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="https://twitter.com/cyrillerossant"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd"><i class="fa fa-github"></i></a></li>
+</ul>                </div>
+            </div>
+        </div>
+    </header>
+       
+
+    
+    <div id="layout" class="pure-g">
+        <section id="content" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+
+    <header id="page-header">
+        <h1>14.2. Drawing flight routes with NetworkX</h1>
+    </header>
+
+    <section id="page">
+        <p><a href="/"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="130" style="margin-right: 20px; margin-bottom: 10px;" /></a> <em>This is one of the 100+ free recipes of the <a href="/">IPython Cookbook, Second Edition</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, a guide to numerical computing and data science in the Jupyter Notebook. The ebook and printed book are available for purchase at <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">Packt Publishing</a>.</em></p>
+<p>▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd">Text on GitHub</a> with a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a></em><br />
+▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
+<p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-14-graphs-geometry-and-geographic-information-systems/"><strong><em>Go to</em></strong> <em>Chapter 14 : Graphs, Geometry, and Geographic Information Systems</em></a><br />
+▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter14_graphgeo/02_airports.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
+<p>In this recipe, we load and visualize a dataset containing many flight routes and airports around the world (obtained from the OpenFlights website at <a href="https://openflights.org/data.html">https://openflights.org/data.html</a>).</p>
+<h2>Getting ready</h2>
+<p>To draw the graph on a map, you need <strong>cartopy</strong>, available at <a href="http://scitools.org.uk/cartopy/.">http://scitools.org.uk/cartopy/.</a> You can install it with <code>conda install -c conda-forge cartopy</code>.</p>
+<h2>How to do it...</h2>
+<p><strong>1.&nbsp;</strong> Let's import a few packages:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="kn">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">cartopy.crs</span> <span class="kn">as</span> <span class="nn">ccrs</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+</pre></div>
+</div>
+
+
+<p><strong>2.&nbsp;</strong> We load the first dataset containing many flight routes:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">names</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;airline,airline_id,&#39;</span>
+         <span class="s1">&#39;source,source_id,&#39;</span>
+         <span class="s1">&#39;dest,dest_id,&#39;</span>
+         <span class="s1">&#39;codeshare,stops,equipment&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">routes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="s1">&#39;https://github.com/ipython-books/&#39;</span>
+    <span class="s1">&#39;cookbook-2nd-data/blob/master/&#39;</span>
+    <span class="s1">&#39;routes.dat?raw=true&#39;</span><span class="p">,</span>
+    <span class="n">names</span><span class="o">=</span><span class="n">names</span><span class="p">,</span>
+    <span class="n">header</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+<span class="n">routes</span>
+</pre></div>
+</div>
+
+
+<p><img alt="Output" src="http://ipython-books.github.io/pages/chapter14_graphgeo/02_airports_files/02_airports_9_0.png" /></p>
+<p><strong>3.&nbsp;</strong> We load the second dataset with details about the airports, and we only keep the airports from the United States:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">names</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;id,name,city,country,iata,icao,lat,lon,&#39;</span>
+         <span class="s1">&#39;alt,timezone,dst,tz,type,source&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">airports</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="s1">&#39;https://github.com/ipython-books/&#39;</span>
+    <span class="s1">&#39;cookbook-2nd-data/blob/master/&#39;</span>
+    <span class="s1">&#39;airports.dat?raw=true&#39;</span><span class="p">,</span>
+    <span class="n">header</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+    <span class="n">names</span><span class="o">=</span><span class="n">names</span><span class="p">,</span>
+    <span class="n">index_col</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">na_values</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">N&#39;</span><span class="p">)</span>
+<span class="n">airports_us</span> <span class="o">=</span> <span class="n">airports</span><span class="p">[</span><span class="n">airports</span><span class="p">[</span><span class="s1">&#39;country&#39;</span><span class="p">]</span> <span class="o">==</span>
+                       <span class="s1">&#39;United States&#39;</span><span class="p">]</span>
+<span class="n">airports_us</span>
+</pre></div>
+</div>
+
+
+<p><img alt="Output" src="http://ipython-books.github.io/pages/chapter14_graphgeo/02_airports_files/02_airports_12_0.png" /></p>
+<p>The DataFrame index is the IATA code, a 3-characters code identifying the airports.</p>
+<p><strong>4.&nbsp;</strong> Let's keep all national US flight routes, that is, those for which the source and the destination airports belong to the list of US airports:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">routes_us</span> <span class="o">=</span> <span class="n">routes</span><span class="p">[</span>
+    <span class="n">routes</span><span class="p">[</span><span class="s1">&#39;source&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">airports_us</span><span class="o">.</span><span class="n">index</span><span class="p">)</span> <span class="o">&amp;</span>
+    <span class="n">routes</span><span class="p">[</span><span class="s1">&#39;dest&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">airports_us</span><span class="o">.</span><span class="n">index</span><span class="p">)]</span>
+<span class="n">routes_us</span>
+</pre></div>
+</div>
+
+
+<p><img alt="Output" src="http://ipython-books.github.io/pages/chapter14_graphgeo/02_airports_files/02_airports_15_0.png" /></p>
+<p><strong>5.&nbsp;</strong> We construct the list of edges representing our graph, where nodes are airports, and two airports are connected if there exists a route between them (flight network):</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">edges</span> <span class="o">=</span> <span class="n">routes_us</span><span class="p">[[</span><span class="s1">&#39;source&#39;</span><span class="p">,</span> <span class="s1">&#39;dest&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">edges</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>array([[&#39;ADQ&#39;, &#39;KLN&#39;],
+       [&#39;KLN&#39;, &#39;KYK&#39;],
+       [&#39;BRL&#39;, &#39;ORD&#39;],
+       ...,
+       [&#39;SOW&#39;, &#39;PHX&#39;],
+       [&#39;VIS&#39;, &#39;LAX&#39;],
+       [&#39;WRL&#39;, &#39;CYS&#39;]], dtype=object)
+</pre></div>
+</div>
+
+
+<p><strong>6.&nbsp;</strong> We create the networkX graph from the <code>edges</code> array:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">from_edgelist</span><span class="p">(</span><span class="n">edges</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><strong>7.&nbsp;</strong> Let's take a look at the graph's statistics:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">nodes</span><span class="p">()),</span> <span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">edges</span><span class="p">())</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>(546, 2781)
+</pre></div>
+</div>
+
+
+<p>There are 546 US airports and 2781 routes in the dataset.</p>
+<p><strong>8.&nbsp;</strong> Let's plot the graph:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                 <span class="n">font_size</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=.</span><span class="mi">5</span><span class="p">,</span>
+                 <span class="n">width</span><span class="o">=.</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
+</pre></div>
+</div>
+
+
+<p><img alt="&lt;matplotlib.figure.Figure at 0x7fc830810b38&gt;" src="http://ipython-books.github.io/pages/chapter14_graphgeo/02_airports_files/02_airports_24_0.png" /></p>
+<p><strong>9.&nbsp;</strong> There are a few airports that are not connected to the rest of the airports. We keep the largest connected component of the graph as follows (the subgraphs returned by <code>connected_component_subgraphs()</code> are sorted by decreasing size):</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">sg</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">connected_component_subgraphs</span><span class="p">(</span><span class="n">g</span><span class="p">))</span>
+</pre></div>
+</div>
+
+
+<p><strong>10.&nbsp;</strong> Now, we plot the largest connected component subgraph:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx</span><span class="p">(</span><span class="n">sg</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                 <span class="n">node_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">width</span><span class="o">=.</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
+</pre></div>
+</div>
+
+
+<p><img alt="&lt;matplotlib.figure.Figure at 0x7fc835a72710&gt;" src="http://ipython-books.github.io/pages/chapter14_graphgeo/02_airports_files/02_airports_28_0.png" /></p>
+<p>The graph encodes only the <em>topology</em> (connections between the airports) and not the <em>geometry</em> (actual positions of the airports on a map). Airports at the center of the graph are the largest US airports.</p>
+<p><strong>11.&nbsp;</strong> We're going to draw the graph on a map, using the geographical coordinates of the airports. First, we need to create a dictionary where the keys are the airports IATA codes, and the values are the coordinates:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">pos</span> <span class="o">=</span> <span class="p">{</span><span class="n">airport</span><span class="p">:</span> <span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">],</span> <span class="n">v</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">])</span>
+       <span class="k">for</span> <span class="n">airport</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span>
+       <span class="n">airports_us</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+</pre></div>
+</div>
+
+
+<p><strong>12.&nbsp;</strong> The node sizes will depend on the degree of the nodes, that is, the number of airports connected to every node:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">deg</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">degree</span><span class="p">(</span><span class="n">sg</span><span class="p">)</span>
+<span class="n">sizes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span> <span class="o">*</span> <span class="n">deg</span><span class="p">[</span><span class="n">iata</span><span class="p">]</span> <span class="k">for</span> <span class="n">iata</span> <span class="ow">in</span> <span class="n">sg</span><span class="o">.</span><span class="n">nodes</span><span class="p">]</span>
+</pre></div>
+</div>
+
+
+<p><strong>13.&nbsp;</strong> We will also show the airport altitude as the node color:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">altitude</span> <span class="o">=</span> <span class="n">airports_us</span><span class="p">[</span><span class="s1">&#39;alt&#39;</span><span class="p">]</span>
+<span class="n">altitude</span> <span class="o">=</span> <span class="p">[</span><span class="n">altitude</span><span class="p">[</span><span class="n">iata</span><span class="p">]</span> <span class="k">for</span> <span class="n">iata</span> <span class="ow">in</span> <span class="n">sg</span><span class="o">.</span><span class="n">nodes</span><span class="p">]</span>
+</pre></div>
+</div>
+
+
+<p><strong>14.&nbsp;</strong> We will display the labels of the largest airports only (at least 20 connections to other US airports):</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">labels</span> <span class="o">=</span> <span class="p">{</span><span class="n">iata</span><span class="p">:</span> <span class="n">iata</span> <span class="k">if</span> <span class="n">deg</span><span class="p">[</span><span class="n">iata</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">20</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span>
+          <span class="k">for</span> <span class="n">iata</span> <span class="ow">in</span> <span class="n">sg</span><span class="o">.</span><span class="n">nodes</span><span class="p">}</span>
+</pre></div>
+</div>
+
+
+<p><strong>15.&nbsp;</strong> Finally, we use cartopy to project the points on the map:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Map projection</span>
+<span class="n">crs</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">()</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span>
+    <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+    <span class="n">subplot_kw</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">crs</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">coastlines</span><span class="p">()</span>
+<span class="c1"># Extent of continental US.</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_extent</span><span class="p">([</span><span class="o">-</span><span class="mi">128</span><span class="p">,</span> <span class="o">-</span><span class="mi">62</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">])</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx</span><span class="p">(</span><span class="n">sg</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+                 <span class="n">font_size</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
+                 <span class="n">alpha</span><span class="o">=.</span><span class="mi">5</span><span class="p">,</span>
+                 <span class="n">width</span><span class="o">=.</span><span class="mo">075</span><span class="p">,</span>
+                 <span class="n">node_size</span><span class="o">=</span><span class="n">sizes</span><span class="p">,</span>
+                 <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span>
+                 <span class="n">pos</span><span class="o">=</span><span class="n">pos</span><span class="p">,</span>
+                 <span class="n">node_color</span><span class="o">=</span><span class="n">altitude</span><span class="p">,</span>
+                 <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">autumn</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><img alt="&lt;matplotlib.figure.Figure at 0x7fc83094f748&gt;" src="http://ipython-books.github.io/pages/chapter14_graphgeo/02_airports_files/02_airports_38_0.png" /></p>
+<h2>See also</h2>
+<ul>
+<li>Manipulating and visualize graphs with NetworkX</li>
+<li>Manipulating geospatial data with Cartopy</li>
+</ul>
+    </section>
+
+            </div>
+        </section>
+
+        <footer id="footer" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+                <div>
+                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+        
+    </div>
+    
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=9752080; 
+var sc_invisible=1; 
+var sc_security="837928c1"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="hit counter"
+href="http://statcounter.com/free-hit-counter/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/9752080/0/837928c1/1/"
+alt="hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+</body>
+</html>
+

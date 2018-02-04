@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IPython Cookbook, ">
+
+
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+
+
+        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+
+        <title>IPython Cookbook - 7.5. Fitting a probability distribution to data with the maximum likelihood method</title>
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</head>
+
+<body>
+
+
+    <header id="header" class="pure-g">
+        <div class="pure-u-1 pure-u-md-3-4">
+             <div id="menu">
+                 <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="/">home</a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
+        <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
+        <li><a href="http://cyrille.rossant.net">author</a></li>
+</ul>                </div>
+            </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-4">
+            <div id="social">
+                <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="https://twitter.com/cyrillerossant"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd"><i class="fa fa-github"></i></a></li>
+</ul>                </div>
+            </div>
+        </div>
+    </header>
+       
+
+    
+    <div id="layout" class="pure-g">
+        <section id="content" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+
+    <header id="page-header">
+        <h1>7.5. Fitting a probability distribution to data with the maximum likelihood method</h1>
+    </header>
+
+    <section id="page">
+        <p><a href="/"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="130" style="margin-right: 20px; margin-bottom: 10px;" /></a> <em>This is one of the 100+ free recipes of the <a href="/">IPython Cookbook, Second Edition</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, a guide to numerical computing and data science in the Jupyter Notebook. The ebook and printed book are available for purchase at <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">Packt Publishing</a>.</em></p>
+<p>▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd">Text on GitHub</a> with a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a></em><br />
+▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
+<p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-7-statistical-data-analysis/"><strong><em>Go to</em></strong> <em>Chapter 7 : Statistical Data Analysis</em></a><br />
+▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter07_stats/05_mlfit.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
+<p>A good way to explain a dataset is to apply a probabilistic model to it. Finding an adequate model can be a job in its own. Once a model is chosen, it is necessary to compare it to the data. This is what statistical estimation is about. In this recipe, we apply the <strong>maximum likelihood method</strong> on a dataset of survival times after heart transplant (1967-1974 study).</p>
+<h2>Getting ready</h2>
+<p>As usual in this chapter, a background in probability theory and real analysis is recommended. In addition, you need the statsmodels package to retrieve the test dataset. It should be included in Anaconda, but you can always install it with the <code>conda install statsmodels</code> command.</p>
+<h2>How to do it...</h2>
+<p><strong>1.&nbsp;</strong> statsmodels is a Python package for conducting statistical data analyses. It also contains real-world datasets that we can use when experimenting with new methods. Here, we load the <em>heart</em> dataset:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="kn">as</span> <span class="nn">st</span>
+<span class="kn">import</span> <span class="nn">statsmodels.datasets</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">statsmodels</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">heart</span><span class="o">.</span><span class="n">load_pandas</span><span class="p">()</span><span class="o">.</span><span class="n">data</span>
+</pre></div>
+</div>
+
+
+<p><strong>2.&nbsp;</strong> Let's take a look at this DataFrame.</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
+</pre></div>
+</div>
+
+
+<p><img alt="Transplant Survival Data" src="http://ipython-books.github.io/pages/chapter07_stats/05_mlfit_files/05_mlfit_9_0.png" /></p>
+<p>This dataset contains censored and uncensored data: a censor of 0 means that the patient was alive at the end of the study, and thus we don't know the exact survival time. We only know that the patient survived <em>at least</em> the indicated number of days. For simplicity here, we only keep uncensored data (we thereby introduce a bias toward patients that did not survive very long after their transplant):</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">censors</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">survival</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">survival</span>
+</pre></div>
+</div>
+
+
+<p><strong>3.&nbsp;</strong> Let's take a look at the data graphically, by plotting the raw survival data and the histogram:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">survival</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Patient&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Survival time (days)&#39;</span><span class="p">)</span>
+
+<span class="n">ax2</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">survival</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Survival time (days)&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Number of patients&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><img alt="Survival time" src="http://ipython-books.github.io/pages/chapter07_stats/05_mlfit_files/05_mlfit_13_0.png" /></p>
+<p><strong>4.&nbsp;</strong> We observe that the histogram is decreasing very rapidly. Fortunately, the survival rates today are much higher (~70 percent after 5 years). Let's try to fit an exponential distribution (more information on the exponential distribution is available at <a href="https://en.wikipedia.org/wiki/Exponential_distribution">https://en.wikipedia.org/wiki/Exponential_distribution</a>) to the data. According to this model, <span class="math">\(S\)</span> (number of days of survival) is an exponential random variable with the parameter <span class="math">\(\lambda\)</span>, and the observations <span class="math">\(s_i\)</span> are sampled from this distribution. Let the sample mean be:</p>
+<div class="math">$$\overline s = \frac 1 n \sum s_i$$</div>
+<p>The likelihood function of an exponential distribution is as follows, by definition (see proof in the next section):</p>
+<div class="math">$$\mathcal{L}(\lambda, \{s_i\}) = P(\{s_i\} \mid \lambda) = \lambda^n \exp\left(-\lambda n \overline s\right)$$</div>
+<p>The <strong>maximum likelihood estimate</strong> for the rate parameter is, by definition, the value <span class="math">\(\lambda\)</span> that maximizes the likelihood function. In other words, it is the parameter that maximizes the probability of observing the data, assuming that the observations are sampled from an exponential distribution.</p>
+<p>Here, it can be shown that the likelihood function has a maximum value when <span class="math">\(\lambda = 1/s\)</span>, which is the maximum likelihood estimate for the rate parameter. Let's compute this parameter numerically:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">smean</span> <span class="o">=</span> <span class="n">survival</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">rate</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">/</span> <span class="n">smean</span>
+</pre></div>
+</div>
+
+
+<p><strong>5.&nbsp;</strong> To compare the fitted exponential distribution to the data, we first need to generate linearly spaced values for the x-axis (days):</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">smax</span> <span class="o">=</span> <span class="n">survival</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="n">days</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">smax</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="c1"># bin size: interval between two</span>
+<span class="c1"># consecutive values in `days`</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="n">smax</span> <span class="o">/</span> <span class="mf">999.</span>
+</pre></div>
+</div>
+
+
+<p>We can obtain the probability density function of the exponential distribution with SciPy. The parameter is the scale, the inverse of the estimated rate.</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">dist_exp</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">expon</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">days</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.</span> <span class="o">/</span> <span class="n">rate</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><strong>6.&nbsp;</strong> Now, let's plot the histogram and the obtained distribution. We need to rescale the theoretical distribution to the histogram (depending on the bin size and the total number of data points):</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">nbins</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">survival</span><span class="p">,</span> <span class="n">nbins</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">days</span><span class="p">,</span> <span class="n">dist_exp</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">survival</span><span class="p">)</span> <span class="o">*</span> <span class="n">smax</span> <span class="o">/</span> <span class="n">nbins</span><span class="p">,</span>
+        <span class="s1">&#39;-r&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Survival time (days)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Number of patients&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><img alt="Exponential fit" src="http://ipython-books.github.io/pages/chapter07_stats/05_mlfit_files/05_mlfit_26_0.png" /></p>
+<p>The fit is far from perfect. We were able to find an analytical formula for the maximum likelihood estimate here. In more complex situations, that is not always possible. Thus we may need to resort to numerical methods. SciPy actually integrates numerical maximum likelihood routines for a large number of distributions. Here, we use this other method to estimate the parameter of the exponential distribution.</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">dist</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">expon</span>
+<span class="n">args</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">survival</span><span class="p">)</span>
+<span class="n">args</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>(1.000, 222.289)
+</pre></div>
+</div>
+
+
+<p><strong>7.&nbsp;</strong> We can use these parameters to perform a <strong>Kolmogorov-Smirnov test</strong>, which assesses the goodness of fit of the distribution with respect to the data. This test is based on a distance between the <strong>empirical distribution function</strong> of the data and the <strong>cumulative distribution function (CDF)</strong> of the reference distribution.</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">st</span><span class="o">.</span><span class="n">kstest</span><span class="p">(</span><span class="n">survival</span><span class="p">,</span> <span class="n">dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>KstestResult(statistic=0.362, pvalue=8.647e-06)
+</pre></div>
+</div>
+
+
+<p>Here, the p-value is very low: the null hypothesis (stating that the observed data stems from an exponential distribution with a maximum likelihood rate parameter) can be rejected with high confidence. Let's try another distribution, the Birnbaum-Sanders distribution, which is typically used to model failure times. (More information on the Birnbaum-Sanders distribution is available at <a href="https://en.wikipedia.org/wiki/Birnbaum-Saunders_distribution.">https://en.wikipedia.org/wiki/Birnbaum-Saunders_distribution.</a>)</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">dist</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">fatiguelife</span>
+<span class="n">args</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">survival</span><span class="p">)</span>
+<span class="n">st</span><span class="o">.</span><span class="n">kstest</span><span class="p">(</span><span class="n">survival</span><span class="p">,</span> <span class="n">dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>KstestResult(statistic=0.188, pvalue=0.073)
+</pre></div>
+</div>
+
+
+<p>This time, the p-value is about 0.073, so that we would not reject the null hypothesis with a five percent confidence level. When plotting the resulting distribution, we observe a better fit than with the exponential distribution:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">dist_fl</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">days</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+<span class="n">nbins</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">survival</span><span class="p">,</span> <span class="n">nbins</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">days</span><span class="p">,</span> <span class="n">dist_exp</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">survival</span><span class="p">)</span> <span class="o">*</span> <span class="n">smax</span> <span class="o">/</span> <span class="n">nbins</span><span class="p">,</span>
+        <span class="s1">&#39;-r&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;exp&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">days</span><span class="p">,</span> <span class="n">dist_fl</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">survival</span><span class="p">)</span> <span class="o">*</span> <span class="n">smax</span> <span class="o">/</span> <span class="n">nbins</span><span class="p">,</span>
+        <span class="s1">&#39;--g&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;BS&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Survival time (days)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Number of patients&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+
+
+<p><img alt="Different fits" src="http://ipython-books.github.io/pages/chapter07_stats/05_mlfit_files/05_mlfit_34_0.png" /></p>
+<h2>How it works...</h2>
+<p>Here, we give the calculations leading to the maximum likelihood estimation of the rate parameter for an exponential distribution:</p>
+<div class="math">$$\begin{align*}
+\mathcal{L}(\lambda, \{s_i\}) &amp;= P(\{s_i\} \mid \lambda) &amp;\\
+&amp;= \prod_{i=1}^n P(s_i \mid \lambda) &amp; \textrm{(by independence of the $s_i$)}\\
+&amp;= \prod_{i=1}^n \lambda \exp(-\lambda s_i) &amp;\\
+&amp;= \lambda^n \exp\left(-\lambda \sum_{i=1}^n s_i\right) &amp;\\
+&amp;= \lambda^n \exp\left(-\lambda n \overline s\right) &amp;
+\end{align*}$$</div>
+<p>Here, <span class="math">\(\overline s\)</span> is the sample mean. In more complex situations, we would require numerical optimization methods in which the principle is to maximize the likelihood function using a standard numerical optimization algorithm (see <em>Chapter 9, Numerical Optimization</em>).</p>
+<p>To find the maximum of this function, let's compute its derivative function with respect to <span class="math">\(\lambda\)</span>:</p>
+<div class="math">$$\frac{d\mathcal{L}(\lambda, \{s_i\})}{d\lambda} = \lambda^{n-1} \exp\left(-\lambda n \overline s \right) \left( n - n \lambda \overline s \right)$$</div>
+<p>The root of this derivative is therefore <span class="math">\(\lambda = 1/\overline s\)</span>.</p>
+<h2>There's more...</h2>
+<p>Here are a few references:</p>
+<ul>
+<li>Maximum likelihood on Wikipedia, available at <a href="https://en.wikipedia.org/wiki/Maximum_likelihood">https://en.wikipedia.org/wiki/Maximum_likelihood</a></li>
+<li>Kolmogorov-Smirnov test on Wikipedia, available at <a href="https://en.wikipedia.org/wiki/Kolmogorov-Smirnov_test">https://en.wikipedia.org/wiki/Kolmogorov-Smirnov_test</a></li>
+<li>Goodness of fit at <a href="https://en.wikipedia.org/wiki/Goodness_of_fit">https://en.wikipedia.org/wiki/Goodness_of_fit</a></li>
+</ul>
+<p>The maximum likelihood method is parametric: the model belongs to a prespecified parametric family of distributions. In the next recipe, we will see a nonparametric kernel-based method.</p>
+<h2>See also</h2>
+<ul>
+<li>Estimating a probability distribution nonparametrically with a kernel density estimation</li>
+</ul>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+    </section>
+
+            </div>
+        </section>
+
+        <footer id="footer" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+                <div>
+                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+        
+    </div>
+    
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=9752080; 
+var sc_invisible=1; 
+var sc_security="837928c1"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="hit counter"
+href="http://statcounter.com/free-hit-counter/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/9752080/0/837928c1/1/"
+alt="hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+</body>
+</html>
+

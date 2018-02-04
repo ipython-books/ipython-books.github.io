@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IPython Cookbook, ">
+
+
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+
+
+        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+
+        <title>IPython Cookbook - 2.8. Writing unit tests with py.test</title>
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</head>
+
+<body>
+
+
+    <header id="header" class="pure-g">
+        <div class="pure-u-1 pure-u-md-3-4">
+             <div id="menu">
+                 <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="/">home</a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
+        <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
+        <li><a href="http://cyrille.rossant.net">author</a></li>
+</ul>                </div>
+            </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-4">
+            <div id="social">
+                <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="https://twitter.com/cyrillerossant"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd"><i class="fa fa-github"></i></a></li>
+</ul>                </div>
+            </div>
+        </div>
+    </header>
+       
+
+    
+    <div id="layout" class="pure-g">
+        <section id="content" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+
+    <header id="page-header">
+        <h1>2.8. Writing unit tests with py.test</h1>
+    </header>
+
+    <section id="page">
+        <p><a href="/"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="130" style="margin-right: 20px; margin-bottom: 10px;" /></a> <em>This is one of the 100+ free recipes of the <a href="/">IPython Cookbook, Second Edition</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, a guide to numerical computing and data science in the Jupyter Notebook. The ebook and printed book are available for purchase at <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">Packt Publishing</a>.</em></p>
+<p>▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd">Text on GitHub</a> with a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a></em><br />
+▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
+<p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-2-best-practices-in-interactive-computing/"><strong><em>Go to</em></strong> <em>Chapter 2 : Best practices in Interactive Computing</em></a><br />
+▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter02_best_practices/08_test.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
+<p>Untested code is broken code. Manual testing is essential to ensuring that our software works as expected and does not contain critical bugs. However, manual testing is severely limited because bugs may be introduced at any time in the code.</p>
+<p>Nowadays, automated testing is a standard practice in software engineering. In this recipe, we will briefly cover important aspects of automated testing: unit tests, test-driven development, test coverage, and continuous integration. Following these practices is fundamental in order to produce high-quality software.</p>
+<h2>Getting ready</h2>
+<p>Python has a native unit testing module that you can readily use (unittest). Other third-party unit testing packages exist. In this recipe, we will use <strong>py.test</strong>. It is installed by default in Anaconda, but you can also install it manually with <code>conda install pytest</code>.</p>
+<h2>How to do it...</h2>
+<p><strong>1.&nbsp;</strong> Let's write in a <code>first.py</code> file a simple function that returns the first element of a list.</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">writefile</span> <span class="n">first</span><span class="o">.</span><span class="n">py</span>
+<span class="k">def</span> <span class="nf">first</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>Overwriting first.py
+</pre></div>
+</div>
+
+
+<p><strong>2.&nbsp;</strong> To test this function, we write another function, the <em>unit test</em>, that checks our first function using an example and an assertion:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">writefile</span> <span class="o">-</span><span class="n">a</span> <span class="n">first</span><span class="o">.</span><span class="n">py</span>
+
+<span class="c1"># This is appended to the file.</span>
+<span class="k">def</span> <span class="nf">test_first</span><span class="p">():</span>
+    <span class="k">assert</span> <span class="n">first</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>Appending to first.py
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">cat</span> <span class="n">first</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>def first(l):
+    return l[0]
+
+# This is appended to the file.
+def test_first():
+    assert first([1, 2, 3]) == 1
+</pre></div>
+</div>
+
+
+<p><strong>3.&nbsp;</strong> To run the unit test, we use the <code>pytest</code> executable (the <code>!</code> means that we're calling an external program from IPython):</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="err">!</span><span class="n">pytest</span> <span class="n">first</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>============= test session starts ==============
+platform linux -- Python 3.6.3, pytest-3.2.1, py-1.4.34
+rootdir: ~/git/cookbook-2nd/chapter02_best_practices:
+plugins: cov-2.5.1
+
+collecting 0 items
+collecting 1 item
+collected 1 item
+
+first.py .
+
+=========== 1 passed in 0.00 seconds ===========
+</pre></div>
+</div>
+
+
+<p><strong>4.&nbsp;</strong> Our test passes! Let's add another example with an empty list. We want our function to return <code>None</code> in this case:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">writefile</span> <span class="n">first</span><span class="o">.</span><span class="n">py</span>
+<span class="k">def</span> <span class="nf">first</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">test_first</span><span class="p">():</span>
+    <span class="k">assert</span> <span class="n">first</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span>
+    <span class="k">assert</span> <span class="n">first</span><span class="p">([])</span> <span class="ow">is</span> <span class="bp">None</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>Overwriting first.py
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="err">!</span><span class="n">pytest</span> <span class="n">first</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>============= test session starts ==============
+platform linux -- Python 3.6.3, pytest-3.2.1, py-1.4.34
+rootdir: ~/git/cookbook-2nd/chapter02_best_practices:
+plugins: cov-2.5.1
+
+collecting 0 items
+collecting 1 item
+collected 1 item
+
+first.py F
+
+=================== FAILURES ===================
+__________________ test_first __________________
+
+    def test_first():
+        assert first([1, 2, 3]) == 1
+&gt;       assert first([]) is None
+
+first.py:6:
+ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+l = []
+
+    def first(l):
+&gt;       return l[0]
+E       IndexError: list index out of range
+
+first.py:2: IndexError
+=========== 1 failed in 0.02 seconds ===========
+</pre></div>
+</div>
+
+
+<p><strong>5.&nbsp;</strong> This time, our test fails. Let's fix it by modifying the <code>first()</code> function:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">writefile</span> <span class="n">first</span><span class="o">.</span><span class="n">py</span>
+<span class="k">def</span> <span class="nf">first</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">l</span> <span class="k">else</span> <span class="bp">None</span>
+
+<span class="k">def</span> <span class="nf">test_first</span><span class="p">():</span>
+    <span class="k">assert</span> <span class="n">first</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span>
+    <span class="k">assert</span> <span class="n">first</span><span class="p">([])</span> <span class="ow">is</span> <span class="bp">None</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>Overwriting first.py
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="err">!</span><span class="n">pytest</span> <span class="n">first</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>============= test session starts ==============
+platform linux -- Python 3.6.3, pytest-3.2.1, py-1.4.34
+rootdir: ~/git/cookbook-2nd/chapter02_best_practices:
+plugins: cov-2.5.1
+
+collecting 0 items
+collecting 1 item
+collected 1 item
+
+first.py .
+
+=========== 1 passed in 0.00 seconds ===========
+</pre></div>
+</div>
+
+
+<p>The test passes again!</p>
+<h2>How it works...</h2>
+<p>By definition, a unit test must focus on one specific functionality. All unit tests should be completely independent. Writing a program as a collection of well-tested, mostly decoupled units forces you to write modular code that is more easily maintainable.</p>
+<p>In a Python package, a <code>test_xxx.py</code> module should accompany every Python module named <code>xxx.py</code>. This testing module contains unit tests that test functionality implemented in the <code>xxx.py</code> module.</p>
+<p>Sometimes, your module's functions require preliminary work to run (for example, setting up the environment, creating data files, or setting up a web server). The unit testing framework can handle this via <strong>fixtures</strong>. The state of the system environment should be exactly the same before and after a testing module runs. If your tests affect the file system, they should do so in a temporary directory that is automatically deleted at the end of the tests. Testing frameworks such as py.test provide convenient facilities for this use-case.</p>
+<p>Tests typically involve many assertions. With py.test, you can simply use the builtin <code>assert</code> keyword. Further convenient assertion functions are provided by NumPy (see <a href="http://docs.scipy.org/doc/numpy/reference/routines.testing.html">http://docs.scipy.org/doc/numpy/reference/routines.testing.html</a>). They are especially useful when working with arrays. For example, <code>np.testing.assert_allclose(x, y)</code> asserts that the <code>x</code> and <code>y</code> arrays are almost equal, up to a given precision that can be specified.</p>
+<p>Writing a full testing suite takes time. It imposes strong (but good) constraints on your code's architecture. It is a real investment, but it is always profitable in the long run. Also, knowing that your project is backed by a full testing suite is a real load off your mind.</p>
+<p>First, thinking about unit tests from the beginning forces you to think about a modular architecture. It is really difficult to write unit tests for a monolithic program full of interdependencies.</p>
+<p>Second, unit tests make it easier for you to find and fix bugs. If a unit test fails after introducing a change in the program, isolating and reproducing the bugs becomes trivial.</p>
+<p>Third, unit tests help you avoid regressions, that is, fixed bugs that silently reappear in a later version. When you discover a new bug, you should write a specific failing unit test for it. To fix it, make this test pass. Now, if the bug reappears later, this unit test will fail and you will immediately be able to address it.</p>
+<p>When you write a complex program based on interdependent APIs, having a good test coverage for one module means that you can safely rely on it in other modules, without worrying about its behavior not conforming to its specification.</p>
+<p>Unit tests are just one type of automated tests. Other important types of tests include integration tests (making sure that different parts of the program work together) and functional tests (testing typical use-cases).</p>
+<h2>There's more...</h2>
+<p>Automated testing is a wide topic, and we only scratched the surface in this recipe. We give some further information here.</p>
+<h3>Test coverage</h3>
+<p>Using unit tests is good. However, measuring <strong>test coverage</strong> is even better: it quantifies how much of our code is being covered by your testing suite. The <strong>coverage.py</strong> module (https://coverage.readthedocs.io/) does precisely this. It integrates well with py.test.</p>
+<p>The <strong>coveralls.io</strong> service brings test-coverage features to a continuous integration server (refer to the <em>Unit testing and continuous integration</em> section). It works seamlessly with GitHub.</p>
+<h3>Workflows with unit testing</h3>
+<p>Note the particular workflow we have used in this example. After writing our function, we created a first unit test that passed. Then we created a second test, which failed. We investigated the issue and fixed the function. The second test passed. We could continue writing more and more complex unit tests, until we are confident that the function works as expected in most situations.</p>
+<blockquote>
+<p>Run <code>pytest --pdb</code> to drop into the Python debugger on failures. This is quite convenient to find out quickly why a unit test fails.</p>
+</blockquote>
+<p>We could even write the tests <em>before</em> the function itself. This is <strong>test-driven development</strong>, which consists of writing unit tests before writing the actual code. This workflow forces us to think about what our code does and how one uses it, instead of how it is implemented.</p>
+<h3>Unit testing and continuous integration</h3>
+<p>A good habit to get into is running the full testing suite of our project at every commit. In fact, it is even possible to do this completely transparently and automatically through <strong>continuous integration</strong>. We can set up a server that automatically runs our testing suite in the cloud at every commit. If a test fails, we get an automatic e-mail telling us what the problem is so that we can fix it.</p>
+<p>There are many continuous integration systems and services: Jenkins/Hudson, Travis CI (https://travis-ci.org), Codeship (http://codeship.com/), and others. Some of them play well with GitHub. For example, to use Travis CI with a GitHub project, create an account on Travis CI, link your GitHub project to this account, and then add a <code>.travis.yml</code> file with various settings in your repository (see the additional details in the references below).</p>
+<p>In conclusion, unit testing, code coverage, and continuous integration are standard practices that should be used in all significant projects.</p>
+<p>Here are a few references:</p>
+<ul>
+<li>Test-driven development, at <a href="https://en.wikipedia.org/wiki/Test-driven_development">https://en.wikipedia.org/wiki/Test-driven_development</a></li>
+<li>Documentation of Travis CI in Python, at <a href="http://about.travis-ci.org/docs/user/languages/python/">http://about.travis-ci.org/docs/user/languages/python/</a></li>
+</ul>
+    </section>
+
+            </div>
+        </section>
+
+        <footer id="footer" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+                <div>
+                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+        
+    </div>
+    
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=9752080; 
+var sc_invisible=1; 
+var sc_security="837928c1"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="hit counter"
+href="http://statcounter.com/free-hit-counter/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/9752080/0/837928c1/1/"
+alt="hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+</body>
+</html>
+

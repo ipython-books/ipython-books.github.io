@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IPython Cookbook, ">
+
+
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+
+
+        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+
+        <title>IPython Cookbook - 7.3. Getting started with Bayesian methods</title>
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</head>
+
+<body>
+
+
+    <header id="header" class="pure-g">
+        <div class="pure-u-1 pure-u-md-3-4">
+             <div id="menu">
+                 <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="/">home</a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
+        <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
+        <li><a href="http://cyrille.rossant.net">author</a></li>
+</ul>                </div>
+            </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-4">
+            <div id="social">
+                <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="https://twitter.com/cyrillerossant"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd"><i class="fa fa-github"></i></a></li>
+</ul>                </div>
+            </div>
+        </div>
+    </header>
+       
+
+    
+    <div id="layout" class="pure-g">
+        <section id="content" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+
+    <header id="page-header">
+        <h1>7.3. Getting started with Bayesian methods</h1>
+    </header>
+
+    <section id="page">
+        <p><a href="/"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="130" style="margin-right: 20px; margin-bottom: 10px;" /></a> <em>This is one of the 100+ free recipes of the <a href="/">IPython Cookbook, Second Edition</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, a guide to numerical computing and data science in the Jupyter Notebook. The ebook and printed book are available for purchase at <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">Packt Publishing</a>.</em></p>
+<p>▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd">Text on GitHub</a> with a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a></em><br />
+▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
+<p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-7-statistical-data-analysis/"><strong><em>Go to</em></strong> <em>Chapter 7 : Statistical Data Analysis</em></a><br />
+▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter07_stats/03_bayesian.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
+<p>In the last recipe, we used a frequentist method to test a hypothesis on incomplete data. Here, we will see an alternative approach based on <strong>Bayesian theory</strong>. The main idea is to consider that <em>unknown parameters are random variables</em>, just like the variables describing the experiment. Prior knowledge about the parameters is integrated into the model. This knowledge is updated as more and more data is observed.</p>
+<p>Frequentists and Bayesians interpret probabilities differently. Frequentists interpret a probability as a limit of frequencies when the number of samples tends to infinity. Bayesians interpret it as a belief; this belief is updated as more and more data is observed.</p>
+<p>Here, we revisit the previous coin flipping example with a Bayesian approach. This example is sufficiently simple to permit an analytical treatment. In general, as we will see later in this chapter, analytical results cannot be obtained and numerical methods become essential.</p>
+<h2>Getting ready</h2>
+<p>This is a math-heavy recipe. Knowledge of basic probability theory (random variables, distributions, Bayes formula) and calculus (derivatives, integrals) is recommended. We use the same notations as in the previous recipe.</p>
+<h2>How to do it...</h2>
+<p>Let <span class="math">\(q\)</span> be the probability of obtaining a head. Whereas <span class="math">\(q\)</span> was just a fixed number in the previous recipe, we consider here that it is a <strong>random variable</strong>. Initially, this variable follows a distribution called the <strong>prior probability distribution</strong>. It represents our knowledge about <span class="math">\(q\)</span> <em>before</em> we start flipping the coin. We will update this distribution after each trial (posterior distribution).</p>
+<p><strong>1.&nbsp;</strong> First, we assume that <span class="math">\(q\)</span> is a <em>uniform</em> random variable on the interval <span class="math">\([0, 1]\)</span>. That's our prior distribution: for all <span class="math">\(q\)</span>, <span class="math">\(P(q)=1\)</span>.
+<strong>2.&nbsp;</strong> Then, we flip our coin <span class="math">\(n\)</span> times. We note <span class="math">\(x_i\)</span> the outcome of the <span class="math">\(i\)</span>th flip (<span class="math">\(0\)</span> for tail, <span class="math">\(1\)</span> for head).
+<strong>3.&nbsp;</strong> What is the probability distribution of <span class="math">\(q\)</span> knowing the observations <span class="math">\(x_i\)</span>? <strong>Bayes' theorem</strong> allows us to compute the <em>posterior distribution</em> analytically (see the next section for the mathematical details):</p>
+<div class="math">$$P \left( q \mid \{x_i\} \right) = \frac{P(\{x_i\} \mid q) P(q)}{\displaystyle\int_0^1 P(\{x_i\} \mid q) P(q) dq} = (n+1)\binom n h q^h (1-q)^{n-h}$$</div>
+<p><strong>4.&nbsp;</strong> We define the posterior distribution according to the mathematical formula above. We remark that this expression is <span class="math">\((n+1)\)</span> times the <strong>probability mass function (PMF)</strong> of the binomial distribution, which is directly available in <code>scipy.stats</code>. (For more information on Binomial distribution, refer to <a href="https://en.wikipedia.org/wiki/Binomial_distribution.">https://en.wikipedia.org/wiki/Binomial_distribution.</a>)</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="kn">as</span> <span class="nn">st</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">posterior</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">st</span><span class="o">.</span><span class="n">binom</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><strong>5.&nbsp;</strong> Let's plot this distribution for an observation of <span class="math">\(h=61\)</span> heads and <span class="math">\(n=100\)</span> total flips:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">h</span> <span class="o">=</span> <span class="mi">61</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">posterior</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="s1">&#39;-k&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;q parameter&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Posterior distribution&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><img alt="Posterior distribution" src="http://ipython-books.github.io/pages/chapter07_stats/03_bayesian_files/03_bayesian_15_0.png" /></p>
+<p>This curve represents our belief about the parameter q after we have observed 61 heads.</p>
+<h2>How it works...</h2>
+<p>In this section, we explain Bayes' theorem, and we give the mathematical details underlying this example.</p>
+<h3>Bayes' theorem</h3>
+<p>There is a very general idea in data science that consists of explaining data with a mathematical model. This is formalized with a one-way process, <em>model → data</em>.</p>
+<p>Once this process is formalized, the task of the data scientist is to exploit the data to recover information about the model. In other words, we want to <em>invert</em> the original process and get <em>data → model</em>.</p>
+<p>In a probabilistic setting, the direct process is represented as a <strong>conditional probability distribution</strong> <span class="math">\(P(data \mid model)\)</span>. This is the probability of observing the data when the model is entirely specified.</p>
+<p>Similarly, the inverse process is <span class="math">\(P(model \mid data)\)</span>. It gives us information about the model (what we're looking for), knowing the observations (what we have).</p>
+<p>Bayes' theorem is at the core of a general framework for inverting a probabilistic process of <em>model → data</em>. It can be stated as follows:</p>
+<div class="math">$$P(\textrm{model} \mid \textrm{data}) = \frac{P(\textrm{data} \mid \textrm{model}) \, P(\textrm{model})}{P(\textrm{data})}$$</div>
+<p>This equation gives us information about our model, knowing the observed data. Bayes' equation is widely used in signal processing, statistics, machine learning, inverse problems, and in many other scientific applications.</p>
+<p>In Bayes' equation, <span class="math">\(P(model)\)</span> reflects our prior knowledge about the model. Also, <span class="math">\(P(data)\)</span> is the distribution of the data. It is generally expressed as an integral of <span class="math">\(P(data \mid model) \, P(model)\)</span>.</p>
+<p>In conclusion, Bayes' equation gives us a general roadmap for data inference:</p>
+<p><strong>1.&nbsp;</strong> Specify a mathematical model for the direct process <em>model → data</em> (the <span class="math">\(P(data \mid model)\)</span> term).
+<strong>2.&nbsp;</strong> Specify a prior probability distribution for the model (<span class="math">\(P(model)\)</span> term).
+<strong>3.&nbsp;</strong> Perform analytical or numerical calculations to solve this equation.</p>
+<h3>Computation of the posterior distribution</h3>
+<p>In this recipe's example, we found the posterior distribution with the following equation (deriving directly from Bayes' theorem):</p>
+<div class="math">$$P(q \mid \{x_i\}) = \frac{P(\{x_i\} \mid q) \, P(q)}{\displaystyle\int_0^1 P(\{x_i\} \mid q) \, P(q) \, dq}$$</div>
+<p>Knowing that the <span class="math">\(x_i\)</span> are independent, we get (<span class="math">\(h\)</span> being the number of heads):</p>
+<div class="math">$$P(\{x_i\} \mid q) = \prod_{i=1}^n P(x_i \mid q) = q^h (1-q)^{n-h}$$</div>
+<p>In addition, we can compute analytically the following integral (using an integration by parts and an induction):</p>
+<div class="math">$$\int_0^1 P(\{x_i\} \mid q) P(q) dq = \int_0^1 q^h (1-q)^{n-h} dq = \frac{1}{(n+1)\binom n h}$$</div>
+<p>Finally, we get:</p>
+<div class="math">$$P(q \mid \{x_i\}) = \frac{P(\{x_i\} \mid q) \, P(q)}{\displaystyle\int_0^1 P(\{x_i\} \mid q) \, P(q) \, dq} = (n+1)\binom n h  q^h (1-q)^{n-h}$$</div>
+<h3>Maximum a posteriori estimation</h3>
+<p>We can get a point estimate from the posterior distribution. For example, the <strong>maximum a posteriori (MAP) estimation</strong> consists of considering the maximum of the posterior distribution as an estimate for <span class="math">\(q\)</span>. We can find this maximum analytically or numerically. For more information on MAP, refer to <a href="https://en.wikipedia.org/wiki/Maximum_a_posteriori_estimation.">https://en.wikipedia.org/wiki/Maximum_a_posteriori_estimation.</a></p>
+<p>Here, we can get this estimate analytically by deriving the posterior distribution with respect to <span class="math">\(q\)</span>. We get (assuming <span class="math">\(1 \leq h \leq n-1\)</span>):</p>
+<div class="math">$$\frac{d P(q \mid \{x_i\})}{dq} = (n+1)\frac{n!}{(n-h)! \, h!} \left( h q^{h-1} (1-q)^{n-h} - (n-h)q^h (1-q)^{n-h-1} \right)$$</div>
+<p>This expression is equal to zero when <span class="math">\(q = h/n\)</span>. This is the MAP estimate of the parameter <span class="math">\(q\)</span>. This value happens to be the proportion of heads obtained in the experiment.</p>
+<h2>There's more...</h2>
+<p>In this recipe, we showed a few basic notions in Bayesian theory. We illustrated them with a simple example. The fact that we were able to derive the posterior distribution analytically is not very common in real-world applications. This example is nevertheless informative because it explains the core mathematical ideas behind the complex numerical methods we will see later.</p>
+<h3>Credible interval</h3>
+<p>The posterior distribution indicates the plausible values for <span class="math">\(q\)</span> given the observations. We could use it to derive a <strong>credible interval</strong>, likely to contain the actual value. Credible intervals are the Bayesian analog to confidence intervals in frequentist statistics. For more information on credible intervals, refer to <a href="https://en.wikipedia.org/wiki/Credible_interval.">https://en.wikipedia.org/wiki/Credible_interval.</a></p>
+<h3>Conjugate distributions</h3>
+<p>In this recipe, the prior and posterior distributions are <strong>conjugate</strong>, meaning that they belong to the same family (the beta distribution). For this reason, we were able to compute the posterior distribution analytically. You will find more details about conjugate distributions at <a href="https://en.wikipedia.org/wiki/Conjugate_prior.">https://en.wikipedia.org/wiki/Conjugate_prior.</a></p>
+<h3>Non-informative (objective) prior distributions</h3>
+<p>We chose a uniform distribution as prior distribution for the unknown parameter <span class="math">\(q\)</span>. It is a simple choice and it leads to tractable computations. It reflects the intuitive fact that we do not favor any particular value a priori. However, there are rigorous ways of choosing completely uninformative priors (see <a href="https://en.wikipedia.org/wiki/Prior_probability#Uninformative_priors">https://en.wikipedia.org/wiki/Prior_probability#Uninformative_priors</a>). An example is the Jeffreys prior, based on the idea that the prior distribution should not depend on the parameterization of the parameters. For more information on Jeffreys prior, refer to <a href="https://en.wikipedia.org/wiki/Jeffreys_prior.">https://en.wikipedia.org/wiki/Jeffreys_prior.</a> In our example, the Jeffreys prior is:</p>
+<div class="math">$$P(q) = \frac{1}{\sqrt{q(1-q)}}$$</div>
+<h2>See also</h2>
+<ul>
+<li>The <em>Fitting a Bayesian model by sampling from a posterior distribution with a Markov chain Monte Carlo method</em> recipe</li>
+</ul>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+    </section>
+
+            </div>
+        </section>
+
+        <footer id="footer" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+                <div>
+                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+        
+    </div>
+    
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=9752080; 
+var sc_invisible=1; 
+var sc_security="837928c1"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="hit counter"
+href="http://statcounter.com/free-hit-counter/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/9752080/0/837928c1/1/"
+alt="hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+</body>
+</html>
+

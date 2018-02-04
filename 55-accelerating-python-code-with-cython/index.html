@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IPython Cookbook, ">
+
+
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+
+
+        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+
+        <title>IPython Cookbook - 5.5. Accelerating Python code with Cython</title>
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</head>
+
+<body>
+
+
+    <header id="header" class="pure-g">
+        <div class="pure-u-1 pure-u-md-3-4">
+             <div id="menu">
+                 <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="/">home</a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
+        <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
+        <li><a href="http://cyrille.rossant.net">author</a></li>
+</ul>                </div>
+            </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-4">
+            <div id="social">
+                <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="https://twitter.com/cyrillerossant"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd"><i class="fa fa-github"></i></a></li>
+</ul>                </div>
+            </div>
+        </div>
+    </header>
+       
+
+    
+    <div id="layout" class="pure-g">
+        <section id="content" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+
+    <header id="page-header">
+        <h1>5.5. Accelerating Python code with Cython</h1>
+    </header>
+
+    <section id="page">
+        <p><a href="/"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="130" style="margin-right: 20px; margin-bottom: 10px;" /></a> <em>This is one of the 100+ free recipes of the <a href="/">IPython Cookbook, Second Edition</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, a guide to numerical computing and data science in the Jupyter Notebook. The ebook and printed book are available for purchase at <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">Packt Publishing</a>.</em></p>
+<p>▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd">Text on GitHub</a> with a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a></em><br />
+▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
+<p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-5-high-performance-computing/"><strong><em>Go to</em></strong> <em>Chapter 5 : High-Performance Computing</em></a><br />
+▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter05_hpc/05_cython.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
+<p><strong>Cython</strong> is both a language (a superset of Python) and a Python library. With Cython, we start from a regular Python program and we add annotations about the type of the variables. Then, Cython translates that code to C and compiles the result into a Python extension module. Finally, we can use this compiled module in any Python program.</p>
+<p>While dynamic typing comes with a performance cost in Python, statically-typed variables in Cython generally lead to faster code execution.</p>
+<p>Performance gains are most significant in CPU-bound programs, notably in tight Python loops. By contrast, I/O bound programs are not expected to benefit much from a Cython implementation.</p>
+<p>In this recipe, we will see how to accelerate the Mandelbrot code example with Cython.</p>
+<h2>Getting ready</h2>
+<p>A C compiler is required. You will find all compiler-related instructions in the introduction of this chapter.</p>
+<p>You also need Cython, which should be installed by default with Anaconda. If needed, you can also install it with <code>conda install cython</code>.</p>
+<h2>How to do it...</h2>
+<p><strong>1.&nbsp;</strong> Let's define some variables:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">size</span> <span class="o">=</span> <span class="mi">400</span>
+<span class="n">iterations</span> <span class="o">=</span> <span class="mi">100</span>
+</pre></div>
+</div>
+
+
+<p><strong>2.&nbsp;</strong> To use Cython in the Jupyter Notebook, we first need to import the Cython Jupyter extension:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">load_ext</span> <span class="n">cython</span>
+</pre></div>
+</div>
+
+
+<p><strong>3.&nbsp;</strong> As a first try, let's just add the <code>%%cython</code> magic before the definition of the <code>mandelbrot()</code> function. Internally, this cell magic compiles the cell into a standalone Cython module, hence the need for all required imports to occur within the same cell. This cell does not have access to any variable or function defined in the interactive namespace:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">cython</span> <span class="o">-</span><span class="n">a</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">mandelbrot_cython</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">iterations</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">size</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">size</span><span class="p">):</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span> <span class="o">+</span> <span class="mf">3.</span><span class="o">/</span><span class="n">size</span><span class="o">*</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1j</span><span class="o">*</span><span class="p">(</span><span class="mf">1.5</span><span class="o">-</span><span class="mf">3.</span><span class="o">/</span><span class="n">size</span><span class="o">*</span><span class="n">i</span><span class="p">)</span>
+            <span class="n">z</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iterations</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">:</span>
+                    <span class="n">z</span> <span class="o">=</span> <span class="n">z</span><span class="o">*</span><span class="n">z</span> <span class="o">+</span> <span class="n">c</span>
+                    <span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">n</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">break</span>
+</pre></div>
+</div>
+
+
+<p><img alt="&lt;IPython.core.display.HTML object&gt;" src="http://ipython-books.github.io/pages/chapter05_hpc/05_cython_files/05_cython_15_0.png" /></p>
+<p>The <code>-a</code> option tells Cython to annotate lines of code with a background color indicating how optimized it is. The darker the color, the less optimized the line. The color depends on the relative number of Python API calls at each line. We can click on any line to see the generated C code. Here, this version does not appear to be optimized.</p>
+<p><strong>4.&nbsp;</strong> How fast is this version?</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n1</span> <span class="o">-</span><span class="n">r1</span> <span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+<span class="n">mandelbrot_cython</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">iterations</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>4.52 s ± 0 ns per loop (mean ± std. dev. of 1 run,
+    1 loop each)
+</pre></div>
+</div>
+
+
+<p>We get virtually no speedup here. We need to specify the type of our Python variables.</p>
+<p><strong>5.&nbsp;</strong> Let's add type information using typed memory views for NumPy arrays (we explain these in the <em>How it works...</em> section). We also use a slightly different way to test whether particles have escaped from the domain (<code>if</code> test):</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">cython</span> <span class="o">-</span><span class="n">a</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">mandelbrot_cython</span><span class="p">(</span><span class="nb">int</span><span class="p">[:,::</span><span class="mi">1</span><span class="p">]</span> <span class="n">m</span><span class="p">,</span>
+                      <span class="nb">int</span> <span class="n">size</span><span class="p">,</span>
+                      <span class="nb">int</span> <span class="n">iterations</span><span class="p">):</span>
+    <span class="n">cdef</span> <span class="nb">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">n</span>
+    <span class="n">cdef</span> <span class="nb">complex</span> <span class="n">z</span><span class="p">,</span> <span class="n">c</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">size</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">size</span><span class="p">):</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span> <span class="o">+</span> <span class="mf">3.</span><span class="o">/</span><span class="n">size</span><span class="o">*</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1j</span><span class="o">*</span><span class="p">(</span><span class="mf">1.5</span><span class="o">-</span><span class="mf">3.</span><span class="o">/</span><span class="n">size</span><span class="o">*</span><span class="n">i</span><span class="p">)</span>
+            <span class="n">z</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iterations</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">z</span><span class="o">.</span><span class="n">real</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">z</span><span class="o">.</span><span class="n">imag</span><span class="o">**</span><span class="mi">2</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">:</span>
+                    <span class="n">z</span> <span class="o">=</span> <span class="n">z</span><span class="o">*</span><span class="n">z</span> <span class="o">+</span> <span class="n">c</span>
+                    <span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">n</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">break</span>
+</pre></div>
+</div>
+
+
+<p><img alt="&lt;IPython.core.display.HTML object&gt;" src="http://ipython-books.github.io/pages/chapter05_hpc/05_cython_files/05_cython_21_0.png" /></p>
+<p><strong>5.&nbsp;</strong> How fast is this new version?</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n1</span> <span class="o">-</span><span class="n">r1</span> <span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+<span class="n">mandelbrot_cython</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">iterations</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>12.7 ms ± 0 ns per loop (mean ± std. dev. of 1 run,
+    1 loop each)
+</pre></div>
+</div>
+
+
+<p>This version is almost 350 times faster than the first version!</p>
+<p>All we have done is to specify the type of the local variables and function arguments, and bypass NumPy's <code>np.abs()</code> function when computing the absolute value of <code>z</code>. These changes have helped Cython generate more optimized C code from Python code.</p>
+<h2>How it works...</h2>
+<p>The <code>cdef</code> keyword declares a variable as a statically-typed C variable. C variables lead to faster code execution because the overhead from Python's dynamic typing is bypassed. Function arguments can also be declared as statically-typed C variables.</p>
+<p>There are two ways of declaring NumPy arrays as C variables with Cython: using <strong>array buffers</strong> or using <strong>typed memory views</strong>. In this recipe, we used typed memory views. We will cover array buffers in the next recipe.</p>
+<p>Typed memory views allow efficient access to data buffers with a NumPy-like indexing syntax. For example, we can use <code>int[:,::1]</code> to declare a C-ordered 2D NumPy array with integer values, with <code>::1</code> meaning a contiguous layout in this dimension. Typed memory views can be indexed just like NumPy arrays.</p>
+<p>However, memory views do not implement element-wise operations like NumPy. Thus, memory views act as convenient data containers within tight for loops. For element-wise NumPy-like operations, array buffers should be used instead.</p>
+<p>We could achieve a significant performance speedup by replacing the call to <code>np.abs()</code> with a faster expression. The reason is that <code>np.abs()</code> is a NumPy function with a slight call overhead. It is designed to work with relatively large arrays, not scalar values. This overhead results in a significant performance hit in a tight loop such as here. This bottleneck can be spotted with Cython annotations.</p>
+<h2>There's more...</h2>
+<p>Using Cython from Jupyter is very convenient with the <code>%%cython</code> cell magic. However, it is sometimes necessary to create a reusable C extension module with Cython. This is actually what the <code>%%cython</code> cell magic does under the hood. You will find more information at <a href="http://cython.readthedocs.io/en/latest/src/quickstart/build.html.">http://cython.readthedocs.io/en/latest/src/quickstart/build.html.</a></p>
+<p>Here are a few references:</p>
+<ul>
+<li>Distributing Cython modules, explained at <a href="http://docs.cython.org/src/userguide/source_files_and_compilation.html">http://docs.cython.org/src/userguide/source_files_and_compilation.html</a></li>
+<li>Compilation with Cython, explained at <a href="http://docs.cython.org/src/reference/compilation.html">http://docs.cython.org/src/reference/compilation.html</a></li>
+<li>Cython and Numpy, at <a href="http://cython.readthedocs.io/en/latest/src/userguide/memoryviews.html">http://cython.readthedocs.io/en/latest/src/userguide/memoryviews.html</a></li>
+</ul>
+<h2>See also</h2>
+<ul>
+<li>Optimizing Cython code by writing less Python and more C</li>
+<li>Releasing the GIL to take advantage of multicore processors with Cython and OpenMP</li>
+</ul>
+    </section>
+
+            </div>
+        </section>
+
+        <footer id="footer" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+                <div>
+                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+        
+    </div>
+    
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=9752080; 
+var sc_invisible=1; 
+var sc_security="837928c1"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="hit counter"
+href="http://statcounter.com/free-hit-counter/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/9752080/0/837928c1/1/"
+alt="hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+</body>
+</html>
+

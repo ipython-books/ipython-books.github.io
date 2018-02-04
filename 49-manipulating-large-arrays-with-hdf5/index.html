@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IPython Cookbook, ">
+
+
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+
+
+        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+
+        <title>IPython Cookbook - 4.9. Manipulating large arrays with HDF5</title>
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</head>
+
+<body>
+
+
+    <header id="header" class="pure-g">
+        <div class="pure-u-1 pure-u-md-3-4">
+             <div id="menu">
+                 <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="/">home</a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
+        <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
+        <li><a href="http://cyrille.rossant.net">author</a></li>
+</ul>                </div>
+            </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-4">
+            <div id="social">
+                <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="https://twitter.com/cyrillerossant"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://github.com/ipython-books/cookbook-2nd"><i class="fa fa-github"></i></a></li>
+</ul>                </div>
+            </div>
+        </div>
+    </header>
+       
+
+    
+    <div id="layout" class="pure-g">
+        <section id="content" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+
+    <header id="page-header">
+        <h1>4.9. Manipulating large arrays with HDF5</h1>
+    </header>
+
+    <section id="page">
+        <p><a href="/"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="130" style="margin-right: 20px; margin-bottom: 10px;" /></a> <em>This is one of the 100+ free recipes of the <a href="/">IPython Cookbook, Second Edition</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, a guide to numerical computing and data science in the Jupyter Notebook. The ebook and printed book are available for purchase at <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">Packt Publishing</a>.</em></p>
+<p>▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd">Text on GitHub</a> with a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a></em><br />
+▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
+<p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-4-profiling-and-optimization/"><strong><em>Go to</em></strong> <em>Chapter 4 : Profiling and Optimization</em></a><br />
+▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter04_optimization/09_hdf5_array.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
+<p>NumPy arrays can be persistently saved on disk using built-in functions in NumPy such as <code>np.savetxt()</code>, <code>np.save()</code>, or <code>np.savez()</code>, and loaded in memory using analogous functions. Common file formats for data arrays include raw binary files as in the previous recipe, the NPY file format implemented by NumPy (which are raw binary files with a header containing the metadata), and <strong>Hierarchical Data Format</strong>, or <strong>HDF5</strong>.</p>
+<p>An HDF5 file contains one or several datasets (arrays or heterogeneous tables) organized into a POSIX-like hierarchy. Datasets may be accessed lazily with memory mapping. In this recipe, we will use <strong>h5py</strong>, a Python package designed to deal with HDF5 files with a NumPy-like programming interface.</p>
+<h2>Getting ready</h2>
+<p>You need h5py for this recipe and the next one. It should be included with Anaconda, but you can also install it with <code>conda install h5py</code>.</p>
+<h2>How to do it...</h2>
+<p><strong>1.&nbsp;</strong> First, we need to import NumPy and h5py:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">h5py</span>
+</pre></div>
+</div>
+
+
+<p><strong>2.&nbsp;</strong> Let's create a new empty HDF5 file in write mode:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s1">&#39;myfile.h5&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><strong>3.&nbsp;</strong> We create a new top-level group named <code>experiment1</code>:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">.</span><span class="n">create_group</span><span class="p">(</span><span class="s1">&#39;/experiment1&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>&lt;HDF5 group &quot;/experiment1&quot; (0 members)&gt;
+</pre></div>
+</div>
+
+
+<p><strong>4.&nbsp;</strong> Let's also add some metadata to this group:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">[</span><span class="s1">&#39;/experiment1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;2018-01-01&#39;</span>
+</pre></div>
+</div>
+
+
+<p><strong>5.&nbsp;</strong> In this group, we create a <code>1000 * 1000</code> array named <code>array1</code>:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">f</span><span class="p">[</span><span class="s1">&#39;/experiment1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s1">&#39;array1&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>&lt;HDF5 dataset &quot;array1&quot;: shape (1000, 1000), type &quot;&lt;f8&quot;&gt;
+</pre></div>
+</div>
+
+
+<p><strong>6.&nbsp;</strong> Finally, we need to close the file to commit the changes on disk:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+
+
+<p><strong>7.&nbsp;</strong> Now, let's open this file in read mode. We could have done this in another Python session since the array has been saved in the HDF5 file.</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s1">&#39;myfile.h5&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<p><strong>8.&nbsp;</strong> We can retrieve an attribute by giving the group path and the attribute name:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">[</span><span class="s1">&#39;/experiment1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>&#39;2018-01-01&#39;
+</pre></div>
+</div>
+
+
+<p><strong>9.&nbsp;</strong> Let's access our array:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="s1">&#39;/experiment1/array1&#39;</span><span class="p">]</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>h5py._hl.dataset.Dataset
+</pre></div>
+</div>
+
+
+<p><strong>10.&nbsp;</strong> The array can be used as a NumPy array, but an important distinction is that it is stored on disk instead of system memory. Performing a computation on this array automatically loads the requested section of the array into memory, thus it is more efficient to access only the array's views.</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:],</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:])</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-text"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+
+
+<p><strong>11.&nbsp;</strong> We're done for this recipe, so let's do some clean-up:</p>
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+
+
+<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;myfile.h5&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+<h2>How it works...</h2>
+<p>In this recipe, we stored a single array in the file, but HDF5 is especially useful when many arrays need to be saved in a single file. HDF5 is generally used in big projects, when large arrays have to be organized within a hierarchical structure. For example, it is largely used at NASA and other scientific institutions. Researchers can store recorded data across multiple devices, multiple trials, and multiple experiments.</p>
+<p>In HDF5, the data is organized within a tree. Nodes are either <strong>groups</strong> (analogous to folders in a file system) or <strong>datasets</strong> (analogous to files). A group can contain subgroups and datasets, whereas datasets only contain data. Both groups and datasets can contain attributes (metadata) that have a basic data type (integer or floating point number, string, and so on).</p>
+<h2>There's more...</h2>
+<p>HDF5 files created with h5py can be accessed in other languages like C, FORTRAN, MATLAB, and others.</p>
+<p>In HDF5, a dataset may be stored in a <strong>contiguous</strong> block of memory, or in <strong>chunks</strong>. Chunks are atomic objects and HDF5 can only read and write entire chunks. Chunks are internally organized within a tree data structure called a <strong>B-tree</strong>. When we create a new array or table, we can specify the <strong>chunk shape</strong>. It is an internal detail, but it can greatly affect performance when writing and reading parts of the dataset.</p>
+<p>The optimal chunk shape depends on how we plan to access the data. There is a trade-off between many small chunks (large overhead due to managing lots of chunks) and a few large chunks (inefficient disk I/O). In general, the chunk size is recommended to be smaller than 1 MB. The chunk cache is also an important parameter that may affect performance.</p>
+<blockquote>
+<p>Another HDF5 library in Python is <strong>PyTables</strong>. There is work in progress to make the two libraries share more code and reduce duplication of development efforts.</p>
+</blockquote>
+<p>Here are a few references:</p>
+<ul>
+<li>NPY file format at <a href="https://docs.scipy.org/doc/numpy-dev/neps/npy-format.html">https://docs.scipy.org/doc/numpy-dev/neps/npy-format.html</a></li>
+<li>h5py at <a href="http://www.h5py.org/">http://www.h5py.org/</a></li>
+<li>HDF5 chunking, at <a href="http://www.hdfgroup.org/HDF5/doc/Advanced/Chunking/">http://www.hdfgroup.org/HDF5/doc/Advanced/Chunking/</a></li>
+<li>Python and HDF5, a vision, <a href="https://www.hdfgroup.org/2015/09/python-hdf5-a-vision/">https://www.hdfgroup.org/2015/09/python-hdf5-a-vision/</a></li>
+<li>PyTables optimization guide, available at <a href="http://pytables.github.io/usersguide/optimization.html">http://pytables.github.io/usersguide/optimization.html</a></li>
+<li>Difference between PyTables and h5py, from the perspective of h5py, at <a href="https://github.com/h5py/h5py/wiki/FAQ#whats-the-difference-between-h5py-and-pytables">https://github.com/h5py/h5py/wiki/FAQ#whats-the-difference-between-h5py-and-pytables</a></li>
+<li>A personal piece about limitations of HDF5, at <a href="http://cyrille.rossant.net/moving-away-hdf5/">http://cyrille.rossant.net/moving-away-hdf5/</a></li>
+</ul>
+<h2>See also</h2>
+<ul>
+<li>Processing huge NumPy arrays with memory mapping</li>
+<li>Manipulating large heterogeneous tables with HDF5</li>
+<li>Ten tips for conducting reproducible interavctinve computing experiments</li>
+</ul>
+    </section>
+
+            </div>
+        </section>
+
+        <footer id="footer" class="pure-u-1 pure-u-md-4-4">
+            <div class="l-box">
+                <div>
+                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+        
+    </div>
+    
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=9752080; 
+var sc_invisible=1; 
+var sc_security="837928c1"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="hit counter"
+href="http://statcounter.com/free-hit-counter/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/9752080/0/837928c1/1/"
+alt="hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+</body>
+</html>
+
