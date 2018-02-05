@@ -90,161 +90,95 @@
 ▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
 <p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-9-numerical-optimization/"><strong><em>Go to</em></strong> <em>Chapter 9 : Numerical Optimization</em></a><br />
 ▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter09_numoptim/01_root.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
-<p>In this short recipe, we will see how to use SciPy to find the root of a simple mathematical function of a single real variable.</p>
-<h2>How to do it...</h2>
-<p><strong>1.&nbsp;</strong> Let's import NumPy, SciPy, scipy.optimize, and matplotlib:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">scipy</span> <span class="kn">as</span> <span class="nn">sp</span>
-<span class="kn">import</span> <span class="nn">scipy.optimize</span> <span class="kn">as</span> <span class="nn">opt</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
-</pre></div>
-</div>
+<p><a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">The recipe is available in the book, to be purchased on Packt.</a></p>
+<!-- REMOVE AS PER PACKT AGREEMENT
+
+In this short recipe, we will see how to use SciPy to find the root of a simple mathematical function of a single real variable.
+
+## How to do it...
+
+**1.&nbsp;** Let's import NumPy, SciPy, scipy.optimize, and matplotlib:
 
 
-<p><strong>2.&nbsp;</strong> We define the mathematical function <span class="math">\(f(x)=\cos(x)-x\)</span> in Python. We will try to find a root of this function numerically. Here, a root corresponds to a fixed point of the cosine function:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">x</span>
-</pre></div>
-</div>
+wzxhzdk:0
 
 
-<p><strong>3.&nbsp;</strong> Let's plot this function on the interval <span class="math">\([-5, 5]\)</span> (using 1000 samples):</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-</pre></div>
-</div>
+**2.&nbsp;** We define the mathematical function $f(x)=\cos(x)-x$ in Python. We will try to find a root of this function numerically. Here, a root corresponds to a fixed point of the cosine function:
 
 
-<p><img alt="&lt;matplotlib.figure.Figure at 0x5bb5470&gt;" src="http://ipython-books.github.io/pages/chapter09_numoptim/01_root_files/01_root_8_0.png" /></p>
-<p><strong>4.&nbsp;</strong> We see that this function has a unique root on this interval (this is because the function's sign changes on this interval). The <code>scipy.optimize</code> module contains a few root-finding functions that are adapted here. For example, the <code>bisect()</code> function implements the <strong>bisection method</strong> (also called the <strong>dichotomy method</strong>). It takes as input the function and the interval to find the root in:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">opt</span><span class="o">.</span><span class="n">bisect</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-</pre></div>
-</div>
+wzxhzdk:1
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>0.739
-</pre></div>
-</div>
+**3.&nbsp;** Let's plot this function on the interval $[-5, 5]$ (using 1000 samples):
 
 
-<p>Let's visualize the root on the plot:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-<span class="c1"># The zorder argument is used to put</span>
-<span class="c1"># the dot on top of the other elements.</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">([</span><span class="n">_</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
-           <span class="n">zorder</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-</pre></div>
-</div>
+wzxhzdk:2
 
 
-<p><img alt="&lt;matplotlib.figure.Figure at 0x5d04198&gt;" src="http://ipython-books.github.io/pages/chapter09_numoptim/01_root_files/01_root_12_0.png" /></p>
-<p><strong>5.&nbsp;</strong> A faster and more powerful method is <code>brentq()</code> (<strong>Brent's method</strong>). This algorithm also requires <code>f</code> to be continuous and <code>f(a)</code> and <code>f(b)</code> to have different signs:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">opt</span><span class="o">.</span><span class="n">brentq</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-</pre></div>
-</div>
+![<matplotlib.figure.Figure at 0x5bb5470>]({filename}01_root_files/01_root_8_0.png)
+
+**4.&nbsp;** We see that this function has a unique root on this interval (this is because the function's sign changes on this interval). The `scipy.optimize` module contains a few root-finding functions that are adapted here. For example, the `bisect()` function implements the **bisection method** (also called the **dichotomy method**). It takes as input the function and the interval to find the root in:
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>0.739
-</pre></div>
-</div>
+wzxhzdk:3
 
 
-<p>The <code>brentq()</code> method is faster than <code>bisect()</code>. If the conditions are satisfied, it is a good idea to try Brent's method first:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="n">opt</span><span class="o">.</span><span class="n">bisect</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-<span class="o">%</span><span class="n">timeit</span> <span class="n">opt</span><span class="o">.</span><span class="n">brentq</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-</pre></div>
-</div>
+
+wzxhzdk:4
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>34.5 µs ± 855 ns per loop (mean ± std. dev. of 7 runs,
-    10000 loops each)
-7.71 µs ± 170 ns per loop (mean ± std. dev. of 7 runs,
-    100000 loops each)
-</pre></div>
-</div>
+Let's visualize the root on the plot:
 
 
-<h2>How it works...</h2>
-<p>The bisection method consists of iteratively cutting an interval in half and selecting a subinterval that necessarily contains a root. This method is based on the fact that, if <span class="math">\(f\)</span> is a continuous function of a single real variable, <span class="math">\(f(a)&gt;0\)</span>, and <span class="math">\(f(b)&lt;0\)</span>, then <span class="math">\(f\)</span> has a root in <span class="math">\((a,b)\)</span> (<strong>intermediate value theorem</strong>).</p>
-<p><strong>Brent's method</strong> is a popular hybrid algorithm combining root bracketing, interval bisection, and inverse quadratic interpolation. It is a default method that works in many cases.</p>
-<p>Let's also mention <strong>Newton's method</strong>. The idea is to approximate <span class="math">\(f(x)\)</span> by its tangent (found with <span class="math">\(f'(x)\)</span>) and find the intersection with the <span class="math">\(y=0\)</span> line. If <span class="math">\(f\)</span> is regular enough, the intersection point will be closer to the actual root of <span class="math">\(f\)</span>. By iterating this operation, the algorithm may converge to the sought solution.</p>
-<h2>There's more</h2>
-<p>Here are a few references:</p>
-<ul>
-<li>Documentation of scipy.optimize available at <a href="http://docs.scipy.org/doc/scipy/reference/optimize.html#root-finding">http://docs.scipy.org/doc/scipy/reference/optimize.html#root-finding</a></li>
-<li>A course on root finding with SciPy available at <a href="http://quant-econ.net/scipy.html#roots-and-fixed-points">http://quant-econ.net/scipy.html#roots-and-fixed-points</a></li>
-<li>The Bisection method on Wikipedia, available at <a href="https://en.wikipedia.org/wiki/Bisection_method">https://en.wikipedia.org/wiki/Bisection_method</a></li>
-<li>The intermediate value theorem on Wikipedia, available at <a href="https://en.wikipedia.org/wiki/Intermediate_value_theorem">https://en.wikipedia.org/wiki/Intermediate_value_theorem</a></li>
-<li>Brent's method on Wikipedia, available at <a href="https://en.wikipedia.org/wiki/Brent%27s_method">https://en.wikipedia.org/wiki/Brent%27s_method</a></li>
-<li>Newton's method on Wikipedia, available at <a href="https://en.wikipedia.org/wiki/Newton%27s_method">https://en.wikipedia.org/wiki/Newton%27s_method</a></li>
-</ul>
-<h2>See also</h2>
-<ul>
-<li>Minimizing a mathematical function</li>
-</ul>
-<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
-    var align = "center",
-        indent = "0em",
-        linebreak = "false";
+wzxhzdk:5
 
-    if (false) {
-        align = (screen.width < 768) ? "left" : align;
-        indent = (screen.width < 768) ? "0em" : indent;
-        linebreak = (screen.width < 768) ? 'true' : linebreak;
-    }
 
-    var mathjaxscript = document.createElement('script');
-    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
-    mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
-    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
-        "MathJax.Hub.Config({" +
-        "    config: ['MMLorHTML.js']," +
-        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
-        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
-        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
-        "    displayAlign: '"+ align +"'," +
-        "    displayIndent: '"+ indent +"'," +
-        "    showMathMenu: true," +
-        "    messageStyle: 'normal'," +
-        "    tex2jax: { " +
-        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
-        "        displayMath: [ ['$$','$$'] ]," +
-        "        processEscapes: true," +
-        "        preview: 'TeX'," +
-        "    }, " +
-        "    'HTML-CSS': { " +
-        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
-        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
-        "    }, " +
-        "}); " +
-        "if ('default' !== 'default') {" +
-            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-        "}";
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
-}
-</script>
+![<matplotlib.figure.Figure at 0x5d04198>]({filename}01_root_files/01_root_12_0.png)
+
+**5.&nbsp;** A faster and more powerful method is `brentq()` (**Brent's method**). This algorithm also requires `f` to be continuous and `f(a)` and `f(b)` to have different signs:
+
+
+wzxhzdk:6
+
+
+
+wzxhzdk:7
+
+
+The `brentq()` method is faster than `bisect()`. If the conditions are satisfied, it is a good idea to try Brent's method first:
+
+
+wzxhzdk:8
+
+
+
+wzxhzdk:9
+
+
+## How it works...
+
+The bisection method consists of iteratively cutting an interval in half and selecting a subinterval that necessarily contains a root. This method is based on the fact that, if $f$ is a continuous function of a single real variable, $f(a)>0$, and $f(b)<0$, then $f$ has a root in $(a,b)$ (**intermediate value theorem**).
+
+**Brent's method** is a popular hybrid algorithm combining root bracketing, interval bisection, and inverse quadratic interpolation. It is a default method that works in many cases.
+
+Let's also mention **Newton's method**. The idea is to approximate $f(x)$ by its tangent (found with $f'(x)$) and find the intersection with the $y=0$ line. If $f$ is regular enough, the intersection point will be closer to the actual root of $f$. By iterating this operation, the algorithm may converge to the sought solution.
+
+## There's more
+
+Here are a few references:
+
+* Documentation of scipy.optimize available at [http://docs.scipy.org/doc/scipy/reference/optimize.html#root-finding](http://docs.scipy.org/doc/scipy/reference/optimize.html#root-finding)
+* A course on root finding with SciPy available at [http://quant-econ.net/scipy.html#roots-and-fixed-points](http://quant-econ.net/scipy.html#roots-and-fixed-points)
+* The Bisection method on Wikipedia, available at [https://en.wikipedia.org/wiki/Bisection_method](https://en.wikipedia.org/wiki/Bisection_method)
+* The intermediate value theorem on Wikipedia, available at [https://en.wikipedia.org/wiki/Intermediate_value_theorem](https://en.wikipedia.org/wiki/Intermediate_value_theorem)
+* Brent's method on Wikipedia, available at [https://en.wikipedia.org/wiki/Brent%27s_method](https://en.wikipedia.org/wiki/Brent%27s_method)
+* Newton's method on Wikipedia, available at [https://en.wikipedia.org/wiki/Newton%27s_method](https://en.wikipedia.org/wiki/Newton%27s_method)
+
+## See also
+
+* Minimizing a mathematical function
+
+-->
     </section>
 
             </div>

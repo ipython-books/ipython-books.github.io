@@ -90,127 +90,131 @@
 ▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
 <p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-15-symbolic-and-numerical-mathematics/"><strong><em>Go to</em></strong> <em>Chapter 15 : Symbolic and Numerical Mathematics</em></a><br />
 ▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter15_symbolic/08_sage.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
-<p>Sage (http://www.sagemath.org) is a standalone mathematics software based on Python. It is an open source alternative to commercial products such as Mathematica, Maple, or MATLAB. Sage provides a unified interface to many open source mathematical libraries. These libraries include SciPy, SymPy, NetworkX, and other Python scientific packages, but also non-Python libraries such as ATLAS, BLAS, GSL, LAPACK, Singular, and many others.</p>
-<p>In this recipe, we will give a brief introduction to Sage.</p>
-<h2>Getting ready</h2>
-<p>You can either:</p>
-<ul>
-<li>Install Sage on your local computer (http://www.sagemath.org/doc/installation/)</li>
-<li>Create Sage notebooks remotely in the cloud (https://cloud.sagemath.com/)</li>
-</ul>
-<p>Being based on so many libraries, Sage is heavy and hard to compile from source. On Ubuntu, you can use the system's package manager (see <a href="http://www.sagemath.org/download-linux.html">http://www.sagemath.org/download-linux.html</a>). Binaries exist for most systems except Windows, where you generally have to use VirtualBox (a virtualization solution: <a href="http://www.virtualbox.org">http://www.virtualbox.org</a>).</p>
-<p>Alternatively, you can use Sage in a browser with a Jupyter notebook running in the cloud.</p>
-<p>Once Sage is installed, you can use it with Jupyter by typing the following command in a terminal: <code>sage -n jupyter</code>.</p>
-<h2>How to do it...</h2>
-<p>Here, we will create a new Sage notebook and introduce the most basic features:</p>
-<p><strong>1.&nbsp;</strong> Sage accepts mathematical expressions as we would expect:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="mi">3</span> <span class="o">*</span> <span class="mi">4</span>
-</pre></div>
-</div>
+<p><a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">The recipe is available in the book, to be purchased on Packt.</a></p>
+<!-- REMOVE AS PER PACKT AGREEMENT
+
+Sage (http://www.sagemath.org) is a standalone mathematics software based on Python. It is an open source alternative to commercial products such as Mathematica, Maple, or MATLAB. Sage provides a unified interface to many open source mathematical libraries. These libraries include SciPy, SymPy, NetworkX, and other Python scientific packages, but also non-Python libraries such as ATLAS, BLAS, GSL, LAPACK, Singular, and many others.
+
+In this recipe, we will give a brief introduction to Sage.
+
+## Getting ready
+
+You can either:
+
+* Install Sage on your local computer (http://www.sagemath.org/doc/installation/)
+* Create Sage notebooks remotely in the cloud (https://cloud.sagemath.com/)
+
+Being based on so many libraries, Sage is heavy and hard to compile from source. On Ubuntu, you can use the system's package manager (see [http://www.sagemath.org/download-linux.html](http://www.sagemath.org/download-linux.html)). Binaries exist for most systems except Windows, where you generally have to use VirtualBox (a virtualization solution: [http://www.virtualbox.org](http://www.virtualbox.org)).
+
+Alternatively, you can use Sage in a browser with a Jupyter notebook running in the cloud.
+
+Once Sage is installed, you can use it with Jupyter by typing the following command in a terminal: `sage -n jupyter`.
+
+## How to do it...
+
+Here, we will create a new Sage notebook and introduce the most basic features:
+
+**1.&nbsp;** Sage accepts mathematical expressions as we would expect:
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>12
-</pre></div>
-</div>
+wzxhzdk:0
 
 
-<p><strong>2.&nbsp;</strong> Being based on Python, Sage's syntax is almost Python, but there are a few differences. For example, the power exponent is the more classical ^ symbol:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="mi">2</span> <span class="o">^</span> <span class="mi">3</span>
-</pre></div>
-</div>
+
+wzxhzdk:1
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>8
-</pre></div>
-</div>
+**2.&nbsp;** Being based on Python, Sage's syntax is almost Python, but there are a few differences. For example, the power exponent is the more classical ^ symbol:
 
 
-<p><strong>3.&nbsp;</strong> Like in SymPy, symbolic variables need to be declared beforehand with the <code>var()</code> function. However, the <code>x</code> variable is always predefined. Here, we define a new mathematical function:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">^</span> <span class="mi">2</span>
-</pre></div>
-</div>
+wzxhzdk:2
 
 
-<p><strong>4.&nbsp;</strong> Let's simplify the expression of f:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">.</span><span class="n">simplify_trig</span><span class="p">()</span>
-</pre></div>
-</div>
+
+wzxhzdk:3
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>cos(x)^2
-</pre></div>
-</div>
+**3.&nbsp;** Like in SymPy, symbolic variables need to be declared beforehand with the `var()` function. However, the `x` variable is always predefined. Here, we define a new mathematical function:
 
 
-<p><strong>5.&nbsp;</strong> Let's evaluate <code>f</code> on a given point:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">pi</span><span class="p">)</span>
-</pre></div>
-</div>
+wzxhzdk:4
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>1
-</pre></div>
-</div>
+**4.&nbsp;** Let's simplify the expression of f:
 
 
-<p><strong>6.&nbsp;</strong> Functions can be differentiated and integrated:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-</pre></div>
-</div>
+wzxhzdk:5
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>-2*cos(x)*sin(x)
-</pre></div>
-</div>
+
+wzxhzdk:6
 
 
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-</pre></div>
-</div>
+**5.&nbsp;** Let's evaluate `f` on a given point:
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>1/2*x + 1/4*sin(2*x)
-</pre></div>
-</div>
+wzxhzdk:7
 
 
-<p><strong>7.&nbsp;</strong> Sage also supports numerical computations in addition to symbolic computations:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">find_root</span><span class="p">(</span><span class="n">f</span> <span class="o">-</span> <span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-</pre></div>
-</div>
+
+wzxhzdk:8
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>0.6417143708729726
-</pre></div>
-</div>
+**6.&nbsp;** Functions can be differentiated and integrated:
 
 
-<p><strong>8.&nbsp;</strong> Sage also comes with rich plotting capabilities (including interactive plotting widgets):</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">.</span><span class="n">plot</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">pi</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">pi</span><span class="p">))</span>
-</pre></div>
-</div>
+wzxhzdk:9
 
 
-<p><img alt="Graphics object consisting of 1 graphics primitive" src="http://ipython-books.github.io/pages/chapter15_symbolic/08_sage_files/08_sage_27_0.png" /></p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">var</span><span class="p">(</span><span class="s1">&#39;x,y&#39;</span><span class="p">)</span>
-<span class="n">plot3d</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span> <span class="o">^</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">y</span> <span class="o">^</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">x</span> <span class="o">^</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">y</span> <span class="o">^</span> <span class="mi">2</span><span class="p">),</span>
-       <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-</pre></div>
-</div>
+
+wzxhzdk:10
 
 
-<p><img alt="Graphics3d Object" src="http://ipython-books.github.io/pages/chapter15_symbolic/08_sage_files/08_sage_28_0.png" /></p>
-<h2>There's more...</h2>
-<p>This (too) short recipe cannot do justice to the huge list of possibilities offered by Sage. Many aspects of mathematics are covered: algebra, combinatorics, numerical mathematics, number theory, calculus, geometry, graph theory, and many others. Here are a few references:</p>
-<ul>
-<li>An in-depth tutorial on Sage, available at <a href="http://doc.sagemath.org/html/en/tutorial/index.html">http://doc.sagemath.org/html/en/tutorial/index.html</a></li>
-<li>The Sage reference manual, available at <a href="http://doc.sagemath.org/html/en/reference/index.html">http://doc.sagemath.org/html/en/reference/index.html</a></li>
-<li>Videos on Sage, available at <a href="http://www.sagemath.org/help-video.html">http://www.sagemath.org/help-video.html</a></li>
-</ul>
-<h2>See also</h2>
-<ul>
-<li>Diving into symbolic computing with SymPy</li>
-</ul>
+
+wzxhzdk:11
+
+
+
+wzxhzdk:12
+
+
+**7.&nbsp;** Sage also supports numerical computations in addition to symbolic computations:
+
+
+wzxhzdk:13
+
+
+
+wzxhzdk:14
+
+
+**8.&nbsp;** Sage also comes with rich plotting capabilities (including interactive plotting widgets):
+
+
+wzxhzdk:15
+
+
+![Graphics object consisting of 1 graphics primitive]({filename}08_sage_files/08_sage_27_0.png)
+
+
+wzxhzdk:16
+
+
+![Graphics3d Object]({filename}08_sage_files/08_sage_28_0.png)
+
+## There's more...
+
+This (too) short recipe cannot do justice to the huge list of possibilities offered by Sage. Many aspects of mathematics are covered: algebra, combinatorics, numerical mathematics, number theory, calculus, geometry, graph theory, and many others. Here are a few references:
+
+* An in-depth tutorial on Sage, available at [http://doc.sagemath.org/html/en/tutorial/index.html](http://doc.sagemath.org/html/en/tutorial/index.html)
+* The Sage reference manual, available at [http://doc.sagemath.org/html/en/reference/index.html](http://doc.sagemath.org/html/en/reference/index.html)
+* Videos on Sage, available at [http://www.sagemath.org/help-video.html](http://www.sagemath.org/help-video.html)
+
+## See also
+
+* Diving into symbolic computing with SymPy
+
+-->
     </section>
 
             </div>

@@ -90,137 +90,142 @@
 ▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
 <p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-4-profiling-and-optimization/"><strong><em>Go to</em></strong> <em>Chapter 4 : Profiling and Optimization</em></a><br />
 ▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter04_optimization/09_hdf5_array.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
-<p>NumPy arrays can be persistently saved on disk using built-in functions in NumPy such as <code>np.savetxt()</code>, <code>np.save()</code>, or <code>np.savez()</code>, and loaded in memory using analogous functions. Common file formats for data arrays include raw binary files as in the previous recipe, the NPY file format implemented by NumPy (which are raw binary files with a header containing the metadata), and <strong>Hierarchical Data Format</strong>, or <strong>HDF5</strong>.</p>
-<p>An HDF5 file contains one or several datasets (arrays or heterogeneous tables) organized into a POSIX-like hierarchy. Datasets may be accessed lazily with memory mapping. In this recipe, we will use <strong>h5py</strong>, a Python package designed to deal with HDF5 files with a NumPy-like programming interface.</p>
-<h2>Getting ready</h2>
-<p>You need h5py for this recipe and the next one. It should be included with Anaconda, but you can also install it with <code>conda install h5py</code>.</p>
-<h2>How to do it...</h2>
-<p><strong>1.&nbsp;</strong> First, we need to import NumPy and h5py:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">h5py</span>
-</pre></div>
-</div>
+<p><a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">The recipe is available in the book, to be purchased on Packt.</a></p>
+<!-- REMOVE AS PER PACKT AGREEMENT
+
+NumPy arrays can be persistently saved on disk using built-in functions in NumPy such as `np.savetxt()`, `np.save()`, or `np.savez()`, and loaded in memory using analogous functions. Common file formats for data arrays include raw binary files as in the previous recipe, the NPY file format implemented by NumPy (which are raw binary files with a header containing the metadata), and **Hierarchical Data Format**, or **HDF5**.
+
+An HDF5 file contains one or several datasets (arrays or heterogeneous tables) organized into a POSIX-like hierarchy. Datasets may be accessed lazily with memory mapping. In this recipe, we will use **h5py**, a Python package designed to deal with HDF5 files with a NumPy-like programming interface.
+
+## Getting ready
+
+You need h5py for this recipe and the next one. It should be included with Anaconda, but you can also install it with `conda install h5py`.
+
+## How to do it...
+
+**1.&nbsp;** First, we need to import NumPy and h5py:
 
 
-<p><strong>2.&nbsp;</strong> Let's create a new empty HDF5 file in write mode:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s1">&#39;myfile.h5&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
+wzxhzdk:0
 
 
-<p><strong>3.&nbsp;</strong> We create a new top-level group named <code>experiment1</code>:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">.</span><span class="n">create_group</span><span class="p">(</span><span class="s1">&#39;/experiment1&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
+**2.&nbsp;** Let's create a new empty HDF5 file in write mode:
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>&lt;HDF5 group &quot;/experiment1&quot; (0 members)&gt;
-</pre></div>
-</div>
+wzxhzdk:1
 
 
-<p><strong>4.&nbsp;</strong> Let's also add some metadata to this group:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">[</span><span class="s1">&#39;/experiment1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;2018-01-01&#39;</span>
-</pre></div>
-</div>
+**3.&nbsp;** We create a new top-level group named `experiment1`:
 
 
-<p><strong>5.&nbsp;</strong> In this group, we create a <code>1000 * 1000</code> array named <code>array1</code>:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
-<span class="n">f</span><span class="p">[</span><span class="s1">&#39;/experiment1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s1">&#39;array1&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">x</span><span class="p">)</span>
-</pre></div>
-</div>
+wzxhzdk:2
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>&lt;HDF5 dataset &quot;array1&quot;: shape (1000, 1000), type &quot;&lt;f8&quot;&gt;
-</pre></div>
-</div>
+
+wzxhzdk:3
 
 
-<p><strong>6.&nbsp;</strong> Finally, we need to close the file to commit the changes on disk:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</pre></div>
-</div>
+**4.&nbsp;** Let's also add some metadata to this group:
 
 
-<p><strong>7.&nbsp;</strong> Now, let's open this file in read mode. We could have done this in another Python session since the array has been saved in the HDF5 file.</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s1">&#39;myfile.h5&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
+wzxhzdk:4
 
 
-<p><strong>8.&nbsp;</strong> We can retrieve an attribute by giving the group path and the attribute name:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">[</span><span class="s1">&#39;/experiment1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span>
-</pre></div>
-</div>
+**5.&nbsp;** In this group, we create a `1000 * 1000` array named `array1`:
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>&#39;2018-01-01&#39;
-</pre></div>
-</div>
+wzxhzdk:5
 
 
-<p><strong>9.&nbsp;</strong> Let's access our array:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="s1">&#39;/experiment1/array1&#39;</span><span class="p">]</span>
-<span class="nb">type</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-</pre></div>
-</div>
+
+wzxhzdk:6
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>h5py._hl.dataset.Dataset
-</pre></div>
-</div>
+**6.&nbsp;** Finally, we need to close the file to commit the changes on disk:
 
 
-<p><strong>10.&nbsp;</strong> The array can be used as a NumPy array, but an important distinction is that it is stored on disk instead of system memory. Performing a computation on this array automatically loads the requested section of the array into memory, thus it is more efficient to access only the array's views.</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:],</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:])</span>
-</pre></div>
-</div>
+wzxhzdk:7
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>True
-</pre></div>
-</div>
+**7.&nbsp;** Now, let's open this file in read mode. We could have done this in another Python session since the array has been saved in the HDF5 file.
 
 
-<p><strong>11.&nbsp;</strong> We're done for this recipe, so let's do some clean-up:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</pre></div>
-</div>
+wzxhzdk:8
 
 
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;myfile.h5&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
+**8.&nbsp;** We can retrieve an attribute by giving the group path and the attribute name:
 
 
-<h2>How it works...</h2>
-<p>In this recipe, we stored a single array in the file, but HDF5 is especially useful when many arrays need to be saved in a single file. HDF5 is generally used in big projects, when large arrays have to be organized within a hierarchical structure. For example, it is largely used at NASA and other scientific institutions. Researchers can store recorded data across multiple devices, multiple trials, and multiple experiments.</p>
-<p>In HDF5, the data is organized within a tree. Nodes are either <strong>groups</strong> (analogous to folders in a file system) or <strong>datasets</strong> (analogous to files). A group can contain subgroups and datasets, whereas datasets only contain data. Both groups and datasets can contain attributes (metadata) that have a basic data type (integer or floating point number, string, and so on).</p>
-<h2>There's more...</h2>
-<p>HDF5 files created with h5py can be accessed in other languages like C, FORTRAN, MATLAB, and others.</p>
-<p>In HDF5, a dataset may be stored in a <strong>contiguous</strong> block of memory, or in <strong>chunks</strong>. Chunks are atomic objects and HDF5 can only read and write entire chunks. Chunks are internally organized within a tree data structure called a <strong>B-tree</strong>. When we create a new array or table, we can specify the <strong>chunk shape</strong>. It is an internal detail, but it can greatly affect performance when writing and reading parts of the dataset.</p>
-<p>The optimal chunk shape depends on how we plan to access the data. There is a trade-off between many small chunks (large overhead due to managing lots of chunks) and a few large chunks (inefficient disk I/O). In general, the chunk size is recommended to be smaller than 1 MB. The chunk cache is also an important parameter that may affect performance.</p>
-<blockquote>
-<p>Another HDF5 library in Python is <strong>PyTables</strong>. There is work in progress to make the two libraries share more code and reduce duplication of development efforts.</p>
-</blockquote>
-<p>Here are a few references:</p>
-<ul>
-<li>NPY file format at <a href="https://docs.scipy.org/doc/numpy-dev/neps/npy-format.html">https://docs.scipy.org/doc/numpy-dev/neps/npy-format.html</a></li>
-<li>h5py at <a href="http://www.h5py.org/">http://www.h5py.org/</a></li>
-<li>HDF5 chunking, at <a href="http://www.hdfgroup.org/HDF5/doc/Advanced/Chunking/">http://www.hdfgroup.org/HDF5/doc/Advanced/Chunking/</a></li>
-<li>Python and HDF5, a vision, <a href="https://www.hdfgroup.org/2015/09/python-hdf5-a-vision/">https://www.hdfgroup.org/2015/09/python-hdf5-a-vision/</a></li>
-<li>PyTables optimization guide, available at <a href="http://pytables.github.io/usersguide/optimization.html">http://pytables.github.io/usersguide/optimization.html</a></li>
-<li>Difference between PyTables and h5py, from the perspective of h5py, at <a href="https://github.com/h5py/h5py/wiki/FAQ#whats-the-difference-between-h5py-and-pytables">https://github.com/h5py/h5py/wiki/FAQ#whats-the-difference-between-h5py-and-pytables</a></li>
-<li>A personal piece about limitations of HDF5, at <a href="http://cyrille.rossant.net/moving-away-hdf5/">http://cyrille.rossant.net/moving-away-hdf5/</a></li>
-</ul>
-<h2>See also</h2>
-<ul>
-<li>Processing huge NumPy arrays with memory mapping</li>
-<li>Manipulating large heterogeneous tables with HDF5</li>
-<li>Ten tips for conducting reproducible interavctinve computing experiments</li>
-</ul>
+wzxhzdk:9
+
+
+
+wzxhzdk:10
+
+
+**9.&nbsp;** Let's access our array:
+
+
+wzxhzdk:11
+
+
+
+wzxhzdk:12
+
+
+**10.&nbsp;** The array can be used as a NumPy array, but an important distinction is that it is stored on disk instead of system memory. Performing a computation on this array automatically loads the requested section of the array into memory, thus it is more efficient to access only the array's views.
+
+
+wzxhzdk:13
+
+
+
+wzxhzdk:14
+
+
+**11.&nbsp;** We're done for this recipe, so let's do some clean-up:
+
+
+wzxhzdk:15
+
+
+
+wzxhzdk:16
+
+
+## How it works...
+
+In this recipe, we stored a single array in the file, but HDF5 is especially useful when many arrays need to be saved in a single file. HDF5 is generally used in big projects, when large arrays have to be organized within a hierarchical structure. For example, it is largely used at NASA and other scientific institutions. Researchers can store recorded data across multiple devices, multiple trials, and multiple experiments.
+
+In HDF5, the data is organized within a tree. Nodes are either **groups** (analogous to folders in a file system) or **datasets** (analogous to files). A group can contain subgroups and datasets, whereas datasets only contain data. Both groups and datasets can contain attributes (metadata) that have a basic data type (integer or floating point number, string, and so on).
+
+## There's more...
+
+HDF5 files created with h5py can be accessed in other languages like C, FORTRAN, MATLAB, and others.
+
+In HDF5, a dataset may be stored in a **contiguous** block of memory, or in **chunks**. Chunks are atomic objects and HDF5 can only read and write entire chunks. Chunks are internally organized within a tree data structure called a **B-tree**. When we create a new array or table, we can specify the **chunk shape**. It is an internal detail, but it can greatly affect performance when writing and reading parts of the dataset.
+
+The optimal chunk shape depends on how we plan to access the data. There is a trade-off between many small chunks (large overhead due to managing lots of chunks) and a few large chunks (inefficient disk I/O). In general, the chunk size is recommended to be smaller than 1 MB. The chunk cache is also an important parameter that may affect performance.
+
+> Another HDF5 library in Python is **PyTables**. There is work in progress to make the two libraries share more code and reduce duplication of development efforts.
+
+Here are a few references:
+
+* NPY file format at [https://docs.scipy.org/doc/numpy-dev/neps/npy-format.html](https://docs.scipy.org/doc/numpy-dev/neps/npy-format.html)
+* h5py at [http://www.h5py.org/](http://www.h5py.org/)
+* HDF5 chunking, at [http://www.hdfgroup.org/HDF5/doc/Advanced/Chunking/](http://www.hdfgroup.org/HDF5/doc/Advanced/Chunking/)
+* Python and HDF5, a vision, [https://www.hdfgroup.org/2015/09/python-hdf5-a-vision/](https://www.hdfgroup.org/2015/09/python-hdf5-a-vision/)
+* PyTables optimization guide, available at [http://pytables.github.io/usersguide/optimization.html](http://pytables.github.io/usersguide/optimization.html)
+* Difference between PyTables and h5py, from the perspective of h5py, at [https://github.com/h5py/h5py/wiki/FAQ#whats-the-difference-between-h5py-and-pytables](https://github.com/h5py/h5py/wiki/FAQ#whats-the-difference-between-h5py-and-pytables)
+* A personal piece about limitations of HDF5, at [http://cyrille.rossant.net/moving-away-hdf5/](http://cyrille.rossant.net/moving-away-hdf5/)
+
+## See also
+
+* Processing huge NumPy arrays with memory mapping
+* Manipulating large heterogeneous tables with HDF5
+* Ten tips for conducting reproducible interavctinve computing experiments
+
+-->
     </section>
 
             </div>
