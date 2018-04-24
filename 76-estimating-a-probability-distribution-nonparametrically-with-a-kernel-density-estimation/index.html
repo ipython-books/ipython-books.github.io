@@ -96,7 +96,7 @@
 <p>You need <strong>cartopy</strong>, available at <a href="http://scitools.org.uk/cartopy/.">http://scitools.org.uk/cartopy/.</a> You can install it with <code>conda install -c conda-forge cartopy</code>.</p>
 <h2>How to do it...</h2>
 <p><strong>1.&nbsp;</strong> Let's import the usual packages. The kernel density estimation with a Gaussian kernel is implemented in <code>scipy.stats</code>:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="kn">as</span> <span class="nn">st</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
@@ -104,73 +104,65 @@
 <span class="kn">import</span> <span class="nn">cartopy.crs</span> <span class="kn">as</span> <span class="nn">ccrs</span>
 <span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
 </pre></div>
-</div>
 
 
 <p><strong>2.&nbsp;</strong> Let's open the data with pandas:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="c1"># www.ncdc.noaa.gov/ibtracs/index.php?name=wmo-data</span>
+<div class="highlight"><pre><span></span><span class="c1"># www.ncdc.noaa.gov/ibtracs/index.php?name=wmo-data</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://github.com/ipython-books/&#39;</span>
                  <span class="s1">&#39;cookbook-2nd-data/blob/master/&#39;</span>
                  <span class="s1">&#39;Allstorms.ibtracs_wmo.v03r05.csv?&#39;</span>
                  <span class="s1">&#39;raw=true&#39;</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p><strong>3.&nbsp;</strong> The dataset contains information about most storms since 1848. A single storm may appear multiple times across several consecutive days.</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]]]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]]]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
-</div>
 
 
 <p><img alt="Storm dataset" src="http://ipython-books.github.io/pages/chapter07_stats/06_kde_files/06_kde_11_0.png" /></p>
 <p><strong>4.&nbsp;</strong> We use pandas' <code>groupby()</code> function to obtain the average location of every storm:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">dfs</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Serial_Num&#39;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">dfs</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Serial_Num&#39;</span><span class="p">)</span>
 <span class="n">pos</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">[[</span><span class="s1">&#39;Latitude&#39;</span><span class="p">,</span> <span class="s1">&#39;Longitude&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">pos</span><span class="o">.</span><span class="n">Longitude</span><span class="o">.</span><span class="n">values</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">pos</span><span class="o">.</span><span class="n">Latitude</span><span class="o">.</span><span class="n">values</span>
 <span class="n">pos</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
-</div>
 
 
 <p><img alt="Storm locations" src="http://ipython-books.github.io/pages/chapter07_stats/06_kde_files/06_kde_13_0.png" /></p>
 <p><strong>5.&nbsp;</strong> We display the storms on a map with cartopy. This toolkit allows us to easily project the geographical coordinates on the map.</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="c1"># We use a simple equirectangular projection,</span>
+<div class="highlight"><pre><span></span><span class="c1"># We use a simple equirectangular projection,</span>
 <span class="c1"># also called Plate Carree.</span>
+<span class="n">geo</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">Geodetic</span><span class="p">()</span>
 <span class="n">crs</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">()</span>
 <span class="c1"># We create the map plot.</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">crs</span><span class="p">)</span>
 <span class="c1"># We display the world map picture.</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">stock_img</span><span class="p">()</span>
 <span class="c1"># We display the storm locations.</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=.</span><span class="mi">5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=.</span><span class="mi">25</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=.</span><span class="mi">5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=.</span><span class="mi">25</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">geo</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p><img alt="Location of the storms" src="http://ipython-books.github.io/pages/chapter07_stats/06_kde_files/06_kde_15_0.png" /></p>
 <p><strong>6.&nbsp;</strong> Before performing the kernel density estimation, we transform the storms' positions from the <strong>geodetic coordinate system</strong> (longitude and latitude) into the map's coordinate system, called <strong>plate carrée</strong>.</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">geo</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">Geodetic</span><span class="p">()</span>
-<span class="n">h</span> <span class="o">=</span> <span class="n">geo</span><span class="o">.</span><span class="n">transform_points</span><span class="p">(</span><span class="n">crs</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">T</span>
+<div class="highlight"><pre><span></span><span class="n">h</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">transform_points</span><span class="p">(</span><span class="n">geo</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">T</span>
 <span class="n">h</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>(2, 6940)
+<div class="highlight"><pre><span></span>(2, 6940)
 </pre></div>
-</div>
 
 
 <p><strong>7.&nbsp;</strong> Now, we perform the kernel density estimation on our <code>(2, N)</code> array.</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">kde</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">gaussian_kde</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">kde</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">gaussian_kde</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p><strong>8.&nbsp;</strong> The <code>gaussian_kde()</code> routine returned a Python function. To see the results on a map, we need to evaluate this function on a 2D grid spanning the entire map. We create this grid with <code>meshgrid()</code>, and we pass the <code>x</code> and <code>y</code> values to the <code>kde()</code> function:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">k</span> <span class="o">=</span> <span class="mi">100</span>
+<div class="highlight"><pre><span></span><span class="n">k</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="c1"># Coordinates of the four corners of the map.</span>
 <span class="n">x0</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">y1</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_extent</span><span class="p">()</span>
 <span class="c1"># We create the grid.</span>
@@ -178,31 +170,28 @@
                      <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">y0</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">k</span><span class="p">))</span>
 <span class="c1"># We reshape the grid for the kde() function.</span>
 <span class="n">mesh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">tx</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">ty</span><span class="o">.</span><span class="n">ravel</span><span class="p">()))</span>
-<span class="c1"># We evaluate the kde() functionon the grid.</span>
+<span class="c1"># We evaluate the kde() function on the grid.</span>
 <span class="n">v</span> <span class="o">=</span> <span class="n">kde</span><span class="p">(</span><span class="n">mesh</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">k</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">k</span><span class="p">))</span>
 </pre></div>
-</div>
 
 
 <p><strong>9.&nbsp;</strong> Before displaying the KDE heatmap on the map, we need to use a special colormap with a transparent channel. This will allow us to superimpose the heatmap on the stock image:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="c1"># [https://stackoverflow.com/a/37334212/1595060](https://stackoverflow.com/a/37334212/1595060)</span>
+<div class="highlight"><pre><span></span><span class="c1"># [https://stackoverflow.com/a/37334212/1595060](https://stackoverflow.com/a/37334212/1595060)</span>
 <span class="n">cmap</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;Reds&#39;</span><span class="p">)</span>
 <span class="n">my_cmap</span> <span class="o">=</span> <span class="n">cmap</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">cmap</span><span class="o">.</span><span class="n">N</span><span class="p">))</span>
 <span class="n">my_cmap</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">cmap</span><span class="o">.</span><span class="n">N</span><span class="p">)</span>
 <span class="n">my_cmap</span> <span class="o">=</span> <span class="n">ListedColormap</span><span class="p">(</span><span class="n">my_cmap</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p><strong>10.&nbsp;</strong> Finally, we display the estimated density with <code>imshow()</code>:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">crs</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">crs</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">stock_img</span><span class="p">()</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span>
           <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="n">x0</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">y1</span><span class="p">],</span>
           <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;bilinear&#39;</span><span class="p">,</span>
           <span class="n">cmap</span><span class="o">=</span><span class="n">my_cmap</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p><img alt="Kernel density estimation" src="http://ipython-books.github.io/pages/chapter07_stats/06_kde_files/06_kde_25_0.png" /></p>
