@@ -32,16 +32,16 @@
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
     <!--[if lte IE 8]>
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+        <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
     <![endif]-->
     <!--[if gt IE 8]><!-->
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+        <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
     <!--<![endif]-->
     <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
     <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
-    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
-    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
-    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    <!-- <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
     
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -98,272 +98,229 @@
 </blockquote>
 <h2>How to do it...</h2>
 <p><strong>1.&nbsp;</strong> In Python 3, <code>print()</code> is a function whereas it was a statement in Python 2 (it was a historical oddity). This function may accept multiple arguments as well as a few options. Let's create a list:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">my_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><span class="n">my_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
 </pre></div>
-</div>
 
 
 <p>We can print the <code>my_list</code> object:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+<div class="highlight"><pre><span></span>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 </pre></div>
-</div>
 
 
 <p>But we can also print the ten numbers in the list:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="o">*</span><span class="n">my_list</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="o">*</span><span class="n">my_list</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>0 1 2 3 4 5 6 7 8 9
+<div class="highlight"><pre><span></span>0 1 2 3 4 5 6 7 8 9
 </pre></div>
-</div>
 
 
 <p>Finally we can customize the separator and the end of the string to print:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="o">*</span><span class="n">my_list</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot; + &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; = </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">sum</span><span class="p">(</span><span class="n">my_list</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="o">*</span><span class="n">my_list</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot; + &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; = </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">sum</span><span class="p">(</span><span class="n">my_list</span><span class="p">))</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>0 + 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 = 45
+<div class="highlight"><pre><span></span>0 + 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 = 45
 </pre></div>
-</div>
 
 
 <p><strong>2.&nbsp;</strong> Python 3 supports more advanced variable unpacking features:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">first</span><span class="p">,</span> <span class="n">second</span><span class="p">,</span> <span class="o">*</span><span class="n">rest</span><span class="p">,</span> <span class="n">last</span> <span class="o">=</span> <span class="n">my_list</span>
+<div class="highlight"><pre><span></span><span class="n">first</span><span class="p">,</span> <span class="n">second</span><span class="p">,</span> <span class="o">*</span><span class="n">rest</span><span class="p">,</span> <span class="n">last</span> <span class="o">=</span> <span class="n">my_list</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">second</span><span class="p">,</span> <span class="n">last</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">second</span><span class="p">,</span> <span class="n">last</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>0 1 9
+<div class="highlight"><pre><span></span>0 1 9
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">rest</span>
+<div class="highlight"><pre><span></span><span class="n">rest</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>[2, 3, 4, 5, 6, 7, 8]
+<div class="highlight"><pre><span></span>[2, 3, 4, 5, 6, 7, 8]
 </pre></div>
-</div>
 
 
 <p><strong>3.&nbsp;</strong> In Python 3, variable names can contain Unicode characters. This technique may be useful when writing mathematical code. To type mathematical symbols in the Jupyter Notebook, write LaTeX code and press <em>Tab</em>. For example, to create a variable <span class="math">\(\pi\)</span>, type <code>\pi</code> and then <em>Tab</em>:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">pi</span><span class="p">,</span> <span class="n">cos</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">pi</span><span class="p">,</span> <span class="n">cos</span>
 <span class="err">α</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="err">π</span> <span class="o">=</span> <span class="n">pi</span>
 <span class="n">cos</span><span class="p">(</span><span class="err">α</span> <span class="o">*</span> <span class="err">π</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>1.000
+<div class="highlight"><pre><span></span>1.000
 </pre></div>
-</div>
 
 
 <p><strong>4.&nbsp;</strong> Python 3.6 brings new string literals called <strong>f-strings</strong>. They offer a convenient syntax to define strings depending on existing variables:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span>
+<div class="highlight"><pre><span></span><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span>
 <span class="n">f</span><span class="s2">&quot;The sum of {a} and {b} is {a + b}&quot;</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>&#39;The sum of 1 and 2 is 3&#39;
+<div class="highlight"><pre><span></span>&#39;The sum of 1 and 2 is 3&#39;
 </pre></div>
-</div>
 
 
 <p><strong>5.&nbsp;</strong> We can add custom annotations to function arguments and output. These function annotations convey no semantics, but they can be used in the code as we like. Here is an example coming from <a href="https://stackoverflow.com/a/7811344/1595060">https://stackoverflow.com/a/7811344/1595060</a> :</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">kinetic_energy</span><span class="p">(</span><span class="n">mass</span><span class="p">:</span> <span class="s1">&#39;kg&#39;</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">kinetic_energy</span><span class="p">(</span><span class="n">mass</span><span class="p">:</span> <span class="s1">&#39;kg&#39;</span><span class="p">,</span>
                    <span class="n">velocity</span><span class="p">:</span> <span class="s1">&#39;m/s&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;J&#39;</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;The annotations serve here as documentation.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="o">.</span><span class="mi">5</span> <span class="o">*</span> <span class="n">mass</span> <span class="o">*</span> <span class="n">velocity</span> <span class="o">**</span> <span class="mi">2</span>
 </pre></div>
-</div>
 
 
 <p>These annotations are stored in the <code>__annotations__</code> attribute of the function, and they can be used as follows:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">annotations</span> <span class="o">=</span> <span class="n">kinetic_energy</span><span class="o">.</span><span class="n">__annotations__</span>
+<div class="highlight"><pre><span></span><span class="n">annotations</span> <span class="o">=</span> <span class="n">kinetic_energy</span><span class="o">.</span><span class="n">__annotations__</span>
 <span class="k">print</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;{key} is in {value}&quot;</span>
         <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">annotations</span><span class="o">.</span><span class="n">items</span><span class="p">()),</span>
       <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;, &quot;</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>mass is in kg, velocity is in m/s, return is in J
+<div class="highlight"><pre><span></span>mass is in kg, velocity is in m/s, return is in J
 </pre></div>
-</div>
 
 
 <p>The <em>typing</em> module, which has been included in Python 3.5 on a provisional basis, implements several annotations that can be used to specify typing information in functions.</p>
 <p><strong>6.&nbsp;</strong> Python 3.5 brings a new operator <code>@</code> for matrix multiplication. It is supported by NumPy 1.10 and later:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
 </pre></div>
-</div>
 
 
 <p>The <code>*</code> operator is the element-wise multiplication:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">M</span> <span class="o">*</span> <span class="n">M</span>
+<div class="highlight"><pre><span></span><span class="n">M</span> <span class="o">*</span> <span class="n">M</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>array([[0, 1],
+<div class="highlight"><pre><span></span>array([[0, 1],
        [1, 0]])
 </pre></div>
-</div>
 
 
 <p>Previously, matrix multiplication could be performed with <code>np.dot()</code>. The new syntax is clearer:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">M</span> <span class="err">@</span> <span class="n">M</span>
+<div class="highlight"><pre><span></span><span class="n">M</span> <span class="err">@</span> <span class="n">M</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>array([[1, 0],
+<div class="highlight"><pre><span></span>array([[1, 0],
        [0, 1]])
 </pre></div>
-</div>
 
 
 <p><strong>7.&nbsp;</strong> Python 3.3 brings the new <code>yield from</code> syntax that allows you, among other things, to compose multiple generators. For example, the two following functions are equivalent:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gen1</span><span class="p">():</span>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gen1</span><span class="p">():</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
             <span class="k">yield</span> <span class="n">j</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gen2</span><span class="p">():</span>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gen2</span><span class="p">():</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
         <span class="k">yield from</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="n">gen1</span><span class="p">())</span>
+<div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="n">gen1</span><span class="p">())</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>[0, 0, 1, 0, 1, 2, 0, 1, 2, 3]
+<div class="highlight"><pre><span></span>[0, 0, 1, 0, 1, 2, 0, 1, 2, 3]
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="n">gen2</span><span class="p">())</span>
+<div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="n">gen2</span><span class="p">())</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>[0, 0, 1, 0, 1, 2, 0, 1, 2, 3]
+<div class="highlight"><pre><span></span>[0, 0, 1, 0, 1, 2, 0, 1, 2, 3]
 </pre></div>
-</div>
 
 
 <p><strong>8.&nbsp;</strong> The <code>functools</code> library provides a <code>@lru_cache</code> decorator to implement a simple in-memory caching system for Python functions:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
 
 <span class="k">def</span> <span class="nf">f1</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">x</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n1</span> <span class="o">-</span><span class="n">r1</span> <span class="n">f1</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n1</span> <span class="o">-</span><span class="n">r1</span> <span class="n">f1</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>1 s ± 0 ns per loop (mean ± std. dev. of 1 run,
+<div class="highlight"><pre><span></span>1 s ± 0 ns per loop (mean ± std. dev. of 1 run,
     1 loop each)
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n1</span> <span class="o">-</span><span class="n">r1</span> <span class="n">f1</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n1</span> <span class="o">-</span><span class="n">r1</span> <span class="n">f1</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>1 s ± 0 ns per loop (mean ± std. dev. of 1 run,
+<div class="highlight"><pre><span></span>1 s ± 0 ns per loop (mean ± std. dev. of 1 run,
     1 loop each)
 </pre></div>
-</div>
 
 
 <p>Here, the two successive identical calls to <code>f1(0)</code> take one second. Now, let's define a cached version of this function:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">lru_cache</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">lru_cache</span>
 
 <span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>  <span class="c1"># keep the latest 32 calls</span>
 <span class="k">def</span> <span class="nf">f2</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">x</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n1</span> <span class="o">-</span><span class="n">r1</span> <span class="n">f2</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n1</span> <span class="o">-</span><span class="n">r1</span> <span class="n">f2</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>1 s ± 0 ns per loop (mean ± std. dev. of 1 run,
+<div class="highlight"><pre><span></span>1 s ± 0 ns per loop (mean ± std. dev. of 1 run,
     1 loop each)
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n1</span> <span class="o">-</span><span class="n">r1</span> <span class="n">f2</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n1</span> <span class="o">-</span><span class="n">r1</span> <span class="n">f2</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>6.14 µs ± 0 ns per loop (mean ± std. dev. of 1 run,
+<div class="highlight"><pre><span></span>6.14 µs ± 0 ns per loop (mean ± std. dev. of 1 run,
     1 loop each)
 </pre></div>
-</div>
 
 
 <p>The first call takes one second, whereas the next one returns immediately. In the second case, the function is not called but the output corresponding to the argument of 0 was cached and returned.</p>
 <p><strong>9.&nbsp;</strong> The new <em>pathlib</em> module offers filesystem facilities that are more convenient to use than the Python 2 <code>os.path</code> methods. The main class is <code>Path</code>:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 </pre></div>
-</div>
 
 
 <p>We instantiate a <code>Path</code> object representing the current directory:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p>Let's list all Markdown files in the directory:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="nb">sorted</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;*.md&#39;</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><span class="nb">sorted</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;*.md&#39;</span><span class="p">))</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>[PosixPath(&#39;00_intro.md&#39;),
+<div class="highlight"><pre><span></span>[PosixPath(&#39;00_intro.md&#39;),
  PosixPath(&#39;01_py3.md&#39;),
  PosixPath(&#39;02_workflows.md&#39;),
  PosixPath(&#39;03_git.md&#39;),
@@ -373,71 +330,60 @@
  PosixPath(&#39;07_test.md&#39;),
  PosixPath(&#39;08_debugging.md&#39;)]
 </pre></div>
-</div>
 
 
 <p>We can easily get the contents of a text file:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">read_text</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><span class="n">_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">read_text</span><span class="p">()</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>&#39;# Introduction\n\n...\n&#39;
+<div class="highlight"><pre><span></span>&#39;# Introduction\n\n...\n&#39;
 </pre></div>
-</div>
 
 
 <p>Let's obtain the list of subdirectories:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">d</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">p</span><span class="o">.</span><span class="n">iterdir</span><span class="p">()</span> <span class="k">if</span> <span class="n">d</span><span class="o">.</span><span class="n">is_dir</span><span class="p">()]</span>
+<div class="highlight"><pre><span></span><span class="p">[</span><span class="n">d</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">p</span><span class="o">.</span><span class="n">iterdir</span><span class="p">()</span> <span class="k">if</span> <span class="n">d</span><span class="o">.</span><span class="n">is_dir</span><span class="p">()]</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>[PosixPath(&#39;images&#39;),
+<div class="highlight"><pre><span></span>[PosixPath(&#39;images&#39;),
  PosixPath(&#39;.ipynb_checkpoints&#39;),
  PosixPath(&#39;__pycache__&#39;),
 </pre></div>
-</div>
 
 
 <p>Finally, we list all files in the <code>images</code> subfolder (note the slash <code>/</code> operator on <code>Path</code> instances):</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">((</span><span class="n">p</span> <span class="o">/</span> <span class="s1">&#39;images&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">iterdir</span><span class="p">())</span>
+<div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">((</span><span class="n">p</span> <span class="o">/</span> <span class="s1">&#39;images&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">iterdir</span><span class="p">())</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>[PosixPath(&#39;images/github_new.png&#39;),
+<div class="highlight"><pre><span></span>[PosixPath(&#39;images/github_new.png&#39;),
  PosixPath(&#39;images/folder.png&#39;)]
 </pre></div>
-</div>
 
 
 <p><strong>10.&nbsp;</strong> Python 3.4 provides a new <em>statistics</em> module which implements basic statistical routines. This module may be useful when depending on NumPy or SciPy is not desirable. Let's import the module:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span> <span class="kn">as</span> <span class="nn">r</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span> <span class="kn">as</span> <span class="nn">r</span>
 <span class="kn">import</span> <span class="nn">statistics</span> <span class="kn">as</span> <span class="nn">st</span>
 </pre></div>
-</div>
 
 
 <p>We create a list of normally-distributed random variables:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">normalvariate</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">normalvariate</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100000</span><span class="p">)]</span>
 </pre></div>
-</div>
 
 
 <p>We compute the mean, median, and standard deviation:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">my_list</span><span class="p">),</span>
+<div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">my_list</span><span class="p">),</span>
       <span class="n">st</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">my_list</span><span class="p">),</span>
       <span class="n">st</span><span class="o">.</span><span class="n">stdev</span><span class="p">(</span><span class="n">my_list</span><span class="p">),</span>
       <span class="p">)</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>0.00073 -0.00052 1.00050
+<div class="highlight"><pre><span></span>0.00073 -0.00052 1.00050
 </pre></div>
-</div>
 
 
 <h2>There's more...</h2>
@@ -521,9 +467,9 @@
         <footer id="footer" class="pure-u-1 pure-u-md-4-4">
             <div class="l-box">
                 <div>
-                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                    <p>&copy; <a href="https://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
                         Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
-                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                        for <a href="https://blog.getpelican.com/">Pelican</a>
                     </p>
                 </div>
             </div>
@@ -543,11 +489,10 @@ var scJsHost = (("https:" == document.location.protocol) ?
 src="https://www.statcounter.com/counter/counter.js"
 async></script>
 <noscript><div class="statcounter"><a title="Web Analytics"
-href="http://statcounter.com/" target="_blank"><img
+href="https://statcounter.com/" target="_blank"><img
 class="statcounter"
 src="//c.statcounter.com/9752080/0/c177b501/1/" alt="Web
 Analytics"></a></div></noscript>
 <!-- End of StatCounter Code for Default Guide -->
 </body>
 </html>
-

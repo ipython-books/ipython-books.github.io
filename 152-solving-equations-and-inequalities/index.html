@@ -32,16 +32,16 @@
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
     <!--[if lte IE 8]>
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+        <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
     <![endif]-->
     <!--[if gt IE 8]><!-->
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+        <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
     <!--<![endif]-->
     <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
     <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
-    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
-    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
-    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    <!-- <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
     
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -93,79 +93,68 @@
 <p>SymPy offers several ways to solve linear and nonlinear equations and systems of equations. Of course, these functions do not always succeed in finding closed-form exact solutions. In this case, we can fall back to numerical solvers and obtain approximate solutions.</p>
 <h2>How to do it...</h2>
 <p><strong>1.&nbsp;</strong> Let's define a few symbols:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="n">init_printing</span><span class="p">()</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">var</span><span class="p">(</span><span class="s1">&#39;x y z a&#39;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">var</span><span class="p">(</span><span class="s1">&#39;x y z a&#39;</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p><img alt="(x, y, z, a)" src="http://ipython-books.github.io/pages/chapter15_symbolic/02_solvers_files/02_solvers_5_0.png" /></p>
 <p><strong>2.&nbsp;</strong> We use the <code>solve()</code> function to solve equations (the right-hand side is 0 by default):</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">solve</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">a</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">solve</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">a</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p><img alt="Output" src="http://ipython-books.github.io/pages/chapter15_symbolic/02_solvers_files/02_solvers_7_0.png" /></p>
 <p><strong>3.&nbsp;</strong> We can also solve inequalities. Here, we need to use the <code>solve_univariate_inequality()</code> function to solve this univariate inequality in the real domain:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
 <span class="n">solve_univariate_inequality</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p><img alt="Output" src="http://ipython-books.github.io/pages/chapter15_symbolic/02_solvers_files/02_solvers_9_0.png" /></p>
 <p><strong>4.&nbsp;</strong> The <code>solve()</code> function also accepts systems of equations (here, a linear system):</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">solve</span><span class="p">([</span><span class="n">x</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="mi">2</span><span class="p">],</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">solve</span><span class="p">([</span><span class="n">x</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="mi">2</span><span class="p">],</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p><img alt="Output" src="http://ipython-books.github.io/pages/chapter15_symbolic/02_solvers_files/02_solvers_11_0.png" /></p>
 <p><strong>5.&nbsp;</strong> Nonlinear systems are also handled:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">solve</span><span class="p">([</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">S</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">],</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">solve</span><span class="p">([</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">S</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">],</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p><img alt="Output" src="http://ipython-books.github.io/pages/chapter15_symbolic/02_solvers_files/02_solvers_13_0.png" /></p>
 <p><strong>6.&nbsp;</strong> Singular linear systems can also be solved (here, there is an infinite number of solutions because the two equations are collinear):</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">solve</span><span class="p">([</span><span class="n">x</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="n">x</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">solve</span><span class="p">([</span><span class="n">x</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="n">x</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p><img alt="Output" src="http://ipython-books.github.io/pages/chapter15_symbolic/02_solvers_files/02_solvers_15_0.png" /></p>
 <p><strong>7.&nbsp;</strong> Now, let's solve a linear system using matrices containing symbolic variables:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">var</span><span class="p">(</span><span class="s1">&#39;a b c d u v&#39;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">var</span><span class="p">(</span><span class="s1">&#39;a b c d u v&#39;</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p><img alt="Output" src="http://ipython-books.github.io/pages/chapter15_symbolic/02_solvers_files/02_solvers_17_0.png" /></p>
 <p><strong>8.&nbsp;</strong> We create the <strong>augmented matrix</strong>, which is the horizontal concatenation of the system's matrix with the linear coefficients and the right-hand side vector. This matrix corresponds to the following system in <span class="math">\(x, y\)</span>: <span class="math">\(ax+by=u, cx+dy=v\)</span>:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">M</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">([[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">u</span><span class="p">],</span> <span class="p">[</span><span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">v</span><span class="p">]])</span>
+<div class="highlight"><pre><span></span><span class="n">M</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">([[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">u</span><span class="p">],</span> <span class="p">[</span><span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">v</span><span class="p">]])</span>
 <span class="n">M</span>
 </pre></div>
-</div>
 
 
 <p><img alt="Output" src="http://ipython-books.github.io/pages/chapter15_symbolic/02_solvers_files/02_solvers_19_0.png" /></p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">solve_linear_system</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">solve_linear_system</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p><img alt="Output" src="http://ipython-books.github.io/pages/chapter15_symbolic/02_solvers_files/02_solvers_20_0.png" /></p>
 <p><strong>9.&nbsp;</strong> This system needs to be nonsingular in order to have a unique solution, which is equivalent to saying that the determinant of the system's matrix needs to be nonzero (otherwise the denominators in the preceding fractions are equal to zero):</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">det</span><span class="p">(</span><span class="n">M</span><span class="p">[:</span><span class="mi">2</span><span class="p">,</span> <span class="p">:</span><span class="mi">2</span><span class="p">])</span>
+<div class="highlight"><pre><span></span><span class="n">det</span><span class="p">(</span><span class="n">M</span><span class="p">[:</span><span class="mi">2</span><span class="p">,</span> <span class="p">:</span><span class="mi">2</span><span class="p">])</span>
 </pre></div>
-</div>
 
 
 <p><img alt="Output" src="http://ipython-books.github.io/pages/chapter15_symbolic/02_solvers_files/02_solvers_22_0.png" /></p>
@@ -240,9 +229,9 @@
         <footer id="footer" class="pure-u-1 pure-u-md-4-4">
             <div class="l-box">
                 <div>
-                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                    <p>&copy; <a href="https://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
                         Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
-                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                        for <a href="https://blog.getpelican.com/">Pelican</a>
                     </p>
                 </div>
             </div>
@@ -262,11 +251,10 @@ var scJsHost = (("https:" == document.location.protocol) ?
 src="https://www.statcounter.com/counter/counter.js"
 async></script>
 <noscript><div class="statcounter"><a title="Web Analytics"
-href="http://statcounter.com/" target="_blank"><img
+href="https://statcounter.com/" target="_blank"><img
 class="statcounter"
 src="//c.statcounter.com/9752080/0/c177b501/1/" alt="Web
 Analytics"></a></div></noscript>
 <!-- End of StatCounter Code for Default Guide -->
 </body>
 </html>
-

@@ -32,16 +32,16 @@
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
     <!--[if lte IE 8]>
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+        <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
     <![endif]-->
     <!--[if gt IE 8]><!-->
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+        <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
     <!--<![endif]-->
     <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
     <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
-    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
-    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
-    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    <!-- <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
     
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -99,18 +99,16 @@
 <p>Install Altair with <code>conda install -c conda-forge altair</code>.</p>
 <h2>How to do it...</h2>
 <p><strong>1.&nbsp;</strong> Let's import Altair:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">altair</span> <span class="kn">as</span> <span class="nn">alt</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">altair</span> <span class="kn">as</span> <span class="nn">alt</span>
 </pre></div>
-</div>
 
 
 <p><strong>2.&nbsp;</strong> Altair provides several example datasets:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">alt</span><span class="o">.</span><span class="n">list_datasets</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><span class="n">alt</span><span class="o">.</span><span class="n">list_datasets</span><span class="p">()</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>[&#39;airports&#39;,
+<div class="highlight"><pre><span></span>[&#39;airports&#39;,
  ...
  &#39;driving&#39;,
  &#39;flare&#39;,
@@ -125,37 +123,33 @@
  &#39;wheat&#39;,
  &#39;world-110m&#39;]
 </pre></div>
-</div>
 
 
 <p><strong>3.&nbsp;</strong> We load the <code>flights-5k</code> dataset:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s1">&#39;flights-5k&#39;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s1">&#39;flights-5k&#39;</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p>The <code>load_dataset()</code> function returns a pandas <code>DataFrame</code>.</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p><img alt="Output" src="http://ipython-books.github.io/pages/chapter06_viz/06_altair_files/06_altair_12_0.png" /></p>
 <p>This dataset provides the date, origin, destination, flight distance, and delay of many flights.</p>
 <p><strong>4.&nbsp;</strong> Let's create a scatter plot showing the delay as a function of the date, with the marker size depending on the flight distance:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">mark_point</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">mark_point</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
     <span class="n">x</span><span class="o">=</span><span class="s1">&#39;date&#39;</span><span class="p">,</span>
     <span class="n">y</span><span class="o">=</span><span class="s1">&#39;delay&#39;</span><span class="p">,</span>
     <span class="n">size</span><span class="o">=</span><span class="s1">&#39;distance&#39;</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p><img alt="A scatter plot" src="http://ipython-books.github.io/pages/chapter06_viz/06_altair_files/06_altair_15_0.png" /></p>
 <p>The <code>mark_point()</code> method specifies that we're creating a scatter plot. The <code>encode()</code> function allows us to link parameters of the plot (<em>x</em> and <em>y</em> coordinates, the point size) to specific columns in our DataFrame.</p>
 <p><strong>5.&nbsp;</strong> Next, we create a bar plot with the average delay of all flights departing from Los Angeles, as a function of time:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">df_la</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;origin&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;LAX&#39;</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><span class="n">df_la</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;origin&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;LAX&#39;</span><span class="p">]</span>
 
 <span class="n">x</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="nb">bin</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;average(delay)&#39;</span>
@@ -165,13 +159,12 @@
     <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p><img alt="A bar plot" src="http://ipython-books.github.io/pages/chapter06_viz/06_altair_files/06_altair_18_0.png" /></p>
 <p>We select all flights departing from the <code>LAX</code> airport using pandas. For the <em>x</em> coordinate, we use the <code>alt.X</code> class to specify that we want a histogram (<code>bin=True</code>). For the <em>y</em> coordinate, we specify the average of all delays for every bin.</p>
 <p><strong>6.&nbsp;</strong> Now, we create a histogram of the average delay of every origin airport. We use the <code>sort</code> option of the <code>X</code> class to specify that we want to order the <em>x</em> axis (origin) as a function of the average delay, in descending order:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">sort_delay</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">SortField</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><span class="n">sort_delay</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">SortField</span><span class="p">(</span>
     <span class="s1">&#39;delay&#39;</span><span class="p">,</span> <span class="n">op</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;descending&#39;</span><span class="p">)</span>
 
 <span class="n">x</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s1">&#39;origin&#39;</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="n">sort_delay</span><span class="p">)</span>
@@ -182,13 +175,12 @@
     <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p><img alt="A histogram" src="http://ipython-books.github.io/pages/chapter06_viz/06_altair_files/06_altair_21_0.png" /></p>
 <h2>How it works...</h2>
 <p>Altair provides a Python API to generate a Vega-Lite specification in JSON. The <code>to_json()</code> method of an Altair chart can be used to inspect the JSON created by Altair. For example, here is the JSON of the last chart example above:</p>
-<div class="highlight highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+<div class="highlight"><pre><span></span><span class="p">{</span>
  <span class="nt">&quot;$schema&quot;</span><span class="p">:</span> <span class="s2">&quot;https://vega.github.io/schema/vega-lite/v1.2.1.json&quot;</span><span class="p">,</span>
  <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
   <span class="nt">&quot;values&quot;</span><span class="p">:</span> <span class="p">[</span>
@@ -221,7 +213,6 @@
  <span class="nt">&quot;mark&quot;</span><span class="p">:</span> <span class="s2">&quot;bar&quot;</span>
 <span class="p">}</span>
 </pre></div>
-</div>
 
 
 <p>The JSON may contain the data itself, like here, or a URL to a data file. It also defines the <em>encoding channels</em> which link the chart parameters to the data.</p>
@@ -252,9 +243,9 @@
         <footer id="footer" class="pure-u-1 pure-u-md-4-4">
             <div class="l-box">
                 <div>
-                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                    <p>&copy; <a href="https://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
                         Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
-                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                        for <a href="https://blog.getpelican.com/">Pelican</a>
                     </p>
                 </div>
             </div>
@@ -274,11 +265,10 @@ var scJsHost = (("https:" == document.location.protocol) ?
 src="https://www.statcounter.com/counter/counter.js"
 async></script>
 <noscript><div class="statcounter"><a title="Web Analytics"
-href="http://statcounter.com/" target="_blank"><img
+href="https://statcounter.com/" target="_blank"><img
 class="statcounter"
 src="//c.statcounter.com/9752080/0/c177b501/1/" alt="Web
 Analytics"></a></div></noscript>
 <!-- End of StatCounter Code for Default Guide -->
 </body>
 </html>
-

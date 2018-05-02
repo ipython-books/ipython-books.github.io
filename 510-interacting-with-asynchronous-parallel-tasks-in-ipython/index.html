@@ -32,16 +32,16 @@
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
     <!--[if lte IE 8]>
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+        <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
     <![endif]-->
     <!--[if gt IE 8]><!-->
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+        <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
     <!--<![endif]-->
     <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
     <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
-    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
-    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
-    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    <!-- <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
     
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -95,77 +95,67 @@
 <p>You need to start the IPython engines (see the previous recipe). The simplest option is to launch them from the <em>IPython Clusters</em> tab in the Notebook dashboard. In this recipe, we use four engines.</p>
 <h2>How to do it...</h2>
 <p><strong>1.&nbsp;</strong> Let's import a few modules:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">ipyparallel</span>
 <span class="kn">import</span> <span class="nn">ipywidgets</span>
 <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">clear_output</span><span class="p">,</span> <span class="n">display</span>
 </pre></div>
-</div>
 
 
 <p><strong>2.&nbsp;</strong> We create a <code>Client</code>:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">rc</span> <span class="o">=</span> <span class="n">ipyparallel</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><span class="n">rc</span> <span class="o">=</span> <span class="n">ipyparallel</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
 </pre></div>
-</div>
 
 
 <p><strong>3.&nbsp;</strong> Now, we create a load-balanced view on the IPython engines:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">view</span> <span class="o">=</span> <span class="n">rc</span><span class="o">.</span><span class="n">load_balanced_view</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><span class="n">view</span> <span class="o">=</span> <span class="n">rc</span><span class="o">.</span><span class="n">load_balanced_view</span><span class="p">()</span>
 </pre></div>
-</div>
 
 
 <p><strong>4.&nbsp;</strong> We define a simple function for our parallel tasks:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="kn">import</span> <span class="nn">time</span>
     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="o">.</span><span class="mi">1</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
 </pre></div>
-</div>
 
 
 <p><strong>5.&nbsp;</strong> We will run this function on 100 integer numbers in parallel:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">numbers</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><span class="n">numbers</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
 </pre></div>
-</div>
 
 
 <p><strong>6.&nbsp;</strong> We execute <code>f</code> on our list <code>numbers</code> in parallel across all of our engines, using <code>map_async()</code>. This function immediately returns an <code>AsyncResult</code> object that allows us to interactively retrieve information about the tasks:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">ar</span> <span class="o">=</span> <span class="n">view</span><span class="o">.</span><span class="n">map_async</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">numbers</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">ar</span> <span class="o">=</span> <span class="n">view</span><span class="o">.</span><span class="n">map_async</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">numbers</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p><strong>7.&nbsp;</strong> This object has a <code>metadata</code> attribute: a list of dictionaries for all engines. We can get the date of submission and completion, the status, the standard output and error, and other information:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">ar</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><span class="n">ar</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>{&#39;after&#39;: None,
+<div class="highlight"><pre><span></span>{&#39;after&#39;: None,
  &#39;completed&#39;: None,
  &#39;data&#39;: {},
  ...
  &#39;submitted&#39;: datetime.datetime(2017, ...)}
 </pre></div>
-</div>
 
 
 <p><strong>8.&nbsp;</strong> Iterating over the <code>AsyncResult</code> instance works normally; the iteration progresses in real-time while the tasks are being completed:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ar</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ar</span><span class="p">:</span>
     <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;, &#39;</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>0, 1, 4, ..., 9801,
+<div class="highlight"><pre><span></span>0, 1, 4, ..., 9801,
 </pre></div>
-</div>
 
 
 <p><strong>9.&nbsp;</strong> Now, we create a simple progress bar for our asynchronous tasks. The idea is to create a loop polling for the tasks' status at every second. An <code>IntProgressWidget</code> widget is updated in real-time and shows the progress of the tasks:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">progress_bar</span><span class="p">(</span><span class="n">ar</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">progress_bar</span><span class="p">(</span><span class="n">ar</span><span class="p">):</span>
     <span class="c1"># We create a progress bar.</span>
     <span class="n">w</span> <span class="o">=</span> <span class="n">ipywidgets</span><span class="o">.</span><span class="n">IntProgress</span><span class="p">()</span>
     <span class="c1"># The maximum value is the number of tasks.</span>
@@ -181,18 +171,15 @@
         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="o">.</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">w</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">max</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">ar</span> <span class="o">=</span> <span class="n">view</span><span class="o">.</span><span class="n">map_async</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">numbers</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">ar</span> <span class="o">=</span> <span class="n">view</span><span class="o">.</span><span class="n">map_async</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">numbers</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p>The progress bar is shown in the following screenshot:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">progress_bar</span><span class="p">(</span><span class="n">ar</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">progress_bar</span><span class="p">(</span><span class="n">ar</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p><img alt="Progress bar" src="http://ipython-books.github.io/pages/chapter05_hpc/10_async_files/10_async_25_0.png" /></p>
@@ -227,9 +214,9 @@
         <footer id="footer" class="pure-u-1 pure-u-md-4-4">
             <div class="l-box">
                 <div>
-                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                    <p>&copy; <a href="https://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
                         Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
-                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                        for <a href="https://blog.getpelican.com/">Pelican</a>
                     </p>
                 </div>
             </div>
@@ -249,11 +236,10 @@ var scJsHost = (("https:" == document.location.protocol) ?
 src="https://www.statcounter.com/counter/counter.js"
 async></script>
 <noscript><div class="statcounter"><a title="Web Analytics"
-href="http://statcounter.com/" target="_blank"><img
+href="https://statcounter.com/" target="_blank"><img
 class="statcounter"
 src="//c.statcounter.com/9752080/0/c177b501/1/" alt="Web
 Analytics"></a></div></noscript>
 <!-- End of StatCounter Code for Default Guide -->
 </body>
 </html>
-

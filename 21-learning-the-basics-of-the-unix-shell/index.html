@@ -32,16 +32,16 @@
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
     <!--[if lte IE 8]>
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+        <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
     <![endif]-->
     <!--[if gt IE 8]><!-->
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+        <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
     <!--<![endif]-->
     <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
     <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
-    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
-    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
-    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    <!-- <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
     
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -102,39 +102,34 @@
 <h2>How to do it...</h2>
 <p>The Unix shell comes with hundreds of commands. We will see the most common ones in this recipe.</p>
 <p><strong>1.&nbsp;</strong> The terminal lets us write text commands with the keyboard. We execute them by pressing Enter, and the output is displayed below the command. The <strong>working directory</strong> is the directory of our file system that is currently "active" in the terminal. We can get the absolute path of the working directory as follows:</p>
-<div class="highlight highlight-bash"><div class="highlight"><pre><span></span><span class="nb">pwd</span>
+<div class="highlight"><pre><span></span><span class="nb">pwd</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>~/git/cookbook-2nd/chapter02_best_practices
+<div class="highlight"><pre><span></span>~/git/cookbook-2nd/chapter02_best_practices
 </pre></div>
-</div>
 
 
 <blockquote>
 <p>the dollar <code>$</code> sign must not be typed: it is typically used by the shell to indicate where the user can start typing. The information written before it may show the user name, the computer name, and part of the working directory. Here, only the three characters <code>pwd</code> should be typed before pressing Enter.</p>
 </blockquote>
 <p><strong>2.&nbsp;</strong> We can list all files and subdirectories in the working directory as follows:</p>
-<div class="highlight highlight-bash"><div class="highlight"><pre><span></span>ls
+<div class="highlight"><pre><span></span>ls
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>00_intro.md  03_git.md           07_high_quality.md
+<div class="highlight"><pre><span></span>00_intro.md  03_git.md           07_high_quality.md
 01_shell.md  04_git_advanced.md  08_test.md
 02_py3       05_workflows.md     09_debugging.md
 02_py3.md    06_tips.md          images
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-bash"><div class="highlight"><pre><span></span>ls -l
+<div class="highlight"><pre><span></span>ls -l
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>total 100
+<div class="highlight"><pre><span></span>total 100
 -rw-rw-r-- 1 owner   769 Dec 12 10:23 00_intro.md
 -rw-rw-r-- 1 owner  2473 Dec 12 14:21 01_shell.md
 ...
@@ -142,72 +137,61 @@
 -rw-rw-r-- 1 owner  5032 Dec 12 10:23 09_debugging.md
 drwxrwxr-x 2 owner  4096 Aug  1 16:49 images
 </pre></div>
-</div>
 
 
 <p>The <code>-l</code> option displays the directory contents as a detailed list, showing the permissions and owner of the files, the file sizes, and the last modified dates. Most shell commands come with many options that alter their behavior and that can be arbitrarily combined.</p>
 <p><strong>3.&nbsp;</strong> We use the <code>cd</code> command to navigate between subdirectories. The current directory is named <code>.</code> (single dot), and the parent directory is named <code>..</code> (double dot):</p>
-<div class="highlight highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> images
+<div class="highlight"><pre><span></span><span class="nb">cd</span> images
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-bash"><div class="highlight"><pre><span></span><span class="nb">pwd</span>
+<div class="highlight"><pre><span></span><span class="nb">pwd</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>~/git/cookbook-2nd/chapter02_best_practices/images
+<div class="highlight"><pre><span></span>~/git/cookbook-2nd/chapter02_best_practices/images
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-bash"><div class="highlight"><pre><span></span>ls
+<div class="highlight"><pre><span></span>ls
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>folder.png  github_new.png
+<div class="highlight"><pre><span></span>folder.png  github_new.png
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> ..
+<div class="highlight"><pre><span></span><span class="nb">cd</span> ..
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-bash"><div class="highlight"><pre><span></span><span class="nb">pwd</span>
+<div class="highlight"><pre><span></span><span class="nb">pwd</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>~/git/cookbook-2nd/chapter02_best_practices
+<div class="highlight"><pre><span></span>~/git/cookbook-2nd/chapter02_best_practices
 </pre></div>
-</div>
 
 
 <p><strong>4.&nbsp;</strong> Paths can be specified as relative (depending on a reference directory, generally the working directory) or absolute. The <strong>home directory</strong>, specified as <code>~</code>, contains the user's personal files. Configuration files are often stored in a directory like <code>~/.program_name</code>. For example, <code>~/.ipython</code> contains configuration files of IPython:</p>
-<div class="highlight highlight-bash"><div class="highlight"><pre><span></span>ls -la ~/.ipython
+<div class="highlight"><pre><span></span>ls -la ~/.ipython
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>total 20
+<div class="highlight"><pre><span></span>total 20
 drwxr-xr-x  5 cyrille 4096 Nov 14 16:16 .
 drwxr-xr-x 93 cyrille 4096 Dec 12 10:50 ..
 drwxr-xr-x  2 cyrille 4096 Nov 14 16:16 extensions
 drwxr-xr-x  2 cyrille 4096 Nov 14 16:16 nbextensions
 drwxr-xr-x  7 cyrille 4096 Dec 12 14:18 profile_default
 </pre></div>
-</div>
 
 
 <blockquote>
 <p>in most terminals, we can use the arrow keys on the keyboard to navigate in the history of past commands. Also, the Tab key enables tab completion, which automatically completes the first characters of a command or a file. For example, typing <code>ls -la ~/.ipy</code> and pressing Tab would automatically complete to <code>ls -la ~/.ipython</code>, or it would present the list of possible options if there are several files or directories that begin with <code>~/.ipy</code>.</p>
 </blockquote>
 <p><strong>5.&nbsp;</strong> We can create, move, rename, copy, delete files and directories from the terminal:</p>
-<div class="highlight highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># We create an empty directory:</span>
+<div class="highlight"><pre><span></span><span class="c1"># We create an empty directory:</span>
 mkdir md_files
 <span class="c1"># We copy all Markdown files into the new directory:</span>
 cp *.md md_files
@@ -215,104 +199,88 @@ cp *.md md_files
 mv md_files markdown_files
 ls markdown_files
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>00_intro.md         05_workflows.md
+<div class="highlight"><pre><span></span>00_intro.md         05_workflows.md
 01_shell.md         06_tips.md
 02_py3.md           07_high_quality.md
 03_git.md           08_test.md
 04_git_advanced.md  09_debugging.md
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-bash"><div class="highlight"><pre><span></span>rmdir markdown_files
+<div class="highlight"><pre><span></span>rmdir markdown_files
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>rmdir: failed to remove &#39;markdown_files&#39;:
+<div class="highlight"><pre><span></span>rmdir: failed to remove &#39;markdown_files&#39;:
     Directory not empty
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-bash"><div class="highlight"><pre><span></span>rm markdown_files/*
+<div class="highlight"><pre><span></span>rm markdown_files/*
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-bash"><div class="highlight"><pre><span></span>rmdir markdown_files
+<div class="highlight"><pre><span></span>rmdir markdown_files
 </pre></div>
-</div>
 
 
 <blockquote>
 <p>The <code>rm</code> command lets us delete files and directories. The <code>rm -rf path</code> deletes the given path recursively, even if subdirectories are not empty. It is an extremely dangerous command as it cannot be undone: the files are immediately and permanently deleted, they do not go into a trash directory first. See <a href="https://github.com/sindresorhus/guides/blob/master/how-not-to-rm-yourself.md">https://github.com/sindresorhus/guides/blob/master/how-not-to-rm-yourself.md</a> for more details.</p>
 </blockquote>
 <p><strong>6.&nbsp;</strong> There are several useful commands to deal with text files:</p>
-<div class="highlight highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># Show the first three lines of a text file:</span>
+<div class="highlight"><pre><span></span><span class="c1"># Show the first three lines of a text file:</span>
 head -n <span class="m">3</span> 01_shell.md
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span># Learning the basics of the Unix shell
+<div class="highlight"><pre><span></span># Learning the basics of the Unix shell
 
 Learning how to interact with the operating system (...)
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># Show the last line of a text file:</span>
+<div class="highlight"><pre><span></span><span class="c1"># Show the last line of a text file:</span>
 tail -n <span class="m">1</span> 00_intro.md
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>We will also cover more general topics (...)
+<div class="highlight"><pre><span></span>We will also cover more general topics (...)
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># We display some text:</span>
+<div class="highlight"><pre><span></span><span class="c1"># We display some text:</span>
 <span class="nb">echo</span> <span class="s2">&quot;Hello world!&quot;</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>Hello world!
+<div class="highlight"><pre><span></span>Hello world!
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># We redirect the output of a command to</span>
+<div class="highlight"><pre><span></span><span class="c1"># We redirect the output of a command to</span>
 <span class="c1"># a text file with `&gt;`:</span>
 <span class="nb">echo</span> <span class="s2">&quot;Hello world!&quot;</span> &gt; myfile.txt
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># We display the entire contents of the file:</span>
+<div class="highlight"><pre><span></span><span class="c1"># We display the entire contents of the file:</span>
 cat myfile.txt
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>Hello world!
+<div class="highlight"><pre><span></span>Hello world!
 </pre></div>
-</div>
 
 
 <p>Several command-line text editors are available, such as <code>pico</code>, <code>nano</code>, or <code>vi</code>. Learning these text editors requires time and effort, especially vi.</p>
 <p><strong>7.&nbsp;</strong> The <code>grep</code> command lets us search substrings in text. In the following example, we find all instances of <code>Unix</code> followed by a word (using regular expressions):</p>
-<div class="highlight highlight-bash"><div class="highlight"><pre><span></span>grep -Eo <span class="s2">&quot;Unix \w+&quot;</span> 01_shell.md
+<div class="highlight"><pre><span></span>grep -Eo <span class="s2">&quot;Unix \w+&quot;</span> 01_shell.md
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>Unix shell
+<div class="highlight"><pre><span></span>Unix shell
 Unix shell
 Unix subsystem
 Unix shell
@@ -320,18 +288,15 @@ Unix shell
 Unix shell
 Unix shell
 </pre></div>
-</div>
 
 
 <p><strong>8.&nbsp;</strong> A major strength of the Unix shell is that commands can be combined with <strong>pipes</strong>: the output of one command can be directly transferred to the input of another command:</p>
-<div class="highlight highlight-bash"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s2">&quot;This is a Unix shell&quot;</span> <span class="p">|</span> grep -Eo <span class="s2">&quot;Unix \w+&quot;</span>
+<div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s2">&quot;This is a Unix shell&quot;</span> <span class="p">|</span> grep -Eo <span class="s2">&quot;Unix \w+&quot;</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>Unix shell
+<div class="highlight"><pre><span></span>Unix shell
 </pre></div>
-</div>
 
 
 <h2>There's more...</h2>
@@ -358,9 +323,9 @@ Unix shell
         <footer id="footer" class="pure-u-1 pure-u-md-4-4">
             <div class="l-box">
                 <div>
-                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                    <p>&copy; <a href="https://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
                         Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
-                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                        for <a href="https://blog.getpelican.com/">Pelican</a>
                     </p>
                 </div>
             </div>
@@ -380,11 +345,10 @@ var scJsHost = (("https:" == document.location.protocol) ?
 src="https://www.statcounter.com/counter/counter.js"
 async></script>
 <noscript><div class="statcounter"><a title="Web Analytics"
-href="http://statcounter.com/" target="_blank"><img
+href="https://statcounter.com/" target="_blank"><img
 class="statcounter"
 src="//c.statcounter.com/9752080/0/c177b501/1/" alt="Web
 Analytics"></a></div></noscript>
 <!-- End of StatCounter Code for Default Guide -->
 </body>
 </html>
-

@@ -32,16 +32,16 @@
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
     <!--[if lte IE 8]>
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+        <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
     <![endif]-->
     <!--[if gt IE 8]><!-->
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+        <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
     <!--<![endif]-->
     <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
     <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
-    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
-    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
-    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    <!-- <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
     
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -93,69 +93,59 @@
 <p>SymPy contains a rich calculus toolbox to analyze real-valued functions: limits, power series, derivatives, integrals, Fourier transforms, and so on. In this recipe, we will show the very basics of these capabilities.</p>
 <h2>How to do it...</h2>
 <p><strong>1.&nbsp;</strong> Let's define a few symbols and a function (which is just an expression depending on <code>x</code>):</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="n">init_printing</span><span class="p">()</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">var</span><span class="p">(</span><span class="s1">&#39;x z&#39;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">var</span><span class="p">(</span><span class="s1">&#39;x z&#39;</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p><img alt="(x, z)" src="http://ipython-books.github.io/pages/chapter15_symbolic/03_function_files/03_function_5_0.png" /></p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p><strong>2.&nbsp;</strong> Let's evaluate this function at 1:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">f</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p><img alt="1/2" src="http://ipython-books.github.io/pages/chapter15_symbolic/03_function_files/03_function_8_0.png" /></p>
 <p><strong>3.&nbsp;</strong> We can compute the derivative of this function:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">diff</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">diff</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p><img alt="Output" src="http://ipython-books.github.io/pages/chapter15_symbolic/03_function_files/03_function_10_0.png" /></p>
 <p><strong>4.&nbsp;</strong> What is <span class="math">\(f\)</span>'s limit to infinity? (Note the double o (<code>oo</code>) for the infinity symbol):</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">limit</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">oo</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">limit</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">oo</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p><img alt="0" src="http://ipython-books.github.io/pages/chapter15_symbolic/03_function_files/03_function_12_0.png" /></p>
 <p><strong>5.&nbsp;</strong> Here's how to compute a Taylor series (here, around 0, of order 9). The <strong>Big O</strong> can be removed with the <code>removeO()</code> method.</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">series</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">series</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p><img alt="Output" src="http://ipython-books.github.io/pages/chapter15_symbolic/03_function_files/03_function_14_0.png" /></p>
 <p><strong>6.&nbsp;</strong> We can compute definite integrals (here, over the entire real line):</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">integrate</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="n">oo</span><span class="p">,</span> <span class="n">oo</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><span class="n">integrate</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="n">oo</span><span class="p">,</span> <span class="n">oo</span><span class="p">))</span>
 </pre></div>
-</div>
 
 
 <p><img alt="Pi" src="http://ipython-books.github.io/pages/chapter15_symbolic/03_function_files/03_function_16_0.png" /></p>
 <p><strong>7.&nbsp;</strong> SymPy can also compute indefinite integrals:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">integrate</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">integrate</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p><img alt="atan(x)" src="http://ipython-books.github.io/pages/chapter15_symbolic/03_function_files/03_function_18_0.png" /></p>
 <p><strong>8.&nbsp;</strong> Finally, let's compute <span class="math">\(f\)</span>'s Fourier transforms:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">fourier_transform</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">fourier_transform</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p><img alt="Output" src="http://ipython-books.github.io/pages/chapter15_symbolic/03_function_files/03_function_20_0.png" /></p>
@@ -230,9 +220,9 @@
         <footer id="footer" class="pure-u-1 pure-u-md-4-4">
             <div class="l-box">
                 <div>
-                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                    <p>&copy; <a href="https://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
                         Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
-                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                        for <a href="https://blog.getpelican.com/">Pelican</a>
                     </p>
                 </div>
             </div>
@@ -252,11 +242,10 @@ var scJsHost = (("https:" == document.location.protocol) ?
 src="https://www.statcounter.com/counter/counter.js"
 async></script>
 <noscript><div class="statcounter"><a title="Web Analytics"
-href="http://statcounter.com/" target="_blank"><img
+href="https://statcounter.com/" target="_blank"><img
 class="statcounter"
 src="//c.statcounter.com/9752080/0/c177b501/1/" alt="Web
 Analytics"></a></div></noscript>
 <!-- End of StatCounter Code for Default Guide -->
 </body>
 </html>
-

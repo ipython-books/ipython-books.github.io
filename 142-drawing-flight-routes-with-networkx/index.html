@@ -32,16 +32,16 @@
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
     <!--[if lte IE 8]>
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+        <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
     <![endif]-->
     <!--[if gt IE 8]><!-->
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+        <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
     <!--<![endif]-->
     <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
     <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
-    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
-    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
-    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    <!-- <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
     
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -95,7 +95,7 @@
 <p>To draw the graph on a map, you need <strong>cartopy</strong>, available at <a href="http://scitools.org.uk/cartopy/.">http://scitools.org.uk/cartopy/.</a> You can install it with <code>conda install -c conda-forge cartopy</code>.</p>
 <h2>How to do it...</h2>
 <p><strong>1.&nbsp;</strong> Let's import a few packages:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
 <span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
@@ -105,19 +105,17 @@
 <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
 <span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
 </pre></div>
-</div>
 
 
 <p><strong>2.&nbsp;</strong> We load the first dataset containing many flight routes:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">names</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;airline,airline_id,&#39;</span>
+<div class="highlight"><pre><span></span><span class="n">names</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;airline,airline_id,&#39;</span>
          <span class="s1">&#39;source,source_id,&#39;</span>
          <span class="s1">&#39;dest,dest_id,&#39;</span>
          <span class="s1">&#39;codeshare,stops,equipment&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">routes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><span class="n">routes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
     <span class="s1">&#39;https://github.com/ipython-books/&#39;</span>
     <span class="s1">&#39;cookbook-2nd-data/blob/master/&#39;</span>
     <span class="s1">&#39;routes.dat?raw=true&#39;</span><span class="p">,</span>
@@ -125,18 +123,16 @@
     <span class="n">header</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
 <span class="n">routes</span>
 </pre></div>
-</div>
 
 
 <p><img alt="Output" src="http://ipython-books.github.io/pages/chapter14_graphgeo/02_airports_files/02_airports_9_0.png" /></p>
 <p><strong>3.&nbsp;</strong> We load the second dataset with details about the airports, and we only keep the airports from the United States:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">names</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;id,name,city,country,iata,icao,lat,lon,&#39;</span>
+<div class="highlight"><pre><span></span><span class="n">names</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;id,name,city,country,iata,icao,lat,lon,&#39;</span>
          <span class="s1">&#39;alt,timezone,dst,tz,type,source&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">airports</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><span class="n">airports</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
     <span class="s1">&#39;https://github.com/ipython-books/&#39;</span>
     <span class="s1">&#39;cookbook-2nd-data/blob/master/&#39;</span>
     <span class="s1">&#39;airports.dat?raw=true&#39;</span><span class="p">,</span>
@@ -148,29 +144,26 @@
                        <span class="s1">&#39;United States&#39;</span><span class="p">]</span>
 <span class="n">airports_us</span>
 </pre></div>
-</div>
 
 
 <p><img alt="Output" src="http://ipython-books.github.io/pages/chapter14_graphgeo/02_airports_files/02_airports_12_0.png" /></p>
 <p>The DataFrame index is the IATA code, a 3-characters code identifying the airports.</p>
 <p><strong>4.&nbsp;</strong> Let's keep all national US flight routes, that is, those for which the source and the destination airports belong to the list of US airports:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">routes_us</span> <span class="o">=</span> <span class="n">routes</span><span class="p">[</span>
+<div class="highlight"><pre><span></span><span class="n">routes_us</span> <span class="o">=</span> <span class="n">routes</span><span class="p">[</span>
     <span class="n">routes</span><span class="p">[</span><span class="s1">&#39;source&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">airports_us</span><span class="o">.</span><span class="n">index</span><span class="p">)</span> <span class="o">&amp;</span>
     <span class="n">routes</span><span class="p">[</span><span class="s1">&#39;dest&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">airports_us</span><span class="o">.</span><span class="n">index</span><span class="p">)]</span>
 <span class="n">routes_us</span>
 </pre></div>
-</div>
 
 
 <p><img alt="Output" src="http://ipython-books.github.io/pages/chapter14_graphgeo/02_airports_files/02_airports_15_0.png" /></p>
 <p><strong>5.&nbsp;</strong> We construct the list of edges representing our graph, where nodes are airports, and two airports are connected if there exists a route between them (flight network):</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">edges</span> <span class="o">=</span> <span class="n">routes_us</span><span class="p">[[</span><span class="s1">&#39;source&#39;</span><span class="p">,</span> <span class="s1">&#39;dest&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span>
+<div class="highlight"><pre><span></span><span class="n">edges</span> <span class="o">=</span> <span class="n">routes_us</span><span class="p">[[</span><span class="s1">&#39;source&#39;</span><span class="p">,</span> <span class="s1">&#39;dest&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span>
 <span class="n">edges</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>array([[&#39;ADQ&#39;, &#39;KLN&#39;],
+<div class="highlight"><pre><span></span>array([[&#39;ADQ&#39;, &#39;KLN&#39;],
        [&#39;KLN&#39;, &#39;KYK&#39;],
        [&#39;BRL&#39;, &#39;ORD&#39;],
        ...,
@@ -178,86 +171,75 @@
        [&#39;VIS&#39;, &#39;LAX&#39;],
        [&#39;WRL&#39;, &#39;CYS&#39;]], dtype=object)
 </pre></div>
-</div>
 
 
 <p><strong>6.&nbsp;</strong> We create the networkX graph from the <code>edges</code> array:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">from_edgelist</span><span class="p">(</span><span class="n">edges</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">from_edgelist</span><span class="p">(</span><span class="n">edges</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p><strong>7.&nbsp;</strong> Let's take a look at the graph's statistics:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">nodes</span><span class="p">()),</span> <span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">edges</span><span class="p">())</span>
+<div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">nodes</span><span class="p">()),</span> <span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">edges</span><span class="p">())</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>(546, 2781)
+<div class="highlight"><pre><span></span>(546, 2781)
 </pre></div>
-</div>
 
 
 <p>There are 546 US airports and 2781 routes in the dataset.</p>
 <p><strong>8.&nbsp;</strong> Let's plot the graph:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
                  <span class="n">font_size</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=.</span><span class="mi">5</span><span class="p">,</span>
                  <span class="n">width</span><span class="o">=.</span><span class="mi">5</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
 </pre></div>
-</div>
 
 
 <p><img alt="&lt;matplotlib.figure.Figure at 0x7fc830810b38&gt;" src="http://ipython-books.github.io/pages/chapter14_graphgeo/02_airports_files/02_airports_24_0.png" /></p>
 <p><strong>9.&nbsp;</strong> There are a few airports that are not connected to the rest of the airports. We keep the largest connected component of the graph as follows (the subgraphs returned by <code>connected_component_subgraphs()</code> are sorted by decreasing size):</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">sg</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">connected_component_subgraphs</span><span class="p">(</span><span class="n">g</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><span class="n">sg</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">connected_component_subgraphs</span><span class="p">(</span><span class="n">g</span><span class="p">))</span>
 </pre></div>
-</div>
 
 
 <p><strong>10.&nbsp;</strong> Now, we plot the largest connected component subgraph:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx</span><span class="p">(</span><span class="n">sg</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
                  <span class="n">node_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">width</span><span class="o">=.</span><span class="mi">5</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
 </pre></div>
-</div>
 
 
 <p><img alt="&lt;matplotlib.figure.Figure at 0x7fc835a72710&gt;" src="http://ipython-books.github.io/pages/chapter14_graphgeo/02_airports_files/02_airports_28_0.png" /></p>
 <p>The graph encodes only the <em>topology</em> (connections between the airports) and not the <em>geometry</em> (actual positions of the airports on a map). Airports at the center of the graph are the largest US airports.</p>
 <p><strong>11.&nbsp;</strong> We're going to draw the graph on a map, using the geographical coordinates of the airports. First, we need to create a dictionary where the keys are the airports IATA codes, and the values are the coordinates:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">pos</span> <span class="o">=</span> <span class="p">{</span><span class="n">airport</span><span class="p">:</span> <span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">],</span> <span class="n">v</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">])</span>
+<div class="highlight"><pre><span></span><span class="n">pos</span> <span class="o">=</span> <span class="p">{</span><span class="n">airport</span><span class="p">:</span> <span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">],</span> <span class="n">v</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">])</span>
        <span class="k">for</span> <span class="n">airport</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span>
        <span class="n">airports_us</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
 </pre></div>
-</div>
 
 
 <p><strong>12.&nbsp;</strong> The node sizes will depend on the degree of the nodes, that is, the number of airports connected to every node:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">deg</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">degree</span><span class="p">(</span><span class="n">sg</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">deg</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">degree</span><span class="p">(</span><span class="n">sg</span><span class="p">)</span>
 <span class="n">sizes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span> <span class="o">*</span> <span class="n">deg</span><span class="p">[</span><span class="n">iata</span><span class="p">]</span> <span class="k">for</span> <span class="n">iata</span> <span class="ow">in</span> <span class="n">sg</span><span class="o">.</span><span class="n">nodes</span><span class="p">]</span>
 </pre></div>
-</div>
 
 
 <p><strong>13.&nbsp;</strong> We will also show the airport altitude as the node color:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">altitude</span> <span class="o">=</span> <span class="n">airports_us</span><span class="p">[</span><span class="s1">&#39;alt&#39;</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><span class="n">altitude</span> <span class="o">=</span> <span class="n">airports_us</span><span class="p">[</span><span class="s1">&#39;alt&#39;</span><span class="p">]</span>
 <span class="n">altitude</span> <span class="o">=</span> <span class="p">[</span><span class="n">altitude</span><span class="p">[</span><span class="n">iata</span><span class="p">]</span> <span class="k">for</span> <span class="n">iata</span> <span class="ow">in</span> <span class="n">sg</span><span class="o">.</span><span class="n">nodes</span><span class="p">]</span>
 </pre></div>
-</div>
 
 
 <p><strong>14.&nbsp;</strong> We will display the labels of the largest airports only (at least 20 connections to other US airports):</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">labels</span> <span class="o">=</span> <span class="p">{</span><span class="n">iata</span><span class="p">:</span> <span class="n">iata</span> <span class="k">if</span> <span class="n">deg</span><span class="p">[</span><span class="n">iata</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">20</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span>
+<div class="highlight"><pre><span></span><span class="n">labels</span> <span class="o">=</span> <span class="p">{</span><span class="n">iata</span><span class="p">:</span> <span class="n">iata</span> <span class="k">if</span> <span class="n">deg</span><span class="p">[</span><span class="n">iata</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">20</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span>
           <span class="k">for</span> <span class="n">iata</span> <span class="ow">in</span> <span class="n">sg</span><span class="o">.</span><span class="n">nodes</span><span class="p">}</span>
 </pre></div>
-</div>
 
 
 <p><strong>15.&nbsp;</strong> Finally, we use cartopy to project the points on the map:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Map projection</span>
+<div class="highlight"><pre><span></span><span class="c1"># Map projection</span>
 <span class="n">crs</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">()</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span>
     <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
@@ -275,7 +257,6 @@
                  <span class="n">node_color</span><span class="o">=</span><span class="n">altitude</span><span class="p">,</span>
                  <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">autumn</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p><img alt="&lt;matplotlib.figure.Figure at 0x7fc83094f748&gt;" src="http://ipython-books.github.io/pages/chapter14_graphgeo/02_airports_files/02_airports_38_0.png" /></p>
@@ -292,9 +273,9 @@
         <footer id="footer" class="pure-u-1 pure-u-md-4-4">
             <div class="l-box">
                 <div>
-                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                    <p>&copy; <a href="https://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
                         Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
-                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                        for <a href="https://blog.getpelican.com/">Pelican</a>
                     </p>
                 </div>
             </div>
@@ -314,11 +295,10 @@ var scJsHost = (("https:" == document.location.protocol) ?
 src="https://www.statcounter.com/counter/counter.js"
 async></script>
 <noscript><div class="statcounter"><a title="Web Analytics"
-href="http://statcounter.com/" target="_blank"><img
+href="https://statcounter.com/" target="_blank"><img
 class="statcounter"
 src="//c.statcounter.com/9752080/0/c177b501/1/" alt="Web
 Analytics"></a></div></noscript>
 <!-- End of StatCounter Code for Default Guide -->
 </body>
 </html>
-

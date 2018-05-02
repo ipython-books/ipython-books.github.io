@@ -32,16 +32,16 @@
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
     <!--[if lte IE 8]>
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+        <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
     <![endif]-->
     <!--[if gt IE 8]><!-->
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+        <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
     <!--<![endif]-->
     <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
     <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
-    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
-    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
-    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    <!-- <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
     
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -93,7 +93,7 @@
 <p>In this recipe, we will create a small electronic piano in the Notebook. We will synthesize sinusoidal sounds with NumPy instead of using recorded tones.</p>
 <h2>How to do it...</h2>
 <p><strong>1.&nbsp;</strong> We import the modules:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">Audio</span><span class="p">,</span> <span class="n">display</span><span class="p">,</span> <span class="n">clear_output</span><span class="p">)</span>
@@ -101,43 +101,38 @@
 <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
 <span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
 </pre></div>
-</div>
 
 
 <p><strong>2.&nbsp;</strong> We define the sampling rate and the duration of the notes:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">rate</span> <span class="o">=</span> <span class="mf">16000.</span>
+<div class="highlight"><pre><span></span><span class="n">rate</span> <span class="o">=</span> <span class="mf">16000.</span>
 <span class="n">duration</span> <span class="o">=</span> <span class="o">.</span><span class="mi">25</span>
 <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span>
     <span class="mf">0.</span><span class="p">,</span> <span class="n">duration</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">rate</span> <span class="o">*</span> <span class="n">duration</span><span class="p">))</span>
 </pre></div>
-</div>
 
 
 <p><strong>3.&nbsp;</strong> We create a function that generates and plays the sound of a note (sine function) at a given frequency, using NumPy and IPython's Audio class:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">synth</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">synth</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">f</span> <span class="o">*</span> <span class="mf">2.</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
     <span class="n">display</span><span class="p">(</span><span class="n">Audio</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="n">rate</span><span class="p">,</span> <span class="n">autoplay</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
 </pre></div>
-</div>
 
 
 <p><strong>4.&nbsp;</strong> Here is the fundamental 440 Hz note:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">synth</span><span class="p">(</span><span class="mi">440</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">synth</span><span class="p">(</span><span class="mi">440</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p><img alt="Sound widget" src="http://ipython-books.github.io/pages/chapter11_image/07_synth_files/07_synth_10_0.png" /></p>
 <p><strong>5.&nbsp;</strong> Now, we generate the note frequencies of our piano. The chromatic scale is obtained by a geometric progression with the common ratio <span class="math">\(2^{1/12}\)</span>:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">notes</span> <span class="o">=</span> <span class="s1">&#39;C,C#,D,D#,E,F,F#,G,G#,A,A#,B,C&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">notes</span> <span class="o">=</span> <span class="s1">&#39;C,C#,D,D#,E,F,F#,G,G#,A,A#,B,C&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
 <span class="n">freqs</span> <span class="o">=</span> <span class="mf">440.</span> <span class="o">*</span> <span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">notes</span><span class="p">))</span> <span class="o">/</span> <span class="mf">12.</span><span class="p">)</span>
 <span class="n">notes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">notes</span><span class="p">,</span> <span class="n">freqs</span><span class="p">))</span>
 </pre></div>
-</div>
 
 
 <p><strong>6.&nbsp;</strong> Finally, we create the piano with the Notebook widgets. Each note is a button, and all buttons are contained in a horizontal box container. Clicking on one note plays a sound at the corresponding frequency.</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">layout</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><span class="n">layout</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span>
     <span class="n">width</span><span class="o">=</span><span class="s1">&#39;30px&#39;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="s1">&#39;60px&#39;</span><span class="p">,</span>
     <span class="n">border</span><span class="o">=</span><span class="s1">&#39;1px solid black&#39;</span><span class="p">)</span>
 
@@ -158,7 +153,6 @@
 <span class="c1"># We place all buttons horizontally.</span>
 <span class="n">widgets</span><span class="o">.</span><span class="n">Box</span><span class="p">(</span><span class="n">children</span><span class="o">=</span><span class="n">buttons</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p><img alt="Synthesizer in the notebook" src="http://ipython-books.github.io/pages/chapter11_image/07_synth_files/07_synth_14_0.png" /></p>
@@ -239,9 +233,9 @@
         <footer id="footer" class="pure-u-1 pure-u-md-4-4">
             <div class="l-box">
                 <div>
-                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                    <p>&copy; <a href="https://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
                         Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
-                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                        for <a href="https://blog.getpelican.com/">Pelican</a>
                     </p>
                 </div>
             </div>
@@ -261,11 +255,10 @@ var scJsHost = (("https:" == document.location.protocol) ?
 src="https://www.statcounter.com/counter/counter.js"
 async></script>
 <noscript><div class="statcounter"><a title="Web Analytics"
-href="http://statcounter.com/" target="_blank"><img
+href="https://statcounter.com/" target="_blank"><img
 class="statcounter"
 src="//c.statcounter.com/9752080/0/c177b501/1/" alt="Web
 Analytics"></a></div></noscript>
 <!-- End of StatCounter Code for Default Guide -->
 </body>
 </html>
-

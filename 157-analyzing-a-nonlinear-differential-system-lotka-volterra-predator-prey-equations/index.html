@@ -32,16 +32,16 @@
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
     <!--[if lte IE 8]>
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+        <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
     <![endif]-->
     <!--[if gt IE 8]><!-->
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+        <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
     <!--<![endif]-->
     <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
     <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
-    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
-    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
-    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    <!-- <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
     
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -95,13 +95,12 @@
 <p>For this recipe, knowing the basics of linear and nonlinear systems of differential equations is recommended.</p>
 <h2>How to do it...</h2>
 <p><strong>1.&nbsp;</strong> Let's create some symbols:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="n">init_printing</span><span class="p">(</span><span class="n">pretty_print</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
 <span class="n">var</span><span class="p">(</span><span class="s1">&#39;x y&#39;</span><span class="p">)</span>
 <span class="n">var</span><span class="p">(</span><span class="s1">&#39;a b c d&#39;</span><span class="p">,</span> <span class="n">positive</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p><img alt="(a, b, c, d)" src="http://ipython-books.github.io/pages/chapter15_symbolic/07_lotka_files/07_lotka_6_0.png" /></p>
@@ -110,66 +109,57 @@
 \frac{dx}{dt} &amp;= f(x) = x(a-by)\\
 \frac{dy}{dt} &amp;= g(x) = -y(c-dx)
 \end{align}$$</div>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span>
 <span class="n">g</span> <span class="o">=</span> <span class="o">-</span><span class="n">y</span> <span class="o">*</span> <span class="p">(</span><span class="n">c</span> <span class="o">-</span> <span class="n">d</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p><strong>3.&nbsp;</strong> Let's find the fixed points of the system (solving <span class="math">\(f(x,y) = g(x,y) = 0\)</span>). We call them <span class="math">\((x_0, y_0)\)</span> and <span class="math">\((x_1, y_1)\)</span>:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">solve</span><span class="p">([</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">],</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><span class="n">solve</span><span class="p">([</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">],</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
 </pre></div>
-</div>
 
 
 <p><img alt="Output" src="http://ipython-books.github.io/pages/chapter15_symbolic/07_lotka_files/07_lotka_11_0.png" /></p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">),</span> <span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">)</span> <span class="o">=</span> <span class="n">_</span>
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">),</span> <span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">)</span> <span class="o">=</span> <span class="n">_</span>
 </pre></div>
-</div>
 
 
 <p><strong>4.&nbsp;</strong> Let's write the 2D vector with the two equations:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">M</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">((</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><span class="n">M</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">((</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">))</span>
 <span class="n">M</span>
 </pre></div>
-</div>
 
 
 <p><img alt="Output" src="http://ipython-books.github.io/pages/chapter15_symbolic/07_lotka_files/07_lotka_14_0.png" /></p>
 <p><strong>5.&nbsp;</strong> Now, we can compute the <strong>Jacobian</strong> of the system, as a function of <span class="math">\((x, y)\)</span>:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">J</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">jacobian</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><span class="n">J</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">jacobian</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
 <span class="n">J</span>
 </pre></div>
-</div>
 
 
 <p><img alt="Output" src="http://ipython-books.github.io/pages/chapter15_symbolic/07_lotka_files/07_lotka_16_0.png" /></p>
 <p><strong>6.&nbsp;</strong> Let's study the stability of the first fixed point by looking at the eigenvalues of the Jacobian at this point. The first fixed point corresponds to extinct populations:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">M0</span> <span class="o">=</span> <span class="n">J</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x0</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y0</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">M0</span> <span class="o">=</span> <span class="n">J</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x0</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y0</span><span class="p">)</span>
 <span class="n">M0</span>
 </pre></div>
-</div>
 
 
 <p><img alt="Output" src="http://ipython-books.github.io/pages/chapter15_symbolic/07_lotka_files/07_lotka_18_0.png" /></p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">M0</span><span class="o">.</span><span class="n">eigenvals</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><span class="n">M0</span><span class="o">.</span><span class="n">eigenvals</span><span class="p">()</span>
 </pre></div>
-</div>
 
 
 <p><img alt="{a: 1, -c: 1}" src="http://ipython-books.github.io/pages/chapter15_symbolic/07_lotka_files/07_lotka_19_0.png" /></p>
 <p>The parameters <span class="math">\(a\)</span> and <span class="math">\(c\)</span> are strictly positive, so the eigenvalues are real and of opposite signs, and this fixed point is a saddle point. As this point is unstable, the extinction of both populations is unlikely in this model.</p>
 <p><strong>7.&nbsp;</strong> Let's consider the second fixed point now:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">M1</span> <span class="o">=</span> <span class="n">J</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x1</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y1</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">M1</span> <span class="o">=</span> <span class="n">J</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x1</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y1</span><span class="p">)</span>
 <span class="n">M1</span>
 </pre></div>
-</div>
 
 
 <p><img alt="Output" src="http://ipython-books.github.io/pages/chapter15_symbolic/07_lotka_files/07_lotka_22_0.png" /></p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">M1</span><span class="o">.</span><span class="n">eigenvals</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><span class="n">M1</span><span class="o">.</span><span class="n">eigenvals</span><span class="p">()</span>
 </pre></div>
-</div>
 
 
 <p><img alt="Eigenvalues" src="http://ipython-books.github.io/pages/chapter15_symbolic/07_lotka_files/07_lotka_23_0.png" /></p>
@@ -254,9 +244,9 @@
         <footer id="footer" class="pure-u-1 pure-u-md-4-4">
             <div class="l-box">
                 <div>
-                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                    <p>&copy; <a href="https://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
                         Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
-                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                        for <a href="https://blog.getpelican.com/">Pelican</a>
                     </p>
                 </div>
             </div>
@@ -276,11 +266,10 @@ var scJsHost = (("https:" == document.location.protocol) ?
 src="https://www.statcounter.com/counter/counter.js"
 async></script>
 <noscript><div class="statcounter"><a title="Web Analytics"
-href="http://statcounter.com/" target="_blank"><img
+href="https://statcounter.com/" target="_blank"><img
 class="statcounter"
 src="//c.statcounter.com/9752080/0/c177b501/1/" alt="Web
 Analytics"></a></div></noscript>
 <!-- End of StatCounter Code for Default Guide -->
 </body>
 </html>
-

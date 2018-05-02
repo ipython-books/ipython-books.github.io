@@ -32,16 +32,16 @@
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
     <!--[if lte IE 8]>
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+        <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
     <![endif]-->
     <!--[if gt IE 8]><!-->
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+        <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
     <!--<![endif]-->
     <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
     <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
-    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
-    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
-    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    <!-- <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
     
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -101,37 +101,32 @@
 <p>To convert a notebook to PDF, you need a LaTeX distribution, which you can download and install at <a href="http://latex-project.org/ftp.html.">http://latex-project.org/ftp.html.</a></p>
 <h2>How to do it...</h2>
 <p><strong>1.&nbsp;</strong> Let's download and open the test notebook. A notebook is just a plain text file (JSON):</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">io</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">io</span>
 <span class="kn">import</span> <span class="nn">requests</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;https://github.com/ipython-books/&#39;</span>
+<div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;https://github.com/ipython-books/&#39;</span>
        <span class="s1">&#39;cookbook-2nd-data/blob/master/&#39;</span>
        <span class="s1">&#39;test.ipynb?raw=true&#39;</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">contents</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+<div class="highlight"><pre><span></span><span class="n">contents</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
 <span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">contents</span><span class="p">))</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>3857
+<div class="highlight"><pre><span></span>3857
 </pre></div>
-</div>
 
 
 <p><strong>2.&nbsp;</strong> Here is an excerpt of the <code>test.ipynb</code> file:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">contents</span><span class="p">[:</span><span class="mi">345</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;...&#39;</span> <span class="o">+</span> <span class="n">contents</span><span class="p">[</span><span class="o">-</span><span class="mi">33</span><span class="p">:])</span>
+<div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">contents</span><span class="p">[:</span><span class="mi">345</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;...&#39;</span> <span class="o">+</span> <span class="n">contents</span><span class="p">[</span><span class="o">-</span><span class="mi">33</span><span class="p">:])</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>{
+<div class="highlight"><pre><span></span>{
  &quot;cells&quot;: [
   {
    &quot;cell_type&quot;: &quot;markdown&quot;,
@@ -156,38 +151,33 @@
  &quot;nbformat_minor&quot;: 4
 }
 </pre></div>
-</div>
 
 
 <p><strong>3.&nbsp;</strong> Now that we have loaded the notebook in a string, let's parse it with the <code>json</code> module as follows:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
 <span class="n">nb</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p><strong>4.&nbsp;</strong> Let's have a look at the keys in the notebook dictionary:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">nb</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">nb</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
 <span class="k">print</span><span class="p">(</span><span class="s1">&#39;nbformat </span><span class="si">%d</span><span class="s1">.</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">nb</span><span class="p">[</span><span class="s1">&#39;nbformat&#39;</span><span class="p">],</span>
                           <span class="n">nb</span><span class="p">[</span><span class="s1">&#39;nbformat_minor&#39;</span><span class="p">]))</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>dict_keys([&#39;cells&#39;, &#39;metadata&#39;,
+<div class="highlight"><pre><span></span>dict_keys([&#39;cells&#39;, &#39;metadata&#39;,
            &#39;nbformat&#39;, &#39;nbformat_minor&#39;])
 nbformat 4.4
 </pre></div>
-</div>
 
 
 <p><strong>5.&nbsp;</strong> Each cell has a type, optional metadata, some contents (text or code), possibly one or several outputs, and other information. Let's look at a Markdown cell and a code cell:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">nb</span><span class="p">[</span><span class="s1">&#39;cells&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><span class="n">nb</span><span class="p">[</span><span class="s1">&#39;cells&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>{&#39;cell_type&#39;: &#39;markdown&#39;,
+<div class="highlight"><pre><span></span>{&#39;cell_type&#39;: &#39;markdown&#39;,
  &#39;metadata&#39;: {&#39;my_field&#39;: [&#39;value1&#39;, &#39;2405&#39;]},
  &#39;source&#39;: [&quot;Let&#39;s write some *rich* **text** with
         [links](http://www.ipython.org) and lists:\n&quot;,
@@ -198,15 +188,13 @@ nbformat 4.4
   &#39;    2. subitem\n&#39;,
   &#39;* item3&#39;]}
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">nb</span><span class="p">[</span><span class="s1">&#39;cells&#39;</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><span class="n">nb</span><span class="p">[</span><span class="s1">&#39;cells&#39;</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>{&#39;cell_type&#39;: &#39;code&#39;,
+<div class="highlight"><pre><span></span>{&#39;cell_type&#39;: &#39;code&#39;,
  &#39;execution_count&#39;: 1,
  &#39;metadata&#39;: {},
  &#39;outputs&#39;: [{&#39;data&#39;: {&#39;image/png&#39;: &#39;iVBOR...QmCC\n&#39;,
@@ -222,11 +210,10 @@ nbformat 4.4
   &quot;plt.axis(&#39;off&#39;);\n&quot;,
   &#39;plt.tight_layout();&#39;]}
 </pre></div>
-</div>
 
 
 <p><strong>6.&nbsp;</strong> Once parsed, the notebook is represented as a Python dictionary. Manipulating it is therefore quite convenient in Python. Here, we count the number of Markdown and code cells as follows:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">cells</span> <span class="o">=</span> <span class="n">nb</span><span class="p">[</span><span class="s1">&#39;cells&#39;</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><span class="n">cells</span> <span class="o">=</span> <span class="n">nb</span><span class="p">[</span><span class="s1">&#39;cells&#39;</span><span class="p">]</span>
 <span class="n">nm</span> <span class="o">=</span> <span class="nb">len</span><span class="p">([</span><span class="n">cell</span> <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">cells</span>
           <span class="k">if</span> <span class="n">cell</span><span class="p">[</span><span class="s1">&#39;cell_type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;markdown&#39;</span><span class="p">])</span>
 <span class="n">nc</span> <span class="o">=</span> <span class="nb">len</span><span class="p">([</span><span class="n">cell</span> <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">cells</span>
@@ -234,56 +221,48 @@ nbformat 4.4
 <span class="k">print</span><span class="p">((</span><span class="n">f</span><span class="s2">&quot;There are {nm} Markdown cells and &quot;</span>
        <span class="n">f</span><span class="s2">&quot;{nc} code cells.&quot;</span><span class="p">))</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>There are 2 Markdown cells and 1 code cells.
+<div class="highlight"><pre><span></span>There are 2 Markdown cells and 1 code cells.
 </pre></div>
-</div>
 
 
 <p><strong>7.&nbsp;</strong> Let's have a closer look at the image output of the cell with the matplotlib figure:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">cells</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="s1">&#39;outputs&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><span class="n">cells</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="s1">&#39;outputs&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">]</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>{&#39;image/png&#39;: &#39;iVBOR...QmCC\n&#39;,
+<div class="highlight"><pre><span></span>{&#39;image/png&#39;: &#39;iVBOR...QmCC\n&#39;,
  &#39;text/plain&#39;: [&#39;&lt;matplotlib.figure.Figure at ...&gt;&#39;]}
 </pre></div>
-</div>
 
 
 <p>In general, there can be zero, one, or multiple outputs. Additionally, each output can have multiple representations. Here, the matplotlib figure has a PNG representation (the base64-encoded image) and a text representation (the internal representation of the figure).
 <strong>8.&nbsp;</strong> Now, we convert our text notebook to HTML using nbconvert:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="c1"># We write the notebook to a file on disk.</span>
+<div class="highlight"><pre><span></span><span class="c1"># We write the notebook to a file on disk.</span>
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test.ipynb&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="err">!</span><span class="n">jupyter</span> <span class="n">nbconvert</span> <span class="o">--</span><span class="n">to</span> <span class="n">html</span> <span class="n">test</span><span class="o">.</span><span class="n">ipynb</span>
+<div class="highlight"><pre><span></span><span class="err">!</span><span class="n">jupyter</span> <span class="n">nbconvert</span> <span class="o">--</span><span class="n">to</span> <span class="n">html</span> <span class="n">test</span><span class="o">.</span><span class="n">ipynb</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>[NbConvertApp] Converting notebook test.ipynb to html
+<div class="highlight"><pre><span></span>[NbConvertApp] Converting notebook test.ipynb to html
 [NbConvertApp] Writing 253784 bytes to test.html
 </pre></div>
-</div>
 
 
 <p><strong>9.&nbsp;</strong> Let's display this document in an <code>&lt;iframe&gt;</code> (a small window showing an external HTML document within the notebook):</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">IFrame</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">IFrame</span>
 <span class="n">IFrame</span><span class="p">(</span><span class="s1">&#39;test.html&#39;</span><span class="p">,</span> <span class="mi">600</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p><img alt="HTML export" src="http://ipython-books.github.io/pages/chapter03_notebook/02_nbformat_files/02_nbformat_30_0.png" /></p>
 <p><strong>10.&nbsp;</strong> We can also convert the notebook to LaTeX and PDF. In order to specify the title and author of the document, we need to extend the default LaTeX template. First, we create a file called <code>temp.tplx</code> that extends the default <code>article.tplx</code> template provided by nbconvert. We specify the contents of the author and title blocks as follows:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">writefile</span> <span class="n">temp</span><span class="o">.</span><span class="n">tplx</span>
+<div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">writefile</span> <span class="n">temp</span><span class="o">.</span><span class="n">tplx</span>
 <span class="p">((</span><span class="o">*-</span> <span class="n">extends</span> <span class="s1">&#39;article.tplx&#39;</span> <span class="o">-*</span><span class="p">))</span>
 
 <span class="p">((</span><span class="o">*</span> <span class="n">block</span> <span class="n">author</span> <span class="o">*</span><span class="p">))</span>
@@ -294,22 +273,19 @@ nbformat 4.4
 \<span class="n">title</span><span class="p">{</span><span class="n">My</span> <span class="n">document</span><span class="p">}</span>
 <span class="p">((</span><span class="o">*</span> <span class="n">endblock</span> <span class="n">title</span> <span class="o">*</span><span class="p">))</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>Writing temp.tplx
+<div class="highlight"><pre><span></span>Writing temp.tplx
 </pre></div>
-</div>
 
 
 <p><strong>11.&nbsp;</strong> Then, we can run nbconvert by specifying our custom template as follows:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">bash</span>
+<div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">bash</span>
 <span class="n">jupyter</span> <span class="n">nbconvert</span> <span class="o">--</span><span class="n">to</span> <span class="n">pdf</span> <span class="o">--</span><span class="n">template</span> <span class="n">temp</span> <span class="n">test</span><span class="o">.</span><span class="n">ipynb</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>[NbConvertApp] Converting notebook test.ipynb to pdf
+<div class="highlight"><pre><span></span>[NbConvertApp] Converting notebook test.ipynb to pdf
 [NbConvertApp] Support files will be in test_files/
 [NbConvertApp] Making directory test_files
 [NbConvertApp] Writing 16695 bytes to notebook.tex
@@ -321,7 +297,6 @@ nbformat 4.4
 [NbConvertApp] PDF successfully created
 [NbConvertApp] Writing 16147 bytes to test.pdf
 </pre></div>
-</div>
 
 
 <p>We used nbconvert to convert the notebook to LaTeX, and pdflatex (coming with our LaTeX distribution) to compile the LaTeX document to PDF. The following screenshot shows the PDF version of the notebook:</p>
@@ -346,9 +321,9 @@ nbformat 4.4
         <footer id="footer" class="pure-u-1 pure-u-md-4-4">
             <div class="l-box">
                 <div>
-                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                    <p>&copy; <a href="https://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
                         Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
-                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                        for <a href="https://blog.getpelican.com/">Pelican</a>
                     </p>
                 </div>
             </div>
@@ -368,11 +343,10 @@ var scJsHost = (("https:" == document.location.protocol) ?
 src="https://www.statcounter.com/counter/counter.js"
 async></script>
 <noscript><div class="statcounter"><a title="Web Analytics"
-href="http://statcounter.com/" target="_blank"><img
+href="https://statcounter.com/" target="_blank"><img
 class="statcounter"
 src="//c.statcounter.com/9752080/0/c177b501/1/" alt="Web
 Analytics"></a></div></noscript>
 <!-- End of StatCounter Code for Default Guide -->
 </body>
 </html>
-

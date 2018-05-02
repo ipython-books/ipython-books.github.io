@@ -32,16 +32,16 @@
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
     <!--[if lte IE 8]>
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+        <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
     <![endif]-->
     <!--[if gt IE 8]><!-->
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+        <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
     <!--<![endif]-->
     <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
     <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
-    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
-    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
-    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    <!-- <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
     
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -93,24 +93,22 @@
 <p>The ipywidgets packages provides many built-in control widgets to interact with code and data in the Jupyter Notebook. In this recipe, we show how to build a custom interactive widget from scratch, using Python on the kernel side, and HTML/JavaScript on the client side (frontend). The widget just displays two buttons to increase and decrease a number. The number can be accessed and updated either from the kernel (Python code) or the client (browser).</p>
 <h2>How to do it...</h2>
 <p><strong>1.&nbsp;</strong> Let's import the packages:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="kn">as</span> <span class="nn">widgets</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="kn">as</span> <span class="nn">widgets</span>
 <span class="kn">from</span> <span class="nn">traitlets</span> <span class="kn">import</span> <span class="n">Unicode</span><span class="p">,</span> <span class="n">Int</span><span class="p">,</span> <span class="n">validate</span>
 </pre></div>
-</div>
 
 
 <p><strong>2.&nbsp;</strong> We create a <code>CounterWidget</code> class deriving from <code>DOMWidget</code>:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">CounterWidget</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">DOMWidget</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">CounterWidget</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">DOMWidget</span><span class="p">):</span>
     <span class="n">_view_name</span> <span class="o">=</span> <span class="n">Unicode</span><span class="p">(</span><span class="s1">&#39;CounterView&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="n">_view_module</span> <span class="o">=</span> <span class="n">Unicode</span><span class="p">(</span><span class="s1">&#39;counter&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="n">value</span> <span class="o">=</span> <span class="n">Int</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p>This class represents the Python part of the widget. The <code>_view_name</code> and <code>_view_module</code> attributes refer to the name and module of the JavaScript part. We use the traitlets package to specify the type of the variables. The <code>value</code> attribute is the counter value, an integer initialized at 0. All of these attributes' values are synchronized between Python and JavaScript, hence the <code>sync=True</code> option.</p>
 <p><strong>3.&nbsp;</strong> We now turn to the JavaScript side of the widget. We can write the code directly in the notebook using the <code>%%javascript</code> cell magic. The widgets framework relies on several JavaScript libraries: jQuery (represented as the <code>$</code> variable), require.js (modules and dependencies), and Backbone.js (a model view controller framework):</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">javascript</span>
+<div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">javascript</span>
 <span class="o">//</span> <span class="n">We</span> <span class="n">make</span> <span class="n">sure</span> <span class="n">the</span> <span class="sb">`counter`</span> <span class="n">module</span> <span class="ow">is</span> <span class="n">defined</span>
 <span class="o">//</span> <span class="n">only</span> <span class="n">once</span><span class="o">.</span>
 <span class="n">require</span><span class="o">.</span><span class="n">undef</span><span class="p">(</span><span class="s1">&#39;counter&#39;</span><span class="p">);</span>
@@ -184,34 +182,29 @@
     <span class="p">};</span>
 <span class="p">});</span>
 </pre></div>
-</div>
 
 
 <p><strong>4.&nbsp;</strong> Let's display the widget:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="n">CounterWidget</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="n">CounterWidget</span><span class="p">()</span>
 <span class="n">w</span>
 </pre></div>
-</div>
 
 
 <p><img alt="Custom widget" src="http://ipython-books.github.io/pages/chapter03_notebook/04_custom_widgets_files/04_custom_widgets_11_0.png" /></p>
 <p><strong>5.&nbsp;</strong> Pressing the buttons updates the value immediately.</p>
 <p><img alt="Custom widget" src="http://ipython-books.github.io/pages/chapter03_notebook/04_custom_widgets_files/widget2.png" /></p>
 <p><strong>6.&nbsp;</strong> The counter's value is automatically updated on the kernel side:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">w</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">w</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>4
+<div class="highlight"><pre><span></span>4
 </pre></div>
-</div>
 
 
 <p><strong>7.&nbsp;</strong> Conversely, we can update the value from Python, and it is updated in the frontend:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">w</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="mi">5</span>
+<div class="highlight"><pre><span></span><span class="n">w</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="mi">5</span>
 </pre></div>
-</div>
 
 
 <p><img alt="Custom widget" src="http://ipython-books.github.io/pages/chapter03_notebook/04_custom_widgets_files/04_custom_widgets_17_0.png" /></p>
@@ -234,9 +227,9 @@
         <footer id="footer" class="pure-u-1 pure-u-md-4-4">
             <div class="l-box">
                 <div>
-                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                    <p>&copy; <a href="https://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
                         Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
-                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                        for <a href="https://blog.getpelican.com/">Pelican</a>
                     </p>
                 </div>
             </div>
@@ -256,11 +249,10 @@ var scJsHost = (("https:" == document.location.protocol) ?
 src="https://www.statcounter.com/counter/counter.js"
 async></script>
 <noscript><div class="statcounter"><a title="Web Analytics"
-href="http://statcounter.com/" target="_blank"><img
+href="https://statcounter.com/" target="_blank"><img
 class="statcounter"
 src="//c.statcounter.com/9752080/0/c177b501/1/" alt="Web
 Analytics"></a></div></noscript>
 <!-- End of StatCounter Code for Default Guide -->
 </body>
 </html>
-

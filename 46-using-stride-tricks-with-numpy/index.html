@@ -32,16 +32,16 @@
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
     <!--[if lte IE 8]>
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+        <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
     <![endif]-->
     <!--[if gt IE 8]><!-->
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+        <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
     <!--<![endif]-->
     <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
     <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
-    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
-    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
-    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    <!-- <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
     
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -93,65 +93,56 @@
 <p>In this recipe, we will dig deeper into the internals of NumPy arrays, by generalizing the notion of row-major and column-major orders to multidimensional arrays. The general notion is that of strides, which describe how the items of a multidimensional array are organized within a one-dimensional data buffer. Strides are mostly an implementation detail, but they can also be used in specific situations to optimize some algorithms.</p>
 <h2>Getting ready</h2>
 <p>We suppose that NumPy has been imported and that the <code>aid()</code> function has been defined (see the previous recipe, <em>Understanding the internals of NumPy to avoid unnecessary array copying</em>).</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">aid</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">aid</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="c1"># This function returns the memory</span>
     <span class="c1"># block address of an array.</span>
     <span class="k">return</span> <span class="n">x</span><span class="o">.</span><span class="n">__array_interface__</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
-</div>
 
 
 <h2>How to do it...</h2>
 <p><strong>1.&nbsp;</strong> Strides are integer numbers describing the byte step in the contiguous block of memory for each dimension.</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 <span class="n">x</span><span class="o">.</span><span class="n">strides</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>(8,)
+<div class="highlight"><pre><span></span>(8,)
 </pre></div>
-</div>
 
 
 <p>This vector <code>x</code> contains double-precision floating point numbers (float64, 8 bytes); one needs to go <em>8 bytes forward</em> to go from one item to the next.</p>
 <p><strong>2.&nbsp;</strong> Now, let's look at the strides of a 2D array:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
 <span class="n">y</span><span class="o">.</span><span class="n">strides</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>(80, 8)
+<div class="highlight"><pre><span></span>(80, 8)
 </pre></div>
-</div>
 
 
 <p>In the first dimension (vertical), one needs to go <em>80 bytes</em> (10 float64 items) <em>forward</em> to go from one item to the next, because the items are internally stored in row-major order. In the second dimension (horizontal), one needs to go <em>8 bytes forward</em> to go from one item to the next.</p>
 <p><strong>3.&nbsp;</strong> Let's show how we can revisit the broadcasting rules from the previous recipe using strides:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span>
+<div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span>
 <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p>We will create a new array, <code>b</code>, pointing to the same memory block as <code>a</code>, but with a different shape and different strides. This new array will look like a vertically-tiled version of <code>a</code>. We use a special function in NumPy to change the strides of an array:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">lib</span><span class="o">.</span><span class="n">stride_tricks</span><span class="o">.</span><span class="n">as_strided</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">lib</span><span class="o">.</span><span class="n">stride_tricks</span><span class="o">.</span><span class="n">as_strided</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">b</span>
+<div class="highlight"><pre><span></span><span class="n">b</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>array([[  0,   1,   2, ..., 997, 998, 999],
+<div class="highlight"><pre><span></span>array([[  0,   1,   2, ..., 997, 998, 999],
        [  0,   1,   2, ..., 997, 998, 999],
        [  0,   1,   2, ..., 997, 998, 999],
        ...,
@@ -159,42 +150,35 @@
        [  0,   1,   2, ..., 997, 998, 999],
        [  0,   1,   2, ..., 997, 998, 999]])
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">b</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">nbytes</span>
+<div class="highlight"><pre><span></span><span class="n">b</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">nbytes</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>(1000000, (1000, 1000), 8000000)
+<div class="highlight"><pre><span></span>(1000000, (1000, 1000), 8000000)
 </pre></div>
-</div>
 
 
 <p>NumPy believes that this array contains one million different elements, whereas the data buffer actually contains the same 1000 elements as <code>a</code>.</p>
 <p><strong>4.&nbsp;</strong> We can now perform an efficient outer product using the same principle as with broadcasting rules:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="n">b</span> <span class="o">*</span> <span class="n">b</span><span class="o">.</span><span class="n">T</span>
+<div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="n">b</span> <span class="o">*</span> <span class="n">b</span><span class="o">.</span><span class="n">T</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>766 µs ± 2.59 µs per loop (mean ± std. dev. of 7 runs,
+<div class="highlight"><pre><span></span>766 µs ± 2.59 µs per loop (mean ± std. dev. of 7 runs,
 1000 loops each)
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">timeit</span>
+<div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">timeit</span>
 <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">a</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>5.55 ms ± 9.1 µs per loop (mean ± std. dev. of 7 runs,
+<div class="highlight"><pre><span></span>5.55 ms ± 9.1 µs per loop (mean ± std. dev. of 7 runs,
 100 loops each)
 </pre></div>
-</div>
 
 
 <h2>How it works...</h2>
@@ -219,9 +203,9 @@
         <footer id="footer" class="pure-u-1 pure-u-md-4-4">
             <div class="l-box">
                 <div>
-                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                    <p>&copy; <a href="https://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
                         Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
-                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                        for <a href="https://blog.getpelican.com/">Pelican</a>
                     </p>
                 </div>
             </div>
@@ -241,11 +225,10 @@ var scJsHost = (("https:" == document.location.protocol) ?
 src="https://www.statcounter.com/counter/counter.js"
 async></script>
 <noscript><div class="statcounter"><a title="Web Analytics"
-href="http://statcounter.com/" target="_blank"><img
+href="https://statcounter.com/" target="_blank"><img
 class="statcounter"
 src="//c.statcounter.com/9752080/0/c177b501/1/" alt="Web
 Analytics"></a></div></noscript>
 <!-- End of StatCounter Code for Default Guide -->
 </body>
 </html>
-

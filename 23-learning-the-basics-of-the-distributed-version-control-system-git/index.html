@@ -32,16 +32,16 @@
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
     <!--[if lte IE 8]>
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+        <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
     <![endif]-->
     <!--[if gt IE 8]><!-->
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+        <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
     <!--<![endif]-->
     <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
     <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
-    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
-    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
-    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    <!-- <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
     
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -101,110 +101,93 @@
 <p>This book's code is stored on GitHub. Most Python libraries are also developed on GitHub.</p>
 <h2>How to do it...</h2>
 <p><strong>1.&nbsp;</strong> The very first thing to do when starting a new project or computing experiment is create a new folder locally:</p>
-<div class="highlight highlight-bash"><div class="highlight"><pre><span></span>mkdir myproject
+<div class="highlight"><pre><span></span>mkdir myproject
 <span class="nb">cd</span> myproject
 </pre></div>
-</div>
 
 
 <p><strong>2.&nbsp;</strong> We initialize a Git repository:</p>
-<div class="highlight highlight-bash"><div class="highlight"><pre><span></span>git init
+<div class="highlight"><pre><span></span>git init
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>Initialized empty Git repository in
+<div class="highlight"><pre><span></span>Initialized empty Git repository in
 ~/git/cookbook-2nd/chapter02/myproject/.git/
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-bash"><div class="highlight"><pre><span></span><span class="nb">pwd</span>
+<div class="highlight"><pre><span></span><span class="nb">pwd</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>~/git/cookbook-2nd/chapter02/myproject
+<div class="highlight"><pre><span></span>~/git/cookbook-2nd/chapter02/myproject
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-bash"><div class="highlight"><pre><span></span>ls -a
+<div class="highlight"><pre><span></span>ls -a
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>.  ..  .git
+<div class="highlight"><pre><span></span>.  ..  .git
 </pre></div>
-</div>
 
 
 <p>Git created a  <code>.git</code> subdirectory that contains all the parameters and history of the repository.</p>
 <p><strong>3.&nbsp;</strong> Let's set our name and e-mail address globally:</p>
-<div class="highlight highlight-bash"><div class="highlight"><pre><span></span>git config --global user.name <span class="s2">&quot;My Name&quot;</span>
+<div class="highlight"><pre><span></span>git config --global user.name <span class="s2">&quot;My Name&quot;</span>
 git config --global user.email <span class="s2">&quot;me@home.com&quot;</span>
 </pre></div>
-</div>
 
 
 <p><strong>4.&nbsp;</strong> We create a new file, and we tell Git to track it:</p>
-<div class="highlight highlight-bash"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s2">&quot;Hello world&quot;</span> &gt; file.txt
+<div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s2">&quot;Hello world&quot;</span> &gt; file.txt
 git add file.txt
 </pre></div>
-</div>
 
 
 <p><strong>5.&nbsp;</strong> Let's create our first commit:</p>
-<div class="highlight highlight-bash"><div class="highlight"><pre><span></span>git commit -m <span class="s2">&quot;Initial commit&quot;</span>
+<div class="highlight"><pre><span></span>git commit -m <span class="s2">&quot;Initial commit&quot;</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>[master (root-commit) 02971c0] Initial commit
+<div class="highlight"><pre><span></span>[master (root-commit) 02971c0] Initial commit
  1 file changed, 1 insertion(+)
  create mode 100644 file.txt
 </pre></div>
-</div>
 
 
 <p><strong>6.&nbsp;</strong> We can check the list of commits:</p>
-<div class="highlight highlight-bash"><div class="highlight"><pre><span></span>git log
+<div class="highlight"><pre><span></span>git log
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>commit 02971c0e1176cd26ec33900e359b192a27df2821
+<div class="highlight"><pre><span></span>commit 02971c0e1176cd26ec33900e359b192a27df2821
 Author: My Name &lt;me@home.com&gt;
 Date:   Tue Dec 12 10:50:37 2017 +0100
 
     Initial commit
 </pre></div>
-</div>
 
 
 <p><strong>7.&nbsp;</strong> Next, we edit the file by appending an exclamation mark:</p>
-<div class="highlight highlight-bash"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s2">&quot;Hello world!&quot;</span> &gt; file.txt
+<div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s2">&quot;Hello world!&quot;</span> &gt; file.txt
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-bash"><div class="highlight"><pre><span></span>cat file.txt
+<div class="highlight"><pre><span></span>cat file.txt
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>Hello world!
+<div class="highlight"><pre><span></span>Hello world!
 </pre></div>
-</div>
 
 
 <p><strong>8.&nbsp;</strong> We can see the differences between the current state of our repository, and the state in the last commit:</p>
-<div class="highlight highlight-bash"><div class="highlight"><pre><span></span>git diff
+<div class="highlight"><pre><span></span>git diff
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>diff --git a/file.txt b/file.txt
+<div class="highlight"><pre><span></span>diff --git a/file.txt b/file.txt
 index 802992c..cd08755 100644
 --- a/file.txt
 +++ b/file.txt
@@ -212,17 +195,15 @@ index 802992c..cd08755 100644
 -Hello world
 +Hello world!
 </pre></div>
-</div>
 
 
 <p>The output of <code>git diff</code> shows that the contents of <code>file.txt</code> were changed from <code>Hello world</code> to <code>Hello world!</code>. Git compares the states of all tracked files and computes the differences between the files.</p>
 <p><strong>9.&nbsp;</strong> We can also get a summary of the changes as follows:</p>
-<div class="highlight highlight-bash"><div class="highlight"><pre><span></span>git status
+<div class="highlight"><pre><span></span>git status
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>On branch master
+<div class="highlight"><pre><span></span>On branch master
 Changes not staged for commit:
   (use &quot;git add &lt;file&gt;...&quot; to update what will
       be committed)
@@ -231,39 +212,33 @@ Changes not staged for commit:
 
 no changes added to commit (use &quot;git add&quot;)
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-bash"><div class="highlight"><pre><span></span>git diff --stat
+<div class="highlight"><pre><span></span>git diff --stat
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span> file.txt | 2 +-
+<div class="highlight"><pre><span></span> file.txt | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 </pre></div>
-</div>
 
 
 <p>The <code>git status</code> command gives a summary of all changes since the last commit. The <code>git diff --stat</code> command shows, for each modified text file, the number of changed lines.</p>
 <p><strong>10.&nbsp;</strong> Finally, we commit our change with a shortcut that automatically adds all changes in the tracked files (<code>-a</code> option):</p>
-<div class="highlight highlight-bash"><div class="highlight"><pre><span></span>git commit -am <span class="s2">&quot;Add exclamation mark to file.txt&quot;</span>
+<div class="highlight"><pre><span></span>git commit -am <span class="s2">&quot;Add exclamation mark to file.txt&quot;</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>[master 045df6a] Add exclamation mark to file.txt
+<div class="highlight"><pre><span></span>[master 045df6a] Add exclamation mark to file.txt
  1 file changed, 1 insertion(+), 1 deletion(-)
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-bash"><div class="highlight"><pre><span></span>git log
+<div class="highlight"><pre><span></span>git log
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>commit 045df6a6f8a62b19f45025d15168d6d7382a8429
+<div class="highlight"><pre><span></span>commit 045df6a6f8a62b19f45025d15168d6d7382a8429
 Author: My Name &lt;me@home.com&gt;
 Date:   Tue Dec 12 10:59:39 2017 +0100
 
@@ -275,7 +250,6 @@ Date:   Tue Dec 12 10:50:37 2017 +0100
 
     Initial commit
 </pre></div>
-</div>
 
 
 <h2>How it works...</h2>
@@ -293,9 +267,8 @@ Date:   Tue Dec 12 10:50:37 2017 +0100
 <p>We can also create a new repository on an online git provider such as GitHub:</p>
 <p><img alt="New project on GitHub" src="http://ipython-books.github.io/pages/chapter02_best_practices/images/github_new.png" /></p>
 <p>On the main webpage of the newly created project, click on the <strong>Clone or download</strong> button to get the repository URL and type in a terminal:</p>
-<div class="highlight highlight-bash"><div class="highlight"><pre><span></span>git clone <span class="o">[</span>https://github.com/mylogin/myproject.git<span class="o">](</span>https://github.com/mylogin/myproject.git<span class="o">)</span>
+<div class="highlight"><pre><span></span>git clone <span class="o">[</span>https://github.com/mylogin/myproject.git<span class="o">](</span>https://github.com/mylogin/myproject.git<span class="o">)</span>
 </pre></div>
-</div>
 
 
 <p>If the local repository already exists, do not tick the <em>Initialize this repository with a README</em> box on the GitHub page, and add the remote with <code>git remote add origin [https://github.com/yourlogin/myproject.git](https://github.com/yourlogin/myproject.git)</code>. See <a href="https://help.github.com/articles/adding-a-remote/">https://help.github.com/articles/adding-a-remote/</a> for more details.</p>
@@ -324,9 +297,9 @@ Date:   Tue Dec 12 10:50:37 2017 +0100
         <footer id="footer" class="pure-u-1 pure-u-md-4-4">
             <div class="l-box">
                 <div>
-                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                    <p>&copy; <a href="https://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
                         Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
-                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                        for <a href="https://blog.getpelican.com/">Pelican</a>
                     </p>
                 </div>
             </div>
@@ -346,11 +319,10 @@ var scJsHost = (("https:" == document.location.protocol) ?
 src="https://www.statcounter.com/counter/counter.js"
 async></script>
 <noscript><div class="statcounter"><a title="Web Analytics"
-href="http://statcounter.com/" target="_blank"><img
+href="https://statcounter.com/" target="_blank"><img
 class="statcounter"
 src="//c.statcounter.com/9752080/0/c177b501/1/" alt="Web
 Analytics"></a></div></noscript>
 <!-- End of StatCounter Code for Default Guide -->
 </body>
 </html>
-

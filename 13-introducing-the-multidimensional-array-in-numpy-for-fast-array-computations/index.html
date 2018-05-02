@@ -32,16 +32,16 @@
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
     <!--[if lte IE 8]>
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+        <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
     <![endif]-->
     <!--[if gt IE 8]><!-->
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+        <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
     <!--<![endif]-->
     <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
     <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
-    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
-    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
-    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    <!-- <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
     
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -94,82 +94,69 @@
 <p>In this recipe, we will illustrate the basic concepts of the multidimensional array. A more comprehensive coverage of the topic can be found in the <em>Learning IPython for Interactive Computing and Data Visualization Second Edition</em> book.</p>
 <h2>How to do it...</h2>
 <p><strong>1.&nbsp;</strong> Let's import the built-in <code>random</code> Python module and NumPy:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 </pre></div>
-</div>
 
 
 <p><strong>2.&nbsp;</strong> We generate two Python lists, <code>x</code> and <code>y</code>, each one containing 1 million random numbers between 0 and 1:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">1000000</span>
+<div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">1000000</span>
 <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
 <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span> <span class="n">y</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><span class="n">x</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span> <span class="n">y</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>([0.926, 0.722, 0.962], [0.291, 0.339, 0.819])
+<div class="highlight"><pre><span></span>([0.926, 0.722, 0.962], [0.291, 0.339, 0.819])
 </pre></div>
-</div>
 
 
 <p><strong>3.&nbsp;</strong> Let's compute the element-wise sum of all of these numbers: the first element of <code>x</code> plus the first element of <code>y</code>, and so on. We use a <code>for</code> loop in a list comprehension:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">z</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+<div class="highlight"><pre><span></span><span class="n">z</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
 <span class="n">z</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>[1.217, 1.061, 1.781]
+<div class="highlight"><pre><span></span>[1.217, 1.061, 1.781]
 </pre></div>
-</div>
 
 
 <p><strong>4.&nbsp;</strong> How long does this computation take? IPython defines a handy <code>%timeit</code> magic command to quickly evaluate the time taken by a single statement:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+<div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>101 ms ± 5.12 ms per loop (mean ± std. dev. of 7 runs,
+<div class="highlight"><pre><span></span>101 ms ± 5.12 ms per loop (mean ± std. dev. of 7 runs,
     10 loops each)
 </pre></div>
-</div>
 
 
 <p><strong>5.&nbsp;</strong> Now, we will perform the same operation with NumPy. NumPy works on multidimensional arrays, so we need to convert our lists to arrays. The <code>np.array()</code> function does just that:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">xa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">xa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="n">ya</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">xa</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><span class="n">xa</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>array([ 0.926,  0.722,  0.962])
+<div class="highlight"><pre><span></span>array([ 0.926,  0.722,  0.962])
 </pre></div>
-</div>
 
 
 <p>The <code>xa</code> and <code>ya</code> arrays contain the exact same numbers that our original lists, <code>x</code> and <code>y</code>, contained. Those lists were instances of the <code>list</code> built-in class, while our arrays are instances of the <code>ndarray</code> NumPy class. These types are implemented very differently in Python and NumPy. In this example, we will see that using arrays instead of lists leads to drastic performance improvements.</p>
 <p><strong>6.&nbsp;</strong> To compute the element-wise sum of these arrays, we don't need to do a <code>for</code> loop anymore. In NumPy, adding two arrays means adding the elements of the arrays component-by-component. This is the standard mathematical notation in linear algebra (operations on vectors and matrices):</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">za</span> <span class="o">=</span> <span class="n">xa</span> <span class="o">+</span> <span class="n">ya</span>
+<div class="highlight"><pre><span></span><span class="n">za</span> <span class="o">=</span> <span class="n">xa</span> <span class="o">+</span> <span class="n">ya</span>
 <span class="n">za</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>array([ 1.217,  1.061,  1.781])
+<div class="highlight"><pre><span></span>array([ 1.217,  1.061,  1.781])
 </pre></div>
-</div>
 
 
 <p>We see that the <code>z</code> list and the <code>za</code> array contain the same elements (the sum of the numbers in <code>x</code> and <code>y</code>).</p>
@@ -177,102 +164,86 @@
 <p>Be careful not to use the <code>+</code> operator between vectors when they are represented as Python lists! This operator is valid between lists, so it would not raise an error and it could lead to subtle and silent bugs. In fact, <code>list1 + list2</code> is the <em>concatenation</em> of two lists, not the element-wise addition.</p>
 </blockquote>
 <p><strong>7.&nbsp;</strong> Let's compare the performance of this NumPy operation with the native Python loop:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="n">xa</span> <span class="o">+</span> <span class="n">ya</span>
+<div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="n">xa</span> <span class="o">+</span> <span class="n">ya</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>1.09 ms ± 37.3 µs per loop (mean ± std. dev. of 7 runs,
+<div class="highlight"><pre><span></span>1.09 ms ± 37.3 µs per loop (mean ± std. dev. of 7 runs,
     1000 loops each)
 </pre></div>
-</div>
 
 
 <p>With NumPy, we went from 100 ms down to 1 ms to compute one million additions!</p>
 <p><strong>8.&nbsp;</strong> Now, we will compute something else: the sum of all elements in <code>x</code> or <code>xa</code>. Although this is not an element-wise operation, NumPy is still highly efficient here. The pure Python version uses the built-in <code>sum()</code> function on an iterable. The NumPy version uses the <code>np.sum()</code> function on a NumPy array:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># pure Python</span>
+<div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># pure Python</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>3.94 ms ± 4.44 µs per loop (mean ± std. dev. of 7 runs
+<div class="highlight"><pre><span></span>3.94 ms ± 4.44 µs per loop (mean ± std. dev. of 7 runs
     100 loops each)
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">xa</span><span class="p">)</span>  <span class="c1"># NumPy</span>
+<div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">xa</span><span class="p">)</span>  <span class="c1"># NumPy</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>298 µs ± 4.62 µs per loop (mean ± std. dev. of 7 runs,
+<div class="highlight"><pre><span></span>298 µs ± 4.62 µs per loop (mean ± std. dev. of 7 runs,
     1000 loops each)
 </pre></div>
-</div>
 
 
 <p>We also observe a significant speedup here.</p>
 <p><strong>9.&nbsp;</strong> Finally, let's perform one last operation: computing the arithmetic distance between any pair of numbers in our two lists (we only consider the first 1000 elements to keep computing times reasonable). First, we implement this in pure Python with two nested <code>for</code> loops:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+<div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
      <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
      <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">)]</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">d</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><span class="n">d</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>[0.635, 0.587, 0.106]
+<div class="highlight"><pre><span></span>[0.635, 0.587, 0.106]
 </pre></div>
-</div>
 
 
 <p><strong>10.&nbsp;</strong> Now, we use a NumPy implementation, bringing out two slightly more advanced notions. First, we consider a <strong>two-dimensional array</strong> (or matrix). This is how we deal with the two indices, <code>i</code> and <code>j</code>. Second, we use <strong>broadcasting</strong> to perform an operation between a 2D array and 1D array. We will give more details in the <em>How it works...</em> section.</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">da</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">xa</span><span class="p">[:</span><span class="mi">1000</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">-</span> <span class="n">ya</span><span class="p">[:</span><span class="mi">1000</span><span class="p">])</span>
+<div class="highlight"><pre><span></span><span class="n">da</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">xa</span><span class="p">[:</span><span class="mi">1000</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">-</span> <span class="n">ya</span><span class="p">[:</span><span class="mi">1000</span><span class="p">])</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">da</span>
+<div class="highlight"><pre><span></span><span class="n">da</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>array([[ 0.635,  0.587,  ...,  0.849,  0.046],
+<div class="highlight"><pre><span></span>array([[ 0.635,  0.587,  ...,  0.849,  0.046],
        [ 0.431,  0.383,  ...,  0.646,  0.158],
        ...,
        [ 0.024,  0.024,  ...,  0.238,  0.566],
        [ 0.081,  0.033,  ...,  0.295,  0.509]])
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> \
+<div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> \
          <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span> \
          <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">)]</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>134 ms ± 1.79 ms per loop (mean ± std. dev. of 7 runs,
+<div class="highlight"><pre><span></span>134 ms ± 1.79 ms per loop (mean ± std. dev. of 7 runs,
     1000 loops each)
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">xa</span><span class="p">[:</span><span class="mi">1000</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">-</span> <span class="n">ya</span><span class="p">[:</span><span class="mi">1000</span><span class="p">])</span>
+<div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">xa</span><span class="p">[:</span><span class="mi">1000</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">-</span> <span class="n">ya</span><span class="p">[:</span><span class="mi">1000</span><span class="p">])</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>1.54 ms ± 48.9 µs per loop (mean ± std. dev. of 7 runs
+<div class="highlight"><pre><span></span>1.54 ms ± 48.9 µs per loop (mean ± std. dev. of 7 runs
     1000 loops each)
 </pre></div>
-</div>
 
 
 <p>Here again, we observe a significant speedup.</p>
@@ -311,9 +282,9 @@
         <footer id="footer" class="pure-u-1 pure-u-md-4-4">
             <div class="l-box">
                 <div>
-                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                    <p>&copy; <a href="https://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
                         Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
-                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                        for <a href="https://blog.getpelican.com/">Pelican</a>
                     </p>
                 </div>
             </div>
@@ -333,11 +304,10 @@ var scJsHost = (("https:" == document.location.protocol) ?
 src="https://www.statcounter.com/counter/counter.js"
 async></script>
 <noscript><div class="statcounter"><a title="Web Analytics"
-href="http://statcounter.com/" target="_blank"><img
+href="https://statcounter.com/" target="_blank"><img
 class="statcounter"
 src="//c.statcounter.com/9752080/0/c177b501/1/" alt="Web
 Analytics"></a></div></noscript>
 <!-- End of StatCounter Code for Default Guide -->
 </body>
 </html>
-

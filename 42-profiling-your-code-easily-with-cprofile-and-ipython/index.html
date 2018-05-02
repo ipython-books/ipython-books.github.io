@@ -32,16 +32,16 @@
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
     <!--[if lte IE 8]>
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+        <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
     <![endif]-->
     <!--[if gt IE 8]><!-->
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+        <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
     <!--<![endif]-->
     <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
     <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
-    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
-    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
-    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    <!-- <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
     
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -96,21 +96,19 @@
 <p>IPython offers the <code>%prun</code> line magic and the <code>%%prun</code> cell magic to easily profile one or multiple lines of code. The <code>%run</code> magic command also accepts a <code>-p</code> flag to run a Python script under the control of the profiler. These commands accept a lot of options as can be seen with <code>%prun?</code> and <code>%run?</code>.</p>
 <p>In this example, we will profile a numerical simulation of random walks. We will cover these kinds of simulations in more detail in <em>Chapter 13, Stochastic Dynamical Systems</em>.</p>
 <p><strong>1.&nbsp;</strong> Let's import NumPy:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 </pre></div>
-</div>
 
 
 <p><strong>2.&nbsp;</strong> Let's create a function generating random +1 and -1 values in an array:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="o">*</span><span class="n">shape</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="o">*</span><span class="n">shape</span><span class="p">):</span>
     <span class="c1"># Create a random n-vector with +1 or -1 values.</span>
     <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random_sample</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span><span class="o">&lt;.</span><span class="mi">5</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
 </pre></div>
-</div>
 
 
 <p><strong>3.&nbsp;</strong> Now, we write the simulation code in a cell starting with <code>%%prun</code> in order to profile the entire simulation. The various options allow us to save the report in a file and to sort the first 10 results by cumulative time. We will explain these options in more detail in the <em>How it works...</em> section.</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">prun</span> <span class="o">-</span><span class="n">s</span> <span class="n">cumulative</span> <span class="o">-</span><span class="n">q</span> <span class="o">-</span><span class="n">l</span> <span class="mi">10</span> <span class="o">-</span><span class="n">T</span> <span class="n">prun0</span>
+<div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">prun</span> <span class="o">-</span><span class="n">s</span> <span class="n">cumulative</span> <span class="o">-</span><span class="n">q</span> <span class="o">-</span><span class="n">l</span> <span class="mi">10</span> <span class="o">-</span><span class="n">T</span> <span class="n">prun0</span>
 <span class="c1"># We profile the cell, sort the report by &quot;cumulative</span>
 <span class="c1"># time&quot;, limit it to 10 lines, and save it to a file</span>
 <span class="c1"># named &quot;prun0&quot;.</span>
@@ -122,18 +120,15 @@
 <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">,:],</span> <span class="n">bins</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iterations</span><span class="p">)])</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>*** Profile printout saved to text file &#39;prun0&#39;.
+<div class="highlight"><pre><span></span>*** Profile printout saved to text file &#39;prun0&#39;.
 </pre></div>
-</div>
 
 
 <p><strong>4.&nbsp;</strong> The profiling report has been saved in a text file named <code>prun0</code>. Let's display it (the following output is a stripped down version that fits on this page):</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;prun0&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+<div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;prun0&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
 </pre></div>
-</div>
 
 
 <p><img alt="Profiling result" src="http://ipython-books.github.io/pages/chapter04_optimization/02_profile_files/02_profile_13_0.png" /></p>
@@ -153,9 +148,8 @@
 <h2>There's more...</h2>
 <p>Profiling code in IPython is particularly simple (especially in the Notebook), as we have seen in this recipe. However, it may be undesirable or difficult to execute the code that we need to profile from IPython (GUIs, for example). In this case, we can use <code>cProfile</code> directly. It is slightly less straightforward than with IPython.</p>
 <p><strong>1.&nbsp;</strong> First, we call the following command:</p>
-<div class="highlight highlight-bash"><div class="highlight"><pre><span></span>$ python -m cProfile -o profresults myscript.py
+<div class="highlight"><pre><span></span>$ python -m cProfile -o profresults myscript.py
 </pre></div>
-</div>
 
 
 <p>The file <code>profresults</code> will contain the dump of the profiling results of <code>myscript.py</code>.</p>
@@ -188,9 +182,9 @@ p.strip_dirs().sort_stats(&quot;cumulative&quot;).print_stats()
         <footer id="footer" class="pure-u-1 pure-u-md-4-4">
             <div class="l-box">
                 <div>
-                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                    <p>&copy; <a href="https://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
                         Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
-                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                        for <a href="https://blog.getpelican.com/">Pelican</a>
                     </p>
                 </div>
             </div>
@@ -210,11 +204,10 @@ var scJsHost = (("https:" == document.location.protocol) ?
 src="https://www.statcounter.com/counter/counter.js"
 async></script>
 <noscript><div class="statcounter"><a title="Web Analytics"
-href="http://statcounter.com/" target="_blank"><img
+href="https://statcounter.com/" target="_blank"><img
 class="statcounter"
 src="//c.statcounter.com/9752080/0/c177b501/1/" alt="Web
 Analytics"></a></div></noscript>
 <!-- End of StatCounter Code for Default Guide -->
 </body>
 </html>
-

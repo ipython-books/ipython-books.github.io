@@ -32,16 +32,16 @@
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
     <!--[if lte IE 8]>
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+        <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
     <![endif]-->
     <!--[if gt IE 8]><!-->
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+        <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
     <!--<![endif]-->
     <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
     <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
-    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
-    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
-    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    <!-- <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
     
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -101,109 +101,92 @@
 <li>Using the web interface provided in the Jupyter Notebook's main page by clicking on the <em>IPython Clusters</em> tab and launching four engines</li>
 </ul>
 <p><strong>2.&nbsp;</strong> Then, we create a client that will act as a proxy to the IPython engines. The client automatically detects the running engines:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ipyparallel</span> <span class="kn">import</span> <span class="n">Client</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ipyparallel</span> <span class="kn">import</span> <span class="n">Client</span>
 <span class="n">rc</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>
 </pre></div>
-</div>
 
 
 <p><strong>3.&nbsp;</strong> Let's check the number of running engines:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">rc</span><span class="o">.</span><span class="n">ids</span>
+<div class="highlight"><pre><span></span><span class="n">rc</span><span class="o">.</span><span class="n">ids</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>[0, 1, 2, 3]
+<div class="highlight"><pre><span></span>[0, 1, 2, 3]
 </pre></div>
-</div>
 
 
 <p><strong>4.&nbsp;</strong> To run commands in parallel over the engines, we can use the <code>%px</code> line magic or the <code>%%px</code> cell magic:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">px</span>
+<div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">px</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Process {os.getpid():d}.&quot;</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>[stdout:0] Process 10784.
+<div class="highlight"><pre><span></span>[stdout:0] Process 10784.
 [stdout:1] Process 10785.
 [stdout:2] Process 10787.
 [stdout:3] Process 10791.
 </pre></div>
-</div>
 
 
 <p><strong>5.&nbsp;</strong> We can specify which engines to run the commands on using the <code>--targets</code> or <code>-t</code> option:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">px</span> <span class="o">-</span><span class="n">t</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span>
+<div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">px</span> <span class="o">-</span><span class="n">t</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span>
 <span class="c1"># The os module has already been imported in</span>
 <span class="c1"># the previous cell.</span>
 <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Process {os.getpid():d}.&quot;</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>[stdout:1] Process 10785.
+<div class="highlight"><pre><span></span>[stdout:1] Process 10785.
 [stdout:2] Process 10787.
 </pre></div>
-</div>
 
 
 <p><strong>6.&nbsp;</strong> By default, the <code>%px</code> magic executes commands in <strong>blocking mode</strong>; the cell only returns when the commands have completed on all engines. It is possible to run non-blocking commands with the <code>--noblock</code> or <code>-a</code> option. In this case, the cell returns immediately, and the task's status and results can be polled asynchronously from IPython's interactive session:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">px</span> <span class="o">-</span><span class="n">a</span>
+<div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">px</span> <span class="o">-</span><span class="n">a</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>&lt;AsyncResult: execute&gt;
+<div class="highlight"><pre><span></span>&lt;AsyncResult: execute&gt;
 </pre></div>
-</div>
 
 
 <p><strong>7.&nbsp;</strong> The previous command returned an <code>ASyncResult</code> instance that we can use to poll the task's status:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">_</span><span class="o">.</span><span class="n">elapsed</span><span class="p">,</span> <span class="n">_</span><span class="o">.</span><span class="n">ready</span><span class="p">())</span>
+<div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">_</span><span class="o">.</span><span class="n">elapsed</span><span class="p">,</span> <span class="n">_</span><span class="o">.</span><span class="n">ready</span><span class="p">())</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>1.522944 False
+<div class="highlight"><pre><span></span>1.522944 False
 </pre></div>
-</div>
 
 
 <p><strong>8.&nbsp;</strong> The <code>%pxresult</code> blocks until the task finishes:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">pxresult</span>
+<div class="highlight"><pre><span></span><span class="o">%</span><span class="n">pxresult</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">_</span><span class="o">.</span><span class="n">elapsed</span><span class="p">,</span> <span class="n">_</span><span class="o">.</span><span class="n">ready</span><span class="p">())</span>
+<div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">_</span><span class="o">.</span><span class="n">elapsed</span><span class="p">,</span> <span class="n">_</span><span class="o">.</span><span class="n">ready</span><span class="p">())</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>5.044711 True
+<div class="highlight"><pre><span></span>5.044711 True
 </pre></div>
-</div>
 
 
 <p><strong>9.&nbsp;</strong> ipyparallel provides convenient functions for common use cases, such as a parallel <code>map()</code> function:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">v</span> <span class="o">=</span> <span class="n">rc</span><span class="p">[:]</span>
+<div class="highlight"><pre><span></span><span class="n">v</span> <span class="o">=</span> <span class="n">rc</span><span class="p">[:]</span>
 <span class="n">res</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+<div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>[0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+<div class="highlight"><pre><span></span>[0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
 </pre></div>
-</div>
 
 
 <h2>How it works...</h2>
@@ -262,9 +245,9 @@
         <footer id="footer" class="pure-u-1 pure-u-md-4-4">
             <div class="l-box">
                 <div>
-                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                    <p>&copy; <a href="https://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
                         Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
-                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                        for <a href="https://blog.getpelican.com/">Pelican</a>
                     </p>
                 </div>
             </div>
@@ -284,11 +267,10 @@ var scJsHost = (("https:" == document.location.protocol) ?
 src="https://www.statcounter.com/counter/counter.js"
 async></script>
 <noscript><div class="statcounter"><a title="Web Analytics"
-href="http://statcounter.com/" target="_blank"><img
+href="https://statcounter.com/" target="_blank"><img
 class="statcounter"
 src="//c.statcounter.com/9752080/0/c177b501/1/" alt="Web
 Analytics"></a></div></noscript>
 <!-- End of StatCounter Code for Default Guide -->
 </body>
 </html>
-

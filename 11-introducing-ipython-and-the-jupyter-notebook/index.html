@@ -32,16 +32,16 @@
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
     <!--[if lte IE 8]>
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+        <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
     <![endif]-->
     <!--[if gt IE 8]><!-->
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+        <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
     <!--<![endif]-->
     <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
     <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
-    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
-    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
-    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    <!-- <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
     
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -97,14 +97,12 @@
 <p>Once Anaconda is installed, download the code from the book's website and open a terminal in that folder. In the terminal, type <code>jupyter notebook</code>. Your default web browser should open automatically and load the address <code>http://localhost:8888</code> (a server that runs on your computer). You're ready to get started!</p>
 <h2>How to do it...</h2>
 <p><strong>1.&nbsp;</strong> Let's create a new Jupyter notebook using an IPython kernel. We type the following command in a cell, and press <code>Shift + Enter</code> to evaluate it:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Hello world!&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Hello world!&quot;</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>Hello world!
+<div class="highlight"><pre><span></span>Hello world!
 </pre></div>
-</div>
 
 
 <p><img alt="Screenshot of a Jupyter notebook" src="http://ipython-books.github.io/pages/chapter01_basic/01_notebook_files/01_notebook_12_1.png" /></p>
@@ -113,47 +111,40 @@
 <p>In this book, the prompt <code>&gt;&gt;&gt;</code> means that you need to type everything that starts after it. The <code>&gt;&gt;&gt;</code> characters themselves should not be typed.</p>
 </blockquote>
 <p><strong>2.&nbsp;</strong> Now, we do a simple arithmetic operation:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span>
+<div class="highlight"><pre><span></span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>4
+<div class="highlight"><pre><span></span>4
 </pre></div>
-</div>
 
 
 <p>The result of the operation is shown in the output area. More precisely, the output area not only displays text that is printed by any command in the cell, but it also displays a text representation of the last returned object. Here, the last returned object is the result of <code>2+2</code>, that is, <code>4</code>.</p>
 <p><strong>3.&nbsp;</strong> In the next cell, we can recover the value of the last returned object with the <code>_</code> (underscore) special variable. In practice, it might be more convenient to assign objects to named variables such as in <code>myresult = 2 + 2</code>.</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">_</span> <span class="o">*</span> <span class="mi">3</span>
+<div class="highlight"><pre><span></span><span class="n">_</span> <span class="o">*</span> <span class="mi">3</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>12
+<div class="highlight"><pre><span></span>12
 </pre></div>
-</div>
 
 
 <p><strong>4.&nbsp;</strong> IPython not only accepts Python code, but also shell commands. These commands are provided by the operating system. We first type <code>!</code> in a cell before typing the shell command. Here, assuming a Linux or macOS system, we get the list of all the notebooks in the current directory:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="err">!</span><span class="n">ls</span>
+<div class="highlight"><pre><span></span><span class="err">!</span><span class="n">ls</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>my_notebook.ipynb
+<div class="highlight"><pre><span></span>my_notebook.ipynb
 </pre></div>
-</div>
 
 
 <p>On Windows, one may replaces <code>ls</code> by <code>dir</code>.</p>
 <p><strong>5.&nbsp;</strong> IPython comes with a library of <strong>magic commands</strong>. These commands are convenient shortcuts to common actions. They all start with <code>%</code> (the percent character). We can get the list of all magic commands with <code>%lsmagic</code>:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">lsmagic</span>
+<div class="highlight"><pre><span></span><span class="o">%</span><span class="n">lsmagic</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>Available line magics:
+<div class="highlight"><pre><span></span>Available line magics:
 %alias  %alias_magic  %autocall  %automagic  %autosave  %bookmark  %cat  %cd  %clear  %colors  %config  %connect_info  %cp  %debug  %dhist  %dirs  %doctest_mode  %ed  %edit  %env  %gui  %hist  %history  %killbgscripts  %ldir  %less  %lf  %lk  %ll  %load  %load_ext  %loadpy  %logoff  %logon  %logstart  %logstate  %logstop  %ls  %lsmagic  %lx  %macro  %magic  %man  %matplotlib  %mkdir  %more  %mv  %notebook  %page  %pastebin  %pdb  %pdef  %pdoc  %pfile  %pinfo  %pinfo2  %popd  %pprint  %precision  %profile  %prun  %psearch  %psource  %pushd  %pwd  %pycat  %pylab  %qtconsole  %quickref  %recall  %rehashx  %reload_ext  %rep  %rerun  %reset  %reset_selective  %rm  %rmdir  %run  %save  %sc  %set_env  %store  %sx  %system  %tb  %time  %timeit  %unalias  %unload_ext  %who  %who_ls  %whos  %xdel  %xmode
 
 Available cell magics:
@@ -161,38 +152,32 @@ Available cell magics:
 
 Automagic is ON, % prefix IS NOT needed for line magics.
 </pre></div>
-</div>
 
 
 <p>Cell magics have a <code>%%</code> prefix; they target entire code cells.</p>
 <p><strong>6.&nbsp;</strong> For example, the <code>%%writefile</code> cell magic lets us create a text file. This magic command accepts a filename as an argument. All the remaining lines in the cell are directly written to this text file. Here, we create a file <code>test.txt</code> and write <code>Hello world!</code> into it:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">writefile</span> <span class="n">test</span><span class="o">.</span><span class="n">txt</span>
+<div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">writefile</span> <span class="n">test</span><span class="o">.</span><span class="n">txt</span>
 <span class="n">Hello</span> <span class="n">world</span><span class="err">!</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>Writing test.txt
+<div class="highlight"><pre><span></span>Writing test.txt
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s check what this file contains.</span>
+<div class="highlight"><pre><span></span><span class="c1"># Let&#39;s check what this file contains.</span>
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>Hello world!
+<div class="highlight"><pre><span></span>Hello world!
 </pre></div>
-</div>
 
 
 <p><strong>7.&nbsp;</strong> As we can see in the output of <code>%lsmagic</code>, there are many magic commands in IPython. We can find more information about any command by adding <code>?</code> after it. For example, to get some help about the <code>%run</code> magic command, we type <code>%run?</code>as shown here:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">run</span><span class="err">?</span>
+<div class="highlight"><pre><span></span><span class="o">%</span><span class="n">run</span><span class="err">?</span>
 </pre></div>
-</div>
 
 
 <p><img alt="Screenshot of the pager" src="http://ipython-books.github.io/pages/chapter01_basic/01_notebook_files/01_notebook_29_0.png" /></p>
@@ -203,13 +188,12 @@ Automagic is ON, % prefix IS NOT needed for line magics.
 <p>Running a Markdown cell (by pressing <code>Shift + Enter</code>, for example) displays the output, as shown in the bottom panel of the screenshot above.</p>
 <p>By combining code cells and Markdown cells, we create a standalone interactive document that combines computations (code), text and graphics.</p>
 <p><strong>9.&nbsp;</strong> The Jupyter Notebook also comes with a sophisticated display system that lets us insert rich web elements in the Notebook. Here, we show how to add HTML, <strong>SVG (Scalable Vector Graphics)</strong>, and even YouTube videos in a notebook. First, we need to import some classes:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span><span class="p">,</span> <span class="n">SVG</span><span class="p">,</span> <span class="n">YouTubeVideo</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span><span class="p">,</span> <span class="n">SVG</span><span class="p">,</span> <span class="n">YouTubeVideo</span>
 </pre></div>
-</div>
 
 
 <p><strong>10.&nbsp;</strong> We create an HTML table dynamically with Python, and we display it in the (HTML-based) notebook.</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">HTML</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<div class="highlight"><pre><span></span><span class="n">HTML</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
 <span class="s1">&lt;table style=&quot;border: 2px solid black;&quot;&gt;</span>
 <span class="s1">&#39;&#39;&#39;</span> <span class="o">+</span>
      <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;&lt;tr&gt;&#39;</span> <span class="o">+</span>
@@ -220,12 +204,11 @@ Automagic is ON, % prefix IS NOT needed for line magics.
 <span class="sd">&lt;/table&gt;</span>
 <span class="sd">&#39;&#39;&#39;</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p><img alt="&lt;IPython.core.display.HTML object&gt;" src="http://ipython-books.github.io/pages/chapter01_basic/01_notebook_files/01_notebook_39_0.png" /></p>
 <p><strong>11.&nbsp;</strong> Similarly, we create an SVG graphics dynamically:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">SVG</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;&lt;svg width=&quot;600&quot; height=&quot;80&quot;&gt;&#39;&#39;&#39;</span> <span class="o">+</span>
+<div class="highlight"><pre><span></span><span class="n">SVG</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;&lt;svg width=&quot;600&quot; height=&quot;80&quot;&gt;&#39;&#39;&#39;</span> <span class="o">+</span>
     <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">f</span><span class="s1">&#39;&#39;&#39;&lt;circle</span>
 <span class="s1">              cx=&quot;{(30 + 3*i) * (10 - i)}&quot;</span>
 <span class="s1">              cy=&quot;30&quot;</span>
@@ -236,20 +219,18 @@ Automagic is ON, % prefix IS NOT needed for line magics.
 <span class="s1">        &lt;/circle&gt;&#39;&#39;&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)])</span> <span class="o">+</span>
     <span class="sd">&#39;&#39;&#39;&lt;/svg&gt;&#39;&#39;&#39;</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p><img alt="&lt;IPython.core.display.SVG object&gt;" src="http://ipython-books.github.io/pages/chapter01_basic/01_notebook_files/01_notebook_41_0.png" /></p>
 <p><strong>12.&nbsp;</strong> We display a Youtube video by giving its identifier to <code>YoutubeVideo</code>:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">YouTubeVideo</span><span class="p">(</span><span class="s1">&#39;VQBZ2MqWBZI&#39;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">YouTubeVideo</span><span class="p">(</span><span class="s1">&#39;VQBZ2MqWBZI&#39;</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p><img alt="&lt;IPython.lib.display.YouTubeVideo at 0x7fc0000b64a8&gt;" src="http://ipython-books.github.io/pages/chapter01_basic/01_notebook_files/01_notebook_43_0.jpeg" /></p>
 <h2>There's more...</h2>
 <p>Notebooks are saved as structured text files (JSON format), which makes them easily shareable. Here are the contents of a simple notebook:</p>
-<div class="highlight highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+<div class="highlight"><pre><span></span><span class="p">{</span>
  <span class="nt">&quot;cells&quot;</span><span class="p">:</span> <span class="p">[</span>
   <span class="p">{</span>
    <span class="nt">&quot;cell_type&quot;</span><span class="p">:</span> <span class="s2">&quot;code&quot;</span><span class="p">,</span>
@@ -274,7 +255,6 @@ Automagic is ON, % prefix IS NOT needed for line magics.
  <span class="nt">&quot;nbformat_minor&quot;</span><span class="p">:</span> <span class="mi">2</span>
 <span class="p">}</span>
 </pre></div>
-</div>
 
 
 <p>Jupyter comes with a special tool, <strong>nbconvert</strong>, which converts notebooks to other formats such as HTML and PDF (https://nbconvert.readthedocs.io/en/stable/).</p>
@@ -305,9 +285,9 @@ Automagic is ON, % prefix IS NOT needed for line magics.
         <footer id="footer" class="pure-u-1 pure-u-md-4-4">
             <div class="l-box">
                 <div>
-                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                    <p>&copy; <a href="https://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
                         Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
-                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                        for <a href="https://blog.getpelican.com/">Pelican</a>
                     </p>
                 </div>
             </div>
@@ -327,11 +307,10 @@ var scJsHost = (("https:" == document.location.protocol) ?
 src="https://www.statcounter.com/counter/counter.js"
 async></script>
 <noscript><div class="statcounter"><a title="Web Analytics"
-href="http://statcounter.com/" target="_blank"><img
+href="https://statcounter.com/" target="_blank"><img
 class="statcounter"
 src="//c.statcounter.com/9752080/0/c177b501/1/" alt="Web
 Analytics"></a></div></noscript>
 <!-- End of StatCounter Code for Default Guide -->
 </body>
 </html>
-

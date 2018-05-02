@@ -32,16 +32,16 @@
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
     <!--[if lte IE 8]>
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+        <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
     <![endif]-->
     <!--[if gt IE 8]><!-->
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+        <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
     <!--<![endif]-->
     <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
     <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
-    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
-    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
-    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    <!-- <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
     
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -95,47 +95,41 @@
 <p>To display legends using LaTeX in matplotlib, you will need an installation of LaTeX on your computer (see this chapter's introduction).</p>
 <h2>How to do it...</h2>
 <p><strong>1.&nbsp;</strong> Let's import SymPy and the number theory package:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">import</span> <span class="nn">sympy.ntheory</span> <span class="kn">as</span> <span class="nn">nt</span>
 <span class="n">init_printing</span><span class="p">()</span>
 </pre></div>
-</div>
 
 
 <p><strong>2.&nbsp;</strong> We can test whether a number is prime:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">nt</span><span class="o">.</span><span class="n">isprime</span><span class="p">(</span><span class="mi">2017</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">nt</span><span class="o">.</span><span class="n">isprime</span><span class="p">(</span><span class="mi">2017</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>True
+<div class="highlight"><pre><span></span>True
 </pre></div>
-</div>
 
 
 <p><strong>3.&nbsp;</strong> We can find the next prime after a given number:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">nt</span><span class="o">.</span><span class="n">nextprime</span><span class="p">(</span><span class="mi">2017</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">nt</span><span class="o">.</span><span class="n">nextprime</span><span class="p">(</span><span class="mi">2017</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p><img alt="2027" src="http://ipython-books.github.io/pages/chapter15_symbolic/05_number_theory_files/05_number_theory_10_0.png" /></p>
 <p><strong>4.&nbsp;</strong> What is the 1000th prime number?</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">nt</span><span class="o">.</span><span class="n">prime</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">nt</span><span class="o">.</span><span class="n">prime</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p><img alt="7919" src="http://ipython-books.github.io/pages/chapter15_symbolic/05_number_theory_files/05_number_theory_12_0.png" /></p>
 <p><strong>5.&nbsp;</strong> How many primes less than 2017 are there?</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">nt</span><span class="o">.</span><span class="n">primepi</span><span class="p">(</span><span class="mi">2017</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">nt</span><span class="o">.</span><span class="n">primepi</span><span class="p">(</span><span class="mi">2017</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p><img alt="306" src="http://ipython-books.github.io/pages/chapter15_symbolic/05_number_theory_files/05_number_theory_14_0.png" /></p>
 <p><strong>6.&nbsp;</strong> We can plot <span class="math">\(\pi(x)\)</span>, the <strong>prime-counting function</strong> (the number of prime numbers less than or equal to some number <span class="math">\(x\)</span>). The <strong>prime number theorem</strong> states that this function is asymptotically equivalent to <span class="math">\(x/\log(x)\)</span>. This expression approximately quantifies the distribution of prime numbers among all integers:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 <span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
@@ -146,30 +140,26 @@
         <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$x/\log(x)$&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p><img alt="&lt;matplotlib.figure.Figure at 0x7f2d3c5f52b0&gt;" src="http://ipython-books.github.io/pages/chapter15_symbolic/05_number_theory_files/05_number_theory_16_0.png" /></p>
 <p><strong>7.&nbsp;</strong> Let's compute the integer factorization of a number:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">nt</span><span class="o">.</span><span class="n">factorint</span><span class="p">(</span><span class="mi">1998</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">nt</span><span class="o">.</span><span class="n">factorint</span><span class="p">(</span><span class="mi">1998</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p><img alt="{2: 1, 3: 3, 37: 1}" src="http://ipython-books.github.io/pages/chapter15_symbolic/05_number_theory_files/05_number_theory_18_0.png" /></p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="mi">2</span> <span class="o">*</span> <span class="mi">3</span><span class="o">**</span><span class="mi">3</span> <span class="o">*</span> <span class="mi">37</span>
+<div class="highlight"><pre><span></span><span class="mi">2</span> <span class="o">*</span> <span class="mi">3</span><span class="o">**</span><span class="mi">3</span> <span class="o">*</span> <span class="mi">37</span>
 </pre></div>
-</div>
 
 
 <p><img alt="1998" src="http://ipython-books.github.io/pages/chapter15_symbolic/05_number_theory_files/05_number_theory_19_0.png" /></p>
 <p><strong>8.&nbsp;</strong> Finally, a small problem. A lazy mathematician is counting his marbles. When they are arranged in three rows, the last column contains one marble. When they form four rows, there are two marbles in the last column, and there are three with five rows. How many marbles are there? (Hint: The lazy mathematician has fewer than 100 marbles.)</p>
 <p><img alt="Marbles" src="http://ipython-books.github.io/pages/chapter15_symbolic/05_number_theory_files/marbles.png" /></p>
 <p>The Chinese Remainder Theorem gives us the answer:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy.ntheory.modular</span> <span class="kn">import</span> <span class="n">solve_congruence</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy.ntheory.modular</span> <span class="kn">import</span> <span class="n">solve_congruence</span>
 <span class="n">solve_congruence</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 </pre></div>
-</div>
 
 
 <p><img alt="(58, 60)" src="http://ipython-books.github.io/pages/chapter15_symbolic/05_number_theory_files/05_number_theory_23_0.png" /></p>
@@ -260,9 +250,9 @@ n &amp;\equiv a_k \mod m_k\\
         <footer id="footer" class="pure-u-1 pure-u-md-4-4">
             <div class="l-box">
                 <div>
-                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                    <p>&copy; <a href="https://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
                         Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
-                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                        for <a href="https://blog.getpelican.com/">Pelican</a>
                     </p>
                 </div>
             </div>
@@ -282,11 +272,10 @@ var scJsHost = (("https:" == document.location.protocol) ?
 src="https://www.statcounter.com/counter/counter.js"
 async></script>
 <noscript><div class="statcounter"><a title="Web Analytics"
-href="http://statcounter.com/" target="_blank"><img
+href="https://statcounter.com/" target="_blank"><img
 class="statcounter"
 src="//c.statcounter.com/9752080/0/c177b501/1/" alt="Web
 Analytics"></a></div></noscript>
 <!-- End of StatCounter Code for Default Guide -->
 </body>
 </html>
-

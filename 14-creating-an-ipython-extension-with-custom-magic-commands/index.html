@@ -32,16 +32,16 @@
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
     <!--[if lte IE 8]>
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+        <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
     <![endif]-->
     <!--[if gt IE 8]><!-->
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+        <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
     <!--<![endif]-->
     <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
     <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
-    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
-    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
-    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    <!-- <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
     
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -93,45 +93,39 @@
 <p>Although IPython comes with a wide variety of magic commands, there are cases where we need to implement custom functionality in new magic commands. In this recipe, we will show how to create line and magic cells, and how to integrate them in an IPython extension.</p>
 <h2>How to do it...</h2>
 <p><strong>1.&nbsp;</strong> Let's import a few functions from the IPython magic system:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.core.magic</span> <span class="kn">import</span> <span class="p">(</span><span class="n">register_line_magic</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.core.magic</span> <span class="kn">import</span> <span class="p">(</span><span class="n">register_line_magic</span><span class="p">,</span>
                                 <span class="n">register_cell_magic</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p><strong>2.&nbsp;</strong> Defining a new line magic is particularly simple. First, we create a function that accepts the contents of the line (except the initial <code>%</code>-prefixed name). The name of this function is the name of the magic. Then, we decorate this function with <code>@register_line_magic</code>:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="nd">@register_line_magic</span>
+<div class="highlight"><pre><span></span><span class="nd">@register_line_magic</span>
 <span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">line</span> <span class="o">==</span> <span class="s1">&#39;french&#39;</span><span class="p">:</span>
         <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Salut tout le monde!&quot;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Hello world!&quot;</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">hello</span>
+<div class="highlight"><pre><span></span><span class="o">%</span><span class="n">hello</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>Hello world!
+<div class="highlight"><pre><span></span>Hello world!
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">hello</span> <span class="n">french</span>
+<div class="highlight"><pre><span></span><span class="o">%</span><span class="n">hello</span> <span class="n">french</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>Salut tout le monde!
+<div class="highlight"><pre><span></span>Salut tout le monde!
 </pre></div>
-</div>
 
 
 <p><strong>3.&nbsp;</strong> Let's create a slightly more useful <code>%%csv</code> cell magic that parses a CSV string and returns a pandas <code>DataFrame</code> object. This time, the arguments of the function are the command's options and the contents of the cell.</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span>
 
 <span class="nd">@register_cell_magic</span>
@@ -143,29 +137,26 @@
     <span class="c1"># the CSV string.</span>
     <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">sio</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">csv</span>
+<div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">csv</span>
 <span class="n">col1</span><span class="p">,</span><span class="n">col2</span><span class="p">,</span><span class="n">col3</span>
 <span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span>
 <span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span>
 <span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span>
 </pre></div>
-</div>
 
 
 <p><img alt="Output" src="http://ipython-books.github.io/pages/chapter01_basic/04_magic_files/04_magic_11_0.png" /></p>
 <p>We can access the returned object with <code>_</code>.</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">_</span>
+<div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">_</span>
 <span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
 </pre></div>
-</div>
 
 
 <p><img alt="Output" src="http://ipython-books.github.io/pages/chapter01_basic/04_magic_files/04_magic_13_0.png" /></p>
 <p><strong>4.&nbsp;</strong> The method we described is useful in an interactive session. If we want to use the same magic in multiple notebooks or if we want to distribute it, then we need to create an <strong>IPython extension</strong> that implements our custom magic command. The first step is to create a Python script (<code>csvmagic.py</code> here) that implements the magic. We also need to define a special function <code>load_ipython_extension(ipython)</code>:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">writefile</span> <span class="n">csvmagic</span><span class="o">.</span><span class="n">py</span>
+<div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">writefile</span> <span class="n">csvmagic</span><span class="o">.</span><span class="n">py</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span>
 
@@ -181,27 +172,23 @@
 <span class="sd">    instance.&quot;&quot;&quot;</span>
     <span class="n">ipython</span><span class="o">.</span><span class="n">register_magic_function</span><span class="p">(</span><span class="n">csv</span><span class="p">,</span> <span class="s1">&#39;cell&#39;</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>Writing csvmagic.py
+<div class="highlight"><pre><span></span>Writing csvmagic.py
 </pre></div>
-</div>
 
 
 <p><strong>5.&nbsp;</strong> Once the extension module is created, we need to import it into the IPython session. We can do this with the <code>%load_ext</code> magic command. Here, loading our extension immediately registers our <code>%%csv</code> magic function in the interactive shell:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">load_ext</span> <span class="n">csvmagic</span>
+<div class="highlight"><pre><span></span><span class="o">%</span><span class="n">load_ext</span> <span class="n">csvmagic</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">csv</span>
+<div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">csv</span>
 <span class="n">col1</span><span class="p">,</span><span class="n">col2</span><span class="p">,</span><span class="n">col3</span>
 <span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span>
 <span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span>
 <span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span>
 </pre></div>
-</div>
 
 
 <p><img alt="Output" src="http://ipython-books.github.io/pages/chapter01_basic/04_magic_files/04_magic_18_0.png" /></p>
@@ -247,9 +234,9 @@
         <footer id="footer" class="pure-u-1 pure-u-md-4-4">
             <div class="l-box">
                 <div>
-                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                    <p>&copy; <a href="https://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
                         Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
-                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                        for <a href="https://blog.getpelican.com/">Pelican</a>
                     </p>
                 </div>
             </div>
@@ -269,11 +256,10 @@ var scJsHost = (("https:" == document.location.protocol) ?
 src="https://www.statcounter.com/counter/counter.js"
 async></script>
 <noscript><div class="statcounter"><a title="Web Analytics"
-href="http://statcounter.com/" target="_blank"><img
+href="https://statcounter.com/" target="_blank"><img
 class="statcounter"
 src="//c.statcounter.com/9752080/0/c177b501/1/" alt="Web
 Analytics"></a></div></noscript>
 <!-- End of StatCounter Code for Default Guide -->
 </body>
 </html>
-

@@ -32,16 +32,16 @@
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
     <!--[if lte IE 8]>
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+        <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
     <![endif]-->
     <!--[if gt IE 8]><!-->
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+        <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
     <!--<![endif]-->
     <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
     <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
-    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
-    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
-    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    <!-- <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
     
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -97,38 +97,35 @@
 <p>Whereas simple ODEs can be solved analytically, many ODEs require a numerical treatment. In this recipe, we will simulate a simple linear second-order autonomous ODE, describing the evolution of a particle in the air subject to gravity and viscous resistance. Although this equation could be solved analytically, here we will use SciPy to simulate it numerically.</p>
 <h2>How to do it...</h2>
 <p><strong>1.&nbsp;</strong> Let's import NumPy, SciPy (the <code>integrate</code> package), and matplotlib:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">scipy.integrate</span> <span class="kn">as</span> <span class="nn">spi</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 <span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
 </pre></div>
-</div>
 
 
 <p><strong>2.&nbsp;</strong> We define a few parameters appearing in our model:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="mf">1.</span>  <span class="c1"># particle&#39;s mass</span>
+<div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="mf">1.</span>  <span class="c1"># particle&#39;s mass</span>
 <span class="n">k</span> <span class="o">=</span> <span class="mf">1.</span>  <span class="c1"># drag coefficient</span>
 <span class="n">g</span> <span class="o">=</span> <span class="mf">9.81</span>  <span class="c1"># gravity acceleration</span>
 </pre></div>
-</div>
 
 
 <p><strong>3.&nbsp;</strong> We have two variables: <span class="math">\(x\)</span> and <span class="math">\(y\)</span> (two dimensions). We note <span class="math">\(u=(x,y)\)</span>. The ODE that we are going to simulate is:</p>
 <div class="math">$$u'' = -\frac{k}{m} u' + g$$</div>
 <p>Here, <span class="math">\(g\)</span> is the gravity acceleration vector.</p>
 <p>In order to simulate this second-order ODE with SciPy, we can convert it to a first-order ODE (another option would be to solve <span class="math">\(u'\)</span> first before integrating the solution). To do this, we consider two 2D variables: <span class="math">\(u\)</span> and <span class="math">\(u'\)</span>. We note <span class="math">\(v = (u, u')\)</span>. We can express <span class="math">\(v'\)</span> as a function of <span class="math">\(v\)</span>. Now, we create the initial vector <span class="math">\(v_0\)</span> at time <span class="math">\(t=0\)</span>: it has four components.</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="c1"># The initial position is (0, 0).</span>
+<div class="highlight"><pre><span></span><span class="c1"># The initial position is (0, 0).</span>
 <span class="n">v0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="c1"># The initial speed vector is oriented</span>
 <span class="c1"># to the top right.</span>
 <span class="n">v0</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mf">4.</span>
 <span class="n">v0</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mf">10.</span>
 </pre></div>
-</div>
 
 
 <p><strong>4.&nbsp;</strong> Let's create a Python function <span class="math">\(f\)</span> that takes the current vector <span class="math">\(v(t_0)\)</span> and a time <span class="math">\(t_0\)</span> as arguments (with optional parameters) and that returns the derivative <span class="math">\(v'(t_0)\)</span>:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">t0</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">t0</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
     <span class="c1"># v has four components: v=[u, u&#39;].</span>
     <span class="n">u</span><span class="p">,</span> <span class="n">udot</span> <span class="o">=</span> <span class="n">v</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span> <span class="n">v</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span>
     <span class="c1"># We compute the second derivative u&#39;&#39; of u.</span>
@@ -137,14 +134,13 @@
     <span class="c1"># We return v&#39;=[u&#39;, u&#39;&#39;].</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="n">udot</span><span class="p">,</span> <span class="n">udotdot</span><span class="p">]</span>
 </pre></div>
-</div>
 
 
 <p><strong>5.&nbsp;</strong> Now, we simulate the system for different values of <span class="math">\(k\)</span>. We use the SciPy <code>odeint()</code> function, defined in the <code>scipy.integrate</code> package.</p>
 <blockquote>
 <p>Starting with SciPy 1.0, the generic <code>scipy.integrate.solve_ivp()</code> function can be used instead of the old function <code>odeint()</code>:</p>
 </blockquote>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 
 <span class="c1"># We want to evaluate the system on 30 linearly</span>
 <span class="c1"># spaced times between t=0 and t=3.</span>
@@ -162,7 +158,6 @@
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p><img alt="&lt;matplotlib.figure.Figure at 0x75d2fd0&gt;" src="http://ipython-books.github.io/pages/chapter12_deterministic/03_ode_files/03_ode_19_0.png" /></p>
@@ -262,9 +257,9 @@
         <footer id="footer" class="pure-u-1 pure-u-md-4-4">
             <div class="l-box">
                 <div>
-                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                    <p>&copy; <a href="https://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
                         Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
-                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                        for <a href="https://blog.getpelican.com/">Pelican</a>
                     </p>
                 </div>
             </div>
@@ -284,11 +279,10 @@ var scJsHost = (("https:" == document.location.protocol) ?
 src="https://www.statcounter.com/counter/counter.js"
 async></script>
 <noscript><div class="statcounter"><a title="Web Analytics"
-href="http://statcounter.com/" target="_blank"><img
+href="https://statcounter.com/" target="_blank"><img
 class="statcounter"
 src="//c.statcounter.com/9752080/0/c177b501/1/" alt="Web
 Analytics"></a></div></noscript>
 <!-- End of StatCounter Code for Default Guide -->
 </body>
 </html>
-

@@ -32,16 +32,16 @@
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
     <!--[if lte IE 8]>
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+        <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
     <![endif]-->
     <!--[if gt IE 8]><!-->
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+        <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
     <!--<![endif]-->
     <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
     <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
-    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
-    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
-    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    <!-- <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
     
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -94,104 +94,92 @@
 <p>In this recipe, we will take a look at the same tennis dataset as in the first recipe of this chapter. Following a frequentist approach, we will estimate the correlation between the number of aces and the proportion of points won by a tennis player.</p>
 <h2>How to do it...</h2>
 <p><strong>1.&nbsp;</strong> Let's import NumPy, pandas, SciPy.stats, and matplotlib:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="kn">as</span> <span class="nn">st</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 <span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
 </pre></div>
-</div>
 
 
 <p><strong>2.&nbsp;</strong> We download and load the dataset:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">player</span> <span class="o">=</span> <span class="s1">&#39;Roger Federer&#39;</span>
+<div class="highlight"><pre><span></span><span class="n">player</span> <span class="o">=</span> <span class="s1">&#39;Roger Federer&#39;</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://github.com/ipython-books/&#39;</span>
                  <span class="s1">&#39;cookbook-2nd-data/blob/master/&#39;</span>
                  <span class="s1">&#39;federer.csv?raw=true&#39;</span><span class="p">,</span>
                  <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;start date&#39;</span><span class="p">],</span>
                  <span class="n">dayfirst</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p><strong>3.&nbsp;</strong> Each row corresponds to a match, and the 70 columns contain many player characteristics during that match:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Number of columns: {len(df.columns)}&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Number of columns: {len(df.columns)}&quot;</span><span class="p">)</span>
 <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[:</span><span class="mi">4</span><span class="p">]]</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>Number of columns: 70
+<div class="highlight"><pre><span></span>Number of columns: 70
 </pre></div>
-</div>
 
 
 <p><img alt="Some tournaments" src="http://ipython-books.github.io/pages/chapter07_stats/04_correlation_files/04_correlation_9_1.png" /></p>
 <p><strong>4.&nbsp;</strong> Here, we only look at the proportion of points won, and the (relative) number of aces:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">npoints</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;player1 total points total&#39;</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><span class="n">npoints</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;player1 total points total&#39;</span><span class="p">]</span>
 <span class="n">points</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;player1 total points won&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">npoints</span>
 <span class="n">aces</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;player1 aces&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">npoints</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">aces</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">% o</span><span class="s1">f points won&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">% o</span><span class="s1">f aces&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mf">0.</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
 <p><img alt="Aces and won points" src="http://ipython-books.github.io/pages/chapter07_stats/04_correlation_files/04_correlation_12_0.png" /></p>
 <p>If the two variables were independent, we would not see any trend in the cloud of points. On this plot, it is a bit hard to tell. Let's use pandas to compute a coefficient correlation.</p>
 <p><strong>5.&nbsp;</strong> For simplicity, we create a new <code>DataFrame</code> object with only these fields. We also remove the rows where one field is missing (using <code>dropna()</code>):</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">df_bis</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;points&#39;</span><span class="p">:</span> <span class="n">points</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><span class="n">df_bis</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;points&#39;</span><span class="p">:</span> <span class="n">points</span><span class="p">,</span>
                        <span class="s1">&#39;aces&#39;</span><span class="p">:</span> <span class="n">aces</span><span class="p">})</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
 <span class="n">df_bis</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
 </pre></div>
-</div>
 
 
 <p><img alt="Aces and won points" src="http://ipython-books.github.io/pages/chapter07_stats/04_correlation_files/04_correlation_15_0.png" /></p>
 <p><strong>6.&nbsp;</strong> Let's compute the Pearson's correlation coefficient between the relative number of aces in the match, and the number of points won:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">df_bis</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><span class="n">df_bis</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
 </pre></div>
-</div>
 
 
 <p><img alt="Pearson correlation coefficient" src="http://ipython-books.github.io/pages/chapter07_stats/04_correlation_files/04_correlation_17_0.png" /></p>
 <p>A correlation of ~0.26 seems to indicate a positive correlation between our two variables. In other words, the more aces in a match, the more points the player wins (which is not very surprising!).</p>
 <p><strong>7.&nbsp;</strong> Now, to determine if there is a <em>statistically significant</em> correlation between the variables, we use a <strong>chi-squared test</strong> of the independence of variables in a <strong>contingency table</strong>.
 <strong>8.&nbsp;</strong> First, we binarize our variables. Here, the value corresponding to the number of aces is <code>True</code> if the player is serving more aces than usual in a match, and <code>False</code> otherwise:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">df_bis</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df_bis</span><span class="p">[</span><span class="s1">&#39;points&#39;</span><span class="p">]</span> <span class="o">&gt;</span>
+<div class="highlight"><pre><span></span><span class="n">df_bis</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df_bis</span><span class="p">[</span><span class="s1">&#39;points&#39;</span><span class="p">]</span> <span class="o">&gt;</span>
                     <span class="n">df_bis</span><span class="p">[</span><span class="s1">&#39;points&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">())</span>
 <span class="n">df_bis</span><span class="p">[</span><span class="s1">&#39;manyaces&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df_bis</span><span class="p">[</span><span class="s1">&#39;aces&#39;</span><span class="p">]</span> <span class="o">&gt;</span>
                       <span class="n">df_bis</span><span class="p">[</span><span class="s1">&#39;aces&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">())</span>
 </pre></div>
-</div>
 
 
 <p><strong>9.&nbsp;</strong> Then, we create a contingency table, with the frequencies of all four possibilities (True and True, True and False, and so on):</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">df_bis</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">],</span> <span class="n">df_bis</span><span class="p">[</span><span class="s1">&#39;manyaces&#39;</span><span class="p">])</span>
+<div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">df_bis</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">],</span> <span class="n">df_bis</span><span class="p">[</span><span class="s1">&#39;manyaces&#39;</span><span class="p">])</span>
 </pre></div>
-</div>
 
 
 <p><img alt="Contingency table" src="http://ipython-books.github.io/pages/chapter07_stats/04_correlation_files/04_correlation_22_0.png" /></p>
 <p><strong>10.&nbsp;</strong> Finally, we compute the chi-squared test statistic and the associated p-value. The null hypothesis is the independence between the variables. SciPy implements this test in <code>scipy.stats.chi2_contingency()</code>, which returns several objects. We're interested in the second result, which is the p-value:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="n">st</span><span class="o">.</span><span class="n">chi2_contingency</span><span class="p">(</span><span class="n">_</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">st</span><span class="o">.</span><span class="n">chi2_contingency</span><span class="p">(</span><span class="n">_</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>(2.780e+01, 1.338e-07, 1,
+<div class="highlight"><pre><span></span>(2.780e+01, 1.338e-07, 1,
     array([[ 257.250,  256.749],
            [ 256.749,  256.250]]))
 </pre></div>
-</div>
 
 
 <p>The p-value is much lower than 0.05, so we reject the null hypothesis and conclude that there is a statistically significant correlation between the proportion of aces and the proportion of points won in a match in this dataset.</p>
@@ -282,9 +270,9 @@
         <footer id="footer" class="pure-u-1 pure-u-md-4-4">
             <div class="l-box">
                 <div>
-                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                    <p>&copy; <a href="https://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
                         Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
-                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                        for <a href="https://blog.getpelican.com/">Pelican</a>
                     </p>
                 </div>
             </div>
@@ -304,11 +292,10 @@ var scJsHost = (("https:" == document.location.protocol) ?
 src="https://www.statcounter.com/counter/counter.js"
 async></script>
 <noscript><div class="statcounter"><a title="Web Analytics"
-href="http://statcounter.com/" target="_blank"><img
+href="https://statcounter.com/" target="_blank"><img
 class="statcounter"
 src="//c.statcounter.com/9752080/0/c177b501/1/" alt="Web
 Analytics"></a></div></noscript>
 <!-- End of StatCounter Code for Default Guide -->
 </body>
 </html>
-

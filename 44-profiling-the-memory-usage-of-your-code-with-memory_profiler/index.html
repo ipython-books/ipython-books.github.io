@@ -32,16 +32,16 @@
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
     <!--[if lte IE 8]>
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+        <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
     <![endif]-->
     <!--[if gt IE 8]><!-->
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+        <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
     <!--<![endif]-->
     <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
     <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
-    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
-    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
-    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    <!-- <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
     
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -96,41 +96,36 @@
 <p>You can install <code>memory_profiler</code> with <code>conda install memory_profiler</code>.</p>
 <h2>How to do it...</h2>
 <p><strong>1.&nbsp;</strong> We load the <code>memory_profiler</code> IPython extension:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">load_ext</span> <span class="n">memory_profiler</span>
+<div class="highlight"><pre><span></span><span class="o">%</span><span class="n">load_ext</span> <span class="n">memory_profiler</span>
 </pre></div>
-</div>
 
 
 <p><strong>2.&nbsp;</strong> We define a function that allocates big objects:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">writefile</span> <span class="n">memscript</span><span class="o">.</span><span class="n">py</span>
+<div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">writefile</span> <span class="n">memscript</span><span class="o">.</span><span class="n">py</span>
 <span class="k">def</span> <span class="nf">my_func</span><span class="p">():</span>
     <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">1000000</span>
     <span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="mi">9000000</span>
     <span class="k">del</span> <span class="n">b</span>
     <span class="k">return</span> <span class="n">a</span>
 </pre></div>
-</div>
 
 
 <p><strong>3.&nbsp;</strong> Now, let's run the code under the control of the memory profiler:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">memscript</span> <span class="kn">import</span> <span class="n">my_func</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">memscript</span> <span class="kn">import</span> <span class="n">my_func</span>
 <span class="o">%</span><span class="n">mprun</span> <span class="o">-</span><span class="n">T</span> <span class="n">mprof0</span> <span class="o">-</span><span class="n">f</span> <span class="n">my_func</span> <span class="n">my_func</span><span class="p">()</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>*** Profile printout saved to text file mprof0.
+<div class="highlight"><pre><span></span>*** Profile printout saved to text file mprof0.
 </pre></div>
-</div>
 
 
 <p><strong>4.&nbsp;</strong> Let's show the results:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;mprof0&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+<div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;mprof0&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>Line #  Mem usage    Increment   Line Contents
+<div class="highlight"><pre><span></span>Line #  Mem usage    Increment   Line Contents
 ================================================
    1     93.4 MiB      0.0 MiB   def my_func():
    2    100.9 MiB      7.5 MiB       a = [1] * 1000000
@@ -138,7 +133,6 @@
    4    101.1 MiB    -68.6 MiB       del b
    5    101.1 MiB      0.0 MiB       return a
 </pre></div>
-</div>
 
 
 <p>We can observe line after line the allocation and deallocation of objects.</p>
@@ -146,15 +140,13 @@
 <p>The <code>memory_profiler</code> package checks the memory usage of the interpreter at every line. The <code>increment</code> column allows us to spot those places in the code where large amounts of memory are allocated. This is especially important when working with arrays. Unnecessary array creations and copies can considerably slow down a program. We will tackle this issue in the next few recipes.</p>
 <h2>There's more...</h2>
 <p>The <code>memory_profiler</code> IPython extension also comes with a <code>%memit</code> magic command that lets us benchmark the memory used by a single Python statement. Here is a simple example:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">memit</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">memit</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000000</span><span class="p">)</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>peak memory: 101.20 MiB, increment: 7.77 MiB
+<div class="highlight"><pre><span></span>peak memory: 101.20 MiB, increment: 7.77 MiB
 </pre></div>
-</div>
 
 
 <p>The <code>memory_profiler</code> package offers other ways to profile the memory usage of a Python program, including plotting the memory usage as a function of time. For more details, refer to the documentation at <a href="https://github.com/pythonprofilers/memory_profiler.">https://github.com/pythonprofilers/memory_profiler.</a></p>
@@ -171,9 +163,9 @@
         <footer id="footer" class="pure-u-1 pure-u-md-4-4">
             <div class="l-box">
                 <div>
-                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                    <p>&copy; <a href="https://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
                         Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
-                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                        for <a href="https://blog.getpelican.com/">Pelican</a>
                     </p>
                 </div>
             </div>
@@ -193,11 +185,10 @@ var scJsHost = (("https:" == document.location.protocol) ?
 src="https://www.statcounter.com/counter/counter.js"
 async></script>
 <noscript><div class="statcounter"><a title="Web Analytics"
-href="http://statcounter.com/" target="_blank"><img
+href="https://statcounter.com/" target="_blank"><img
 class="statcounter"
 src="//c.statcounter.com/9752080/0/c177b501/1/" alt="Web
 Analytics"></a></div></noscript>
 <!-- End of StatCounter Code for Default Guide -->
 </body>
 </html>
-

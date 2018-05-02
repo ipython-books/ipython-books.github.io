@@ -32,16 +32,16 @@
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
     <!--[if lte IE 8]>
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+        <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
     <![endif]-->
     <!--[if gt IE 8]><!-->
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+        <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
     <!--<![endif]-->
     <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
     <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
-    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
-    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
-    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    <!-- <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
     
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -96,55 +96,48 @@
 <p>Python has a native unit testing module that you can readily use (unittest). Other third-party unit testing packages exist. In this recipe, we will use <strong>py.test</strong>. It is installed by default in Anaconda, but you can also install it manually with <code>conda install pytest</code>.</p>
 <h2>How to do it...</h2>
 <p><strong>1.&nbsp;</strong> Let's write in a <code>first.py</code> file a simple function that returns the first element of a list.</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">writefile</span> <span class="n">first</span><span class="o">.</span><span class="n">py</span>
+<div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">writefile</span> <span class="n">first</span><span class="o">.</span><span class="n">py</span>
 <span class="k">def</span> <span class="nf">first</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>Overwriting first.py
+<div class="highlight"><pre><span></span>Overwriting first.py
 </pre></div>
-</div>
 
 
 <p><strong>2.&nbsp;</strong> To test this function, we write another function, the <em>unit test</em>, that checks our first function using an example and an assertion:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">writefile</span> <span class="o">-</span><span class="n">a</span> <span class="n">first</span><span class="o">.</span><span class="n">py</span>
+<div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">writefile</span> <span class="o">-</span><span class="n">a</span> <span class="n">first</span><span class="o">.</span><span class="n">py</span>
 
 <span class="c1"># This is appended to the file.</span>
 <span class="k">def</span> <span class="nf">test_first</span><span class="p">():</span>
     <span class="k">assert</span> <span class="n">first</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>Appending to first.py
+<div class="highlight"><pre><span></span>Appending to first.py
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">cat</span> <span class="n">first</span><span class="o">.</span><span class="n">py</span>
+<div class="highlight"><pre><span></span><span class="o">%</span><span class="n">cat</span> <span class="n">first</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>def first(l):
+<div class="highlight"><pre><span></span>def first(l):
     return l[0]
 
 # This is appended to the file.
 def test_first():
     assert first([1, 2, 3]) == 1
 </pre></div>
-</div>
 
 
 <p><strong>3.&nbsp;</strong> To run the unit test, we use the <code>pytest</code> executable (the <code>!</code> means that we're calling an external program from IPython):</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="err">!</span><span class="n">pytest</span> <span class="n">first</span><span class="o">.</span><span class="n">py</span>
+<div class="highlight"><pre><span></span><span class="err">!</span><span class="n">pytest</span> <span class="n">first</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>============= test session starts ==============
+<div class="highlight"><pre><span></span>============= test session starts ==============
 platform linux -- Python 3.6.3, pytest-3.2.1, py-1.4.34
 rootdir: ~/git/cookbook-2nd/chapter02_best_practices:
 plugins: cov-2.5.1
@@ -157,11 +150,10 @@ first.py .
 
 =========== 1 passed in 0.00 seconds ===========
 </pre></div>
-</div>
 
 
 <p><strong>4.&nbsp;</strong> Our test passes! Let's add another example with an empty list. We want our function to return <code>None</code> in this case:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">writefile</span> <span class="n">first</span><span class="o">.</span><span class="n">py</span>
+<div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">writefile</span> <span class="n">first</span><span class="o">.</span><span class="n">py</span>
 <span class="k">def</span> <span class="nf">first</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
@@ -169,20 +161,17 @@ first.py .
     <span class="k">assert</span> <span class="n">first</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span>
     <span class="k">assert</span> <span class="n">first</span><span class="p">([])</span> <span class="ow">is</span> <span class="bp">None</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>Overwriting first.py
+<div class="highlight"><pre><span></span>Overwriting first.py
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="err">!</span><span class="n">pytest</span> <span class="n">first</span><span class="o">.</span><span class="n">py</span>
+<div class="highlight"><pre><span></span><span class="err">!</span><span class="n">pytest</span> <span class="n">first</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>============= test session starts ==============
+<div class="highlight"><pre><span></span>============= test session starts ==============
 platform linux -- Python 3.6.3, pytest-3.2.1, py-1.4.34
 rootdir: ~/git/cookbook-2nd/chapter02_best_practices:
 plugins: cov-2.5.1
@@ -212,11 +201,10 @@ E       IndexError: list index out of range
 first.py:2: IndexError
 =========== 1 failed in 0.02 seconds ===========
 </pre></div>
-</div>
 
 
 <p><strong>5.&nbsp;</strong> This time, our test fails. Let's fix it by modifying the <code>first()</code> function:</p>
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">writefile</span> <span class="n">first</span><span class="o">.</span><span class="n">py</span>
+<div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">writefile</span> <span class="n">first</span><span class="o">.</span><span class="n">py</span>
 <span class="k">def</span> <span class="nf">first</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">l</span> <span class="k">else</span> <span class="bp">None</span>
 
@@ -224,20 +212,17 @@ first.py:2: IndexError
     <span class="k">assert</span> <span class="n">first</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span>
     <span class="k">assert</span> <span class="n">first</span><span class="p">([])</span> <span class="ow">is</span> <span class="bp">None</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>Overwriting first.py
+<div class="highlight"><pre><span></span>Overwriting first.py
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-python"><div class="highlight"><pre><span></span><span class="err">!</span><span class="n">pytest</span> <span class="n">first</span><span class="o">.</span><span class="n">py</span>
+<div class="highlight"><pre><span></span><span class="err">!</span><span class="n">pytest</span> <span class="n">first</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
-</div>
 
 
-<div class="highlight highlight-text"><div class="highlight"><pre><span></span>============= test session starts ==============
+<div class="highlight"><pre><span></span>============= test session starts ==============
 platform linux -- Python 3.6.3, pytest-3.2.1, py-1.4.34
 rootdir: ~/git/cookbook-2nd/chapter02_best_practices:
 plugins: cov-2.5.1
@@ -250,7 +235,6 @@ first.py .
 
 =========== 1 passed in 0.00 seconds ===========
 </pre></div>
-</div>
 
 
 <p>The test passes again!</p>
@@ -293,9 +277,9 @@ first.py .
         <footer id="footer" class="pure-u-1 pure-u-md-4-4">
             <div class="l-box">
                 <div>
-                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                    <p>&copy; <a href="https://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
                         Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
-                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                        for <a href="https://blog.getpelican.com/">Pelican</a>
                     </p>
                 </div>
             </div>
@@ -315,11 +299,10 @@ var scJsHost = (("https:" == document.location.protocol) ?
 src="https://www.statcounter.com/counter/counter.js"
 async></script>
 <noscript><div class="statcounter"><a title="Web Analytics"
-href="http://statcounter.com/" target="_blank"><img
+href="https://statcounter.com/" target="_blank"><img
 class="statcounter"
 src="//c.statcounter.com/9752080/0/c177b501/1/" alt="Web
 Analytics"></a></div></noscript>
 <!-- End of StatCounter Code for Default Guide -->
 </body>
 </html>
-
