@@ -25,7 +25,7 @@
     <meta name="msapplication-TileImage" content="/mstile-144x144.png">
 
 
-        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+        <link rel="alternate"  href="https://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
 
         <title>IPython Cookbook - 10.3. Computing the autocorrelation of a time series</title>
 
@@ -37,8 +37,8 @@
     <!--[if gt IE 8]><!-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/0.5.0/pure-min.css">
     <!--<![endif]-->
-    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
-    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <link rel="stylesheet" href="https://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="https://ipython-books.github.io/theme/css/pygments.css">
     <!-- <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
@@ -58,7 +58,7 @@
         <li><a href="/">home</a></li>
         <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
         <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
-        <li><a href="http://cyrille.rossant.net">author</a></li>
+        <li><a href="https://cyrille.rossant.net">author</a></li>
 </ul>                </div>
             </div>
         </div>
@@ -88,7 +88,7 @@
         <p><a href="/"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="130" style="margin-right: 20px; margin-bottom: 10px;" /></a> <em>This is one of the 100+ free recipes of the <a href="/">IPython Cookbook, Second Edition</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, a guide to numerical computing and data science in the Jupyter Notebook. The ebook and printed book are available for purchase at <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">Packt Publishing</a>.</em></p>
 <p>▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd">Text on GitHub</a> with a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a></em><br />
 ▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
-<p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-10-signal-processing/"><strong><em>Go to</em></strong> <em>Chapter 10 : Signal Processing</em></a><br />
+<p>▶&nbsp;&nbsp;<a href="https://ipython-books.github.io/chapter-10-signal-processing/"><strong><em>Go to</em></strong> <em>Chapter 10 : Signal Processing</em></a><br />
 ▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter10_signal/03_autocorrelation.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
 <p>The autocorrelation of a time series can inform us about repeating patterns or serial correlation. The latter refers to the correlation between the signal at a given time and at a later time. The analysis of the autocorrelation can thereby inform us about the timescale of the fluctuations. Here, we use this tool to analyze the evolution of baby names in the US, based on data provided by the United States Social Security Administration.</p>
 <h2>How to do it...</h2>
@@ -155,7 +155,7 @@ yob2016.txt
 </pre></div>
 
 
-<p><img alt="Output" src="http://ipython-books.github.io/pages/chapter10_signal/03_autocorrelation_files/03_autocorrelation_13_0.png" /></p>
+<p><img alt="Output" src="https://ipython-books.github.io/pages/chapter10_signal/03_autocorrelation_files/03_autocorrelation_13_0.png" /></p>
 <p><strong>4.&nbsp;</strong> We write functions to retrieve the frequencies of baby names as a function of the name, gender, and birth year:</p>
 <div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_value</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">gender</span><span class="p">,</span> <span class="n">year</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return the number of babies born a given year,</span>
@@ -210,7 +210,7 @@ yob2016.txt
 </pre></div>
 
 
-<p><img alt="&lt;matplotlib.figure.Figure at 0xcae9048&gt;" src="http://ipython-books.github.io/pages/chapter10_signal/03_autocorrelation_files/03_autocorrelation_22_0.png" /></p>
+<p><img alt="&lt;matplotlib.figure.Figure at 0xcae9048&gt;" src="https://ipython-books.github.io/pages/chapter10_signal/03_autocorrelation_files/03_autocorrelation_22_0.png" /></p>
 <p>The autocorrelation of Olivia is decaying much faster than Maria's. This is mainly because of the steep increase of the name Olivia at the end of the twentieth century. By contrast, the name Maria is varying more slowly globally, and its autocorrelation is decaying slower.</p>
 <h2>How it works...</h2>
 <p>A <strong>time series</strong> is a sequence indexed by time. Important applications include stock markets, product sales, weather forecasting, biological signals, and many others. Time series analysis is an important part of statistical data analysis, signal processing, and machine learning.</p>

@@ -25,7 +25,7 @@
     <meta name="msapplication-TileImage" content="/mstile-144x144.png">
 
 
-        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+        <link rel="alternate"  href="https://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
 
         <title>IPython Cookbook - 4.5. Understanding the internals of NumPy to avoid unnecessary array copying</title>
 
@@ -37,8 +37,8 @@
     <!--[if gt IE 8]><!-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/0.5.0/pure-min.css">
     <!--<![endif]-->
-    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
-    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <link rel="stylesheet" href="https://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="https://ipython-books.github.io/theme/css/pygments.css">
     <!-- <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
@@ -58,7 +58,7 @@
         <li><a href="/">home</a></li>
         <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
         <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
-        <li><a href="http://cyrille.rossant.net">author</a></li>
+        <li><a href="https://cyrille.rossant.net">author</a></li>
 </ul>                </div>
             </div>
         </div>
@@ -88,7 +88,7 @@
         <p><a href="/"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="130" style="margin-right: 20px; margin-bottom: 10px;" /></a> <em>This is one of the 100+ free recipes of the <a href="/">IPython Cookbook, Second Edition</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, a guide to numerical computing and data science in the Jupyter Notebook. The ebook and printed book are available for purchase at <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">Packt Publishing</a>.</em></p>
 <p>▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd">Text on GitHub</a> with a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a></em><br />
 ▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
-<p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-4-profiling-and-optimization/"><strong><em>Go to</em></strong> <em>Chapter 4 : Profiling and Optimization</em></a><br />
+<p>▶&nbsp;&nbsp;<a href="https://ipython-books.github.io/chapter-4-profiling-and-optimization/"><strong><em>Go to</em></strong> <em>Chapter 4 : Profiling and Optimization</em></a><br />
 ▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter04_optimization/05_array_copies.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
 <p>We can achieve significant performance speedups with NumPy over native Python code, particularly when our computations follow the <strong>Single Instruction, Multiple Data (SIMD)</strong> paradigm. However, it is also possible to unintentionally write non-optimized code with NumPy.</p>
 <p>In the next few recipes, we will see some tricks that can help us write optimized NumPy code. In this recipe, we will see how to avoid unnecessary array copies in order to save memory. In that respect, we will need to dig into the internals of NumPy.</p>
@@ -339,7 +339,7 @@
 <p>Knowing this subtlety of NumPy can help you fix some bugs (where an array is implicitly and unintentionally modified because of an operation on a view), and optimize the speed and memory consumption of your code by reducing the number of unnecessary copies.</p>
 <h3>Why can't some arrays be reshaped without a copy?</h3>
 <p>We explain the example in step 3 here, where a transposed 2D matrix cannot be flattened without a copy. A 2D matrix contains items indexed by two numbers (row and column), but it is stored internally as a 1D contiguous block of memory, accessible with a single number. There is more than one way of storing matrix items in a 1D block of memory: we can put the elements of the first row first, then the second row, and so on, or the elements of the first column first, then the second column, and so on. The first method is called <strong>row-major order</strong>, whereas the latter is called <strong>column-major order</strong>. Choosing between the two methods is only a matter of internal convention: NumPy uses the row-major order, like C, but unlike FORTRAN.</p>
-<p><img alt="Internal array layouts: row-major and column-major orders" src="http://ipython-books.github.io/pages/chapter04_optimization/images/layout.png" /></p>
+<p><img alt="Internal array layouts: row-major and column-major orders" src="https://ipython-books.github.io/pages/chapter04_optimization/images/layout.png" /></p>
 <p>More generally, NumPy uses the notion of <strong>strides</strong> to convert between a multidimensional index and the memory location of the underlying (1D) sequence of elements. The specific mapping between <code>array[i1, i2]</code> and the relevant byte address of the internal data is given by:</p>
 <div class="highlight"><pre><span></span>offset = array.strides[0] * i1 + array.strides[1] * i2
 </pre></div>

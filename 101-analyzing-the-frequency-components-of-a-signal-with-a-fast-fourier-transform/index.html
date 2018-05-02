@@ -25,7 +25,7 @@
     <meta name="msapplication-TileImage" content="/mstile-144x144.png">
 
 
-        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+        <link rel="alternate"  href="https://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
 
         <title>IPython Cookbook - 10.1. Analyzing the frequency components of a signal with a Fast Fourier Transform</title>
 
@@ -37,8 +37,8 @@
     <!--[if gt IE 8]><!-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/0.5.0/pure-min.css">
     <!--<![endif]-->
-    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
-    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <link rel="stylesheet" href="https://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="https://ipython-books.github.io/theme/css/pygments.css">
     <!-- <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
@@ -58,7 +58,7 @@
         <li><a href="/">home</a></li>
         <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
         <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
-        <li><a href="http://cyrille.rossant.net">author</a></li>
+        <li><a href="https://cyrille.rossant.net">author</a></li>
 </ul>                </div>
             </div>
         </div>
@@ -88,7 +88,7 @@
         <p><a href="/"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="130" style="margin-right: 20px; margin-bottom: 10px;" /></a> <em>This is one of the 100+ free recipes of the <a href="/">IPython Cookbook, Second Edition</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, a guide to numerical computing and data science in the Jupyter Notebook. The ebook and printed book are available for purchase at <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">Packt Publishing</a>.</em></p>
 <p>▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd">Text on GitHub</a> with a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a></em><br />
 ▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
-<p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-10-signal-processing/"><strong><em>Go to</em></strong> <em>Chapter 10 : Signal Processing</em></a><br />
+<p>▶&nbsp;&nbsp;<a href="https://ipython-books.github.io/chapter-10-signal-processing/"><strong><em>Go to</em></strong> <em>Chapter 10 : Signal Processing</em></a><br />
 ▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter10_signal/01_fourier.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
 <p>In this recipe, we will show how to use a <strong>Fast Fourier Transform (FFT)</strong> to compute the spectral density of a signal. The spectrum represents the energy associated to frequencies (encoding periodic fluctuations in a signal). It is obtained with a Fourier transform, which is a frequency representation of a time-dependent signal. A signal can be transformed back and forth from one representation to the other with no information loss.</p>
 <p>In this recipe, we will illustrate several aspects of the Fourier Transform. We will apply this tool to weather data spanning 20 years in France obtained from the US National Climatic Data Center.</p>
@@ -121,7 +121,7 @@
 </pre></div>
 
 
-<p><img alt="Output" src="http://ipython-books.github.io/pages/chapter10_signal/01_fourier_files/01_fourier_9_0.png" /></p>
+<p><img alt="Output" src="https://ipython-books.github.io/pages/chapter10_signal/01_fourier_files/01_fourier_9_0.png" /></p>
 <p><strong>3.&nbsp;</strong> Each row contains the precipitation and extreme temperatures recorded each day by one weather station in France. For every date in the calendar, we want to get a single average temperature for the whole country. The <code>groupby()</code> method provided by pandas lets us do this easily. We also remove any N/A value with <code>dropna()</code>:</p>
 <div class="highlight"><pre><span></span><span class="n">df_avg</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;DATE&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 </pre></div>
@@ -131,7 +131,7 @@
 </pre></div>
 
 
-<p><img alt="Output" src="http://ipython-books.github.io/pages/chapter10_signal/01_fourier_files/01_fourier_12_0.png" /></p>
+<p><img alt="Output" src="https://ipython-books.github.io/pages/chapter10_signal/01_fourier_files/01_fourier_12_0.png" /></p>
 <p><strong>4.&nbsp;</strong> Now, we get the list of dates and the list of corresponding temperatures. The unit is in tenths of a degree, and we get the average value between the minimal and maximal temperature, which explains why we divide by 20.</p>
 <div class="highlight"><pre><span></span><span class="n">date</span> <span class="o">=</span> <span class="n">df_avg</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">()</span>
 <span class="n">temp</span> <span class="o">=</span> <span class="p">(</span><span class="n">df_avg</span><span class="p">[</span><span class="s1">&#39;TMAX&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">df_avg</span><span class="p">[</span><span class="s1">&#39;TMIN&#39;</span><span class="p">])</span> <span class="o">/</span> <span class="mf">20.</span>
@@ -148,7 +148,7 @@
 </pre></div>
 
 
-<p><img alt="&lt;matplotlib.figure.Figure at 0x550a828&gt;" src="http://ipython-books.github.io/pages/chapter10_signal/01_fourier_files/01_fourier_16_0.png" /></p>
+<p><img alt="&lt;matplotlib.figure.Figure at 0x550a828&gt;" src="https://ipython-books.github.io/pages/chapter10_signal/01_fourier_files/01_fourier_16_0.png" /></p>
 <p><strong>6.&nbsp;</strong> We now compute the Fourier transform and the spectral density of the signal. The first step is to compute the FFT of the signal using the <code>fft()</code> function:</p>
 <div class="highlight"><pre><span></span><span class="n">temp_fft</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">fftpack</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
 </pre></div>
@@ -178,7 +178,7 @@
 </pre></div>
 
 
-<p><img alt="&lt;matplotlib.figure.Figure at 0xba490f0&gt;" src="http://ipython-books.github.io/pages/chapter10_signal/01_fourier_files/01_fourier_26_0.png" /></p>
+<p><img alt="&lt;matplotlib.figure.Figure at 0xba490f0&gt;" src="https://ipython-books.github.io/pages/chapter10_signal/01_fourier_files/01_fourier_26_0.png" /></p>
 <p>Because the fundamental frequency of the signal is the yearly variation of the temperature, we observe a peak for <code>f=1</code>.</p>
 <p><strong>11.&nbsp;</strong> Now, we cut out frequencies higher than the fundamental frequency:</p>
 <div class="highlight"><pre><span></span><span class="n">temp_fft_bis</span> <span class="o">=</span> <span class="n">temp_fft</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -202,7 +202,7 @@
 </pre></div>
 
 
-<p><img alt="&lt;matplotlib.figure.Figure at 0x8adae48&gt;" src="http://ipython-books.github.io/pages/chapter10_signal/01_fourier_files/01_fourier_32_0.png" /></p>
+<p><img alt="&lt;matplotlib.figure.Figure at 0x8adae48&gt;" src="https://ipython-books.github.io/pages/chapter10_signal/01_fourier_files/01_fourier_32_0.png" /></p>
 <p>We get a smoothed version of the signal, because the fast variations have been lost when we have removed the high frequencies in the Fourier transform.</p>
 <h2>How it works...</h2>
 <p>Broadly speaking, the Fourier transform is an alternative representation of a signal as a superposition of periodic components. It is an important mathematical result that any well-behaved function can be represented under this form. Whereas a time-varying signal is most naturally considered as a function of time, the Fourier transform represents it as a function of the frequency. A magnitude and a phase, which are both encoded in a single complex number, are associated to each frequency.</p>
@@ -212,9 +212,9 @@
 <p>The DFT can be computed efficiently with the Fast Fourier Transform (FFT), an algorithm that exploits symmetries and redundancies in this definition to considerably speed up the computation. The complexity of the FFT is <span class="math">\(O(N \log N)\)</span> instead of <span class="math">\(O(N^2)\)</span> for the naive DFT. The FFT is one of the most important algorithms of the digital universe.</p>
 <p>Here is an intuitive explanation of what the DFT describes. Instead of representing our signal on a real line, let's represent it on a circle. We can play the whole signal by making 1, 2, or any number <span class="math">\(k\)</span> of laps on the circle. Therefore, when <span class="math">\(k\)</span> is fixed, we represent each value <span class="math">\(x_n\)</span> of the signal with an angle <span class="math">\(2\pi kn / N\)</span> and a distance from the original equal to <span class="math">\(x_n\)</span>.</p>
 <p>In the following figure, the signal is a sine wave at the frequency <span class="math">\(f=3 Hz\)</span>. The points of this signal are in blue, positioned at an angle <span class="math">\(2\pi kn / N\)</span>. Their algebraic sum in the complex plane is in red. These vectors represent the different coefficients of the signal's DFT.</p>
-<p><img alt="Illustration of the DFT." src="http://ipython-books.github.io/pages/chapter10_signal/01_fourier_files/fourier.png" /></p>
+<p><img alt="Illustration of the DFT." src="https://ipython-books.github.io/pages/chapter10_signal/01_fourier_files/fourier.png" /></p>
 <p>The next figure represents the previous signal's power spectral density (PSD):</p>
-<p><img alt="The PSD of the signal in the previous example." src="http://ipython-books.github.io/pages/chapter10_signal/01_fourier_files/fourier_bis.png" /></p>
+<p><img alt="The PSD of the signal in the previous example." src="https://ipython-books.github.io/pages/chapter10_signal/01_fourier_files/fourier_bis.png" /></p>
 <h3>Inverse Fourier Transform</h3>
 <p>By considering all possible frequencies, we have an exact representation of our digital signal in the frequency domain. We can recover the initial signal with an <strong>Inverse Fast Fourier Transform</strong> that computes an <strong>Inverse Discrete Fourier Transform</strong>. The formula is very similar to the DFT:</p>
 <div class="math">$$\forall k \in \{0, \ldots, N-1\}, \quad x_k = \frac{1}{N} \sum_{n=0}^{N-1} X_n e^{2i\pi kn/N}.$$</div>

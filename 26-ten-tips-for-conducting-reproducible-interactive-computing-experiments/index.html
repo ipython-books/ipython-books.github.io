@@ -25,7 +25,7 @@
     <meta name="msapplication-TileImage" content="/mstile-144x144.png">
 
 
-        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+        <link rel="alternate"  href="https://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
 
         <title>IPython Cookbook - 2.6. Ten tips for conducting reproducible interactive computing experiments</title>
 
@@ -37,8 +37,8 @@
     <!--[if gt IE 8]><!-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/0.5.0/pure-min.css">
     <!--<![endif]-->
-    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
-    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <link rel="stylesheet" href="https://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="https://ipython-books.github.io/theme/css/pygments.css">
     <!-- <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
@@ -58,7 +58,7 @@
         <li><a href="/">home</a></li>
         <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
         <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
-        <li><a href="http://cyrille.rossant.net">author</a></li>
+        <li><a href="https://cyrille.rossant.net">author</a></li>
 </ul>                </div>
             </div>
         </div>
@@ -88,14 +88,14 @@
         <p><a href="/"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="130" style="margin-right: 20px; margin-bottom: 10px;" /></a> <em>This is one of the 100+ free recipes of the <a href="/">IPython Cookbook, Second Edition</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, a guide to numerical computing and data science in the Jupyter Notebook. The ebook and printed book are available for purchase at <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">Packt Publishing</a>.</em></p>
 <p>▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd">Text on GitHub</a> with a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a></em><br />
 ▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
-<p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-2-best-practices-in-interactive-computing/"><strong><em>Go to</em></strong> <em>Chapter 2 : Best practices in Interactive Computing</em></a><br />
+<p>▶&nbsp;&nbsp;<a href="https://ipython-books.github.io/chapter-2-best-practices-in-interactive-computing/"><strong><em>Go to</em></strong> <em>Chapter 2 : Best practices in Interactive Computing</em></a><br />
 ▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter02_best_practices/06_tips.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
 <p>In this recipe, we present ten tips that can help you conduct efficient and reproducible interactive computing experiments. These are more guidelines than absolute rules.</p>
 <p>First, we will show how you can improve your productivity by minimizing the time spent doing repetitive tasks and maximizing the time spent thinking about your core work.</p>
 <p>Second, we will demonstrate how you can achieve more reproducibility in your computing work. Notably, academic research requires experiments to be reproducible so that any result or conclusion can be verified independently by other researchers. It is not uncommon for errors or manipulations in methods to result in erroneous conclusions that can have damaging consequences. For example, in the 2010 research paper in economics <em>Growth in a Time of Debt</em>, by Carmen Reinhart and Kenneth Rogoff, computational errors were partly responsible for a flawed study with global ramifications for policy makers (see <a href="https://en.wikipedia.org/wiki/Growth_in_a_Time_of_Debt">https://en.wikipedia.org/wiki/Growth_in_a_Time_of_Debt</a>).</p>
 <h2>How to do it...</h2>
 <p><strong>1.&nbsp;</strong> Organize your directory structure carefully and coherently. The specific structure does not matter. What matters is to be consistent throughout your projects regarding file-naming conventions, folders, subfolders, and so on. Here is a simple example:</p>
-<p><img alt="File structure" src="http://ipython-books.github.io/pages/chapter02_best_practices/images/folder.png" /></p>
+<p><img alt="File structure" src="https://ipython-books.github.io/pages/chapter02_best_practices/images/folder.png" /></p>
 <p><strong>2.&nbsp;</strong> Write notes in text files using a lightweight markup language such as <strong>Markdown</strong> (http://daringfireball.net/projects/markdown/), <strong>CommonMark</strong> (http://commonmark.org/), or <strong>reStructuredText (reST)</strong>. All meta-information related to your project, files, data sets, code, figures, lab notebooks, and so on, should be written down in text files.
 <strong>3.&nbsp;</strong> Relatedly, document everything non-trivial in your code with comments, docstrings, and so on. You can use a documentation tool such as <strong>Sphinx</strong> (http://sphinx-doc.org). However, do not spend too much time documenting unstable and bleeding-edge code while you are working on it; it might change frequently and your documentation may soon be out of date. Write your code in such a way that it's easily understandable without comments (name your variables and functions well, use Pythonic patterns, and so on). See also the next recipe, <em>Write high-quality Python code</em>.
 <strong>4.&nbsp;</strong> Use a version control system such as Git for all text-based files, but not binary files (except maybe for very small ones when you really need to). You should use one repository per project. Synchronize the repositories on a remote server, using a free or paid hosting provider (such as GitHub, Gitlab, or Bitbucket) or your own server (your host institution might be able to set up one for you). Use a specific system to store and share binary data files, such as <a href="http://figshare.com">http://figshare.com</a> or <a href="http://datadryad.org.">http://datadryad.org.</a>

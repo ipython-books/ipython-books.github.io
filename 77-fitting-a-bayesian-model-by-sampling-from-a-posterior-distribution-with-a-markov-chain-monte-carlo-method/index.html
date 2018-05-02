@@ -25,7 +25,7 @@
     <meta name="msapplication-TileImage" content="/mstile-144x144.png">
 
 
-        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+        <link rel="alternate"  href="https://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
 
         <title>IPython Cookbook - 7.7. Fitting a Bayesian model by sampling from a posterior distribution with a Markov Chain Monte Carlo method</title>
 
@@ -37,8 +37,8 @@
     <!--[if gt IE 8]><!-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/0.5.0/pure-min.css">
     <!--<![endif]-->
-    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
-    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <link rel="stylesheet" href="https://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="https://ipython-books.github.io/theme/css/pygments.css">
     <!-- <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
@@ -58,7 +58,7 @@
         <li><a href="/">home</a></li>
         <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
         <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
-        <li><a href="http://cyrille.rossant.net">author</a></li>
+        <li><a href="https://cyrille.rossant.net">author</a></li>
 </ul>                </div>
             </div>
         </div>
@@ -88,7 +88,7 @@
         <p><a href="/"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="130" style="margin-right: 20px; margin-bottom: 10px;" /></a> <em>This is one of the 100+ free recipes of the <a href="/">IPython Cookbook, Second Edition</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, a guide to numerical computing and data science in the Jupyter Notebook. The ebook and printed book are available for purchase at <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">Packt Publishing</a>.</em></p>
 <p>▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd">Text on GitHub</a> with a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a></em><br />
 ▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
-<p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-7-statistical-data-analysis/"><strong><em>Go to</em></strong> <em>Chapter 7 : Statistical Data Analysis</em></a><br />
+<p>▶&nbsp;&nbsp;<a href="https://ipython-books.github.io/chapter-7-statistical-data-analysis/"><strong><em>Go to</em></strong> <em>Chapter 7 : Statistical Data Analysis</em></a><br />
 ▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter07_stats/07_pymc.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
 <p>In this recipe, we illustrate a very common and useful method for characterizing a posterior distribution in a Bayesian model. Imagine that you have some data and you want to obtain information about the underlying random phenomenon. In a frequentist approach, you could try to fit a probability distribution within a given family of distributions, using a parametric method such as the maximum likelihood method. The optimization procedure would yield parameters that maximize the probability of observing the data if given the null hypothesis.</p>
 <p>In a Bayesian approach, you consider the parameters themselves as random variables. Their prior distributions reflect your initial knowledge about these parameters. After the observations, your knowledge is updated, and this is reflected in the posterior distributions of the parameters.</p>
@@ -135,7 +135,7 @@
 </pre></div>
 
 
-<p><img alt="&lt;matplotlib.figure.Figure at 0xcef94e0&gt;" src="http://ipython-books.github.io/pages/chapter07_stats/07_pymc_files/07_pymc_14_0.png" /></p>
+<p><img alt="&lt;matplotlib.figure.Figure at 0xcef94e0&gt;" src="https://ipython-books.github.io/pages/chapter07_stats/07_pymc_files/07_pymc_14_0.png" /></p>
 <p><strong>4.&nbsp;</strong> Now, we define our probabilistic model. We assume that storms arise following a time-dependent <strong>Poisson process</strong> with a deterministic rate. We assume that this rate is a piecewise-constant function that takes a first value <code>early_mean</code> before a switch point <code>switchpoint</code>, and a second value <code>late_mean</code> after that point. These three unknown parameters are treated as random variables (we will describe them more in the <em>How it works...</em> section). In the model, the annual number of storms per year follows a Poisson distribution (this is a property of Poisson processes).</p>
 <blockquote>
 <p>A Poisson process (https://en.wikipedia.org/wiki/Poisson_process) is a particular <strong>point process</strong>, that is, a stochastic process describing the random occurrence of instantaneous events. The Poisson process is fully random: the events occur independently at a given rate. See also <em>Chapter 13, Stochastic Dynamical Systems</em>.</p>
@@ -175,7 +175,7 @@ Assigned NUTS to late_rate_log__
 </pre></div>
 
 
-<p><img alt="&lt;matplotlib.figure.Figure at 0x7f6adb76ec88&gt;" src="http://ipython-books.github.io/pages/chapter07_stats/07_pymc_files/07_pymc_21_0.png" /></p>
+<p><img alt="&lt;matplotlib.figure.Figure at 0x7f6adb76ec88&gt;" src="https://ipython-books.github.io/pages/chapter07_stats/07_pymc_files/07_pymc_21_0.png" /></p>
 <p>Each row represents a variable. The left plot is a histogram of the corresponding Markov chain, which gives the posterior distribution of the variable. The right plot is an arbitrarily-chosen path of a Markov chain, showing the evolution of the variable during the fitting procedure.</p>
 <p><strong>7.&nbsp;</strong> Taking the sample mean of these distributions, we get posterior estimates for the three unknown parameters, including the year where the frequency of storms suddenly increased:</p>
 <div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="n">trace</span><span class="p">[</span><span class="s1">&#39;switchpoint&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
@@ -201,10 +201,10 @@ Assigned NUTS to late_rate_log__
 </pre></div>
 
 
-<p><img alt="&lt;matplotlib.figure.Figure at 0xccfe358&gt;" src="http://ipython-books.github.io/pages/chapter07_stats/07_pymc_files/07_pymc_26_0.png" /></p>
+<p><img alt="&lt;matplotlib.figure.Figure at 0xccfe358&gt;" src="https://ipython-books.github.io/pages/chapter07_stats/07_pymc_files/07_pymc_26_0.png" /></p>
 <h2>How it works...</h2>
 <p>The general idea is to define a Bayesian probabilistic model and to fit it to the data. This model may be the starting point of an estimation or decision task. The model is essentially described by stochastic or deterministic variables linked together within a <strong>direct acyclic graph (DAG)</strong>. A is linked to B if B is entirely or partially determined by A. The following figure shows the graph of the model used in this recipe:</p>
-<p><img alt="Dependency graph of the variables" src="http://ipython-books.github.io/pages/chapter07_stats/07_pymc_files/graph.png" /></p>
+<p><img alt="Dependency graph of the variables" src="https://ipython-books.github.io/pages/chapter07_stats/07_pymc_files/graph.png" /></p>
 <p>Stochastic variables follow distributions that can be parameterized by fixed numbers or other variables in the model. Parameters may be random variables themselves, reflecting knowledge prior to the observations. This is the core of Bayesian modeling.</p>
 <p>The goal of the analysis is to include the observations into the model in order to update our knowledge as more and more data is available. Although Bayes' theorem gives us an exact way to compute those posterior distributions, it is rarely practical in real-world problems. This is notably due to the complexity of the models. Alternatively, numerical methods have been developed in order to tackle this problem.</p>
 <p>The <strong>Markov chain Monte Carlo (MCMC) method</strong> used here allows us to sample from a complex distribution by simulating a Markov chain that has the desired distribution as its equilibrium distribution. The <strong>Metropolis-Hastings algorithm</strong> is a particular application of this method to our current example.</p>

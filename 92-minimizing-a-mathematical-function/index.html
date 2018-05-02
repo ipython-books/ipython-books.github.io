@@ -25,7 +25,7 @@
     <meta name="msapplication-TileImage" content="/mstile-144x144.png">
 
 
-        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+        <link rel="alternate"  href="https://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
 
         <title>IPython Cookbook - 9.2. Minimizing a mathematical function</title>
 
@@ -37,8 +37,8 @@
     <!--[if gt IE 8]><!-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/0.5.0/pure-min.css">
     <!--<![endif]-->
-    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
-    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <link rel="stylesheet" href="https://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="https://ipython-books.github.io/theme/css/pygments.css">
     <!-- <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
@@ -58,7 +58,7 @@
         <li><a href="/">home</a></li>
         <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
         <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
-        <li><a href="http://cyrille.rossant.net">author</a></li>
+        <li><a href="https://cyrille.rossant.net">author</a></li>
 </ul>                </div>
             </div>
         </div>
@@ -88,7 +88,7 @@
         <p><a href="/"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="130" style="margin-right: 20px; margin-bottom: 10px;" /></a> <em>This is one of the 100+ free recipes of the <a href="/">IPython Cookbook, Second Edition</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, a guide to numerical computing and data science in the Jupyter Notebook. The ebook and printed book are available for purchase at <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">Packt Publishing</a>.</em></p>
 <p>▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd">Text on GitHub</a> with a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a></em><br />
 ▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
-<p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-9-numerical-optimization/"><strong><em>Go to</em></strong> <em>Chapter 9 : Numerical Optimization</em></a><br />
+<p>▶&nbsp;&nbsp;<a href="https://ipython-books.github.io/chapter-9-numerical-optimization/"><strong><em>Go to</em></strong> <em>Chapter 9 : Numerical Optimization</em></a><br />
 ▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter09_numoptim/02_minimize.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
 <p>Mathematical optimization deals mainly with the problem of finding a minimum or a maximum of a mathematical function. Frequently, a real-world numerical problem can be expressed as a function minimization problem. Such examples can be found in statistical inference, machine learning, graph theory, and other areas.</p>
 <p>Although there are many function minimization algorithms, a generic and universal method does not exist. Therefore, it is important to understand the differences between existing classes of algorithms, their specificities, and their respective use cases. We should also have a good understanding of our problem and our objective function; is it continuous, differentiable, convex, multidimensional, regular, or noisy? Is our problem constrained or unconstrained? Are we seeking local or global minima?</p>
@@ -120,7 +120,7 @@
 </pre></div>
 
 
-<p><img alt="&lt;matplotlib.figure.Figure at 0x7442d68&gt;" src="http://ipython-books.github.io/pages/chapter09_numoptim/02_minimize_files/02_minimize_11_0.png" /></p>
+<p><img alt="&lt;matplotlib.figure.Figure at 0x7442d68&gt;" src="https://ipython-books.github.io/pages/chapter09_numoptim/02_minimize_files/02_minimize_11_0.png" /></p>
 <p><strong>4.&nbsp;</strong> The <code>scipy.optimize</code> module comes with many function minimization routines. The <code>minimize()</code> function offers a unified interface to many algorithms. The <strong>Broyden-Fletcher-Goldfarb-Shanno (BFGS) algorithm</strong> (the default algorithm in <code>minimize()</code>) gives good results in general. The <code>minimize()</code> function requires an initial point as argument. For scalar univariate functions, we can also use <code>minimize_scalar()</code>:</p>
 <div class="highlight"><pre><span></span><span class="n">x0</span> <span class="o">=</span> <span class="mi">3</span>
 <span class="n">xmin</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x0</span><span class="p">)</span><span class="o">.</span><span class="n">x</span>
@@ -137,7 +137,7 @@
 </pre></div>
 
 
-<p><img alt="&lt;matplotlib.figure.Figure at 0x73f03c8&gt;" src="http://ipython-books.github.io/pages/chapter09_numoptim/02_minimize_files/02_minimize_15_0.png" /></p>
+<p><img alt="&lt;matplotlib.figure.Figure at 0x73f03c8&gt;" src="https://ipython-books.github.io/pages/chapter09_numoptim/02_minimize_files/02_minimize_15_0.png" /></p>
 <p><strong>5.&nbsp;</strong> Now, if we start from an initial point that is further away from the actual global minimum, the algorithm converges towards a <em>local</em> minimum only:</p>
 <div class="highlight"><pre><span></span><span class="n">x0</span> <span class="o">=</span> <span class="mi">10</span>
 <span class="n">xmin</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x0</span><span class="p">)</span><span class="o">.</span><span class="n">x</span>
@@ -153,7 +153,7 @@
 </pre></div>
 
 
-<p><img alt="&lt;matplotlib.figure.Figure at 0x73d9080&gt;" src="http://ipython-books.github.io/pages/chapter09_numoptim/02_minimize_files/02_minimize_18_0.png" /></p>
+<p><img alt="&lt;matplotlib.figure.Figure at 0x73d9080&gt;" src="https://ipython-books.github.io/pages/chapter09_numoptim/02_minimize_files/02_minimize_18_0.png" /></p>
 <p><strong>6.&nbsp;</strong> Like most function minimization algorithms, the BFGS algorithm is efficient at finding <em>local</em> minima, but not necessarily <em>global</em> minima, especially on complicated or noisy objective functions. A general strategy to overcome this problem is to combine such algorithms with an exploratory grid search on the initial points. Another option is to use a different class of algorithms based on heuristics and stochastic methods. An example is the <strong>basin-hopping algorithm</strong>:</p>
 <div class="highlight"><pre><span></span><span class="c1"># We use 1000 iterations.</span>
 <span class="n">xmin</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">basinhopping</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">x</span>
@@ -169,7 +169,7 @@
 </pre></div>
 
 
-<p><img alt="&lt;matplotlib.figure.Figure at 0x73f0f60&gt;" src="http://ipython-books.github.io/pages/chapter09_numoptim/02_minimize_files/02_minimize_21_0.png" /></p>
+<p><img alt="&lt;matplotlib.figure.Figure at 0x73f0f60&gt;" src="https://ipython-books.github.io/pages/chapter09_numoptim/02_minimize_files/02_minimize_21_0.png" /></p>
 <p>This time, the algorithm was able to find the global minimum.</p>
 <p><strong>7.&nbsp;</strong> Now, let's define a new function, in two dimensions this time, called the <strong>Lévi function</strong>:</p>
 <div class="math">$$f(x,y) = \sin^{2}\left(3\pi x\right)+\left(x-1\right)^{2}\left(1+\sin^{2}\left(3\pi y\right)\right)+\left(y-1\right)^{2}\left(1+\sin^{2}\left(2\pi y\right)\right)$$</div>
@@ -204,7 +204,7 @@
 </pre></div>
 
 
-<p><img alt="&lt;matplotlib.figure.Figure at 0x7463668&gt;" src="http://ipython-books.github.io/pages/chapter09_numoptim/02_minimize_files/02_minimize_30_0.png" /></p>
+<p><img alt="&lt;matplotlib.figure.Figure at 0x7463668&gt;" src="https://ipython-books.github.io/pages/chapter09_numoptim/02_minimize_files/02_minimize_30_0.png" /></p>
 <p><strong>9.&nbsp;</strong> The <code>minimize()</code> function also works in multiple dimensions:</p>
 <div class="highlight"><pre><span></span><span class="c1"># We use the Powell method.</span>
 <span class="n">x0</span><span class="p">,</span> <span class="n">y0</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
@@ -225,7 +225,7 @@
 </pre></div>
 
 
-<p><img alt="&lt;matplotlib.figure.Figure at 0x7613a90&gt;" src="http://ipython-books.github.io/pages/chapter09_numoptim/02_minimize_files/02_minimize_33_0.png" /></p>
+<p><img alt="&lt;matplotlib.figure.Figure at 0x7613a90&gt;" src="https://ipython-books.github.io/pages/chapter09_numoptim/02_minimize_files/02_minimize_33_0.png" /></p>
 <h2>How it works...</h2>
 <p>Many function minimization algorithms are based on the fundamental idea of <strong>gradient descent</strong>. If a function <span class="math">\(f\)</span> is differentiable, then at every point, the opposite of its gradient points to the direction of the greatest decrease rate of the function. By following this direction, we can expect to find a local minimum.</p>
 <p>This operation is generally done iteratively, by following the direction of the gradient with a small step. The way this step is computed depends on the optimization method.</p>

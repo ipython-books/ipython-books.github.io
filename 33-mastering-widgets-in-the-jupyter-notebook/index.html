@@ -25,7 +25,7 @@
     <meta name="msapplication-TileImage" content="/mstile-144x144.png">
 
 
-        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+        <link rel="alternate"  href="https://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
 
         <title>IPython Cookbook - 3.3. Mastering widgets in the Jupyter Notebook</title>
 
@@ -37,8 +37,8 @@
     <!--[if gt IE 8]><!-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/0.5.0/pure-min.css">
     <!--<![endif]-->
-    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
-    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <link rel="stylesheet" href="https://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="https://ipython-books.github.io/theme/css/pygments.css">
     <!-- <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
@@ -58,7 +58,7 @@
         <li><a href="/">home</a></li>
         <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
         <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
-        <li><a href="http://cyrille.rossant.net">author</a></li>
+        <li><a href="https://cyrille.rossant.net">author</a></li>
 </ul>                </div>
             </div>
         </div>
@@ -88,7 +88,7 @@
         <p><a href="/"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="130" style="margin-right: 20px; margin-bottom: 10px;" /></a> <em>This is one of the 100+ free recipes of the <a href="/">IPython Cookbook, Second Edition</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, a guide to numerical computing and data science in the Jupyter Notebook. The ebook and printed book are available for purchase at <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">Packt Publishing</a>.</em></p>
 <p>▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd">Text on GitHub</a> with a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a></em><br />
 ▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
-<p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-3-mastering-the-jupyter-notebook/"><strong><em>Go to</em></strong> <em>Chapter 3 : Mastering the Jupyter Notebook</em></a><br />
+<p>▶&nbsp;&nbsp;<a href="https://ipython-books.github.io/chapter-3-mastering-the-jupyter-notebook/"><strong><em>Go to</em></strong> <em>Chapter 3 : Mastering the Jupyter Notebook</em></a><br />
 ▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter03_notebook/03_widgets.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
 <p>The <strong>ipywidgets</strong> package provides many common user interface controls for exploring code and data interactively. These controls can be assembled and customized to create complex graphical user interfaces. In this recipe, we introduce the various ways we can create user interfaces with ipywidgets.</p>
 <h2>Getting ready</h2>
@@ -116,7 +116,7 @@
 </pre></div>
 
 
-<p><img alt="Interact" src="http://ipython-books.github.io/pages/chapter03_notebook/03_widgets_files/03_widgets_6_0.png" /></p>
+<p><img alt="Interact" src="https://ipython-books.github.io/pages/chapter03_notebook/03_widgets_files/03_widgets_6_0.png" /></p>
 <p>The function <code>f()</code> is called whenever the slider value changes.</p>
 <p><strong>3.&nbsp;</strong> We can customize the slider parameters. Here, we specify a minimum and maximum integer range for the slider:</p>
 <div class="highlight"><pre><span></span><span class="nd">@widgets.interact</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
@@ -125,7 +125,7 @@
 </pre></div>
 
 
-<p><img alt="Interact" src="http://ipython-books.github.io/pages/chapter03_notebook/03_widgets_files/03_widgets_9_0.png" /></p>
+<p><img alt="Interact" src="https://ipython-books.github.io/pages/chapter03_notebook/03_widgets_files/03_widgets_9_0.png" /></p>
 <p><strong>4.&nbsp;</strong> There is also an <code>@interact_manual</code> decorator which provides a button to call the function manually. This is useful with long-lasting computations that should not run every time a widget value changes. Here, we create a simple user interface for controlling four parameters of a function that displays a plot. There are two floating-point sliders, a dropdown menu for choosing a value among a few predefined options, and a checkbox for boolean values:</p>
 <div class="highlight"><pre><span></span><span class="nd">@widgets.interact_manual</span><span class="p">(</span>
     <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">],</span> <span class="n">lw</span><span class="o">=</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">10.</span><span class="p">))</span>
@@ -138,7 +138,7 @@
 </pre></div>
 
 
-<p><img alt="Interact manual" src="http://ipython-books.github.io/pages/chapter03_notebook/03_widgets_files/03_widgets_11_0.png" /></p>
+<p><img alt="Interact manual" src="https://ipython-books.github.io/pages/chapter03_notebook/03_widgets_files/03_widgets_11_0.png" /></p>
 <p><strong>5.&nbsp;</strong> In addition to the <code>@interact</code> and <code>@interact_manual</code> decorators, ipywidgets provides a simple API to create individual widgets. Here, we create a floating-point slider:</p>
 <div class="highlight"><pre><span></span><span class="n">freq_slider</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">FloatSlider</span><span class="p">(</span>
     <span class="n">value</span><span class="o">=</span><span class="mf">2.</span><span class="p">,</span>
@@ -152,7 +152,7 @@
 </pre></div>
 
 
-<p><img alt="Interact manual" src="http://ipython-books.github.io/pages/chapter03_notebook/03_widgets_files/03_widgets_13_0.png" /></p>
+<p><img alt="Interact manual" src="https://ipython-books.github.io/pages/chapter03_notebook/03_widgets_files/03_widgets_13_0.png" /></p>
 <p><strong>6.&nbsp;</strong> Here is an example of slider for selecting pairs of numbers, like intervals and ranges:</p>
 <div class="highlight"><pre><span></span><span class="n">range_slider</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">FloatRangeSlider</span><span class="p">(</span>
     <span class="n">value</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="o">+</span><span class="mf">1.</span><span class="p">],</span>
@@ -164,7 +164,7 @@
 </pre></div>
 
 
-<p><img alt="Range slider" src="http://ipython-books.github.io/pages/chapter03_notebook/03_widgets_files/03_widgets_15_0.png" /></p>
+<p><img alt="Range slider" src="https://ipython-books.github.io/pages/chapter03_notebook/03_widgets_files/03_widgets_15_0.png" /></p>
 <p><strong>7.&nbsp;</strong> The toggle button can control a boolean value:</p>
 <div class="highlight"><pre><span></span><span class="n">grid_button</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">ToggleButton</span><span class="p">(</span>
     <span class="n">value</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
@@ -175,7 +175,7 @@
 </pre></div>
 
 
-<p><img alt="Toggle button widget" src="http://ipython-books.github.io/pages/chapter03_notebook/03_widgets_files/03_widgets_17_0.png" /></p>
+<p><img alt="Toggle button widget" src="https://ipython-books.github.io/pages/chapter03_notebook/03_widgets_files/03_widgets_17_0.png" /></p>
 <p><strong>8.&nbsp;</strong> Dropdown menus and toggle buttons are useful when selecting a value among a predefined set of options:</p>
 <div class="highlight"><pre><span></span><span class="n">color_buttons</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">ToggleButtons</span><span class="p">(</span>
     <span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">],</span>
@@ -185,7 +185,7 @@
 </pre></div>
 
 
-<p><img alt="Toggle buttons" src="http://ipython-books.github.io/pages/chapter03_notebook/03_widgets_files/03_widgets_19_0.png" /></p>
+<p><img alt="Toggle buttons" src="https://ipython-books.github.io/pages/chapter03_notebook/03_widgets_files/03_widgets_19_0.png" /></p>
 <p><strong>9.&nbsp;</strong> The text widget allows the user to write a string:</p>
 <div class="highlight"><pre><span></span><span class="n">title_textbox</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span>
     <span class="n">value</span><span class="o">=</span><span class="s1">&#39;Hello World&#39;</span><span class="p">,</span>
@@ -195,7 +195,7 @@
 </pre></div>
 
 
-<p><img alt="Text widget" src="http://ipython-books.github.io/pages/chapter03_notebook/03_widgets_files/03_widgets_21_0.png" /></p>
+<p><img alt="Text widget" src="https://ipython-books.github.io/pages/chapter03_notebook/03_widgets_files/03_widgets_21_0.png" /></p>
 <p><strong>10.&nbsp;</strong> We can let the user choose a color using the built-in system color picker:</p>
 <div class="highlight"><pre><span></span><span class="n">color_picker</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">ColorPicker</span><span class="p">(</span>
     <span class="n">concise</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
@@ -206,7 +206,7 @@
 </pre></div>
 
 
-<p><img alt="Color picker" src="http://ipython-books.github.io/pages/chapter03_notebook/03_widgets_files/03_widgets_23_0.png" /></p>
+<p><img alt="Color picker" src="https://ipython-books.github.io/pages/chapter03_notebook/03_widgets_files/03_widgets_23_0.png" /></p>
 <p><strong>11.&nbsp;</strong> We can also simply create a button:</p>
 <div class="highlight"><pre><span></span><span class="n">button</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
     <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Plot&#39;</span><span class="p">,</span>
@@ -215,7 +215,7 @@
 </pre></div>
 
 
-<p><img alt="Button widget" src="http://ipython-books.github.io/pages/chapter03_notebook/03_widgets_files/03_widgets_25_0.png" /></p>
+<p><img alt="Button widget" src="https://ipython-books.github.io/pages/chapter03_notebook/03_widgets_files/03_widgets_25_0.png" /></p>
 <p><strong>12.&nbsp;</strong> Now, we will see how to combine these widgets into a complex graphical user interface, and how to react to user interactions with these controls. We create a function that will display a plot as defined by the created controls. We can access the control value with the <code>value</code> property of the widgets:</p>
 <div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot2</span><span class="p">(</span><span class="n">b</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
     <span class="n">xlim</span> <span class="o">=</span> <span class="n">range_slider</span><span class="o">.</span><span class="n">value</span>
@@ -260,7 +260,7 @@
 </pre></div>
 
 
-<p><img alt="Complex widget" src="http://ipython-books.github.io/pages/chapter03_notebook/03_widgets_files/03_widgets_33_0.png" /></p>
+<p><img alt="Complex widget" src="https://ipython-books.github.io/pages/chapter03_notebook/03_widgets_files/03_widgets_33_0.png" /></p>
 <h2>There's more...</h2>
 <p>The documentation of ipywidgets demonstrates many other features of the package. The styling of the widgets can be customized. New widgets can be created by writing Python and JavaScript code (see recipe <em>Creating custom Jupyter Notebook widgets in Python, HTML, and JavaScript</em>). Widgets can also remain at least partly functional in a static notebook export.</p>
 <p>Here are a few references:</p>

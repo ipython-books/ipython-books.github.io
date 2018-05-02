@@ -25,7 +25,7 @@
     <meta name="msapplication-TileImage" content="/mstile-144x144.png">
 
 
-        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+        <link rel="alternate"  href="https://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
 
         <title>IPython Cookbook - 5.6. Optimizing Cython code by writing less Python and more C</title>
 
@@ -37,8 +37,8 @@
     <!--[if gt IE 8]><!-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/0.5.0/pure-min.css">
     <!--<![endif]-->
-    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
-    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <link rel="stylesheet" href="https://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="https://ipython-books.github.io/theme/css/pygments.css">
     <!-- <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
@@ -58,7 +58,7 @@
         <li><a href="/">home</a></li>
         <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
         <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
-        <li><a href="http://cyrille.rossant.net">author</a></li>
+        <li><a href="https://cyrille.rossant.net">author</a></li>
 </ul>                </div>
             </div>
         </div>
@@ -88,7 +88,7 @@
         <p><a href="/"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="130" style="margin-right: 20px; margin-bottom: 10px;" /></a> <em>This is one of the 100+ free recipes of the <a href="/">IPython Cookbook, Second Edition</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, a guide to numerical computing and data science in the Jupyter Notebook. The ebook and printed book are available for purchase at <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">Packt Publishing</a>.</em></p>
 <p>▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd">Text on GitHub</a> with a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a></em><br />
 ▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
-<p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-5-high-performance-computing/"><strong><em>Go to</em></strong> <em>Chapter 5 : High-Performance Computing</em></a><br />
+<p>▶&nbsp;&nbsp;<a href="https://ipython-books.github.io/chapter-5-high-performance-computing/"><strong><em>Go to</em></strong> <em>Chapter 5 : High-Performance Computing</em></a><br />
 ▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter05_hpc/06_ray.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
 <p>In this recipe, we will consider a more complicated Cython example. Starting from a slow implementation in pure Python, we will use different Cython features to speed it up progressively.</p>
 <p>We will implement a very simple ray tracing engine. <strong>Ray tracing</strong> consists of rendering a scene by simulating the physical properties of light propagation. This rendering method leads to photorealistic scenes, but it is computationally intensive.</p>
@@ -217,7 +217,7 @@
 </pre></div>
 
 
-<p><img alt="Ray tracing with Python and Cython. Left: the outcome of this recipe. Right: outcome of an extended version." src="http://ipython-books.github.io/pages/chapter05_hpc/06_ray_files/06_ray_21_0.png" /></p>
+<p><img alt="Ray tracing with Python and Cython. Left: the outcome of this recipe. Right: outcome of an extended version." src="https://ipython-books.github.io/pages/chapter05_hpc/06_ray_files/06_ray_21_0.png" /></p>
 <p>In this figure, the left panel shows the result of this recipe's code. The right panel shows an extended version of the simple ray tracing engine implemented here.</p>
 <p><strong>8.&nbsp;</strong> How slow is this implementation (<code>ray1</code> example on the book's website)?</p>
 <div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="n">run</span><span class="p">()</span>
@@ -291,9 +291,9 @@ cdef normalize(np.ndarray[DBL_C, ndim=1] x):
 <p>In summary, we have achieved a very interesting speedup by basically rewriting the entire implementation in C with an enhanced Python syntax.</p>
 <h2>How it works...</h2>
 <p>Let's explain briefly how the ray tracing code works. We model a three-dimensional scene with objects such as planes and spheres (here, there is only one sphere). There is also a camera and a plane representing the rendered image:</p>
-<p><img alt="Principles of ray tracing (&quot;Ray trace diagram&quot; by Henrik, Wikimedia Commons)" src="http://ipython-books.github.io/pages/chapter05_hpc/images/ray2.png" /></p>
+<p><img alt="Principles of ray tracing (&quot;Ray trace diagram&quot; by Henrik, Wikimedia Commons)" src="https://ipython-books.github.io/pages/chapter05_hpc/images/ray2.png" /></p>
 <p>There is a main loop over all pixels of the image. For each pixel, we launch a ray from the camera center to the scene through the current pixel and compute the first intersection point between that ray and an object from the scene. Then, we compute the pixel's color as a function of the object material's color, the position of the lights, the normal of the object at the intersection point, and so on. There are several physics-based lighting equations that describe how the color depends on these parameters. Here, we use the <strong>Blinn-Phong shading model</strong> with ambient, diffuse, and specular lighting components:</p>
-<p><img alt="Blinn-Phong shading model (&quot;Phong components&quot;, Wikimedia Commons)" src="http://ipython-books.github.io/pages/chapter05_hpc/images/ray3.png" /></p>
+<p><img alt="Blinn-Phong shading model (&quot;Phong components&quot;, Wikimedia Commons)" src="https://ipython-books.github.io/pages/chapter05_hpc/images/ray3.png" /></p>
 <p>Of course, a full ray tracing engine is far more complex than what we have implemented in this example. We can model other optic and lighting characteristics such as reflections, refractions, shadows, depth of field, and others. It is also possible to implement ray tracing algorithms on the graphics card for real-time photorealistic rendering. Here are a few references:</p>
 <ul>
 <li>Blinn-Phong shading model on Wikipedia, available at <a href="https://en.wikipedia.org/wiki/Blinn-Phong_shading_model">https://en.wikipedia.org/wiki/Blinn-Phong_shading_model</a></li>

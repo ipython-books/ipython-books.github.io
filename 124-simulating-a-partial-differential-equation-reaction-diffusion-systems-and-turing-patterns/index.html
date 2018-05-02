@@ -25,7 +25,7 @@
     <meta name="msapplication-TileImage" content="/mstile-144x144.png">
 
 
-        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+        <link rel="alternate"  href="https://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
 
         <title>IPython Cookbook - 12.4. Simulating a partial differential equation — reaction-diffusion systems and Turing patterns</title>
 
@@ -37,8 +37,8 @@
     <!--[if gt IE 8]><!-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/0.5.0/pure-min.css">
     <!--<![endif]-->
-    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
-    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <link rel="stylesheet" href="https://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="https://ipython-books.github.io/theme/css/pygments.css">
     <!-- <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
@@ -58,7 +58,7 @@
         <li><a href="/">home</a></li>
         <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
         <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
-        <li><a href="http://cyrille.rossant.net">author</a></li>
+        <li><a href="https://cyrille.rossant.net">author</a></li>
 </ul>                </div>
             </div>
         </div>
@@ -88,7 +88,7 @@
         <p><a href="/"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="130" style="margin-right: 20px; margin-bottom: 10px;" /></a> <em>This is one of the 100+ free recipes of the <a href="/">IPython Cookbook, Second Edition</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, a guide to numerical computing and data science in the Jupyter Notebook. The ebook and printed book are available for purchase at <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">Packt Publishing</a>.</em></p>
 <p>▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd">Text on GitHub</a> with a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a></em><br />
 ▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
-<p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-12-deterministic-dynamical-systems/"><strong><em>Go to</em></strong> <em>Chapter 12 : Deterministic Dynamical Systems</em></a><br />
+<p>▶&nbsp;&nbsp;<a href="https://ipython-books.github.io/chapter-12-deterministic-dynamical-systems/"><strong><em>Go to</em></strong> <em>Chapter 12 : Deterministic Dynamical Systems</em></a><br />
 ▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter12_deterministic/04_turing.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
 <p><strong>Partial Differential Equations (PDEs)</strong> describe the evolution of dynamical systems involving both time and space. Examples in physics include sound, heat, electromagnetism, fluid flow, and elasticity, among others. Examples in biology include tumor growth, population dynamics, and epidemic propagations.</p>
 <p>PDEs are hard to solve analytically. Therefore, PDEs are often studied via numerical simulations.</p>
@@ -192,14 +192,14 @@
 </pre></div>
 
 
-<p><img alt="&lt;matplotlib.figure.Figure at 0x7fc0438c4cf8&gt;" src="http://ipython-books.github.io/pages/chapter12_deterministic/04_turing_files/04_turing_27_0.png" /></p>
+<p><img alt="&lt;matplotlib.figure.Figure at 0x7fc0438c4cf8&gt;" src="https://ipython-books.github.io/pages/chapter12_deterministic/04_turing_files/04_turing_27_0.png" /></p>
 <p><strong>9.&nbsp;</strong> Finally, we show the state of the system at the end of the simulation:</p>
 <div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
 <span class="n">show_patterns</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 </pre></div>
 
 
-<p><img alt="&lt;matplotlib.figure.Figure at 0x70db8d0&gt;" src="http://ipython-books.github.io/pages/chapter12_deterministic/04_turing_files/04_turing_29_0.png" /></p>
+<p><img alt="&lt;matplotlib.figure.Figure at 0x70db8d0&gt;" src="https://ipython-books.github.io/pages/chapter12_deterministic/04_turing_files/04_turing_29_0.png" /></p>
 <p>Whereas the variables were completely random at initialization time, we observe the formation of patterns after a sufficiently long simulation time.</p>
 <h2>How it works...</h2>
 <p>Let's explain how the finite difference method allowed us to implement the update step. We start from the following system of equations:</p>

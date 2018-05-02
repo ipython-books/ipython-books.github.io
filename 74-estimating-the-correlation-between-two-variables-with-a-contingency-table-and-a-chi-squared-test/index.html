@@ -25,7 +25,7 @@
     <meta name="msapplication-TileImage" content="/mstile-144x144.png">
 
 
-        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+        <link rel="alternate"  href="https://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
 
         <title>IPython Cookbook - 7.4. Estimating the correlation between two variables with a contingency table and a chi-squared test</title>
 
@@ -37,8 +37,8 @@
     <!--[if gt IE 8]><!-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/0.5.0/pure-min.css">
     <!--<![endif]-->
-    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
-    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <link rel="stylesheet" href="https://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="https://ipython-books.github.io/theme/css/pygments.css">
     <!-- <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
@@ -58,7 +58,7 @@
         <li><a href="/">home</a></li>
         <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
         <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
-        <li><a href="http://cyrille.rossant.net">author</a></li>
+        <li><a href="https://cyrille.rossant.net">author</a></li>
 </ul>                </div>
             </div>
         </div>
@@ -88,7 +88,7 @@
         <p><a href="/"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="130" style="margin-right: 20px; margin-bottom: 10px;" /></a> <em>This is one of the 100+ free recipes of the <a href="/">IPython Cookbook, Second Edition</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, a guide to numerical computing and data science in the Jupyter Notebook. The ebook and printed book are available for purchase at <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">Packt Publishing</a>.</em></p>
 <p>▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd">Text on GitHub</a> with a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a></em><br />
 ▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
-<p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-7-statistical-data-analysis/"><strong><em>Go to</em></strong> <em>Chapter 7 : Statistical Data Analysis</em></a><br />
+<p>▶&nbsp;&nbsp;<a href="https://ipython-books.github.io/chapter-7-statistical-data-analysis/"><strong><em>Go to</em></strong> <em>Chapter 7 : Statistical Data Analysis</em></a><br />
 ▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter07_stats/04_correlation.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
 <p>Whereas univariate methods deal with single-variable observations, multivariate methods consider observations with several features. Multivariate datasets allow the study of <em>relations</em> between variables, more particularly their correlation, or lack thereof (that is, independence).</p>
 <p>In this recipe, we will take a look at the same tennis dataset as in the first recipe of this chapter. Following a frequentist approach, we will estimate the correlation between the number of aces and the proportion of points won by a tennis player.</p>
@@ -122,7 +122,7 @@
 </pre></div>
 
 
-<p><img alt="Some tournaments" src="http://ipython-books.github.io/pages/chapter07_stats/04_correlation_files/04_correlation_9_1.png" /></p>
+<p><img alt="Some tournaments" src="https://ipython-books.github.io/pages/chapter07_stats/04_correlation_files/04_correlation_9_1.png" /></p>
 <p><strong>4.&nbsp;</strong> Here, we only look at the proportion of points won, and the (relative) number of aces:</p>
 <div class="highlight"><pre><span></span><span class="n">npoints</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;player1 total points total&#39;</span><span class="p">]</span>
 <span class="n">points</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;player1 total points won&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">npoints</span>
@@ -139,7 +139,7 @@
 </pre></div>
 
 
-<p><img alt="Aces and won points" src="http://ipython-books.github.io/pages/chapter07_stats/04_correlation_files/04_correlation_12_0.png" /></p>
+<p><img alt="Aces and won points" src="https://ipython-books.github.io/pages/chapter07_stats/04_correlation_files/04_correlation_12_0.png" /></p>
 <p>If the two variables were independent, we would not see any trend in the cloud of points. On this plot, it is a bit hard to tell. Let's use pandas to compute a coefficient correlation.</p>
 <p><strong>5.&nbsp;</strong> For simplicity, we create a new <code>DataFrame</code> object with only these fields. We also remove the rows where one field is missing (using <code>dropna()</code>):</p>
 <div class="highlight"><pre><span></span><span class="n">df_bis</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;points&#39;</span><span class="p">:</span> <span class="n">points</span><span class="p">,</span>
@@ -148,13 +148,13 @@
 </pre></div>
 
 
-<p><img alt="Aces and won points" src="http://ipython-books.github.io/pages/chapter07_stats/04_correlation_files/04_correlation_15_0.png" /></p>
+<p><img alt="Aces and won points" src="https://ipython-books.github.io/pages/chapter07_stats/04_correlation_files/04_correlation_15_0.png" /></p>
 <p><strong>6.&nbsp;</strong> Let's compute the Pearson's correlation coefficient between the relative number of aces in the match, and the number of points won:</p>
 <div class="highlight"><pre><span></span><span class="n">df_bis</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
 </pre></div>
 
 
-<p><img alt="Pearson correlation coefficient" src="http://ipython-books.github.io/pages/chapter07_stats/04_correlation_files/04_correlation_17_0.png" /></p>
+<p><img alt="Pearson correlation coefficient" src="https://ipython-books.github.io/pages/chapter07_stats/04_correlation_files/04_correlation_17_0.png" /></p>
 <p>A correlation of ~0.26 seems to indicate a positive correlation between our two variables. In other words, the more aces in a match, the more points the player wins (which is not very surprising!).</p>
 <p><strong>7.&nbsp;</strong> Now, to determine if there is a <em>statistically significant</em> correlation between the variables, we use a <strong>chi-squared test</strong> of the independence of variables in a <strong>contingency table</strong>.
 <strong>8.&nbsp;</strong> First, we binarize our variables. Here, the value corresponding to the number of aces is <code>True</code> if the player is serving more aces than usual in a match, and <code>False</code> otherwise:</p>
@@ -170,7 +170,7 @@
 </pre></div>
 
 
-<p><img alt="Contingency table" src="http://ipython-books.github.io/pages/chapter07_stats/04_correlation_files/04_correlation_22_0.png" /></p>
+<p><img alt="Contingency table" src="https://ipython-books.github.io/pages/chapter07_stats/04_correlation_files/04_correlation_22_0.png" /></p>
 <p><strong>10.&nbsp;</strong> Finally, we compute the chi-squared test statistic and the associated p-value. The null hypothesis is the independence between the variables. SciPy implements this test in <code>scipy.stats.chi2_contingency()</code>, which returns several objects. We're interested in the second result, which is the p-value:</p>
 <div class="highlight"><pre><span></span><span class="n">st</span><span class="o">.</span><span class="n">chi2_contingency</span><span class="p">(</span><span class="n">_</span><span class="p">)</span>
 </pre></div>

@@ -25,7 +25,7 @@
     <meta name="msapplication-TileImage" content="/mstile-144x144.png">
 
 
-        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+        <link rel="alternate"  href="https://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
 
         <title>IPython Cookbook - 5.8. Writing massively parallel code for NVIDIA graphics cards (GPUs) with CUDA</title>
 
@@ -37,8 +37,8 @@
     <!--[if gt IE 8]><!-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/0.5.0/pure-min.css">
     <!--<![endif]-->
-    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
-    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <link rel="stylesheet" href="https://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="https://ipython-books.github.io/theme/css/pygments.css">
     <!-- <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
@@ -58,7 +58,7 @@
         <li><a href="/">home</a></li>
         <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
         <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
-        <li><a href="http://cyrille.rossant.net">author</a></li>
+        <li><a href="https://cyrille.rossant.net">author</a></li>
 </ul>                </div>
             </div>
         </div>
@@ -88,7 +88,7 @@
         <p><a href="/"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="130" style="margin-right: 20px; margin-bottom: 10px;" /></a> <em>This is one of the 100+ free recipes of the <a href="/">IPython Cookbook, Second Edition</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, a guide to numerical computing and data science in the Jupyter Notebook. The ebook and printed book are available for purchase at <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">Packt Publishing</a>.</em></p>
 <p>▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd">Text on GitHub</a> with a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a></em><br />
 ▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
-<p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-5-high-performance-computing/"><strong><em>Go to</em></strong> <em>Chapter 5 : High-Performance Computing</em></a><br />
+<p>▶&nbsp;&nbsp;<a href="https://ipython-books.github.io/chapter-5-high-performance-computing/"><strong><em>Go to</em></strong> <em>Chapter 5 : High-Performance Computing</em></a><br />
 ▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter05_hpc/08_cuda.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
 <p><strong>Graphics Processing Units (GPUs)</strong> are powerful processors specialized in real-time rendering. We find GPUs in virtually any computer, laptop, video game console, tablet, or smartphone. Their massively parallel architecture comprises tens to thousands of cores. The video game industry has been fostering the development of increasingly powerful GPUs over the last two decades.</p>
 <p>Since the mid-2000s, GPUs are no longer limited to graphics processing. We can now implement scientific algorithms on a GPU. The only condition is that the algorithm follows the <strong>SIMD (Single Instruction, Multiple Data) paradigm</strong>, where a sequence of instructions is executed in parallel with multiple data. This is called <strong>General Purpose Programming on Graphics Processing Units (GPGPU)</strong>. GPGPU is used in many areas: meteorology, machine learning (most particularly deep learning), computer vision, image processing, finance, physics, bioinformatics, and many more. Writing code for GPUs can be challenging as it requires understanding the internal architecture of the hardware.</p>
@@ -178,7 +178,7 @@
 </pre></div>
 
 
-<p><img alt="&lt;matplotlib.figure.Figure at 0x7f1085fbd4a8&gt;" src="http://ipython-books.github.io/pages/chapter05_hpc/08_cuda_files/08_cuda_24_0.png" /></p>
+<p><img alt="&lt;matplotlib.figure.Figure at 0x7f1085fbd4a8&gt;" src="https://ipython-books.github.io/pages/chapter05_hpc/08_cuda_files/08_cuda_24_0.png" /></p>
 <p><strong>8.&nbsp;</strong> Now, let's benchmark this function:</p>
 <div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n10</span> <span class="o">-</span><span class="n">r100</span> <span class="n">f</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">iterations</span><span class="p">)</span>
 </pre></div>
@@ -242,7 +242,7 @@
 <p>Within a block, threads are executed within <strong>warps</strong> of typically 32 threads. Better performance is achieved when conditional branching in a kernel is organized into groups of 32 threads.</p>
 <p>Threads within a block can synchronize at synchronization barriers using the CUDA <code>__syncthreads()</code> function. This feature enables inter-thread communication within one block. However, blocks execute independently so that two threads from different blocks cannot synchronize.</p>
 <p>Within a block, threads are organized into a 1D, 2D, or 3D structure, and similarly for blocks within a grid, as shown in the following figure. This structure is convenient as it matches most common multidimensional datasets encountered in real-world problems.</p>
-<p><img alt="The CUDA programming model (showing threads, blocks, and grids — image by NVIDIA Corporation)" src="http://ipython-books.github.io/pages/chapter05_hpc/images/cuda.png" /></p>
+<p><img alt="The CUDA programming model (showing threads, blocks, and grids — image by NVIDIA Corporation)" src="https://ipython-books.github.io/pages/chapter05_hpc/images/cuda.png" /></p>
 <p>In CUDA, the kernel can retrieve the thread index within the block (<code>threadIdx</code>), as well as the block index within the grid (<code>blockIdx</code>) to determine which bit of data it should work on. In this recipe, the 2D image of the fractal is partitioned into 16 x 16 blocks, each block containing 256 pixels, with one thread per pixel. The kernel computes the color of a single pixel.</p>
 <p>Numba provides the <code>cuda.grid(ndim)</code> function to obtain directly the 1D, 2D, or 3D index of the thread within the grid. Alternatively, one can use the following code snippet to control the exact position of the current thread within the block and the grid (code given in the Numba documentation):</p>
 <div class="highlight"><pre><span></span># Thread id in a 1D block

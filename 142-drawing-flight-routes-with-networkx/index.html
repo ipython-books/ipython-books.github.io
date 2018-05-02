@@ -25,7 +25,7 @@
     <meta name="msapplication-TileImage" content="/mstile-144x144.png">
 
 
-        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+        <link rel="alternate"  href="https://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
 
         <title>IPython Cookbook - 14.2. Drawing flight routes with NetworkX</title>
 
@@ -37,8 +37,8 @@
     <!--[if gt IE 8]><!-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/0.5.0/pure-min.css">
     <!--<![endif]-->
-    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
-    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <link rel="stylesheet" href="https://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="https://ipython-books.github.io/theme/css/pygments.css">
     <!-- <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
@@ -58,7 +58,7 @@
         <li><a href="/">home</a></li>
         <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
         <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
-        <li><a href="http://cyrille.rossant.net">author</a></li>
+        <li><a href="https://cyrille.rossant.net">author</a></li>
 </ul>                </div>
             </div>
         </div>
@@ -88,7 +88,7 @@
         <p><a href="/"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="130" style="margin-right: 20px; margin-bottom: 10px;" /></a> <em>This is one of the 100+ free recipes of the <a href="/">IPython Cookbook, Second Edition</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, a guide to numerical computing and data science in the Jupyter Notebook. The ebook and printed book are available for purchase at <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">Packt Publishing</a>.</em></p>
 <p>▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd">Text on GitHub</a> with a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a></em><br />
 ▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
-<p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-14-graphs-geometry-and-geographic-information-systems/"><strong><em>Go to</em></strong> <em>Chapter 14 : Graphs, Geometry, and Geographic Information Systems</em></a><br />
+<p>▶&nbsp;&nbsp;<a href="https://ipython-books.github.io/chapter-14-graphs-geometry-and-geographic-information-systems/"><strong><em>Go to</em></strong> <em>Chapter 14 : Graphs, Geometry, and Geographic Information Systems</em></a><br />
 ▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter14_graphgeo/02_airports.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
 <p>In this recipe, we load and visualize a dataset containing many flight routes and airports around the world (obtained from the OpenFlights website at <a href="https://openflights.org/data.html">https://openflights.org/data.html</a>).</p>
 <h2>Getting ready</h2>
@@ -125,7 +125,7 @@
 </pre></div>
 
 
-<p><img alt="Output" src="http://ipython-books.github.io/pages/chapter14_graphgeo/02_airports_files/02_airports_9_0.png" /></p>
+<p><img alt="Output" src="https://ipython-books.github.io/pages/chapter14_graphgeo/02_airports_files/02_airports_9_0.png" /></p>
 <p><strong>3.&nbsp;</strong> We load the second dataset with details about the airports, and we only keep the airports from the United States:</p>
 <div class="highlight"><pre><span></span><span class="n">names</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;id,name,city,country,iata,icao,lat,lon,&#39;</span>
          <span class="s1">&#39;alt,timezone,dst,tz,type,source&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
@@ -146,7 +146,7 @@
 </pre></div>
 
 
-<p><img alt="Output" src="http://ipython-books.github.io/pages/chapter14_graphgeo/02_airports_files/02_airports_12_0.png" /></p>
+<p><img alt="Output" src="https://ipython-books.github.io/pages/chapter14_graphgeo/02_airports_files/02_airports_12_0.png" /></p>
 <p>The DataFrame index is the IATA code, a 3-characters code identifying the airports.</p>
 <p><strong>4.&nbsp;</strong> Let's keep all national US flight routes, that is, those for which the source and the destination airports belong to the list of US airports:</p>
 <div class="highlight"><pre><span></span><span class="n">routes_us</span> <span class="o">=</span> <span class="n">routes</span><span class="p">[</span>
@@ -156,7 +156,7 @@
 </pre></div>
 
 
-<p><img alt="Output" src="http://ipython-books.github.io/pages/chapter14_graphgeo/02_airports_files/02_airports_15_0.png" /></p>
+<p><img alt="Output" src="https://ipython-books.github.io/pages/chapter14_graphgeo/02_airports_files/02_airports_15_0.png" /></p>
 <p><strong>5.&nbsp;</strong> We construct the list of edges representing our graph, where nodes are airports, and two airports are connected if there exists a route between them (flight network):</p>
 <div class="highlight"><pre><span></span><span class="n">edges</span> <span class="o">=</span> <span class="n">routes_us</span><span class="p">[[</span><span class="s1">&#39;source&#39;</span><span class="p">,</span> <span class="s1">&#39;dest&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span>
 <span class="n">edges</span>
@@ -197,7 +197,7 @@
 </pre></div>
 
 
-<p><img alt="&lt;matplotlib.figure.Figure at 0x7fc830810b38&gt;" src="http://ipython-books.github.io/pages/chapter14_graphgeo/02_airports_files/02_airports_24_0.png" /></p>
+<p><img alt="&lt;matplotlib.figure.Figure at 0x7fc830810b38&gt;" src="https://ipython-books.github.io/pages/chapter14_graphgeo/02_airports_files/02_airports_24_0.png" /></p>
 <p><strong>9.&nbsp;</strong> There are a few airports that are not connected to the rest of the airports. We keep the largest connected component of the graph as follows (the subgraphs returned by <code>connected_component_subgraphs()</code> are sorted by decreasing size):</p>
 <div class="highlight"><pre><span></span><span class="n">sg</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">connected_component_subgraphs</span><span class="p">(</span><span class="n">g</span><span class="p">))</span>
 </pre></div>
@@ -211,7 +211,7 @@
 </pre></div>
 
 
-<p><img alt="&lt;matplotlib.figure.Figure at 0x7fc835a72710&gt;" src="http://ipython-books.github.io/pages/chapter14_graphgeo/02_airports_files/02_airports_28_0.png" /></p>
+<p><img alt="&lt;matplotlib.figure.Figure at 0x7fc835a72710&gt;" src="https://ipython-books.github.io/pages/chapter14_graphgeo/02_airports_files/02_airports_28_0.png" /></p>
 <p>The graph encodes only the <em>topology</em> (connections between the airports) and not the <em>geometry</em> (actual positions of the airports on a map). Airports at the center of the graph are the largest US airports.</p>
 <p><strong>11.&nbsp;</strong> We're going to draw the graph on a map, using the geographical coordinates of the airports. First, we need to create a dictionary where the keys are the airports IATA codes, and the values are the coordinates:</p>
 <div class="highlight"><pre><span></span><span class="n">pos</span> <span class="o">=</span> <span class="p">{</span><span class="n">airport</span><span class="p">:</span> <span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">],</span> <span class="n">v</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">])</span>
@@ -259,7 +259,7 @@
 </pre></div>
 
 
-<p><img alt="&lt;matplotlib.figure.Figure at 0x7fc83094f748&gt;" src="http://ipython-books.github.io/pages/chapter14_graphgeo/02_airports_files/02_airports_38_0.png" /></p>
+<p><img alt="&lt;matplotlib.figure.Figure at 0x7fc83094f748&gt;" src="https://ipython-books.github.io/pages/chapter14_graphgeo/02_airports_files/02_airports_38_0.png" /></p>
 <h2>See also</h2>
 <ul>
 <li>Manipulating and visualize graphs with NetworkX</li>

@@ -25,7 +25,7 @@
     <meta name="msapplication-TileImage" content="/mstile-144x144.png">
 
 
-        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+        <link rel="alternate"  href="https://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
 
         <title>IPython Cookbook - 6.6. Creating plots with Altair and the Vega-Lite specification</title>
 
@@ -37,8 +37,8 @@
     <!--[if gt IE 8]><!-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/0.5.0/pure-min.css">
     <!--<![endif]-->
-    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
-    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <link rel="stylesheet" href="https://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="https://ipython-books.github.io/theme/css/pygments.css">
     <!-- <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
@@ -58,7 +58,7 @@
         <li><a href="/">home</a></li>
         <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
         <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
-        <li><a href="http://cyrille.rossant.net">author</a></li>
+        <li><a href="https://cyrille.rossant.net">author</a></li>
 </ul>                </div>
             </div>
         </div>
@@ -88,7 +88,7 @@
         <p><a href="/"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="130" style="margin-right: 20px; margin-bottom: 10px;" /></a> <em>This is one of the 100+ free recipes of the <a href="/">IPython Cookbook, Second Edition</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, a guide to numerical computing and data science in the Jupyter Notebook. The ebook and printed book are available for purchase at <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">Packt Publishing</a>.</em></p>
 <p>▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd">Text on GitHub</a> with a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a></em><br />
 ▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
-<p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-6-data-visualization/"><strong><em>Go to</em></strong> <em>Chapter 6 : Data Visualization</em></a><br />
+<p>▶&nbsp;&nbsp;<a href="https://ipython-books.github.io/chapter-6-data-visualization/"><strong><em>Go to</em></strong> <em>Chapter 6 : Data Visualization</em></a><br />
 ▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter06_viz/06_altair.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
 <p><strong>Vega</strong> is a declarative format for designing static and interactive visualizations. It provides a JSON-based visualization grammar that focuses on the <em>what</em> instead of the <em>how</em>. <strong>Vega-Lite</strong> is a higher-level specification that is easier to use than Vega, and that compiles directly to Vega.</p>
 <p><strong>Altair</strong> is a Python library that provides a simple API to define and display Vega-Lite visualizations. It works in the Jupyter Notebook, JupyterLab, and nteract.</p>
@@ -135,7 +135,7 @@
 </pre></div>
 
 
-<p><img alt="Output" src="http://ipython-books.github.io/pages/chapter06_viz/06_altair_files/06_altair_12_0.png" /></p>
+<p><img alt="Output" src="https://ipython-books.github.io/pages/chapter06_viz/06_altair_files/06_altair_12_0.png" /></p>
 <p>This dataset provides the date, origin, destination, flight distance, and delay of many flights.</p>
 <p><strong>4.&nbsp;</strong> Let's create a scatter plot showing the delay as a function of the date, with the marker size depending on the flight distance:</p>
 <div class="highlight"><pre><span></span><span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">mark_point</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
@@ -146,7 +146,7 @@
 </pre></div>
 
 
-<p><img alt="A scatter plot" src="http://ipython-books.github.io/pages/chapter06_viz/06_altair_files/06_altair_15_0.png" /></p>
+<p><img alt="A scatter plot" src="https://ipython-books.github.io/pages/chapter06_viz/06_altair_files/06_altair_15_0.png" /></p>
 <p>The <code>mark_point()</code> method specifies that we're creating a scatter plot. The <code>encode()</code> function allows us to link parameters of the plot (<em>x</em> and <em>y</em> coordinates, the point size) to specific columns in our DataFrame.</p>
 <p><strong>5.&nbsp;</strong> Next, we create a bar plot with the average delay of all flights departing from Los Angeles, as a function of time:</p>
 <div class="highlight"><pre><span></span><span class="n">df_la</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;origin&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;LAX&#39;</span><span class="p">]</span>
@@ -161,7 +161,7 @@
 </pre></div>
 
 
-<p><img alt="A bar plot" src="http://ipython-books.github.io/pages/chapter06_viz/06_altair_files/06_altair_18_0.png" /></p>
+<p><img alt="A bar plot" src="https://ipython-books.github.io/pages/chapter06_viz/06_altair_files/06_altair_18_0.png" /></p>
 <p>We select all flights departing from the <code>LAX</code> airport using pandas. For the <em>x</em> coordinate, we use the <code>alt.X</code> class to specify that we want a histogram (<code>bin=True</code>). For the <em>y</em> coordinate, we specify the average of all delays for every bin.</p>
 <p><strong>6.&nbsp;</strong> Now, we create a histogram of the average delay of every origin airport. We use the <code>sort</code> option of the <code>X</code> class to specify that we want to order the <em>x</em> axis (origin) as a function of the average delay, in descending order:</p>
 <div class="highlight"><pre><span></span><span class="n">sort_delay</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">SortField</span><span class="p">(</span>
@@ -177,7 +177,7 @@
 </pre></div>
 
 
-<p><img alt="A histogram" src="http://ipython-books.github.io/pages/chapter06_viz/06_altair_files/06_altair_21_0.png" /></p>
+<p><img alt="A histogram" src="https://ipython-books.github.io/pages/chapter06_viz/06_altair_files/06_altair_21_0.png" /></p>
 <h2>How it works...</h2>
 <p>Altair provides a Python API to generate a Vega-Lite specification in JSON. The <code>to_json()</code> method of an Altair chart can be used to inspect the JSON created by Altair. For example, here is the JSON of the last chart example above:</p>
 <div class="highlight"><pre><span></span><span class="p">{</span>
@@ -220,7 +220,7 @@
 <h2>There's more...</h2>
 <p>Altair and Vega-Lite support much more complex charts, as can be seen in the galleries of these projects.</p>
 <p>Vega-Lite supports interactive plots. The following example from the Vega-Lite gallery illustrates linked brushing between subplots, where a rectangular selection can be drawn with the mouse in any subplot:</p>
-<p><img alt="Linked brushing" src="http://ipython-books.github.io/pages/chapter06_viz/06_altair_files/brushing.png" /></p>
+<p><img alt="Linked brushing" src="https://ipython-books.github.io/pages/chapter06_viz/06_altair_files/brushing.png" /></p>
 <p>There is also an online editor on the Vega-Lite website that can be used to create plots directly in the browser without installing anything.</p>
 <p>Here are a few references:</p>
 <ul>

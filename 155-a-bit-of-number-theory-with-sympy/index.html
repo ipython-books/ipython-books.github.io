@@ -25,7 +25,7 @@
     <meta name="msapplication-TileImage" content="/mstile-144x144.png">
 
 
-        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+        <link rel="alternate"  href="https://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
 
         <title>IPython Cookbook - 15.5. A bit of number theory with SymPy</title>
 
@@ -37,8 +37,8 @@
     <!--[if gt IE 8]><!-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/0.5.0/pure-min.css">
     <!--<![endif]-->
-    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
-    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <link rel="stylesheet" href="https://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="https://ipython-books.github.io/theme/css/pygments.css">
     <!-- <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
@@ -58,7 +58,7 @@
         <li><a href="/">home</a></li>
         <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
         <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
-        <li><a href="http://cyrille.rossant.net">author</a></li>
+        <li><a href="https://cyrille.rossant.net">author</a></li>
 </ul>                </div>
             </div>
         </div>
@@ -88,7 +88,7 @@
         <p><a href="/"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="130" style="margin-right: 20px; margin-bottom: 10px;" /></a> <em>This is one of the 100+ free recipes of the <a href="/">IPython Cookbook, Second Edition</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, a guide to numerical computing and data science in the Jupyter Notebook. The ebook and printed book are available for purchase at <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">Packt Publishing</a>.</em></p>
 <p>▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd">Text on GitHub</a> with a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a></em><br />
 ▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
-<p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-15-symbolic-and-numerical-mathematics/"><strong><em>Go to</em></strong> <em>Chapter 15 : Symbolic and Numerical Mathematics</em></a><br />
+<p>▶&nbsp;&nbsp;<a href="https://ipython-books.github.io/chapter-15-symbolic-and-numerical-mathematics/"><strong><em>Go to</em></strong> <em>Chapter 15 : Symbolic and Numerical Mathematics</em></a><br />
 ▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter15_symbolic/05_number_theory.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
 <p>SymPy contains many number-theory-related routines: obtaining prime numbers, integer decompositions, and much more. We will show a few examples here.</p>
 <h2>Getting ready</h2>
@@ -115,19 +115,19 @@
 </pre></div>
 
 
-<p><img alt="2027" src="http://ipython-books.github.io/pages/chapter15_symbolic/05_number_theory_files/05_number_theory_10_0.png" /></p>
+<p><img alt="2027" src="https://ipython-books.github.io/pages/chapter15_symbolic/05_number_theory_files/05_number_theory_10_0.png" /></p>
 <p><strong>4.&nbsp;</strong> What is the 1000th prime number?</p>
 <div class="highlight"><pre><span></span><span class="n">nt</span><span class="o">.</span><span class="n">prime</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
 </pre></div>
 
 
-<p><img alt="7919" src="http://ipython-books.github.io/pages/chapter15_symbolic/05_number_theory_files/05_number_theory_12_0.png" /></p>
+<p><img alt="7919" src="https://ipython-books.github.io/pages/chapter15_symbolic/05_number_theory_files/05_number_theory_12_0.png" /></p>
 <p><strong>5.&nbsp;</strong> How many primes less than 2017 are there?</p>
 <div class="highlight"><pre><span></span><span class="n">nt</span><span class="o">.</span><span class="n">primepi</span><span class="p">(</span><span class="mi">2017</span><span class="p">)</span>
 </pre></div>
 
 
-<p><img alt="306" src="http://ipython-books.github.io/pages/chapter15_symbolic/05_number_theory_files/05_number_theory_14_0.png" /></p>
+<p><img alt="306" src="https://ipython-books.github.io/pages/chapter15_symbolic/05_number_theory_files/05_number_theory_14_0.png" /></p>
 <p><strong>6.&nbsp;</strong> We can plot <span class="math">\(\pi(x)\)</span>, the <strong>prime-counting function</strong> (the number of prime numbers less than or equal to some number <span class="math">\(x\)</span>). The <strong>prime number theorem</strong> states that this function is asymptotically equivalent to <span class="math">\(x/\log(x)\)</span>. This expression approximately quantifies the distribution of prime numbers among all integers:</p>
 <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
@@ -142,27 +142,27 @@
 </pre></div>
 
 
-<p><img alt="&lt;matplotlib.figure.Figure at 0x7f2d3c5f52b0&gt;" src="http://ipython-books.github.io/pages/chapter15_symbolic/05_number_theory_files/05_number_theory_16_0.png" /></p>
+<p><img alt="&lt;matplotlib.figure.Figure at 0x7f2d3c5f52b0&gt;" src="https://ipython-books.github.io/pages/chapter15_symbolic/05_number_theory_files/05_number_theory_16_0.png" /></p>
 <p><strong>7.&nbsp;</strong> Let's compute the integer factorization of a number:</p>
 <div class="highlight"><pre><span></span><span class="n">nt</span><span class="o">.</span><span class="n">factorint</span><span class="p">(</span><span class="mi">1998</span><span class="p">)</span>
 </pre></div>
 
 
-<p><img alt="{2: 1, 3: 3, 37: 1}" src="http://ipython-books.github.io/pages/chapter15_symbolic/05_number_theory_files/05_number_theory_18_0.png" /></p>
+<p><img alt="{2: 1, 3: 3, 37: 1}" src="https://ipython-books.github.io/pages/chapter15_symbolic/05_number_theory_files/05_number_theory_18_0.png" /></p>
 <div class="highlight"><pre><span></span><span class="mi">2</span> <span class="o">*</span> <span class="mi">3</span><span class="o">**</span><span class="mi">3</span> <span class="o">*</span> <span class="mi">37</span>
 </pre></div>
 
 
-<p><img alt="1998" src="http://ipython-books.github.io/pages/chapter15_symbolic/05_number_theory_files/05_number_theory_19_0.png" /></p>
+<p><img alt="1998" src="https://ipython-books.github.io/pages/chapter15_symbolic/05_number_theory_files/05_number_theory_19_0.png" /></p>
 <p><strong>8.&nbsp;</strong> Finally, a small problem. A lazy mathematician is counting his marbles. When they are arranged in three rows, the last column contains one marble. When they form four rows, there are two marbles in the last column, and there are three with five rows. How many marbles are there? (Hint: The lazy mathematician has fewer than 100 marbles.)</p>
-<p><img alt="Marbles" src="http://ipython-books.github.io/pages/chapter15_symbolic/05_number_theory_files/marbles.png" /></p>
+<p><img alt="Marbles" src="https://ipython-books.github.io/pages/chapter15_symbolic/05_number_theory_files/marbles.png" /></p>
 <p>The Chinese Remainder Theorem gives us the answer:</p>
 <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy.ntheory.modular</span> <span class="kn">import</span> <span class="n">solve_congruence</span>
 <span class="n">solve_congruence</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 </pre></div>
 
 
-<p><img alt="(58, 60)" src="http://ipython-books.github.io/pages/chapter15_symbolic/05_number_theory_files/05_number_theory_23_0.png" /></p>
+<p><img alt="(58, 60)" src="https://ipython-books.github.io/pages/chapter15_symbolic/05_number_theory_files/05_number_theory_23_0.png" /></p>
 <p>There are infinitely many solutions: 58 plus any multiple of 60. Since there are less than 100 marbles, 58 is the right answer.</p>
 <h2>How it works...</h2>
 <p>SymPy contains many number-theory-related functions. Here, we used the <strong>Chinese Remainder Theorem</strong> to find the solutions of the following system of arithmetic equations:</p>

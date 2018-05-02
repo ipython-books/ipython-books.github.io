@@ -25,7 +25,7 @@
     <meta name="msapplication-TileImage" content="/mstile-144x144.png">
 
 
-        <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
+        <link rel="alternate"  href="https://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Cookbook Full Atom Feed"/>
 
         <title>IPython Cookbook - 6.2. Creating statistical plots easily with seaborn</title>
 
@@ -37,8 +37,8 @@
     <!--[if gt IE 8]><!-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/0.5.0/pure-min.css">
     <!--<![endif]-->
-    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
-    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <link rel="stylesheet" href="https://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="https://ipython-books.github.io/theme/css/pygments.css">
     <!-- <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
@@ -58,7 +58,7 @@
         <li><a href="/">home</a></li>
         <li><a href="https://github.com/ipython-books/cookbook-2nd-code">Jupyter notebooks</a></li>
         <li><a href="https://github.com/ipython-books/minibook-2nd-code">minibook</a></li>
-        <li><a href="http://cyrille.rossant.net">author</a></li>
+        <li><a href="https://cyrille.rossant.net">author</a></li>
 </ul>                </div>
             </div>
         </div>
@@ -88,7 +88,7 @@
         <p><a href="/"><img src="https://raw.githubusercontent.com/ipython-books/cookbook-2nd/master/cover-cookbook-2nd.png" align="left" alt="IPython Cookbook, Second Edition" height="130" style="margin-right: 20px; margin-bottom: 10px;" /></a> <em>This is one of the 100+ free recipes of the <a href="/">IPython Cookbook, Second Edition</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, a guide to numerical computing and data science in the Jupyter Notebook. The ebook and printed book are available for purchase at <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook-second-e">Packt Publishing</a>.</em></p>
 <p>▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd">Text on GitHub</a> with a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/legalcode">CC-BY-NC-ND license</a></em><br />
 ▶&nbsp;&nbsp;<em><a href="https://github.com/ipython-books/cookbook-2nd-code">Code on GitHub</a> with a <a href="https://opensource.org/licenses/MIT">MIT license</a></em></p>
-<p>▶&nbsp;&nbsp;<a href="http://ipython-books.github.io/chapter-6-data-visualization/"><strong><em>Go to</em></strong> <em>Chapter 6 : Data Visualization</em></a><br />
+<p>▶&nbsp;&nbsp;<a href="https://ipython-books.github.io/chapter-6-data-visualization/"><strong><em>Go to</em></strong> <em>Chapter 6 : Data Visualization</em></a><br />
 ▶&nbsp;&nbsp;<a href="https://github.com/ipython-books/cookbook-2nd-code/blob/master/chapter06_viz/02_seaborn.ipynb"><em><strong>Get</strong> the Jupyter notebook</em></a>  </p>
 <p><strong>seaborn</strong> is a library that builds on top of matplotlib and pandas to provide easy-to-use statistical plotting routines. In this recipe, we give a few examples of the types of statistical plots that can be created with seaborn.</p>
 <h2>How to do it...</h2>
@@ -107,7 +107,7 @@
 </pre></div>
 
 
-<p><img alt="Tips dataset" src="http://ipython-books.github.io/pages/chapter06_viz/02_seaborn_files/02_seaborn_8_0.png" /></p>
+<p><img alt="Tips dataset" src="https://ipython-books.github.io/pages/chapter06_viz/02_seaborn_files/02_seaborn_8_0.png" /></p>
 <p><strong>3.&nbsp;</strong> seaborn implements easy-to-use functions to visualize the distribution of datasets. Here, we plot the histogram, <strong>kernel density estimation</strong> (KDE), and a gamma distribution fit of our dataset:</p>
 <div class="highlight"><pre><span></span><span class="c1"># We create two subplots sharing the same y axis.</span>
 <span class="n">f</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span>
@@ -134,13 +134,13 @@
 </pre></div>
 
 
-<p><img alt="Kernel density estimation" src="http://ipython-books.github.io/pages/chapter06_viz/02_seaborn_files/02_seaborn_10_0.png" /></p>
+<p><img alt="Kernel density estimation" src="https://ipython-books.github.io/pages/chapter06_viz/02_seaborn_files/02_seaborn_10_0.png" /></p>
 <p><strong>4.&nbsp;</strong> We can make a quick linear regression to visualize the correlation between two variables:</p>
 <div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;tip&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">)</span>
 </pre></div>
 
 
-<p><img alt="A regression plot" src="http://ipython-books.github.io/pages/chapter06_viz/02_seaborn_files/02_seaborn_12_0.png" /></p>
+<p><img alt="A regression plot" src="https://ipython-books.github.io/pages/chapter06_viz/02_seaborn_files/02_seaborn_12_0.png" /></p>
 <p><strong>5.&nbsp;</strong> We can also visualize the distribution of categorical data with different types of plots. Here, we display a bar plot, a violin plot, and a swarmplot, which show an increasing amount of details:</p>
 <div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">,</span> <span class="n">ax3</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span>
     <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">sharey</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
@@ -150,7 +150,7 @@
 </pre></div>
 
 
-<p><img alt="Plotting distributions" src="http://ipython-books.github.io/pages/chapter06_viz/02_seaborn_files/02_seaborn_14_1.png" /></p>
+<p><img alt="Plotting distributions" src="https://ipython-books.github.io/pages/chapter06_viz/02_seaborn_files/02_seaborn_14_1.png" /></p>
 <p>The bar plot shows the mean and standard deviation of the tip, for males and females. The violin plot shows an estimation of the distribution in a more informative way than the bar plot, especially with non-Gaussian or multimodal distributions. The swarm plot displays all points, using the x axis to make them non-overlapping.</p>
 <p><strong>6.&nbsp;</strong> The <code>FacetGrid</code> lets us explore a multidimensional dataset with several subplots organized within a grid. Here, we plot the tip as a function of the bill with a linear regression, for every combination of smoker (Yes/No) and sex (Male/Female):</p>
 <div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">FacetGrid</span><span class="p">(</span><span class="n">tips</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s1">&#39;smoker&#39;</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="s1">&#39;sex&#39;</span><span class="p">)</span>
@@ -158,7 +158,7 @@
 </pre></div>
 
 
-<p><img alt="A FacetGrid" src="http://ipython-books.github.io/pages/chapter06_viz/02_seaborn_files/02_seaborn_17_0.png" /></p>
+<p><img alt="A FacetGrid" src="https://ipython-books.github.io/pages/chapter06_viz/02_seaborn_files/02_seaborn_17_0.png" /></p>
 <h2>There's more...</h2>
 <p>Besides seaborn, there are other high-level plotting interfaces:</p>
 <ul>
